@@ -30,3 +30,6 @@ build
 *.ipr
 *.iws
 *.iml
+
+#output directory
+out
