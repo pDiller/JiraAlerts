@@ -8,9 +8,9 @@ repositories {
 }
 
 dependencies {
+    testCompile project(':integration')
     compile 'com.google.guava:guava:20.0'
     compile 'com.atlassian.jira:jira-rest-java-client:2.0.0-m2'
     testCompile 'junit:junit:4.12'
     testCompile group: 'org.assertj', name: 'assertj-core', version: '3.8.0'
 }
-
