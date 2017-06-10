@@ -1,5 +1,4 @@
-apply plugin: 'java'
 dependencies {
-    testCompile project(':jira-component')
-    testCompile project(':iot-controller')
+    compile project(':jira-component')
+    compile project(':iot-controller')
 }
