@@ -1,24 +1,17 @@
 package de.reflectoring.jiraalerts.jiracomponent.configuration;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
-import org.mockito.Mockito;
-import org.mockito.runners.MockitoJUnitRunner;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.fail;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.util.Properties;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class JiraConnectionConfigurationServiceTest {
 
@@ -29,7 +22,7 @@ public class JiraConnectionConfigurationServiceTest {
 
     @Before
     public void setup() throws IOException {
-        temporaryPropertyFile = File.createTempFile("test",".properties");
+        temporaryPropertyFile = File.createTempFile("test", ".properties");
     }
 
     @Test
@@ -55,7 +48,7 @@ public class JiraConnectionConfigurationServiceTest {
     }
 
     @After
-    public void tearDown(){
+    public void tearDown() {
         temporaryPropertyFile.delete();
     }
 }
