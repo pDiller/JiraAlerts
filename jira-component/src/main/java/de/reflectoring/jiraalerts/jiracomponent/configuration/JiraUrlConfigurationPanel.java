@@ -32,13 +32,10 @@ public class JiraUrlConfigurationPanel extends GenericPanel<JiraUrlConfiguration
             @Override
             protected void onSubmit(AjaxRequestTarget target) {
                 super.onSubmit(target);
-                try {
-                    String connectionPropertyPath = getClass().getResource("jira-configuration.properties").toURI().getPath();
-                    String connectionUrl = jiraConnectionUrlModel.getObject();
-                    jiraConnectionConfigurationService.writeConnectionUrl(connectionPropertyPath, connectionUrl);
-                } catch (URISyntaxException e) {
-                    LOGGER.error("Failes to store value in propertyfile: ", e);
-                }
+
+                String newConnectionUrl = jiraConnectionUrlModel.getObject();
+                jiraConnectionConfigurationService.writeConnectionUrl(newConnectionUrl);
+
                 if(target != null){
                     target.add(connectionUrlForm);
                 }

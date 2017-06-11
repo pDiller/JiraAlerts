@@ -1,54 +1,50 @@
 package de.reflectoring.jiraalerts.jiracomponent.configuration;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.fail;
-
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
-
-import org.junit.After;
+import de.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionData;
+import de.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionDataRepository;
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.Mockito;
+import org.mockito.runners.MockitoJUnitRunner;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@RunWith(MockitoJUnitRunner.class)
 public class JiraConnectionConfigurationServiceTest {
 
-    private static final String NEW_URL_VALUE = "www.myjira-host.org";
+    @Mock
+    private JiraConnectionDataRepository jiraConnectionDataRepositoryMock;
 
+    @InjectMocks
     private JiraConnectionConfigurationService sut = new JiraConnectionConfigurationService();
-    private File temporaryPropertyFile;
+    private JiraConnectionData jiraConnectionData;
 
     @Before
-    public void setup() throws IOException {
-        temporaryPropertyFile = File.createTempFile("test", ".properties");
+    public void setup() {
+        jiraConnectionData = new JiraConnectionData();
+        jiraConnectionData.setUrl("MyFunnyUrl.com/jira/rest");
+        when(jiraConnectionDataRepositoryMock.findOne(1L)).thenReturn(jiraConnectionData);
     }
 
     @Test
-    public void loadUrlReturnsHardConfiguredUrlFromPropertyFile() throws Exception {
-        InputStream connectionPropertyFileInputStream = getClass().getResourceAsStream("jira-configuration-test.properties");
+    public void loadConnectionUrlReturnsConnectionUrlFromDataObject() {
+        String loadedConnectionUrl = sut.loadConnectionUrl();
 
-        String connectionUrl = sut.loadConnectionUrl(connectionPropertyFileInputStream);
-
-        assertThat(connectionUrl).isEqualTo("<insert JIRA-restendpoint here>");
+        assertThat(loadedConnectionUrl).isEqualTo("MyFunnyUrl.com/jira/rest");
     }
 
     @Test
-    public void writesUrlInPropertyFile() throws Exception {
-        sut.writeConnectionUrl(temporaryPropertyFile.getAbsolutePath(), NEW_URL_VALUE);
+    public void writeConnectionUrlUpdatesObject() throws Exception {
+        sut.writeConnectionUrl("MySecondFunnyUrl.com/jira/rest");
 
-        Properties properties = new Properties();
-        try (InputStream configurationFileStream = new FileInputStream(temporaryPropertyFile)) {
-            properties.load(configurationFileStream);
-        } catch (IOException propertyFileNotFoundException) {
-            fail("PropertyFile not found");
-        }
-        assertThat(properties.getProperty("url")).isEqualTo(NEW_URL_VALUE);
-    }
-
-    @After
-    public void tearDown() {
-        temporaryPropertyFile.delete();
+        assertThat(jiraConnectionData.getUrl()).isNotNull();
+        verify(jiraConnectionDataRepositoryMock).findOne(1L);
+        verify(jiraConnectionDataRepositoryMock).save(jiraConnectionData);
     }
 }

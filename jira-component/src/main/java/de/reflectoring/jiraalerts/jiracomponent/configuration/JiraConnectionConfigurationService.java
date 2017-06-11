@@ -1,14 +1,15 @@
 package de.reflectoring.jiraalerts.jiracomponent.configuration;
 
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.util.Properties;
+import java.util.Date;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import de.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionData;
+import de.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionDataRepository;
 
 /**
  * Service to administrate the JIRA Connection.
@@ -16,46 +17,33 @@ import org.springframework.stereotype.Service;
 @Service
 public class JiraConnectionConfigurationService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(JiraConnectionConfigurationService.class);
-    private static final String URL_PROPERTY = "url";
+    @Autowired
+    private JiraConnectionDataRepository jiraConnectionDataRepository;
+
+    public JiraConnectionConfigurationService() {
+        System.out.println(getClass());
+    }
 
     /**
      * Loads the Connection URL for JIRA instance.
      * 
-     * @param connectionInputStream
-     *            InputStream for the propertyfile with JIRA-Url.
      * @return Connection-URL for JIRA instance.
      */
-    public String loadConnectionUrl(InputStream connectionInputStream) {
-        try {
-            Properties properties = new Properties();
-            properties.load(connectionInputStream);
-            return properties.getProperty(URL_PROPERTY);
-        } catch (IOException propertyFileNotFoundException) {
-            LOGGER.error("No property-file found:", propertyFileNotFoundException);
-            return null;
-        }
+    public String loadConnectionUrl() {
+        JiraConnectionData jiraConnectionData = jiraConnectionDataRepository.findOne(1L);
+        return jiraConnectionData.getUrl();
     }
 
     /**
      * Writes the configured JIRA-URL in given propertyPath.
-     *
-     * @param connectionPropertyPath
-     *            the path to Propertyfile for JIRA-Configuration.
-     * @param connectionUrl
-     *            the new connectionurl value.
+     * 
+     * @param newConnectionUrl
+     *            the new connectionUrl for the JIRA instance.
      */
-    public void writeConnectionUrl(String connectionPropertyPath, String connectionUrl) {
-        try (OutputStream output = new FileOutputStream(connectionPropertyPath)) {
-            Properties prop = new Properties();
-
-            prop.setProperty(URL_PROPERTY, connectionUrl);
-
-            prop.store(output, null);
-
-        } catch (IOException propertyFileNotFoundException) {
-            LOGGER.error("No property-file found:", propertyFileNotFoundException);
-            throw new IllegalStateException("No property-file found:", propertyFileNotFoundException);
-        }
+    public void writeConnectionUrl(String newConnectionUrl) {
+        JiraConnectionData jiraConnectionData = jiraConnectionDataRepository.findOne(1L);
+        jiraConnectionData.setUrl(newConnectionUrl);
+        jiraConnectionData.setModifiedAt(new Date());
+        jiraConnectionDataRepository.save(jiraConnectionData);
     }
 }

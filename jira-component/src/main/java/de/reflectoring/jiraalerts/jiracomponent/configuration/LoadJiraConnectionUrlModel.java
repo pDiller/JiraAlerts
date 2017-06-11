@@ -20,7 +20,6 @@ public class LoadJiraConnectionUrlModel extends LoadableDetachableModel<String> 
 
     @Override
     protected String load() {
-        InputStream jiraConnectionPropertyInputStream = getClass().getResourceAsStream("jira-configuration.properties");
-        return jiraConnectionConfigurationService.loadConnectionUrl(jiraConnectionPropertyInputStream);
+        return jiraConnectionConfigurationService.loadConnectionUrl();
     }
 }
