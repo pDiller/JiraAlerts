@@ -1,5 +1,6 @@
 rootProject.name = 'JiraAlerts'
 
+include 'database-migration'
 include 'integration'
 include 'jira-component'
 include 'iot-controller'
