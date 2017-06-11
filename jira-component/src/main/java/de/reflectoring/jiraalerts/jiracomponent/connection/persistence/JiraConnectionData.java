@@ -1,6 +1,6 @@
-package de.reflectoring.jiraalerts.jiracomponent.connection;
+package de.reflectoring.jiraalerts.jiracomponent.connection.persistence;
 
-import static javax.persistence.GenerationType.SEQUENCE;
+import static javax.persistence.GenerationType.IDENTITY;
 
 import java.util.Date;
 
@@ -8,11 +8,10 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "JIRA_CONNECTION_DATA")
-@SequenceGenerator(name = "jiraConnectionSeq", sequenceName = "jira_connection_seq")
 public class JiraConnectionData {
 
     @Id
-    @GeneratedValue(generator = "jiraConnectionSeq", strategy = SEQUENCE)
+    @GeneratedValue(strategy = IDENTITY)
     private long id;
 
     @Column(name = "URL")
