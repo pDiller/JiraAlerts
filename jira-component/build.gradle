@@ -1,0 +1,3 @@
+dependencies{
+    compile 'com.atlassian.jira:jira-rest-java-client:2.0.0-m2'
+}
