@@ -6,7 +6,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Properties;
 
-import org.apache.tools.ant.taskdefs.Input;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -23,12 +22,14 @@ public class JiraConnectionConfigurationService {
     /**
      * Loads the Connection URL for JIRA instance.
      * 
+     * @param connectionInputStream
+     *            InputStream for the propertyfile with JIRA-Url.
      * @return Connection-URL for JIRA instance.
      */
-    public String loadConnectionUrl(InputStream connectionPropertyPath) {
+    public String loadConnectionUrl(InputStream connectionInputStream) {
         try {
             Properties properties = new Properties();
-            properties.load(connectionPropertyPath);
+            properties.load(connectionInputStream);
             return properties.getProperty(URL_PROPERTY);
         } catch (IOException propertyFileNotFoundException) {
             LOGGER.error("No property-file found:", propertyFileNotFoundException);
@@ -36,6 +37,14 @@ public class JiraConnectionConfigurationService {
         }
     }
 
+    /**
+     * Writes the configured JIRA-URL in given propertyPath.
+     *
+     * @param connectionPropertyPath
+     *            the path to Propertyfile for JIRA-Configuration.
+     * @param connectionUrl
+     *            the new connectionurl value.
+     */
     public void writeConnectionUrl(String connectionPropertyPath, String connectionUrl) {
         try (OutputStream output = new FileOutputStream(connectionPropertyPath)) {
             Properties prop = new Properties();
