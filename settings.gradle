@@ -1,1 +1,5 @@
 rootProject.name = 'JiraAlerts'
+
+include 'integration'
+include 'jira-component'
+include 'iot-controller'

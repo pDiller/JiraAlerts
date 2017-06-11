@@ -1,0 +1,4 @@
+dependencies {
+    compile project(':jira-component')
+    compile project(':iot-controller')
+}
