@@ -1,19 +1,18 @@
 package de.reflectoring.jiraalerts.jiracomponent.configuration;
 
-import de.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionData;
-import de.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionDataRepository;
-import org.assertj.core.api.Assertions;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import de.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionData;
+import de.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionDataRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JiraConnectionConfigurationServiceTest {
@@ -46,5 +45,6 @@ public class JiraConnectionConfigurationServiceTest {
         assertThat(jiraConnectionData.getUrl()).isNotNull();
         verify(jiraConnectionDataRepositoryMock).findOne(1L);
         verify(jiraConnectionDataRepositoryMock).save(jiraConnectionData);
+
     }
 }

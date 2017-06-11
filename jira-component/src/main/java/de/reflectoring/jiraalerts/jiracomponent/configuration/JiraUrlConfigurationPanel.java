@@ -1,7 +1,5 @@
 package de.reflectoring.jiraalerts.jiracomponent.configuration;
 
-import java.net.URISyntaxException;
-
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.form.Form;
@@ -29,14 +27,14 @@ public class JiraUrlConfigurationPanel extends GenericPanel<JiraUrlConfiguration
         LoadJiraConnectionUrlModel jiraConnectionUrlModel = new LoadJiraConnectionUrlModel();
         connectionUrlForm.add(new TextField<>("connectionInputField", jiraConnectionUrlModel));
         connectionUrlForm.add(new AjaxSubmitLink("submitNewConnectionUrlLink", connectionUrlForm) {
+
             @Override
             protected void onSubmit(AjaxRequestTarget target) {
                 super.onSubmit(target);
 
                 String newConnectionUrl = jiraConnectionUrlModel.getObject();
                 jiraConnectionConfigurationService.writeConnectionUrl(newConnectionUrl);
-
-                if(target != null){
+                if (target != null) {
                     target.add(connectionUrlForm);
                 }
             }
