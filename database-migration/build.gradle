@@ -1,0 +1,15 @@
+buildscript {
+    dependencies {
+        classpath 'mysql:mysql-connector-java:6.0.6'
+    }
+}
+
+plugins {
+    id "org.flywaydb.flyway" version "4.2.0"
+}
+
+flyway {
+    url = 'jdbc:mysql://localhost:3306/jiraalerts?serverTimezone=UTC'
+    user = 'root'
+    password = 'root'
+}
