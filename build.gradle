@@ -16,12 +16,22 @@ allprojects {
         testCompile 'org.slf4j:slf4j-log4j12:1.8.0-alpha2'
 
         compile 'com.google.guava:guava:20.0'
+
         compile 'javax.servlet:javax.servlet-api:3.1.0'
+
         compile 'org.apache.wicket:wicket:8.0.0-M6'
         compile 'org.apache.wicket:wicket-spring:8.0.0-M6'
+
         compile 'org.springframework:spring-core:4.3.9.RELEASE'
         compile 'org.springframework:spring-context:4.3.9.RELEASE'
         compile 'org.springframework:spring-web:4.3.9.RELEASE'
+        compile 'org.springframework.data:spring-data-jpa:1.11.4.RELEASE'
+
+
+        compile 'org.hibernate:hibernate-entitymanager:5.2.10.Final'
+        compile 'org.hibernate:hibernate-c3p0:5.2.10.Final'
+
+        compile 'mysql:mysql-connector-java:6.0.6'
     }
 }
 
