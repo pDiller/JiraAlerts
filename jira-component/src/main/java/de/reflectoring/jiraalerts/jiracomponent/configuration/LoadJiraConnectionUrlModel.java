@@ -9,6 +9,12 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
  */
 public class LoadJiraConnectionUrlModel extends LoadableDetachableModel<String> {
 
+    /**
+     * https://github.com/pDiller/JiraAlerts/issues/13
+     * First implementation allows just one configuration. Servicelayer is implemented to allow more.
+     */
+    private static final long JIRA_CONNECTION_DATA_ID = 1L;
+
     @SpringBean
     private JiraConnectionConfigurationService jiraConnectionConfigurationService;
 
@@ -18,6 +24,6 @@ public class LoadJiraConnectionUrlModel extends LoadableDetachableModel<String> 
 
     @Override
     protected String load() {
-        return jiraConnectionConfigurationService.loadConnectionUrl();
+        return jiraConnectionConfigurationService.loadConnectionUrl(JIRA_CONNECTION_DATA_ID);
     }
 }
