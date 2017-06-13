@@ -5,9 +5,8 @@ import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.panel.GenericPanel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Panel to configure the URL of JIRA instance.
@@ -15,8 +14,7 @@ import org.slf4j.LoggerFactory;
 public class JiraUrlConfigurationPanel extends GenericPanel<JiraUrlConfigurationPanel> {
 
     /**
-     * https://github.com/pDiller/JiraAlerts/issues/13
-     * First implementation allows just one configuration. Servicelayer is implemented to allow more.
+     * https://github.com/pDiller/JiraAlerts/issues/13 First implementation allows just one configuration. Servicelayer is implemented to allow more.
      */
     private static final long JIRA_CONNECTION_DATA_ID = 1L;
 
@@ -28,7 +26,7 @@ public class JiraUrlConfigurationPanel extends GenericPanel<JiraUrlConfiguration
 
         Form<Void> connectionUrlForm = new Form<>("connectionUrlForm");
 
-        LoadJiraConnectionUrlModel jiraConnectionUrlModel = new LoadJiraConnectionUrlModel();
+        LoadJiraConnectionUrlModel jiraConnectionUrlModel = new LoadJiraConnectionUrlModel(Model.of(JIRA_CONNECTION_DATA_ID));
         connectionUrlForm.add(new TextField<>("connectionInputField", jiraConnectionUrlModel));
         connectionUrlForm.add(new AjaxSubmitLink("submitNewConnectionUrlLink", connectionUrlForm) {
 
