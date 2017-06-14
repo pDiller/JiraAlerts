@@ -10,7 +10,7 @@
         <filter-class>org.apache.wicket.protocol.http.WicketFilter</filter-class>
         <init-param>
             <param-name>applicationClassName</param-name>
-            <param-value>de.reflectoring.jiraalerts.application.JiraAlertsApplication</param-value>
+            <param-value>io.reflectoring.jiraalerts.application.JiraAlertsApplication</param-value>
         </init-param>
     </filter>
     <filter-mapping>
