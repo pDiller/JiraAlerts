@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.base;
+package io.reflectoring.jiraalerts.integration.base;
 
 import io.reflectoring.jiraalerts.integration.homepage.HomePage;
 import org.apache.wicket.markup.html.basic.Label;
