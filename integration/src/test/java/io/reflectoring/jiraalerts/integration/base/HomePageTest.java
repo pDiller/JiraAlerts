@@ -1,5 +1,6 @@
 package io.reflectoring.jiraalerts.base;
 
+import io.reflectoring.jiraalerts.integration.homepage.HomePage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.mock.MockApplication;
 import org.apache.wicket.util.tester.WicketTester;
@@ -8,19 +9,19 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 @Ignore
-public class JiraAlertsHomePageTest {
+public class HomePageTest {
 
     private WicketTester wicketTester;
 
     @Before
     public void setUp() {
         wicketTester = new WicketTester(new MockApplication());
-        wicketTester.startPage(JiraAlertsHomePage.class);
+        wicketTester.startPage(HomePage.class);
     }
 
     @Test
     public void homepageRendersSuccessfully() {
-        wicketTester.assertRenderedPage(JiraAlertsHomePage.class);
+        wicketTester.assertRenderedPage(HomePage.class);
     }
 
     @Test
