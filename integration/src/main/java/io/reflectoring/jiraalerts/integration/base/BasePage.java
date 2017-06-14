@@ -10,7 +10,7 @@ public class BasePage extends WebPage{
     /**
      * Constructor for BasePage.
      */
-    protected BasePage() {
+    public BasePage() {
         add(new NavbarHeaderPanel("navbarHeaderPanel"));
     }
 }
