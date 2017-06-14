@@ -2,5 +2,5 @@
 
 JiraAlerts should be an Application to connect Atlassians JIRA over REST to your IoT device.
 
-If we have a first stable version, we will explain here, how to setup JiraAlerts and how to run it.
-
+We use the frontend framework Apache Wicket with Spring, Spring-Data and Hibernate.
+To persist the data we have decided to take a MySql5 database.
