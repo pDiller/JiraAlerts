@@ -1,42 +1,135 @@
-apply plugin: 'war'
+buildscript {
+    ext {
+        springBootVersion = '1.5.4.RELEASE'
+    }
+    repositories {
+        maven {
+            url("https://plugins.gradle.org/m2/")
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("gradle.plugin.com.boxfuse.client:flyway-release:4.2.0")
+    }
+}
 
-allprojects {
+apply plugin: 'war'
+apply plugin: 'org.flywaydb.flyway'
+
+allprojects{
+
+    version = '0.0.1-SNAPSHOT'
+    sourceCompatibility = 1.8
+
     apply plugin: 'java'
     apply plugin: 'idea'
+    apply plugin: 'org.springframework.boot'
 
     repositories {
-        mavenCentral()
         jcenter()
     }
 
+    dependencies{
+        testCompile('org.springframework.boot:spring-boot-starter-test')
+        testCompile('org.mockito:mockito-all:1.9.5')
+        testCompile('org.assertj:assertj-core:3.8.0')
+    }
+
+    idea {
+        module {
+            inheritOutputDirs = true
+            downloadJavadoc = true
+            downloadSources = true
+            outputDir = file('build/classes/main')
+            testOutputDir = file('build/classes/test')
+        }
+    }
+
+    if (plugins.hasPlugin("java")) {
+
+        idea.module.iml {
+            withXml {
+                // mark resource directories as such
+                // cf. https://discuss.gradle.org/t/the-idea-plugin-breaks-the-new-intellij-13-iml-configuration/2456/10
+                def sourceFolder = it.asNode().component.content.sourceFolder
+
+                def mainResourceFolder = sourceFolder.find { it.@url == 'file://$MODULE_DIR$/src/main/resources' }
+                // in case there is no src/main/resources in this module
+                if (mainResourceFolder != null) {
+                    def atts = mainResourceFolder.attributes()
+                    atts.remove('isTestSource')
+                    atts.put('type', 'java-resource')
+                }
+
+                def testResourceFolder = sourceFolder.find { it.@url == 'file://$MODULE_DIR$/src/test/resources' }
+                // in case there is no src/test/resources in this module
+                if (testResourceFolder != null) {
+                    def atts = testResourceFolder.attributes()
+                    atts.remove('isTestSource')
+                    atts.put('type', 'java-test-resource')
+                }
+
+                // spring facet
+                def springFacet = '''<component name="FacetManager">
+                <facet type="Spring" name="Spring">
+                  <configuration />
+                </facet>
+              </component>'''
+
+                it.asNode().append((new XmlParser()).parseText(springFacet))
+
+                def disableSpelling = '''<component name="InspectionProjectProfileManager">
+                <profile version="1.0">
+                  <option name="myName" value="Project Default" />
+                  <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+                    <option name="processCode" value="true" />
+                    <option name="processLiterals" value="true" />
+                    <option name="processComments" value="true" />
+                  </inspection_tool>
+                </profile>
+                <option name="PROJECT_PROFILE" value="Project Default" />
+                <option name="USE_PROJECT_PROFILE" value="true" />
+                <version value="1.0" />
+              </component>'''
+                it.asNode().append((new XmlParser()).parseText(disableSpelling))
+            }
+        }
+    }
+}
+
+subprojects {
     dependencies {
-        testCompile 'junit:junit:4.12'
-        testCompile 'org.mockito:mockito-all:1.9.5'
-        testCompile 'org.assertj:assertj-core:3.8.0'
 
-        runtime 'org.slf4j:slf4j-log4j12:1.8.0-alpha2'
-        runtime 'org.slf4j:slf4j-api:1.7.25'
+        compile('com.google.guava:guava:20.0')
 
-        compile 'com.google.guava:guava:20.0'
+        compile('org.apache.wicket:wicket:8.0.0-M6')
+        compile('org.apache.wicket:wicket-spring:8.0.0-M6')
 
-        compile 'javax.servlet:javax.servlet-api:3.1.0'
-
-        compile 'org.apache.wicket:wicket:8.0.0-M6'
-        compile 'org.apache.wicket:wicket-spring:8.0.0-M6'
-
-        compile 'org.springframework:spring-core:4.3.9.RELEASE'
-        compile 'org.springframework:spring-context:4.3.9.RELEASE'
-        compile 'org.springframework:spring-web:4.3.9.RELEASE'
-        compile 'org.springframework.data:spring-data-jpa:1.11.4.RELEASE'
-
-
-        compile 'org.hibernate:hibernate-entitymanager:5.2.10.Final'
-        compile 'org.hibernate:hibernate-c3p0:5.2.10.Final'
-
-        compile 'mysql:mysql-connector-java:6.0.6'
+        compile('org.springframework.boot:spring-boot-starter-data-jpa')
     }
 }
 
 dependencies {
-    compile project(':integration')
+    compile('org.flywaydb:flyway-core')
+    compile('org.springframework.boot:spring-boot-starter-web')
+    compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    compile(project(':integration'))
+
+    runtime('mysql:mysql-connector-java')
+
+    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+}
+
+flyway {
+    url = 'jdbc:mysql://localhost:3306/jiraalerts?serverTimezone=UTC'
+    user = 'root'
+    password = 'root'
+}
+
+idea {
+    project {
+        jdkName = '1.8'
+        languageLevel = '8'
+        vcs = 'Git'
+    }
 }
