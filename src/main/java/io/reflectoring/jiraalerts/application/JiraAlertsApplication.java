@@ -1,6 +1,9 @@
 package io.reflectoring.jiraalerts.application;
 
-import io.reflectoring.jiraalerts.base.JiraAlertsHomePage;
+import de.agilecoders.wicket.core.Bootstrap;
+import de.agilecoders.wicket.core.settings.BootstrapSettings;
+import io.reflectoring.jiraalerts.integration.homepage.HomePage;
+import io.reflectoring.jiraalerts.integration.jiraconfiguration.JiraConfigurationPage;
 import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
 
@@ -17,12 +20,20 @@ public class JiraAlertsApplication extends WebApplication {
 
     @Override
     public Class<? extends Page> getHomePage() {
-        return JiraAlertsHomePage.class;
+        return HomePage.class;
     }
 
     @Override
     protected void init() {
         super.init();
         getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
+        mountPages();
+
+        BootstrapSettings bootstrapSettings = new BootstrapSettings();
+        Bootstrap.install(this, bootstrapSettings);
+    }
+
+    private void mountPages(){
+        mountPage("/jira-configuration", JiraConfigurationPage.class);
     }
 }
