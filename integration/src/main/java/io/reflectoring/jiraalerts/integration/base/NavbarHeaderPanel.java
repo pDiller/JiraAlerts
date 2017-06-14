@@ -16,7 +16,9 @@ class NavbarHeaderPanel extends Panel {
 
     /**
      * Constructor for NavBarHeaderPanel.
-     * @param id the Wicket-Id.
+     * 
+     * @param id
+     *            the Wicket-Id.
      */
     NavbarHeaderPanel(String id) {
         super(id);
@@ -25,7 +27,8 @@ class NavbarHeaderPanel extends Panel {
         navbar.fluid();
         navbar.setBrandName(new ResourceModel("navbarHeader.brandname"));
 
-        navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT, new NavbarButton(HomePage.class, new ResourceModel("navbarHeader.home")), new NavbarButton(JiraConfigurationPage.class, new ResourceModel("navbarHeader.jira.configuration"))));
+        navbar.addComponents(NavbarComponents.transform(Navbar.ComponentPosition.LEFT, new NavbarButton(HomePage.class, new ResourceModel("navbarHeader.home")),
+                new NavbarButton(JiraConfigurationPage.class, new ResourceModel("navbarHeader.jira.configuration"))));
         add(navbar);
     }
 }

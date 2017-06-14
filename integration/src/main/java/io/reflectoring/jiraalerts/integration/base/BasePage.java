@@ -5,7 +5,7 @@ import org.apache.wicket.markup.html.WebPage;
 /**
  * The Page with Basic funktionaltiy, like ne Navigation.
  */
-public class BasePage extends WebPage{
+public class BasePage extends WebPage {
 
     /**
      * Constructor for BasePage.
