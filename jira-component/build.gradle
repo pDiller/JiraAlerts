@@ -2,3 +2,11 @@ dependencies{
 	testCompile(project(':wicket-tests'))
 	compile('com.atlassian.jira:jira-rest-java-client:2.0.0-m2')
 }
+
+spotless {
+	java {
+		removeUnusedImports()
+		importOrderFile '../src/main/resources/formatter/spotless.importorder'
+		eclipse().configFile '../src/main/resources/formatter/spotless.eclipse-format.xml'
+	}
+}

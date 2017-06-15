@@ -7,8 +7,8 @@ import org.apache.wicket.markup.html.WebPage;
  */
 public class BasePage extends WebPage {
 
-  /** Constructor for BasePage. */
-  public BasePage() {
-    add(new NavbarHeaderPanel("navbarHeaderPanel"));
-  }
+	/** Constructor for BasePage. */
+	public BasePage() {
+		add(new NavbarHeaderPanel("navbarHeaderPanel"));
+	}
 }
