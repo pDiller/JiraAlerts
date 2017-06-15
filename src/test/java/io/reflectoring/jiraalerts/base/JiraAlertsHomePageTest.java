@@ -1,20 +1,25 @@
 package io.reflectoring.jiraalerts.base;
 
+import io.reflectoring.jiraalerts.shared.wickettests.JiraAlertsTestConfiguration;
+import io.reflectoring.jiraalerts.shared.wickettests.TestConfiguration;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.mock.MockApplication;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-@Ignore
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(classes = {JiraAlertsTestConfiguration.class, TestConfiguration.class})
 public class JiraAlertsHomePageTest {
 
+    @Autowired
     private WicketTester wicketTester;
 
     @Before
     public void setUp() {
-        wicketTester = new WicketTester(new MockApplication());
         wicketTester.startPage(JiraAlertsHomePage.class);
     }
 

@@ -31,8 +31,11 @@ allprojects{
 
     dependencies{
         testCompile('org.springframework.boot:spring-boot-starter-test')
-        testCompile('org.mockito:mockito-all:1.9.5')
         testCompile('org.assertj:assertj-core:3.8.0')
+        testCompile('javax.servlet:javax.servlet-api:3.1.0')
+
+        compile('org.apache.wicket:wicket:8.0.0-M6')
+        compile('org.apache.wicket:wicket-spring:8.0.0-M6')
     }
 
     idea {
@@ -99,20 +102,17 @@ allprojects{
 
 subprojects {
     dependencies {
-
         compile('com.google.guava:guava:20.0')
-
-        compile('org.apache.wicket:wicket:8.0.0-M6')
-        compile('org.apache.wicket:wicket-spring:8.0.0-M6')
-
         compile('org.springframework.boot:spring-boot-starter-data-jpa')
     }
 }
 
 dependencies {
+
     compile('org.flywaydb:flyway-core')
     compile('org.springframework.boot:spring-boot-starter-web')
     compile('org.springframework.boot:spring-boot-starter-data-jpa')
+    testCompile(project(':wicket-tests'))
     compile(project(':integration'))
 
     runtime('mysql:mysql-connector-java')
