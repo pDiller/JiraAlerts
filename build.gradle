@@ -19,6 +19,14 @@ apply plugin: 'org.flywaydb.flyway'
 
 allprojects{
 
+	buildscript {
+		repositories {
+			maven {
+				url("https://plugins.gradle.org/m2/")
+			}
+		}
+	}
+
 	version = '0.0.1-SNAPSHOT'
 	sourceCompatibility = 1.8
 
@@ -112,6 +120,10 @@ allprojects{
 			trimTrailingWhitespace()
 			indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
 			endWithNewline()
+		}
+		java {
+			removeUnusedImports()
+			googleJavaFormat()
 		}
 	}
 }

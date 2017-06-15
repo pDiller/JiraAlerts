@@ -10,15 +10,14 @@ import org.springframework.stereotype.Component;
 @Component
 public class TestApplication extends MockApplication {
 
-    @Autowired
-    private ApplicationContext applicationContext;
+  @Autowired private ApplicationContext applicationContext;
 
-    @Override
-    protected void init() {
-        super.init();
+  @Override
+  protected void init() {
+    super.init();
 
-        getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
+    getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
 
-        Bootstrap.install(this);
-    }
+    Bootstrap.install(this);
+  }
 }
