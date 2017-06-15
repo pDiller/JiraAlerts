@@ -4,83 +4,84 @@ import static com.pi4j.io.gpio.RaspiPin.*;
 
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioFactory;
+
 import io.reflectoring.jiraalerts.iot.component.RgbLed;
 
 /** This class is currently used for prototype purposes. It will be removed later in development. */
 public class RaspberryPiController {
 
-  public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) throws InterruptedException {
 
-    System.out.println("Hello, from the RaspberryPi!");
+		System.out.println("Hello, from the RaspberryPi!");
 
-    GpioController gpioController = GpioFactory.getInstance();
+		GpioController gpioController = GpioFactory.getInstance();
 
-    System.out.println("Setting up the RGB-LED");
+		System.out.println("Setting up the RGB-LED");
 
-    final RgbLed rgbLed = new RgbLed(GPIO_00, GPIO_01, GPIO_02, gpioController);
+		final RgbLed rgbLed = new RgbLed(GPIO_00, GPIO_01, GPIO_02, gpioController);
 
-    System.out.println("Turn on");
+		System.out.println("Turn on");
 
-    rgbLed.setAllPinsHigh();
+		rgbLed.setAllPinsHigh();
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Turn off");
+		System.out.println("Turn off");
 
-    rgbLed.turnOff();
+		rgbLed.turnOff();
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Turn red");
+		System.out.println("Turn red");
 
-    rgbLed.turnRed();
+		rgbLed.turnRed();
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Turn green");
+		System.out.println("Turn green");
 
-    rgbLed.turnGreen();
+		rgbLed.turnGreen();
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Turn blue");
+		System.out.println("Turn blue");
 
-    rgbLed.turnBlue();
+		rgbLed.turnBlue();
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Turn yellow");
+		System.out.println("Turn yellow");
 
-    rgbLed.turnYellow();
+		rgbLed.turnYellow();
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Turn cyan");
+		System.out.println("Turn cyan");
 
-    rgbLed.turnCyan();
+		rgbLed.turnCyan();
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Turn magenta");
+		System.out.println("Turn magenta");
 
-    rgbLed.turnMagenta();
+		rgbLed.turnMagenta();
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Turn white");
+		System.out.println("Turn white");
 
-    rgbLed.turnWhite();
+		rgbLed.turnWhite();
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Turn off");
+		System.out.println("Turn off");
 
-    rgbLed.turnOff();
+		rgbLed.turnOff();
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Bye bye");
+		System.out.println("Bye bye");
 
-    gpioController.shutdown();
-  }
+		gpioController.shutdown();
+	}
 }

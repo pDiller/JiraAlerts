@@ -6,8 +6,8 @@ import io.reflectoring.jiraalerts.jiracomponent.configuration.JiraUrlConfigurati
 /** Page for Jira-Configuration. */
 public class JiraConfigurationPage extends BasePage {
 
-  /** Constructor for JiraConfigurationPage. */
-  public JiraConfigurationPage() {
-    add(new JiraUrlConfigurationPanel("jiraUrlConfigurationPanel"));
-  }
+	/** Constructor for JiraConfigurationPage. */
+	public JiraConfigurationPage() {
+		add(new JiraUrlConfigurationPanel("jiraUrlConfigurationPanel"));
+	}
 }

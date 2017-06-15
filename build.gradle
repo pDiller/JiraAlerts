@@ -121,10 +121,6 @@ allprojects{
 			indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
 			endWithNewline()
 		}
-		java {
-			removeUnusedImports()
-			googleJavaFormat()
-		}
 	}
 }
 
@@ -151,5 +147,13 @@ idea {
 		jdkName = '1.8'
 		languageLevel = '8'
 		vcs = 'Git'
+	}
+}
+
+spotless {
+	java {
+		removeUnusedImports()
+		importOrderFile 'src/main/resources/formatter/spotless.importorder'
+		eclipse().configFile 'src/main/resources/formatter/spotless.eclipse-format.xml'
 	}
 }

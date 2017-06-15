@@ -8,13 +8,13 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class TestConfiguration {
 
-  @Bean
-  public WebApplication wicketApplication() {
-    return new TestApplication();
-  }
+	@Bean
+	public WebApplication wicketApplication() {
+		return new TestApplication();
+	}
 
-  @Bean
-  public WicketTester wicketTester() {
-    return new WicketTester(wicketApplication());
-  }
+	@Bean
+	public WicketTester wicketTester() {
+		return new WicketTester(wicketApplication());
+	}
 }
