@@ -1,16 +1,17 @@
 buildscript {
-    ext {
-        springBootVersion = '1.5.4.RELEASE'
-    }
-    repositories {
-        maven {
-            url("https://plugins.gradle.org/m2/")
-        }
-    }
-    dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath("gradle.plugin.com.boxfuse.client:flyway-release:4.2.0")
-    }
+	ext {
+		springBootVersion = '1.5.4.RELEASE'
+	}
+	repositories {
+		maven {
+			url("https://plugins.gradle.org/m2/")
+		}
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+		classpath("gradle.plugin.com.boxfuse.client:flyway-release:4.2.0")
+		classpath "com.diffplug.spotless:spotless-plugin-gradle:3.4.0"
+	}
 }
 
 apply plugin: 'war'
@@ -24,6 +25,7 @@ allprojects{
     apply plugin: 'java'
     apply plugin: 'idea'
     apply plugin: 'org.springframework.boot'
+	apply plugin: 'com.diffplug.gradle.spotless'
 
     repositories {
         jcenter()
@@ -103,30 +105,40 @@ allprojects{
             }
         }
     }
+
+	spotless {
+		format 'misc', {
+			target '**/*.gradle', '**/*.md', '**/.gitignore'
+
+			trimTrailingWhitespace()
+			indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
+			endWithNewline()
+		}
+	}
 }
 
 dependencies {
 
-    compile('org.flywaydb:flyway-core')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    testCompile(project(':wicket-tests'))
-    compile(project(':integration'))
+	compile('org.flywaydb:flyway-core')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	testCompile(project(':wicket-tests'))
+	compile(project(':integration'))
 
-    runtime('mysql:mysql-connector-java')
+	runtime('mysql:mysql-connector-java')
 
-    providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
 }
 
 flyway {
-    url = 'jdbc:mysql://localhost:3306/jiraalerts?serverTimezone=UTC'
-    user = 'root'
-    password = 'root'
+	url = 'jdbc:mysql://localhost:3306/jiraalerts?serverTimezone=UTC'
+	user = 'root'
+	password = 'root'
 }
 
 idea {
-    project {
-        jdkName = '1.8'
-        languageLevel = '8'
-        vcs = 'Git'
-    }
+	project {
+		jdkName = '1.8'
+		languageLevel = '8'
+		vcs = 'Git'
+	}
 }
