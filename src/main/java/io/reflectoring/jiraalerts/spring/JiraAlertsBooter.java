@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class JiraAlertsBooter {
 
-	public static void main(String[] args) {
-		SpringApplication.run(JiraAlertsBooter.class, args);
-	}
+  public static void main(String[] args) {
+    SpringApplication.run(JiraAlertsBooter.class, args);
+  }
 }

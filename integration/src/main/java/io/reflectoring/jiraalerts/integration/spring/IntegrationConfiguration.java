@@ -6,5 +6,4 @@ import org.springframework.context.annotation.Import;
 
 @Configuration
 @Import(JiraComponentConfiguration.class)
-public class IntegrationConfiguration {
-}
+public class IntegrationConfiguration {}
