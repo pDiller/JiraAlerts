@@ -1,8 +1,9 @@
-package io.reflectoring.jiraalerts.shared.wickettests;
+package io.reflectoring.jiraalerts.wickettests;
 
 import static org.mockito.Mockito.mock;
 
 import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionDataRepository;
+import io.reflectoring.jiraalerts.shared.wickettests.TestConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;

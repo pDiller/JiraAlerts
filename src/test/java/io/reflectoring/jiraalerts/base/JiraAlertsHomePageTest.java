@@ -1,6 +1,6 @@
 package io.reflectoring.jiraalerts.base;
 
-import io.reflectoring.jiraalerts.shared.wickettests.JiraAlertsTestConfiguration;
+import io.reflectoring.jiraalerts.wickettests.JiraAlertsTestConfiguration;
 import io.reflectoring.jiraalerts.shared.wickettests.TestConfiguration;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.util.tester.WicketTester;
