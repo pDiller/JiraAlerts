@@ -13,9 +13,7 @@ public class HomePage extends BasePage {
     /**
      * Constructor for HomePage.
      */
-
     public HomePage() {
-
         add(new Label("welcomeLabel", new ResourceModel("welcome.text")));
     }
 }

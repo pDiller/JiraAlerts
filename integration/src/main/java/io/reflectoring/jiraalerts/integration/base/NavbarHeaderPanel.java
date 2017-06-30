@@ -16,7 +16,7 @@ class NavbarHeaderPanel extends Panel {
 
     /**
      * Constructor for NavBarHeaderPanel.
-     * 
+     *
      * @param id
      *            the Wicket-Id.
      */
