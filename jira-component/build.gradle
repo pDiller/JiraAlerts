@@ -1,3 +1,4 @@
 dependencies{
-    compile 'com.atlassian.jira:jira-rest-java-client:2.0.0-m2'
+    testCompile(project(':wicket-tests'))
+    compile('com.atlassian.jira:jira-rest-java-client:2.0.0-m2')
 }

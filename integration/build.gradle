@@ -1,4 +1,5 @@
 dependencies {
-    compile project(':jira-component')
-    compile project(':iot-controller')
+    testCompile(project(':wicket-tests'))
+    compile(project(':jira-component'))
+    compile(project(':iot-controller'))
 }
