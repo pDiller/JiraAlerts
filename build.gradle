@@ -30,89 +30,89 @@ allprojects{
 	version = '0.0.1-SNAPSHOT'
 	sourceCompatibility = 1.8
 
-    apply plugin: 'java'
-    apply plugin: 'idea'
-    apply plugin: 'org.springframework.boot'
+	apply plugin: 'java'
+	apply plugin: 'idea'
+	apply plugin: 'org.springframework.boot'
 	apply plugin: 'com.diffplug.gradle.spotless'
 
-    repositories {
-        jcenter()
-    }
+	repositories {
+		jcenter()
+	}
 
-    dependencies{
-        testCompile('org.springframework.boot:spring-boot-starter-test')
-        testCompile('org.assertj:assertj-core:3.8.0')
-        testCompile('javax.servlet:javax.servlet-api:3.1.0')
-        
-        compile('de.agilecoders.wicket:wicket-bootstrap-core:2.0.0-M5')
-        compile('com.google.guava:guava:20.0')
-        compile('org.apache.wicket:wicket:8.0.0-M6')
-        compile('org.apache.wicket:wicket-spring:8.0.0-M6')
-        compile('org.apache.wicket:wicket-extensions:8.0.0-M6')
-        compile('de.agilecoders.wicket:wicket-bootstrap-core:2.0.0-M5')
-        compile('org.springframework.boot:spring-boot-starter-data-jpa')
-    }
+	dependencies{
+		testCompile('org.springframework.boot:spring-boot-starter-test')
+		testCompile('org.assertj:assertj-core:3.8.0')
+		testCompile('javax.servlet:javax.servlet-api:3.1.0')
 
-    idea {
-        module {
-            inheritOutputDirs = true
-            downloadJavadoc = true
-            downloadSources = true
-            outputDir = file('build/classes/main')
-            testOutputDir = file('build/classes/test')
-        }
-    }
+		compile('de.agilecoders.wicket:wicket-bootstrap-core:2.0.0-M5')
+		compile('com.google.guava:guava:20.0')
+		compile('org.apache.wicket:wicket:8.0.0-M6')
+		compile('org.apache.wicket:wicket-spring:8.0.0-M6')
+		compile('org.apache.wicket:wicket-extensions:8.0.0-M6')
+		compile('de.agilecoders.wicket:wicket-bootstrap-core:2.0.0-M5')
+		compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	}
 
-    if (plugins.hasPlugin("java")) {
+	idea {
+		module {
+			inheritOutputDirs = true
+			downloadJavadoc = true
+			downloadSources = true
+			outputDir = file('build/classes/main')
+			testOutputDir = file('build/classes/test')
+		}
+	}
 
-        idea.module.iml {
-            withXml {
-                // mark resource directories as such
-                // cf. https://discuss.gradle.org/t/the-idea-plugin-breaks-the-new-intellij-13-iml-configuration/2456/10
-                def sourceFolder = it.asNode().component.content.sourceFolder
+	if (plugins.hasPlugin("java")) {
 
-                def mainResourceFolder = sourceFolder.find { it.@url == 'file://$MODULE_DIR$/src/main/resources' }
-                // in case there is no src/main/resources in this module
-                if (mainResourceFolder != null) {
-                    def atts = mainResourceFolder.attributes()
-                    atts.remove('isTestSource')
-                    atts.put('type', 'java-resource')
-                }
+		idea.module.iml {
+			withXml {
+				// mark resource directories as such
+				// cf. https://discuss.gradle.org/t/the-idea-plugin-breaks-the-new-intellij-13-iml-configuration/2456/10
+				def sourceFolder = it.asNode().component.content.sourceFolder
 
-                def testResourceFolder = sourceFolder.find { it.@url == 'file://$MODULE_DIR$/src/test/resources' }
-                // in case there is no src/test/resources in this module
-                if (testResourceFolder != null) {
-                    def atts = testResourceFolder.attributes()
-                    atts.remove('isTestSource')
-                    atts.put('type', 'java-test-resource')
-                }
+				def mainResourceFolder = sourceFolder.find { it.@url == 'file://$MODULE_DIR$/src/main/resources' }
+				// in case there is no src/main/resources in this module
+				if (mainResourceFolder != null) {
+					def atts = mainResourceFolder.attributes()
+					atts.remove('isTestSource')
+					atts.put('type', 'java-resource')
+				}
 
-                // spring facet
-                def springFacet = '''<component name="FacetManager">
-                <facet type="Spring" name="Spring">
-                  <configuration />
-                </facet>
-              </component>'''
+				def testResourceFolder = sourceFolder.find { it.@url == 'file://$MODULE_DIR$/src/test/resources' }
+				// in case there is no src/test/resources in this module
+				if (testResourceFolder != null) {
+					def atts = testResourceFolder.attributes()
+					atts.remove('isTestSource')
+					atts.put('type', 'java-test-resource')
+				}
 
-                it.asNode().append((new XmlParser()).parseText(springFacet))
+				// spring facet
+				def springFacet = '''<component name="FacetManager">
+				<facet type="Spring" name="Spring">
+				<configuration />
+				</facet>
+			</component>'''
 
-                def disableSpelling = '''<component name="InspectionProjectProfileManager">
-                <profile version="1.0">
-                  <option name="myName" value="Project Default" />
-                  <inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
-                    <option name="processCode" value="true" />
-                    <option name="processLiterals" value="true" />
-                    <option name="processComments" value="true" />
-                  </inspection_tool>
-                </profile>
-                <option name="PROJECT_PROFILE" value="Project Default" />
-                <option name="USE_PROJECT_PROFILE" value="true" />
-                <version value="1.0" />
-              </component>'''
-                it.asNode().append((new XmlParser()).parseText(disableSpelling))
-            }
-        }
-    }
+				it.asNode().append((new XmlParser()).parseText(springFacet))
+
+				def disableSpelling = '''<component name="InspectionProjectProfileManager">
+				<profile version="1.0">
+				<option name="myName" value="Project Default" />
+				<inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+					<option name="processCode" value="true" />
+					<option name="processLiterals" value="true" />
+					<option name="processComments" value="true" />
+				</inspection_tool>
+				</profile>
+				<option name="PROJECT_PROFILE" value="Project Default" />
+				<option name="USE_PROJECT_PROFILE" value="true" />
+				<version value="1.0" />
+			</component>'''
+				it.asNode().append((new XmlParser()).parseText(disableSpelling))
+			}
+		}
+	}
 
 	spotless {
 		format 'misc', {

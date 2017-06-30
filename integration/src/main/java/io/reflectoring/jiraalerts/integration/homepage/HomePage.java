@@ -10,10 +10,10 @@ import io.reflectoring.jiraalerts.integration.base.BasePage;
  */
 public class HomePage extends BasePage {
 
-    /**
-     * Constructor for HomePage.
-     */
-    public HomePage() {
-        add(new Label("welcomeLabel", new ResourceModel("welcome.text")));
-    }
+	/**
+	 * Constructor for HomePage.
+	 */
+	public HomePage() {
+		add(new Label("welcomeLabel", new ResourceModel("welcome.text")));
+	}
 }
