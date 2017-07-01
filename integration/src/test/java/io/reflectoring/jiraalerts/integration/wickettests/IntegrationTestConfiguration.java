@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Import;
 
 import io.reflectoring.jiraalerts.jiracomponent.configuration.JiraConnectionConfigurationService;
 import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionDataRepository;
-import io.reflectoring.jiraalerts.shared.wickettests.TestConfiguration;
+import io.reflectoring.jiraalerts.base.wickettests.TestConfiguration;
 
 @Configuration
 @Import(TestConfiguration.class)
