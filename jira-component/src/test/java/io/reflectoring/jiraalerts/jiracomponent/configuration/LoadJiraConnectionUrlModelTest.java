@@ -13,7 +13,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import io.reflectoring.jiraalerts.jiracomponent.wickettests.JiraComponentTestConfiguration;
-import io.reflectoring.jiraalerts.shared.wickettests.TestConfiguration;
+import io.reflectoring.jiraalerts.base.wickettests.TestConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { JiraComponentTestConfiguration.class, TestConfiguration.class })

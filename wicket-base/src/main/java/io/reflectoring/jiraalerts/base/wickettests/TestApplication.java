@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.shared.wickettests;
+package io.reflectoring.jiraalerts.base.wickettests;
 
 import org.apache.wicket.mock.MockApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
