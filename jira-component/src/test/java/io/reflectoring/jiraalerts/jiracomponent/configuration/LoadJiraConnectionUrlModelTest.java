@@ -5,7 +5,6 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import org.apache.wicket.model.Model;
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -17,35 +16,35 @@ import io.reflectoring.jiraalerts.jiracomponent.wickettests.JiraComponentTestCon
 import io.reflectoring.jiraalerts.shared.wickettests.TestConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(classes = {JiraComponentTestConfiguration.class, TestConfiguration.class})
+@ContextConfiguration(classes = { JiraComponentTestConfiguration.class, TestConfiguration.class })
 public class LoadJiraConnectionUrlModelTest {
 
-    private static final String TEST_URL = "http://test.org";
-    private static final long TEST_ID = 1337L;
+	private static final String TEST_URL = "http://test.org";
+	private static final long TEST_ID = 1337L;
 
-    @Autowired
-    private JiraConnectionConfigurationService jiraConnectionConfigurationServiceMock;
+	@Autowired
+	private JiraConnectionConfigurationService jiraConnectionConfigurationServiceMock;
 
-    private LoadJiraConnectionUrlModel sut;
+	private LoadJiraConnectionUrlModel sut;
 
-    @Before
-    public void setUp() {
-        when(jiraConnectionConfigurationServiceMock.loadConnectionUrl(TEST_ID)).thenReturn(TEST_URL);
+	@Before
+	public void setUp() {
+		when(jiraConnectionConfigurationServiceMock.loadConnectionUrl(TEST_ID)).thenReturn(TEST_URL);
 
-        sut = new LoadJiraConnectionUrlModel(Model.of(TEST_ID));
-    }
+		sut = new LoadJiraConnectionUrlModel(Model.of(TEST_ID));
+	}
 
-    @Test
-    public void getObjectLoadsCorrectData() {
-        String loadedConnectionUrl = sut.getObject();
+	@Test
+	public void getObjectLoadsCorrectData() {
+		String loadedConnectionUrl = sut.getObject();
 
-        assertThat(loadedConnectionUrl).isEqualTo(TEST_URL);
-    }
+		assertThat(loadedConnectionUrl).isEqualTo(TEST_URL);
+	}
 
-    @Test
-    public void getObjectCallsServiceMethodWithCorrectParameters() throws Exception {
-        sut.getObject();
+	@Test
+	public void getObjectCallsServiceMethodWithCorrectParameters() throws Exception {
+		sut.getObject();
 
-        verify(jiraConnectionConfigurationServiceMock).loadConnectionUrl(TEST_ID);
-    }
+		verify(jiraConnectionConfigurationServiceMock).loadConnectionUrl(TEST_ID);
+	}
 }

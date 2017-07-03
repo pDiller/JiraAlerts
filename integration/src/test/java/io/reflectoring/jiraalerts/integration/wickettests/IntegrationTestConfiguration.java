@@ -14,13 +14,13 @@ import io.reflectoring.jiraalerts.shared.wickettests.TestConfiguration;
 @Import(TestConfiguration.class)
 public class IntegrationTestConfiguration {
 
-    @Bean
-    public JiraConnectionConfigurationService jiraConnectionConfigurationService() {
-        return mock(JiraConnectionConfigurationService.class);
-    }
+	@Bean
+	public JiraConnectionConfigurationService jiraConnectionConfigurationService() {
+		return mock(JiraConnectionConfigurationService.class);
+	}
 
-    @Bean
-    public JiraConnectionDataRepository jiraConnectionDataRepository(){
-        return mock(JiraConnectionDataRepository.class);
-    }
+	@Bean
+	public JiraConnectionDataRepository jiraConnectionDataRepository() {
+		return mock(JiraConnectionDataRepository.class);
+	}
 }

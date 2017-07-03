@@ -1,0 +1,10 @@
+#Organize Import Order
+#Thu Jun 15 18:40:19 CEST 2017
+6=de
+5=com
+4=org
+3=javax
+2=java
+1=
+0=\#
+7=io.reflectoring

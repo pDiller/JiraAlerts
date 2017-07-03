@@ -14,21 +14,21 @@ import io.reflectoring.jiraalerts.integration.wickettests.IntegrationTestConfigu
 @ContextConfiguration(classes = IntegrationTestConfiguration.class)
 public class BasePageTest {
 
-    @Autowired
-    private WicketTester wicketTester;
+	@Autowired
+	private WicketTester wicketTester;
 
-    @Before
-    public void setUp() {
-        wicketTester.startPage(BasePage.class);
-    }
+	@Before
+	public void setUp() {
+		wicketTester.startPage(BasePage.class);
+	}
 
-    @Test
-    public void basepageRendersSuccessfully() {
-        wicketTester.assertRenderedPage(BasePage.class);
-    }
+	@Test
+	public void basepageRendersSuccessfully() {
+		wicketTester.assertRenderedPage(BasePage.class);
+	}
 
-    @Test
-    public void basepageContainsNavbar() {
-        wicketTester.assertComponent("navbarHeaderPanel", NavbarHeaderPanel.class);
-    }
+	@Test
+	public void basepageContainsNavbar() {
+		wicketTester.assertComponent("navbarHeaderPanel", NavbarHeaderPanel.class);
+	}
 }

@@ -13,7 +13,7 @@ We also use Git Flow for our work. Please use the following namingconventions to
 * Feature-branches are namend feature/<branchname>
 * Bugfix-branches are namend bugfix/<branchname>
 
-If you´re new to git flow you can look at this page: http://nvie.com/posts/a-successful-git-branching-model
+If youï¿½re new to git flow you can look at this page: http://nvie.com/posts/a-successful-git-branching-model
 
 ### license
 

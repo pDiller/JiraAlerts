@@ -15,21 +15,21 @@ import io.reflectoring.jiraalerts.integration.wickettests.IntegrationTestConfigu
 @ContextConfiguration(classes = IntegrationTestConfiguration.class)
 public class HomePageTest {
 
-    @Autowired
-    private WicketTester wicketTester;
+	@Autowired
+	private WicketTester wicketTester;
 
-    @Before
-    public void setUp() {
-        wicketTester.startPage(HomePage.class);
-    }
+	@Before
+	public void setUp() {
+		wicketTester.startPage(HomePage.class);
+	}
 
-    @Test
-    public void homepageRendersSuccessfully() {
-        wicketTester.assertRenderedPage(HomePage.class);
-    }
+	@Test
+	public void homepageRendersSuccessfully() {
+		wicketTester.assertRenderedPage(HomePage.class);
+	}
 
-    @Test
-    public void homepageShowsWelcomeLabel() {
-        wicketTester.assertComponent("welcomeLabel", Label.class);
-    }
+	@Test
+	public void homepageShowsWelcomeLabel() {
+		wicketTester.assertComponent("welcomeLabel", Label.class);
+	}
 }
