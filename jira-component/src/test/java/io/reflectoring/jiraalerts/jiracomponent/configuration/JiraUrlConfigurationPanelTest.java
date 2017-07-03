@@ -1,8 +1,8 @@
 package io.reflectoring.jiraalerts.jiracomponent.configuration;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
-import io.reflectoring.jiraalerts.jiracomponent.wickettests.JiraComponentTestConfiguration;
-import io.reflectoring.jiraalerts.shared.wickettests.TestConfiguration;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextField;
@@ -11,13 +11,12 @@ import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import static org.mockito.Mockito.times;
-import static org.mockito.Mockito.verify;
+import io.reflectoring.jiraalerts.jiracomponent.wickettests.JiraComponentTestConfiguration;
+import io.reflectoring.jiraalerts.shared.wickettests.TestConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = {JiraComponentTestConfiguration.class, TestConfiguration.class})
