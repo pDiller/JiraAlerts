@@ -4,6 +4,8 @@ dependencies {
 	compile(project(':iot-controller'))
 }
 
+bootRepackage.enabled = false
+
 spotless {
 	java {
 		removeUnusedImports()
