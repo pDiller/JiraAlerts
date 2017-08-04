@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.shared.wickettests;
+package io.reflectoring.jiraalerts.base.wickettests;
 
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.util.tester.WicketTester;

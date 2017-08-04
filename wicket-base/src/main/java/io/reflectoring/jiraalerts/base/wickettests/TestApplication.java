@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.shared.wickettests;
+package io.reflectoring.jiraalerts.base.wickettests;
 
 import org.apache.wicket.mock.MockApplication;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
@@ -19,6 +19,7 @@ public class TestApplication extends MockApplication {
 		super.init();
 
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
+		getResourceSettings().setLocalizer(new MockLocalizer());
 
 		Bootstrap.install(this);
 	}

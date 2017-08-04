@@ -5,7 +5,6 @@ import static org.mockito.Mockito.verify;
 
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
@@ -15,8 +14,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import io.reflectoring.jiraalerts.base.components.LabeledTextfieldInputPanel;
+import io.reflectoring.jiraalerts.base.wickettests.TestConfiguration;
 import io.reflectoring.jiraalerts.jiracomponent.wickettests.JiraComponentTestConfiguration;
-import io.reflectoring.jiraalerts.shared.wickettests.TestConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = { JiraComponentTestConfiguration.class, TestConfiguration.class })
@@ -40,14 +40,15 @@ public class JiraUrlConfigurationPanelTest {
 	public void homepageRendersSuccessfully() {
 		wicketTester.assertComponent("", JiraUrlConfigurationPanel.class);
 		wicketTester.assertComponent("connectionUrlForm", Form.class);
-		wicketTester.assertComponent("connectionUrlForm:connectionInputField", TextField.class);
+		wicketTester.debugComponentTrees();
+		wicketTester.assertComponent("connectionUrlForm:connectionUrlPanel", LabeledTextfieldInputPanel.class);
 		wicketTester.assertComponent("connectionUrlForm:submitNewConnectionUrlLink", AjaxSubmitLink.class);
 	}
 
 	@Test
 	public void formSubmitCallsServicesForSavingNewData() throws Exception {
 		FormTester formTester = wicketTester.newFormTester("connectionUrlForm");
-		formTester.setValue("connectionInputField", NEW_VALUE_TO_SAVE);
+		formTester.setValue("connectionUrlPanel:textInputForm:input", NEW_VALUE_TO_SAVE);
 
 		wicketTester.clickLink("connectionUrlForm:submitNewConnectionUrlLink");
 

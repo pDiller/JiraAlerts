@@ -81,35 +81,35 @@ public class RaspberryPiController {
 
 		Thread.sleep(2000);
 
-    System.out.println("Now some motor action!");
+		System.out.println("Now some motor action!");
 
-    StepperMotor motor = new StepperMotor(GPIO_03, GPIO_04, GPIO_05, GPIO_06, gpioController);
+		StepperMotor motor = new StepperMotor(GPIO_03, GPIO_04, GPIO_05, GPIO_06, gpioController);
 
-    byte[] singleStepSequence = new byte[4];
-    singleStepSequence[0] = (byte) 0b0011;
-    singleStepSequence[1] = (byte) 0b0110;
-    singleStepSequence[2] = (byte) 0b1100;
-    singleStepSequence[3] = (byte) 0b1001;
+		byte[] singleStepSequence = new byte[4];
+		singleStepSequence[0] = (byte) 0b0011;
+		singleStepSequence[1] = (byte) 0b0110;
+		singleStepSequence[2] = (byte) 0b1100;
+		singleStepSequence[3] = (byte) 0b1001;
 
-    motor.setStepSequence(singleStepSequence);
+		motor.setStepSequence(singleStepSequence);
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Turn half way");
+		System.out.println("Turn half way");
 
-    motor.rotate(0.50);
+		motor.rotate(0.50);
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Turn back");
+		System.out.println("Turn back");
 
-    motor.rotate(-0.5);
+		motor.rotate(-0.5);
 
-    System.out.println("Good boy!");
+		System.out.println("Good boy!");
 
-    Thread.sleep(2000);
+		Thread.sleep(2000);
 
-    System.out.println("Bye bye");
+		System.out.println("Bye bye");
 
 		System.out.println("Bye bye");
 
