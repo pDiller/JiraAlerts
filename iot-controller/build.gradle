@@ -1,3 +1,5 @@
+bootRepackage.enabled = false
+
 spotless {
 	java {
 		removeUnusedImports()

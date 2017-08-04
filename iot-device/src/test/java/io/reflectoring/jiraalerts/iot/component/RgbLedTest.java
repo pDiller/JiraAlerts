@@ -18,7 +18,7 @@ public class RgbLedTest {
 	private GpioPinDigitalOutput greenPinMock;
 	private GpioPinDigitalOutput bluePinMock;
 
-	private RgbLed testSubject;
+	private RgbLed sut;
 
 	@Before
 	public void setUp() {
@@ -32,8 +32,8 @@ public class RgbLedTest {
 		when(gpioControllerMock.provisionDigitalOutputPin(GPIO_01, "green", LOW)).thenReturn(greenPinMock);
 		when(gpioControllerMock.provisionDigitalOutputPin(GPIO_02, "blue", LOW)).thenReturn(bluePinMock);
 
-		// initiate testSubject
-		testSubject = new RgbLed(GPIO_00, GPIO_01, GPIO_02, gpioControllerMock);
+		// initiate system under test
+		sut = new RgbLed(GPIO_00, GPIO_01, GPIO_02, gpioControllerMock);
 	}
 
 	@Test
@@ -44,7 +44,7 @@ public class RgbLedTest {
 		when(bluePinMock.isHigh()).thenReturn(true);
 
 		// when
-		boolean on = testSubject.isOn();
+		boolean on = sut.isOn();
 
 		// then
 		assertThat(on).isTrue();
@@ -58,7 +58,7 @@ public class RgbLedTest {
 		when(bluePinMock.isHigh()).thenReturn(true);
 
 		// when
-		boolean on = testSubject.isOn();
+		boolean on = sut.isOn();
 
 		// then
 		assertThat(on).isTrue();
@@ -72,7 +72,7 @@ public class RgbLedTest {
 		when(bluePinMock.isHigh()).thenReturn(false);
 
 		// when
-		boolean on = testSubject.isOn();
+		boolean on = sut.isOn();
 
 		// then
 		assertThat(on).isFalse();
@@ -83,7 +83,7 @@ public class RgbLedTest {
 		// given
 
 		// when
-		testSubject.setAllPinsHigh();
+		sut.setAllPinsHigh();
 
 		// then
 		verify(redPinMock).setState(HIGH);
@@ -97,7 +97,7 @@ public class RgbLedTest {
 		// given
 
 		// when
-		testSubject.turnRed();
+		sut.turnRed();
 
 		// then
 		verify(redPinMock).setState(HIGH);
@@ -111,7 +111,7 @@ public class RgbLedTest {
 		// given
 
 		// when
-		testSubject.turnGreen();
+		sut.turnGreen();
 
 		// then
 		verify(redPinMock).setState(LOW);
@@ -125,7 +125,7 @@ public class RgbLedTest {
 		// given
 
 		// when
-		testSubject.turnBlue();
+		sut.turnBlue();
 
 		// then
 		verify(redPinMock).setState(LOW);
@@ -139,7 +139,7 @@ public class RgbLedTest {
 		// given
 
 		// when
-		testSubject.turnYellow();
+		sut.turnYellow();
 
 		// then
 		verify(redPinMock).setState(HIGH);
@@ -153,7 +153,7 @@ public class RgbLedTest {
 		// given
 
 		// when
-		testSubject.turnCyan();
+		sut.turnCyan();
 
 		// then
 		verify(redPinMock).setState(LOW);
@@ -167,7 +167,7 @@ public class RgbLedTest {
 		// given
 
 		// when
-		testSubject.turnMagenta();
+		sut.turnMagenta();
 
 		// then
 		verify(redPinMock).setState(HIGH);
@@ -181,7 +181,7 @@ public class RgbLedTest {
 		// given
 
 		// when
-		testSubject.turnWhite();
+		sut.turnWhite();
 
 		// then
 		verify(redPinMock).setState(HIGH);
@@ -195,7 +195,7 @@ public class RgbLedTest {
 		// given
 
 		// when
-		testSubject.turnOff();
+		sut.turnOff();
 
 		// then
 		verify(redPinMock).setState(LOW);
