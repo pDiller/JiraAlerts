@@ -1,0 +1,11 @@
+dependencies {
+	compile(project(':iot-device'))
+}
+
+spotless {
+	java {
+		removeUnusedImports()
+		importOrderFile '../src/main/resources/formatter/spotless.importorder'
+		eclipse().configFile '../src/main/resources/formatter/spotless.eclipse-format.xml'
+	}
+}
