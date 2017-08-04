@@ -1,8 +1,10 @@
 dependencies {
-	testCompile(project(':wicket-tests'))
+	testCompile(project(':wicket-base'))
 	compile(project(':jira-component'))
 	compile(project(':iot-controller'))
 }
+
+bootRepackage.enabled = false
 
 spotless {
 	java {
