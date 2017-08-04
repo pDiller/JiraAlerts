@@ -19,6 +19,7 @@ public class TestApplication extends MockApplication {
 		super.init();
 
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
+		getResourceSettings().setLocalizer(new MockLocalizer());
 
 		Bootstrap.install(this);
 	}
