@@ -1,10 +1,10 @@
 package io.reflectoring.jiraalerts.iot.test;
 
-import com.pi4j.util.Console;
+import static org.apache.commons.lang3.StringUtils.trim;
 
 import java.io.IOException;
 
-import static org.apache.commons.lang3.StringUtils.trim;
+import com.pi4j.util.Console;
 
 /**
  * Use this test to run against a real raspberry pi connected to different devices. You have to run this test directly on a RaspberryPi

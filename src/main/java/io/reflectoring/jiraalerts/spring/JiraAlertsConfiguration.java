@@ -11,9 +11,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import io.reflectoring.jiraalerts.integration.spring.IntegrationConfiguration;
+import io.reflectoring.jiraalerts.timer.QuartzTimerConfiguration;
 
 @Configuration
-@Import(value = { IntegrationConfiguration.class, PersistenceContextConfiguration.class })
+@Import(value = { IntegrationConfiguration.class, PersistenceContextConfiguration.class, QuartzTimerConfiguration.class })
 public class JiraAlertsConfiguration implements ServletContextInitializer {
 
 	private static final String PARAM_APP_BEAN = "applicationBean";

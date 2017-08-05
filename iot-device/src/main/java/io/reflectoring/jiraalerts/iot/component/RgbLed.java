@@ -1,12 +1,12 @@
 package io.reflectoring.jiraalerts.iot.component;
 
+import static com.pi4j.io.gpio.PinState.HIGH;
+import static com.pi4j.io.gpio.PinState.LOW;
+
 import com.pi4j.io.gpio.GpioController;
 import com.pi4j.io.gpio.GpioPinDigitalOutput;
 import com.pi4j.io.gpio.Pin;
 import com.pi4j.io.gpio.PinState;
-
-import static com.pi4j.io.gpio.PinState.HIGH;
-import static com.pi4j.io.gpio.PinState.LOW;
 
 /** Represents an actual RGB-LED. */
 public class RgbLed {
