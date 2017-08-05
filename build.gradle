@@ -50,6 +50,9 @@ allprojects{
 		compile('org.apache.wicket:wicket-extensions:8.0.0-M6')
 		compile('de.agilecoders.wicket:wicket-bootstrap-core:2.0.0-M5')
 		compile('org.springframework.boot:spring-boot-starter-data-jpa')
+		compile('org.quartz-scheduler:quartz:2.2.1')
+		compile('org.springframework:spring-context-support:4.3.9.RELEASE')
+		compile('org.springframework.boot:spring-boot-starter-web')
 	}
 
 	idea {
@@ -127,7 +130,6 @@ allprojects{
 dependencies {
 
 	compile('org.flywaydb:flyway-core')
-	compile('org.springframework.boot:spring-boot-starter-web')
 	testCompile(project(':wicket-base'))
 	compile(project(':integration'))
 
