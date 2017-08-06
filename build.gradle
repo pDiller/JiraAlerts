@@ -13,9 +13,10 @@ buildscript {
 		classpath "com.diffplug.spotless:spotless-plugin-gradle:3.4.0"
 	}
 }
-
-apply plugin: 'war'
-apply plugin: 'org.flywaydb.flyway'
+plugins{
+	id 'war'
+	id "org.flywaydb.flyway" version "4.2.0"
+}
 
 allprojects{
 
@@ -130,6 +131,7 @@ allprojects{
 dependencies {
 
 	compile('org.flywaydb:flyway-core')
+	compile('org.flywaydb:flyway-core:4.2.0')
 	testCompile(project(':wicket-base'))
 	compile(project(':integration'))
 
@@ -142,6 +144,7 @@ flyway {
 	url = 'jdbc:mysql://localhost:3306/jiraalerts?serverTimezone=UTC'
 	user = 'root'
 	password = 'root'
+    schemas = ['jiraalerts']
 }
 
 idea {
