@@ -16,6 +16,7 @@ import org.apache.wicket.validation.validator.UrlValidator;
 
 import de.agilecoders.wicket.core.markup.html.bootstrap.form.BootstrapForm;
 
+import io.reflectoring.jiraalerts.base.components.LabeledPasswordInputPanel;
 import io.reflectoring.jiraalerts.base.components.LabeledTextfieldInputPanel;
 import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionData;
 
@@ -37,10 +38,17 @@ public class JiraConnectionDataPanel extends GenericPanel<JiraConnectionData> {
 		Form<Void> connectionUrlForm = new BootstrapForm<>("connectionUrlForm");
 
 		IModel<String> connectionUrlLabelModel = new StringResourceModel("connectionUrl.label");
-
 		IValidator<String> urlValidator = new UrlValidator(URL_SCHEMES);
 		IModel<String> connectionUrlModel = model(from(JiraConnectionData.class).getUrl()).bind(getModel());
 		connectionUrlForm.add(new LabeledTextfieldInputPanel("connectionUrlPanel", connectionUrlLabelModel, connectionUrlModel, urlValidator));
+
+		IModel<String> connectionUsernameLabelModel = new StringResourceModel("connectionUsername.label");
+		IModel<String> connectionUsernameModel = model(from(JiraConnectionData.class).getUsername()).bind(getModel());
+		connectionUrlForm.add(new LabeledTextfieldInputPanel("connectionUsernamePanel", connectionUsernameLabelModel, connectionUsernameModel));
+
+		IModel<String> connectionPasswordLabelModel = new StringResourceModel("connectionPassword.label");
+		IModel<String> connectionPasswordModel = model(from(JiraConnectionData.class).getPw()).bind(getModel());
+		connectionUrlForm.add(new LabeledPasswordInputPanel("connectionPasswordPanel", connectionPasswordLabelModel, connectionPasswordModel));
 
 		connectionUrlForm.add(new AjaxSubmitLink("submitNewConnectionUrlLink", connectionUrlForm) {
 
