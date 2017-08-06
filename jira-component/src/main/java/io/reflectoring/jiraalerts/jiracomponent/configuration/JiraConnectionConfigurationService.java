@@ -4,48 +4,43 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionData;
 import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionDataRepository;
 
 /** Service to administrate the JIRA Connection. */
 @Service
+@Transactional
 public class JiraConnectionConfigurationService {
 
 	@Autowired
 	private JiraConnectionDataRepository jiraConnectionDataRepository;
 
 	/**
-	 * Loads the Connection URL for JIRA instance.
+	 * Loads the Connection for JIRA instance.
 	 *
 	 * @param jiraConnectionDataId
 	 *            the id for the Configuration to change.
-	 * @return Connection-URL for JIRA instance.
+	 * @return Connection-Data for JIRA instance.
 	 */
-	public String loadConnectionUrl(long jiraConnectionDataId) {
+	public JiraConnectionData loadJiraConnectionData(long jiraConnectionDataId) {
 		JiraConnectionData jiraConnectionData = jiraConnectionDataRepository.findOne(jiraConnectionDataId);
 
 		checkJiraConnectionDataNotNull(jiraConnectionDataId, jiraConnectionData);
 
-		return jiraConnectionData.getUrl();
+		return jiraConnectionData;
 	}
 
 	/**
-	 * Writes the configured JIRA-URL in given propertyPath.
+	 * Writes the configured JIRA-Connection in Database.
 	 *
-	 * @param jiraConnectionDataId
-	 *            the id for the Configuration to change.
-	 * @param newConnectionUrl
-	 *            the new connectionUrl for the JIRA instance.
+	 * @param newJiraConnectionData
+	 *            the new JIRA-Connection-Data.
 	 */
-	public void saveConnectionUrl(long jiraConnectionDataId, String newConnectionUrl) {
-		JiraConnectionData jiraConnectionData = jiraConnectionDataRepository.findOne(jiraConnectionDataId);
-
-		checkJiraConnectionDataNotNull(jiraConnectionDataId, jiraConnectionData);
-
-		jiraConnectionData.setUrl(newConnectionUrl);
-		jiraConnectionData.setModifiedAt(new Date());
-		jiraConnectionDataRepository.save(jiraConnectionData);
+	public void saveConnectionData(JiraConnectionData newJiraConnectionData) {
+		newJiraConnectionData.setModifiedAt(new Date());
+		jiraConnectionDataRepository.save(newJiraConnectionData);
 	}
 
 	private void checkJiraConnectionDataNotNull(long jiraConnectionDataId, JiraConnectionData jiraConnectionData) {

@@ -44,16 +44,16 @@ public class JiraConnectionConfigurationServiceTest {
 	}
 
 	@Test
-	public void loadConnectionUrlReturnsConnectionUrlFromDataObject() {
-		String loadedConnectionUrl = sut.loadConnectionUrl(JIRA_CONNECTION_DATA_ID);
+	public void loadConnectionDataReturnsCorrectConnectionData() {
+		JiraConnectionData loadedConnectionData = sut.loadJiraConnectionData(JIRA_CONNECTION_DATA_ID);
 
-		assertThat(loadedConnectionUrl).isEqualTo(JIRA_CONNECTION_DATA_URL);
+		assertThat(loadedConnectionData.getId()).isEqualTo(JIRA_CONNECTION_DATA_ID);
 	}
 
 	@Test
-	public void loadConnectionUrlThrowsExceptionWhenRepositoryReturnNull() throws Exception {
+	public void loadConnectionDataThrowsExceptionWhenRepositoryReturnNull() throws Exception {
 		try {
-			sut.loadConnectionUrl(UNKNOWN_JIRA_CONNECTION_DATA_ID);
+			sut.loadJiraConnectionData(UNKNOWN_JIRA_CONNECTION_DATA_ID);
 			failBecauseExceptionWasNotThrown(IllegalStateException.class);
 		} catch (IllegalStateException illegalStateException) {
 			assertThat(illegalStateException).hasMessage("No configuration found for id: 1337");
@@ -61,41 +61,24 @@ public class JiraConnectionConfigurationServiceTest {
 	}
 
 	@Test
-	public void loadConnectionCallsRepositoryForLoadingData() throws Exception {
-		sut.loadConnectionUrl(JIRA_CONNECTION_DATA_ID);
+	public void loadConnectionDataCallsRepositoryForLoadingConnectionData() throws Exception {
+		sut.loadJiraConnectionData(JIRA_CONNECTION_DATA_ID);
 
 		verify(jiraConnectionDataRepositoryMock).findOne(JIRA_CONNECTION_DATA_ID);
 	}
 
 	@Test
-	public void saveConnectionUrlSetsNewUrl() throws Exception {
-		sut.saveConnectionUrl(JIRA_CONNECTION_DATA_ID, NEW_JIRA_CONNECTION_DATA_URL);
+	public void saveConnectionDataSetsLastModified() throws Exception {
+		JiraConnectionData newJiraConnectionData = new JiraConnectionData();
+		sut.saveConnectionData(newJiraConnectionData);
 
-		assertThat(jiraConnectionData.getUrl()).isEqualTo(NEW_JIRA_CONNECTION_DATA_URL);
+		assertThat(newJiraConnectionData.getModifiedAt()).isAfter(JIRA_CONNECTION_DATA_MODIFIED_DATE);
 	}
 
 	@Test
-	public void saveConnectionUrlSetsLastModified() throws Exception {
-		sut.saveConnectionUrl(JIRA_CONNECTION_DATA_ID, NEW_JIRA_CONNECTION_DATA_URL);
+	public void saveConnectionDataCallsRepositoryForSavingConnectionData() throws Exception {
+		sut.saveConnectionData(jiraConnectionData);
 
-		assertThat(jiraConnectionData.getModifiedAt()).isAfter(JIRA_CONNECTION_DATA_MODIFIED_DATE);
-	}
-
-	@Test
-	public void saveConnectionUrlThrowsExceptionWhenLoadedConnectionDataIsNull() throws Exception {
-		try {
-			sut.saveConnectionUrl(UNKNOWN_JIRA_CONNECTION_DATA_ID, NEW_JIRA_CONNECTION_DATA_URL);
-			failBecauseExceptionWasNotThrown(IllegalStateException.class);
-		} catch (IllegalStateException illegalStateException) {
-			assertThat(illegalStateException).hasMessage("No configuration found for id: 1337");
-		}
-	}
-
-	@Test
-	public void saveConnectionUrlLoadsObjectWithGivenIdAndSetDataInSameObject() throws Exception {
-		sut.saveConnectionUrl(JIRA_CONNECTION_DATA_ID, NEW_JIRA_CONNECTION_DATA_URL);
-
-		verify(jiraConnectionDataRepositoryMock).findOne(JIRA_CONNECTION_DATA_ID);
 		verify(jiraConnectionDataRepositoryMock).save(jiraConnectionData);
 	}
 }
