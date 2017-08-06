@@ -3,12 +3,13 @@ package io.reflectoring.jiraalerts.jiracomponent.issuerecognition;
 import static org.apache.commons.lang3.time.DurationFormatUtils.formatDuration;
 import static org.slf4j.LoggerFactory.getLogger;
 
-import com.google.common.collect.Lists;
+import java.util.List;
+
 import org.apache.commons.lang3.time.StopWatch;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.google.common.collect.Lists;
 
 @Service
 public class IssueRecognizerService {
@@ -20,7 +21,7 @@ public class IssueRecognizerService {
 		StopWatch issueSearchStopWatch = new StopWatch();
 		issueSearchStopWatch.start();
 
-		//TODO Search for Issues
+		// TODO Search for Issues
 		List<Object> issues = Lists.newArrayList();
 
 		issueSearchStopWatch.stop();

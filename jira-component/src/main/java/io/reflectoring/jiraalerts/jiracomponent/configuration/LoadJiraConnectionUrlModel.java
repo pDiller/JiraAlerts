@@ -5,8 +5,10 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
-/** Model to show the configured JIRA-Connection-URL. */
-public class LoadJiraConnectionUrlModel extends LoadableDetachableModel<String> {
+import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionData;
+
+/** Model to show the configured JIRA-Connection-Data. */
+public class LoadJiraConnectionUrlModel extends LoadableDetachableModel<JiraConnectionData> {
 
 	@SpringBean
 	private JiraConnectionConfigurationService jiraConnectionConfigurationService;
@@ -25,9 +27,9 @@ public class LoadJiraConnectionUrlModel extends LoadableDetachableModel<String> 
 	}
 
 	@Override
-	protected String load() {
+	protected JiraConnectionData load() {
 		Long jiraConnectionDataId = jiraConnectionDataIdModel.getObject();
-		return jiraConnectionConfigurationService.loadConnectionUrl(jiraConnectionDataId);
+		return jiraConnectionConfigurationService.loadJiraConnectionData(jiraConnectionDataId);
 	}
 
 	@Override
