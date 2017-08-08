@@ -5,7 +5,8 @@ import static org.wicketstuff.lazymodel.LazyModel.model;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
-import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.feedback.FeedbackMessage;
+import org.apache.wicket.feedback.FencedFeedbackPanel;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
@@ -28,6 +29,7 @@ public class JiraConnectionDataPanel extends GenericPanel<JiraConnectionData> {
 	 */
 	private static final long JIRA_CONNECTION_DATA_ID = 1L;
 	private static final String[] URL_SCHEMES = { "https", "http" };
+	private static final String CSS_CLASS_SUCCESS = "alert alert-success";
 
 	@SpringBean
 	private JiraConnectionConfigurationService jiraConnectionConfigurationService;
@@ -35,7 +37,7 @@ public class JiraConnectionDataPanel extends GenericPanel<JiraConnectionData> {
 	public JiraConnectionDataPanel(String id) {
 		super(id, new LoadJiraConnectionUrlModel(Model.of(JIRA_CONNECTION_DATA_ID)));
 
-		Form<Void> connectionUrlForm = new BootstrapForm<>("connectionUrlForm");
+		BootstrapForm<Void> connectionUrlForm = new BootstrapForm<>("connectionUrlForm");
 
 		IModel<String> connectionUrlLabelModel = new StringResourceModel("connectionUrl.label");
 		IValidator<String> urlValidator = new UrlValidator(URL_SCHEMES);
@@ -50,13 +52,28 @@ public class JiraConnectionDataPanel extends GenericPanel<JiraConnectionData> {
 		IModel<String> connectionPasswordModel = model(from(JiraConnectionData.class).getPw()).bind(getModel());
 		connectionUrlForm.add(new LabeledPasswordInputPanel("connectionPasswordPanel", connectionPasswordLabelModel, connectionPasswordModel));
 
+		connectionUrlForm.add(new FencedFeedbackPanel("feedback", connectionUrlForm) {
+
+			@Override
+			protected String getCSSClass(FeedbackMessage message) {
+				return CSS_CLASS_SUCCESS;
+			}
+		});
 		connectionUrlForm.add(new AjaxSubmitLink("submitNewConnectionUrlLink", connectionUrlForm) {
+
+			@Override
+			protected void onError(AjaxRequestTarget target) {
+				if (target != null) {
+					target.add(connectionUrlForm);
+				}
+			}
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target) {
 				JiraConnectionData newConnectionData = JiraConnectionDataPanel.this.getModelObject();
 				jiraConnectionConfigurationService.saveConnectionData(newConnectionData);
 				if (target != null) {
+					success(getString("jiraconfig.saved"));
 					target.add(connectionUrlForm);
 				}
 			}
