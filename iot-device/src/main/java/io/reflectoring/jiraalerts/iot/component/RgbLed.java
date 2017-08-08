@@ -8,7 +8,9 @@ import com.pi4j.io.gpio.PinState;
 import static com.pi4j.io.gpio.PinState.HIGH;
 import static com.pi4j.io.gpio.PinState.LOW;
 
-/** Represents an actual RGB-LED. */
+/**
+ * Represents an actual RGB-LED.
+ */
 public class RgbLed {
 
 	private final GpioPinDigitalOutput redPin;
