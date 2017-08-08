@@ -1,15 +1,11 @@
 package io.reflectoring.jiraalerts.iot.test.component.rgbled.action;
 
 import io.reflectoring.jiraalerts.iot.component.RgbLed;
-import io.reflectoring.jiraalerts.iot.test.component.Action;
 
-public class TurnLedGreenAction extends Action {
-
-	private final RgbLed led;
+public class TurnLedGreenAction extends RgbLedAction {
 
 	public TurnLedGreenAction(String actionId, RgbLed led) {
-		super(actionId, "Turn LED green");
-		this.led = led;
+		super(actionId, "Turn LED green", led);
 	}
 
 	@Override
