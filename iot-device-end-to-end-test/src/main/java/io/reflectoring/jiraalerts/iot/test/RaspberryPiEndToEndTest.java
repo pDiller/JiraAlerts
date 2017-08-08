@@ -1,16 +1,18 @@
 package io.reflectoring.jiraalerts.iot.test;
 
-import com.pi4j.io.gpio.GpioController;
-import com.pi4j.io.gpio.GpioFactory;
-import com.pi4j.util.Console;
-import io.reflectoring.jiraalerts.iot.test.component.ComponentEndToEndTest;
-import io.reflectoring.jiraalerts.iot.test.component.rgbled.RgbLedEndToEndTest;
+import static org.apache.commons.lang3.StringUtils.trim;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.apache.commons.lang3.StringUtils.trim;
+import com.pi4j.io.gpio.GpioController;
+import com.pi4j.io.gpio.GpioFactory;
+import com.pi4j.util.Console;
+
+import io.reflectoring.jiraalerts.iot.test.component.ComponentEndToEndTest;
+import io.reflectoring.jiraalerts.iot.test.component.rgbled.RgbLedEndToEndTest;
+import io.reflectoring.jiraalerts.iot.test.component.steppermotor.StepperMotorEndToEndTest;
 
 /**
  * Use this test to run against a real raspberry pi connected to different devices. You have to run this test directly on a RaspberryPi
@@ -19,6 +21,7 @@ public final class RaspberryPiEndToEndTest {
 
 	private static final List<ComponentEndToEndTest> componentEndToEndTests = new ArrayList<>();
 
+	public static final String SEPARATOR_LINE = "###################################################################################";
 	public static final String EXIT_COMMAND = "exit";
 	public static final String LIST_COMMAND = "list";
 	public static final String READ_INPUT_INDICATOR = "> ";
@@ -26,7 +29,7 @@ public final class RaspberryPiEndToEndTest {
 	private static Console console;
 	private static GpioController gpioController;
 
-	public static void main(String[] args) throws IOException, NoSuchMethodException {
+	public static void main(String[] args) throws IOException {
 		gpioController = GpioFactory.getInstance();
 		console = new Console();
 
@@ -61,24 +64,25 @@ public final class RaspberryPiEndToEndTest {
 		printExitMessage();
 	}
 
-	private static void createComponentList(Console console, GpioController gpioController) throws NoSuchMethodException {
+	private static void createComponentList(Console console, GpioController gpioController) {
 		componentEndToEndTests.add(new RgbLedEndToEndTest("0", "RGB Led", console, gpioController));
+		componentEndToEndTests.add(new StepperMotorEndToEndTest("1", "Stepper Motor", console, gpioController));
 	}
 
 	private static void printTitle() {
 		console.println();
-		console.println("###########################################################################################");
-		console.println("                         <-- JiraAlerts RaspberryPi Testclient -->                         ");
-		console.println("     This is an end-to-end test application to test devices connect to a Raspberry Pi!     ");
-		console.println("###########################################################################################");
+		console.println(SEPARATOR_LINE);
+		console.println("                     <-- JiraAlerts RaspberryPi Testclient -->                     ");
+		console.println(" This is an end-to-end test application to test devices connect to a Raspberry Pi! ");
+		console.println(SEPARATOR_LINE);
 		console.println();
 	}
 
 	private static void printExitMessage() {
 		console.println();
-		console.println("###########################################################################################");
-		console.println("                              Thanks for testing! Good-Bye!                                ");
-		console.println("###########################################################################################");
+		console.println(SEPARATOR_LINE);
+		console.println("                          Thanks for testing! Good-Bye!                            ");
+		console.println(SEPARATOR_LINE);
 		console.println();
 	}
 
