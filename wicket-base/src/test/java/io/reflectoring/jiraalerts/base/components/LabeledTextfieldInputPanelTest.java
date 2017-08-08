@@ -1,12 +1,11 @@
 package io.reflectoring.jiraalerts.base.components;
 
+import org.apache.wicket.feedback.FencedFeedbackPanel;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.TextField;
-import org.apache.wicket.markup.html.panel.ComponentFeedbackPanel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
-import org.apache.wicket.validation.IValidator;
 import org.apache.wicket.validation.validator.StringValidator;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -32,14 +31,12 @@ public class LabeledTextfieldInputPanelTest {
 
 	@Test
 	public void componentIsSuccessfullyRendered() {
-		IValidator<String>[] validators = new IValidator[] {};
-		wicketTester
-		        .startComponentInPage(new LabeledTextfieldInputPanel("inputPanel", Model.of("labelValue"), Model.of(TEST_VALUE_CORRECT), validators));
+		wicketTester.startComponentInPage(new LabeledTextfieldInputPanel("inputPanel", Model.of("labelValue"), Model.of(TEST_VALUE_CORRECT)));
 
 		wicketTester.assertComponent("inputPanel:textInputForm", BootstrapForm.class);
 		wicketTester.assertComponent("inputPanel:textInputForm:inputLabel", Label.class);
 		wicketTester.assertComponent("inputPanel:textInputForm:input", TextField.class);
-		wicketTester.assertComponent("inputPanel:textInputForm:feedback", ComponentFeedbackPanel.class);
+		wicketTester.assertComponent("inputPanel:textInputForm:feedback", FencedFeedbackPanel.class);
 		wicketTester.assertNoErrorMessage();
 	}
 
@@ -61,28 +58,6 @@ public class LabeledTextfieldInputPanelTest {
 		FormTester formTester = wicketTester.newFormTester("inputPanel:textInputForm");
 
 		formTester.submit();
-
-		wicketTester.assertNoErrorMessage();
-	}
-
-	@Test
-	public void changeEventValidatesInputFieldWithError() {
-		wicketTester.startComponentInPage(new LabeledTextfieldInputPanel("inputPanel", Model.of("labelValue"), new Model<>(), stringValidator));
-		FormTester formTester = wicketTester.newFormTester("inputPanel:textInputForm");
-		formTester.setValue("input", TEST_VALUE_TO_SHORT);
-
-		wicketTester.executeAjaxEvent("inputPanel:textInputForm:input", "change");
-
-		wicketTester.assertErrorMessages(TEST_ERROR_MESSAGE);
-	}
-
-	@Test
-	public void changeEventValidatesInputFieldSuccessfull() {
-		wicketTester.startComponentInPage(new LabeledTextfieldInputPanel("inputPanel", Model.of("labelValue"), new Model<>(), stringValidator));
-		FormTester formTester = wicketTester.newFormTester("inputPanel:textInputForm");
-		formTester.setValue("input", TEST_VALUE_CORRECT);
-
-		wicketTester.executeAjaxEvent("inputPanel:textInputForm:input", "change");
 
 		wicketTester.assertNoErrorMessage();
 	}
