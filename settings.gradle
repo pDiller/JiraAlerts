@@ -4,6 +4,3 @@ include 'wicket-base'
 include 'integration'
 include 'jira-component'
 include 'iot-controller'
-include 'iot-device'
-// End-To-End Tests for RaspberryPi have to be actual source files and not tests
-include 'iot-device-end-to-end-test'
