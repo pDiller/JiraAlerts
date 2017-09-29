@@ -19,10 +19,10 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.form.BootstrapForm;
 
 import io.reflectoring.jiraalerts.base.components.LabeledPasswordInputPanel;
 import io.reflectoring.jiraalerts.base.components.LabeledTextfieldInputPanel;
-import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionData;
+import io.reflectoring.jiraalerts.jiracomponent.configuration.persistence.JiraConnectionData;
 
 /** Panel to configure the URL of JIRA instance. */
-public class JiraConnectionDataPanel extends GenericPanel<JiraConnectionData> {
+public class JiraConnectionDataPanel extends GenericPanel<JiraConnectionDataDTO> {
 
 	/**
 	 * https://github.com/pDiller/JiraAlerts/issues/13 First implementation allows just one configuration. Servicelayer is implemented to allow more.
@@ -70,7 +70,7 @@ public class JiraConnectionDataPanel extends GenericPanel<JiraConnectionData> {
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target) {
-				JiraConnectionData newConnectionData = JiraConnectionDataPanel.this.getModelObject();
+				JiraConnectionDataDTO newConnectionData = JiraConnectionDataPanel.this.getModelObject();
 				jiraConnectionConfigurationService.saveConnectionData(newConnectionData);
 				if (target != null) {
 					success(getString("jiraconfig.saved"));

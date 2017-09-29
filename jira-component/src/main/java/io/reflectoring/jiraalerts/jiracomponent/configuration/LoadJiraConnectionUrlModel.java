@@ -5,10 +5,8 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 
-import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionData;
-
 /** Model to show the configured JIRA-Connection-Data. */
-public class LoadJiraConnectionUrlModel extends LoadableDetachableModel<JiraConnectionData> {
+public class LoadJiraConnectionUrlModel extends LoadableDetachableModel<JiraConnectionDataDTO> {
 
 	@SpringBean
 	private JiraConnectionConfigurationService jiraConnectionConfigurationService;
@@ -27,9 +25,10 @@ public class LoadJiraConnectionUrlModel extends LoadableDetachableModel<JiraConn
 	}
 
 	@Override
-	protected JiraConnectionData load() {
+	protected JiraConnectionDataDTO load() {
 		Long jiraConnectionDataId = jiraConnectionDataIdModel.getObject();
-		return jiraConnectionConfigurationService.loadJiraConnectionData(jiraConnectionDataId);
+		JiraConnectionDataDTO jiraConnectionDataDTO = jiraConnectionConfigurationService.loadJiraConnectionData(jiraConnectionDataId);
+		return jiraConnectionDataDTO;
 	}
 
 	@Override

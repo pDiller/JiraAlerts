@@ -6,7 +6,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import io.reflectoring.jiraalerts.jiracomponent.configuration.JiraConnectionConfigurationService;
-import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionDataRepository;
+import io.reflectoring.jiraalerts.jiracomponent.configuration.JiraConnectionDataMapper;
+import io.reflectoring.jiraalerts.jiracomponent.configuration.persistence.JiraConnectionDataRepository;
 
 @Configuration
 public class JiraComponentTestConfiguration {
@@ -20,4 +21,10 @@ public class JiraComponentTestConfiguration {
 	public JiraConnectionDataRepository jiraConnectionDataRepository() {
 		return mock(JiraConnectionDataRepository.class);
 	}
+
+	@Bean
+	public JiraConnectionDataMapper jiraConnectionDataMapper() {
+		return mock(JiraConnectionDataMapper.class);
+	}
+
 }

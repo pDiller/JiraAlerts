@@ -18,7 +18,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import io.reflectoring.jiraalerts.base.components.LabeledPasswordInputPanel;
 import io.reflectoring.jiraalerts.base.components.LabeledTextfieldInputPanel;
 import io.reflectoring.jiraalerts.base.wickettests.TestConfiguration;
-import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionData;
 import io.reflectoring.jiraalerts.jiracomponent.wickettests.JiraComponentTestConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -36,7 +35,7 @@ public class JiraConnectionDataPanelTest {
 
 	@Before
 	public void setUp() {
-		when(jiraConnectionConfigurationServiceMock.loadJiraConnectionData(anyInt())).thenReturn(new JiraConnectionData());
+		when(jiraConnectionConfigurationServiceMock.loadJiraConnectionData(anyInt())).thenReturn(new JiraConnectionDataDTO());
 		wicketTester.startComponentInPage(JiraConnectionDataPanel.class);
 	}
 
@@ -61,6 +60,6 @@ public class JiraConnectionDataPanelTest {
 		wicketTester.clickLink("connectionUrlForm:submitNewConnectionUrlLink");
 
 		verify(jiraConnectionConfigurationServiceMock, times(3)).loadJiraConnectionData(JIRA_CONNECTION_DATA_ID);
-		verify(jiraConnectionConfigurationServiceMock).saveConnectionData(any(JiraConnectionData.class));
+		verify(jiraConnectionConfigurationServiceMock).saveConnectionData(any(JiraConnectionDataDTO.class));
 	}
 }

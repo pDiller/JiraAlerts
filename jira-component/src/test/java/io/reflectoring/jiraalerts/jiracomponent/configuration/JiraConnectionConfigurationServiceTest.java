@@ -2,6 +2,7 @@ package io.reflectoring.jiraalerts.jiracomponent.configuration;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
+import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -14,8 +15,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionData;
-import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionDataRepository;
+import io.reflectoring.jiraalerts.jiracomponent.configuration.persistence.JiraConnectionData;
+import io.reflectoring.jiraalerts.jiracomponent.configuration.persistence.JiraConnectionDataRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JiraConnectionConfigurationServiceTest {
@@ -28,6 +29,9 @@ public class JiraConnectionConfigurationServiceTest {
 
 	@Mock
 	private JiraConnectionDataRepository jiraConnectionDataRepositoryMock;
+
+	@Mock
+	private JiraConnectionDataMapper jiraConnectionDataMapperMock;
 
 	@InjectMocks
 	private JiraConnectionConfigurationService sut = new JiraConnectionConfigurationService();
@@ -45,7 +49,11 @@ public class JiraConnectionConfigurationServiceTest {
 
 	@Test
 	public void loadConnectionDataReturnsCorrectConnectionData() {
-		JiraConnectionData loadedConnectionData = sut.loadJiraConnectionData(JIRA_CONNECTION_DATA_ID);
+		JiraConnectionDataDTO jiraConnectionDataDTO = new JiraConnectionDataDTO();
+		jiraConnectionDataDTO.setId(JIRA_CONNECTION_DATA_ID);
+		when(jiraConnectionDataMapperMock.entityToDTO(jiraConnectionData)).thenReturn(jiraConnectionDataDTO);
+
+		JiraConnectionDataDTO loadedConnectionData = sut.loadJiraConnectionData(JIRA_CONNECTION_DATA_ID);
 
 		assertThat(loadedConnectionData.getId()).isEqualTo(JIRA_CONNECTION_DATA_ID);
 	}
@@ -69,7 +77,7 @@ public class JiraConnectionConfigurationServiceTest {
 
 	@Test
 	public void saveConnectionDataSetsLastModified() throws Exception {
-		JiraConnectionData newJiraConnectionData = new JiraConnectionData();
+		JiraConnectionDataDTO newJiraConnectionData = new JiraConnectionDataDTO();
 		sut.saveConnectionData(newJiraConnectionData);
 
 		assertThat(newJiraConnectionData.getModifiedAt()).isAfter(JIRA_CONNECTION_DATA_MODIFIED_DATE);
@@ -77,8 +85,9 @@ public class JiraConnectionConfigurationServiceTest {
 
 	@Test
 	public void saveConnectionDataCallsRepositoryForSavingConnectionData() throws Exception {
-		sut.saveConnectionData(jiraConnectionData);
+		JiraConnectionDataDTO newJiraConnectionData = new JiraConnectionDataDTO();
+		sut.saveConnectionData(newJiraConnectionData);
 
-		verify(jiraConnectionDataRepositoryMock).save(jiraConnectionData);
+		verify(jiraConnectionDataRepositoryMock).save(any(JiraConnectionData.class));
 	}
 }
