@@ -30,7 +30,9 @@ public class JiraConnectionConfigurationService {
 	public JiraConnectionDataDTO loadJiraConnectionData(long jiraConnectionDataId) {
 		JiraConnectionData jiraConnectionData = jiraConnectionDataRepository.findOne(jiraConnectionDataId);
 
-		checkJiraConnectionDataNotNull(jiraConnectionDataId, jiraConnectionData);
+		if (jiraConnectionData == null) {
+			return new JiraConnectionDataDTO();
+		}
 
 		return jiraConnectionDataMapper.entityToDTO(jiraConnectionData);
 	}
@@ -48,9 +50,4 @@ public class JiraConnectionConfigurationService {
 		jiraConnectionDataRepository.save(newJiraConnectionData);
 	}
 
-	private void checkJiraConnectionDataNotNull(long jiraConnectionDataId, JiraConnectionData jiraConnectionData) {
-		if (jiraConnectionData == null) {
-			throw new IllegalStateException("No configuration found for id: " + jiraConnectionDataId);
-		}
-	}
 }

@@ -1,7 +1,6 @@
 package io.reflectoring.jiraalerts.jiracomponent.configuration;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -59,13 +58,9 @@ public class JiraConnectionConfigurationServiceTest {
 	}
 
 	@Test
-	public void loadConnectionDataThrowsExceptionWhenRepositoryReturnNull() throws Exception {
-		try {
-			sut.loadJiraConnectionData(UNKNOWN_JIRA_CONNECTION_DATA_ID);
-			failBecauseExceptionWasNotThrown(IllegalStateException.class);
-		} catch (IllegalStateException illegalStateException) {
-			assertThat(illegalStateException).hasMessage("No configuration found for id: 1337");
-		}
+	public void loadConnectionDataReturnsNewDTOWhenNoConfigExists() throws Exception {
+		JiraConnectionDataDTO jiraConnectionDataDTO = sut.loadJiraConnectionData(UNKNOWN_JIRA_CONNECTION_DATA_ID);
+		assertThat(jiraConnectionDataDTO.getId()).isEqualTo(0L);
 	}
 
 	@Test

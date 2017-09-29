@@ -1,5 +1,6 @@
 package io.reflectoring.jiraalerts.integration.admin;
 
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -15,13 +16,11 @@ import io.reflectoring.jiraalerts.integration.admin.persistence.FirstConfigurati
 @RunWith(MockitoJUnitRunner.class)
 public class IsFirstConfigurationServiceTest {
 
-	private static final Long ZERO = 0L;
-
 	@Mock
 	private FirstConfigurationRepository firstConfigurationRepositoryMock;
 
 	@InjectMocks
-	private IsFirstConfigurationService sut = new IsFirstConfigurationService();
+	private FirstConfigurationService sut = new FirstConfigurationService();
 
 	@Test
 	public void isFirstConfigurationReturnsTrueWhenRepositoryReturnsNull() throws Exception {
@@ -33,7 +32,7 @@ public class IsFirstConfigurationServiceTest {
 	@Test
 	public void isFirstConfigurationReturnsFalseWhenRepositoryCallFindsEntry() throws Exception {
 		FirstConfiguration firstConfiguration = new FirstConfiguration();
-		when(firstConfigurationRepositoryMock.findOne(ZERO)).thenReturn(firstConfiguration);
+		when(firstConfigurationRepositoryMock.findAll()).thenReturn(singletonList(firstConfiguration));
 		boolean isFirstConfiguration = sut.isFirstConfiguration();
 
 		assertThat(isFirstConfiguration).isFalse();

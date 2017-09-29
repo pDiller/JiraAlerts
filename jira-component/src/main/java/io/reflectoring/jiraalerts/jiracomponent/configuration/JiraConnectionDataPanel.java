@@ -76,9 +76,14 @@ public class JiraConnectionDataPanel extends GenericPanel<JiraConnectionDataDTO>
 					success(getString("jiraconfig.saved"));
 					target.add(connectionUrlForm);
 				}
+				submitConnectionData(target);
 			}
 		});
 
 		add(connectionUrlForm);
+	}
+
+	protected void submitConnectionData(AjaxRequestTarget ajaxRequestTarget) {
+
 	}
 }
