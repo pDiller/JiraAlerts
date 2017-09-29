@@ -133,6 +133,8 @@ dependencies {
 
 	compile('org.flywaydb:flyway-core')
 	compile('org.flywaydb:flyway-core:4.2.0')
+	compile('org.apache.commons:commons-crypto:1.0.0')
+
 	testCompile(project(':wicket-base'))
 	compile(project(':integration'))
 

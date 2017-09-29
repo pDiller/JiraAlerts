@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import de.agilecoders.wicket.core.Bootstrap;
 import de.agilecoders.wicket.core.settings.BootstrapSettings;
 
+import io.reflectoring.jiraalerts.integration.admin.AdministrationPage;
 import io.reflectoring.jiraalerts.integration.homepage.HomePage;
 import io.reflectoring.jiraalerts.integration.jiraconfiguration.JiraConfigurationPage;
 
@@ -36,5 +37,6 @@ public class JiraAlertsApplication extends WebApplication {
 
 	private void mountPages() {
 		mountPage("/jira-configuration", JiraConfigurationPage.class);
+		mountPage("/administration", AdministrationPage.class);
 	}
 }
