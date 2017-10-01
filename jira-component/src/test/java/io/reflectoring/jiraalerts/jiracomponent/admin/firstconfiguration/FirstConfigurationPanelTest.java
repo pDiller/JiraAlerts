@@ -34,6 +34,9 @@ public class FirstConfigurationPanelTest {
 	@Autowired
 	private JiraConnectionDataService jiraConnectionDataServiceMock;
 
+	@Autowired
+	private FirstConfigurationService firstConfigurationServiceMock;
+
 	private boolean jiraConnectionSaved = false;
 
 	@Before
@@ -60,7 +63,7 @@ public class FirstConfigurationPanelTest {
 	}
 
 	@Test
-	public void formSubmitCallsServicesForSavingNewData() {
+	public void formSubmitCallsServicesForSavingData() {
 		FormTester formTester = wicketTester.newFormTester("panel:jiraConnectionDataForm");
 		formTester.setValue("connectionUrlPanel:textInputForm:input", URL_TO_SAVE);
 		formTester.setValue("connectionUsernamePanel:textInputForm:input", USERNAME_TO_SAVE);
@@ -68,5 +71,6 @@ public class FirstConfigurationPanelTest {
 		wicketTester.clickLink("panel:jiraConnectionDataForm:submitNewConnectionUrlLink");
 
 		verify(jiraConnectionDataServiceMock).saveJiraConnectionData(any(JiraConnectionDataDTO.class));
+		verify(firstConfigurationServiceMock).saveFirstConfiguration(any(FirstConfigurationDTO.class));
 	}
 }

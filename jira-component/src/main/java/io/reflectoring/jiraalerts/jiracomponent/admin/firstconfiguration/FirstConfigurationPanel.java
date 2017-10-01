@@ -23,6 +23,9 @@ public abstract class FirstConfigurationPanel extends GenericPanel<JiraConnectio
 	@SpringBean
 	private JiraConnectionDataService jiraConnectionDataService;
 
+	@SpringBean
+	private FirstConfigurationService firstConfigurationService;
+
 	public FirstConfigurationPanel(String id, IModel<JiraConnectionDataDTO> jiraConnectionDataDTOModel) {
 		super(id, jiraConnectionDataDTOModel);
 
@@ -49,7 +52,7 @@ public abstract class FirstConfigurationPanel extends GenericPanel<JiraConnectio
 			@Override
 			protected void onSubmit(AjaxRequestTarget target) {
 				jiraConnectionDataService.saveJiraConnectionData(getModelObject());
-				// TODO Save FirstConfiguration here
+				firstConfigurationService.saveFirstConfiguration(new FirstConfigurationDTO());
 				onJiraConnectionSaved(target);
 			}
 		});

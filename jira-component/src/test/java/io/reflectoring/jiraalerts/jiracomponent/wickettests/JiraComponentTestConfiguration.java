@@ -7,9 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import io.reflectoring.jiraalerts.base.wickettests.TestConfiguration;
-import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.JiraConnectionDataDTOMapper;
-import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.JiraConnectionDataRepository;
-import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.JiraConnectionDataService;
+import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.*;
 
 @Configuration
 @Import(TestConfiguration.class)
@@ -28,5 +26,20 @@ public class JiraComponentTestConfiguration {
 	@Bean
 	public JiraConnectionDataService jiraConnectionDataService() {
 		return mock(JiraConnectionDataService.class);
+	}
+
+	@Bean
+	public FirstConfigurationService firstConfigurationService() {
+		return mock(FirstConfigurationService.class);
+	}
+
+	@Bean
+	public FirstConfigurationRepository firstConfigurationRepository() {
+		return mock(FirstConfigurationRepository.class);
+	}
+
+	@Bean
+	public FirstConfigurationMapper firstConfigurationMapper() {
+		return mock(FirstConfigurationMapper.class);
 	}
 }
