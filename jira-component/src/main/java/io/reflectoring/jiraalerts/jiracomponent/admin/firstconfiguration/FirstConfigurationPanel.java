@@ -49,6 +49,7 @@ public abstract class FirstConfigurationPanel extends GenericPanel<JiraConnectio
 			@Override
 			protected void onSubmit(AjaxRequestTarget target) {
 				jiraConnectionDataService.saveJiraConnectionData(getModelObject());
+				// TODO Save FirstConfiguration here
 				onJiraConnectionSaved(target);
 			}
 		});
