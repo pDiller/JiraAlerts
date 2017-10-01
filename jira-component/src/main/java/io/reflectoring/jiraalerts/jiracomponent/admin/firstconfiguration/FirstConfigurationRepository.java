@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.integration.admin.persistence;
+package io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

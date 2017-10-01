@@ -1,8 +1,7 @@
-package io.reflectoring.jiraalerts.jiracomponent.configuration;
+package io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration;
 
 import org.springframework.stereotype.Component;
 
-import io.reflectoring.jiraalerts.jiracomponent.configuration.persistence.JiraConnectionData;
 import io.reflectoring.jiraalerts.jiracomponent.mapper.Mapper;
 
 @Component

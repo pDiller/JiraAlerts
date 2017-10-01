@@ -1,11 +1,8 @@
-package io.reflectoring.jiraalerts.integration.admin;
+package io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import io.reflectoring.jiraalerts.integration.admin.persistence.FirstConfiguration;
-import io.reflectoring.jiraalerts.integration.admin.persistence.FirstConfigurationRepository;
 
 @Transactional
 @Service

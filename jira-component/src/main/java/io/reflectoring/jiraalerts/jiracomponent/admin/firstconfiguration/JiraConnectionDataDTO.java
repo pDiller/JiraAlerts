@@ -1,8 +1,9 @@
-package io.reflectoring.jiraalerts.jiracomponent.configuration;
+package io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class JiraConnectionDataDTO {
+public class JiraConnectionDataDTO implements Serializable {
 
 	private long id;
 
