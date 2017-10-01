@@ -11,8 +11,6 @@ public class JiraConnectionDataDTO implements Serializable {
 
 	private String username;
 
-	private String pw;
-
 	private Date modifiedAt;
 
 	public long getId() {
@@ -37,14 +35,6 @@ public class JiraConnectionDataDTO implements Serializable {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getPw() {
-		return pw;
-	}
-
-	public void setPw(String pw) {
-		this.pw = pw;
 	}
 
 	public Date getModifiedAt() {

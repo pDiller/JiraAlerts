@@ -24,14 +24,12 @@ public class JiraConnectionDataMapperTest {
 		jiraConnectionDataDTO = new JiraConnectionDataDTO();
 		jiraConnectionDataDTO.setId(ID);
 		jiraConnectionDataDTO.setModifiedAt(MODIFIED_AT);
-		jiraConnectionDataDTO.setPw(PASSWORD);
 		jiraConnectionDataDTO.setUrl(URL);
 		jiraConnectionDataDTO.setUsername(USERNAME);
 
 		jiraConnectionData = new JiraConnectionData();
 		jiraConnectionData.setId(ID);
 		jiraConnectionData.setModifiedAt(MODIFIED_AT);
-		jiraConnectionData.setPw(PASSWORD);
 		jiraConnectionData.setUrl(URL);
 		jiraConnectionData.setUsername(USERNAME);
 	}
@@ -48,13 +46,6 @@ public class JiraConnectionDataMapperTest {
 		JiraConnectionData jiraConnectionData = sut.dtoToEntity(jiraConnectionDataDTO);
 
 		assertThat(jiraConnectionData.getModifiedAt()).isEqualTo(MODIFIED_AT);
-	}
-
-	@Test
-	public void mapToEntityWithPassword() {
-		JiraConnectionData jiraConnectionData = sut.dtoToEntity(jiraConnectionDataDTO);
-
-		assertThat(jiraConnectionData.getPw()).isEqualTo(PASSWORD);
 	}
 
 	@Test
@@ -90,13 +81,6 @@ public class JiraConnectionDataMapperTest {
 		JiraConnectionDataDTO jiraConnectionDataDTO = sut.entityToDTO(jiraConnectionData);
 
 		assertThat(jiraConnectionDataDTO.getUrl()).isEqualTo(URL);
-	}
-
-	@Test
-	public void mapToDTOWithPassword() throws Exception {
-		JiraConnectionDataDTO jiraConnectionDataDTO = sut.entityToDTO(jiraConnectionData);
-
-		assertThat(jiraConnectionDataDTO.getPw()).isEqualTo(PASSWORD);
 	}
 
 	@Test

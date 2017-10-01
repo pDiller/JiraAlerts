@@ -13,7 +13,6 @@ public class JiraConnectionDataMapper implements Mapper<JiraConnectionData, Jira
 		jiraConnectionData.setId(dto.getId());
 		jiraConnectionData.setModifiedAt(dto.getModifiedAt());
 		jiraConnectionData.setUrl(dto.getUrl());
-		jiraConnectionData.setPw(dto.getPw());
 		jiraConnectionData.setUsername(dto.getUsername());
 		return jiraConnectionData;
 	}
@@ -24,7 +23,6 @@ public class JiraConnectionDataMapper implements Mapper<JiraConnectionData, Jira
 		jiraConnectionDataDTO.setId(entity.getId());
 		jiraConnectionDataDTO.setModifiedAt(entity.getModifiedAt());
 		jiraConnectionDataDTO.setUrl(entity.getUrl());
-		jiraConnectionDataDTO.setPw(entity.getPw());
 		jiraConnectionDataDTO.setUsername(entity.getUsername());
 		return jiraConnectionDataDTO;
 	}

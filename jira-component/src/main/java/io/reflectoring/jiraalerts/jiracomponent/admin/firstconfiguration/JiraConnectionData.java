@@ -20,9 +20,6 @@ public class JiraConnectionData {
 	@Column(name = "USERNAME")
 	private String username;
 
-	@Column(name = "PW")
-	private String pw;
-
 	@Column(name = "MODIFIED_AT")
 	private Date modifiedAt;
 
@@ -48,14 +45,6 @@ public class JiraConnectionData {
 
 	public void setUsername(String username) {
 		this.username = username;
-	}
-
-	public String getPw() {
-		return pw;
-	}
-
-	public void setPw(String pw) {
-		this.pw = pw;
 	}
 
 	public Date getModifiedAt() {
