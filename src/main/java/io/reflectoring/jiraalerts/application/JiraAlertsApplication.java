@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import de.agilecoders.wicket.core.Bootstrap;
 import de.agilecoders.wicket.core.settings.BootstrapSettings;
 
-import io.reflectoring.jiraalerts.integration.homepage.HomePage;
+import io.reflectoring.jiraalerts.integration.Login.LoginPage;
 import io.reflectoring.jiraalerts.jiracomponent.admin.applicationactivation.ActivateApplicationService;
 import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.FirstConfigurationService;
 
@@ -28,7 +28,7 @@ public class JiraAlertsApplication extends WebApplication {
 
 	@Override
 	public Class<? extends Page> getHomePage() {
-		return HomePage.class;
+		return LoginPage.class;
 	}
 
 	@Override

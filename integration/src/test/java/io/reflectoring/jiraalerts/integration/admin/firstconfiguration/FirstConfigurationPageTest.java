@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import io.reflectoring.jiraalerts.integration.homepage.HomePage;
+import io.reflectoring.jiraalerts.integration.admin.applicationactivation.ActivateApplicationPage;
 import io.reflectoring.jiraalerts.integration.wickettests.IntegrationTestConfiguration;
 import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.FirstConfigurationPanel;
 
@@ -49,6 +49,6 @@ public class FirstConfigurationPageTest {
 
 		wicketTester.clickLink("firstConfigurationPanel:jiraConnectionDataForm:submitNewConnectionUrlLink");
 
-		wicketTester.assertRenderedPage(HomePage.class);
+		wicketTester.assertRenderedPage(ActivateApplicationPage.class);
 	}
 }
