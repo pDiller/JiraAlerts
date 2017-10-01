@@ -8,6 +8,7 @@ import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.StringResourceModel;
+import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.IValidator;
 import org.apache.wicket.validation.validator.UrlValidator;
 
@@ -15,9 +16,12 @@ import de.agilecoders.wicket.core.markup.html.bootstrap.form.BootstrapForm;
 
 import io.reflectoring.jiraalerts.base.components.LabeledTextfieldInputPanel;
 
-public class FirstConfigurationPanel extends GenericPanel<JiraConnectionDataDTO> {
+public abstract class FirstConfigurationPanel extends GenericPanel<JiraConnectionDataDTO> {
 
 	private static final String[] URL_SCHEMES = { "https", "http" };
+
+	@SpringBean
+	private JiraConnectionDataService jiraConnectionDataService;
 
 	public FirstConfigurationPanel(String id, IModel<JiraConnectionDataDTO> jiraConnectionDataDTOModel) {
 		super(id, jiraConnectionDataDTOModel);
@@ -44,10 +48,13 @@ public class FirstConfigurationPanel extends GenericPanel<JiraConnectionDataDTO>
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target) {
-				// TODO
+				jiraConnectionDataService.saveJiraConnectionData(getModelObject());
+				onJiraConnectionSaved(target);
 			}
 		});
 
 		add(jiraConnectionDataForm);
 	}
+
+	protected abstract void onJiraConnectionSaved(AjaxRequestTarget target);
 }

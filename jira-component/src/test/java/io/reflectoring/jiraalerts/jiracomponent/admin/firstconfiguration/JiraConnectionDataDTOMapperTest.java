@@ -7,7 +7,7 @@ import java.util.Date;
 import org.junit.Before;
 import org.junit.Test;
 
-public class JiraConnectionDataMapperTest {
+public class JiraConnectionDataDTOMapperTest {
 
 	private static final Long ID = 1337L;
 	private static final Date MODIFIED_AT = new Date();
@@ -15,9 +15,8 @@ public class JiraConnectionDataMapperTest {
 	private static final String USERNAME = "Testuser";
 	private static final String PASSWORD = "password";
 
-	private JiraConnectionDataMapper sut = new JiraConnectionDataMapper();
+	private JiraConnectionDataDTOMapper sut = new JiraConnectionDataDTOMapper();
 	private JiraConnectionDataDTO jiraConnectionDataDTO;
-	private JiraConnectionData jiraConnectionData;
 
 	@Before
 	public void setup() {
@@ -26,12 +25,6 @@ public class JiraConnectionDataMapperTest {
 		jiraConnectionDataDTO.setModifiedAt(MODIFIED_AT);
 		jiraConnectionDataDTO.setUrl(URL);
 		jiraConnectionDataDTO.setUsername(USERNAME);
-
-		jiraConnectionData = new JiraConnectionData();
-		jiraConnectionData.setId(ID);
-		jiraConnectionData.setModifiedAt(MODIFIED_AT);
-		jiraConnectionData.setUrl(URL);
-		jiraConnectionData.setUsername(USERNAME);
 	}
 
 	@Test
@@ -60,33 +53,5 @@ public class JiraConnectionDataMapperTest {
 		JiraConnectionData jiraConnectionData = sut.dtoToEntity(jiraConnectionDataDTO);
 
 		assertThat(jiraConnectionData.getUsername()).isEqualTo(USERNAME);
-	}
-
-	@Test
-	public void mapToDTOWithID() throws Exception {
-		JiraConnectionDataDTO jiraConnectionDataDTO = sut.entityToDTO(jiraConnectionData);
-
-		assertThat(jiraConnectionDataDTO.getId()).isEqualTo(ID);
-	}
-
-	@Test
-	public void mapToDTOWithModifiedAt() throws Exception {
-		JiraConnectionDataDTO jiraConnectionDataDTO = sut.entityToDTO(jiraConnectionData);
-
-		assertThat(jiraConnectionDataDTO.getModifiedAt()).isEqualTo(MODIFIED_AT);
-	}
-
-	@Test
-	public void mapToDTOWithURL() throws Exception {
-		JiraConnectionDataDTO jiraConnectionDataDTO = sut.entityToDTO(jiraConnectionData);
-
-		assertThat(jiraConnectionDataDTO.getUrl()).isEqualTo(URL);
-	}
-
-	@Test
-	public void mapToDTOWithUsername() throws Exception {
-		JiraConnectionDataDTO jiraConnectionDataDTO = sut.entityToDTO(jiraConnectionData);
-
-		assertThat(jiraConnectionDataDTO.getUsername()).isEqualTo(USERNAME);
 	}
 }

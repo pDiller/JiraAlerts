@@ -8,9 +8,7 @@ package io.reflectoring.jiraalerts.jiracomponent.mapper;
  * @param <D>
  *            DTO
  */
-public interface Mapper<E, D> {
+public interface DTOToEntityMapper<E, D> {
 
 	public E dtoToEntity(D dto);
-
-	public D entityToDTO(E entity);
 }
