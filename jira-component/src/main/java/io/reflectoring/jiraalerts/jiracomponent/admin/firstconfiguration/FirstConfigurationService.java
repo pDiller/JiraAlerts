@@ -15,7 +15,4 @@ public class FirstConfigurationService {
 		return firstConfigurationRepository.findAll().isEmpty();
 	}
 
-	public void storeFirstConfiguration(FirstConfiguration firstConfiguration) {
-		firstConfigurationRepository.save(firstConfiguration);
-	}
 }
