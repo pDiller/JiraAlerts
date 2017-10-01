@@ -11,6 +11,7 @@ import de.agilecoders.wicket.core.Bootstrap;
 import de.agilecoders.wicket.core.settings.BootstrapSettings;
 
 import io.reflectoring.jiraalerts.integration.homepage.HomePage;
+import io.reflectoring.jiraalerts.jiracomponent.admin.applicationactivation.ActivateApplicationService;
 import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.FirstConfigurationService;
 
 @Component
@@ -21,6 +22,9 @@ public class JiraAlertsApplication extends WebApplication {
 
 	@Autowired
 	private FirstConfigurationService firstConfigurationService;
+
+	@Autowired
+	private ActivateApplicationService activateApplicationService;
 
 	@Override
 	public Class<? extends Page> getHomePage() {
@@ -40,5 +44,9 @@ public class JiraAlertsApplication extends WebApplication {
 
 	boolean isFirstConfiguration() {
 		return firstConfigurationService.isFirstConfiguration();
+	}
+
+	public boolean isApplicationActivated() {
+		return activateApplicationService.isApplicationActivated();
 	}
 }
