@@ -12,4 +12,8 @@ public class ActivateApplicationService {
 	public boolean isApplicationActivated() {
 		return activated;
 	}
+
+	public void activateApplication() {
+		activated = true;
+	}
 }

@@ -14,4 +14,11 @@ public class ActivateApplicationServiceTest {
 
 		assertThat(sut.isApplicationActivated()).isFalse();
 	}
+
+	@Test
+	public void activateApplicationActivatesTheApplication() throws Exception {
+		sut.activateApplication();
+
+		assertThat(sut.isApplicationActivated()).isTrue();
+	}
 }
