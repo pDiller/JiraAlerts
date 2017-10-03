@@ -10,7 +10,6 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
-import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -74,6 +73,6 @@ public class FirstConfigurationPanelTest {
 
 		verify(jiraConnectionDataServiceMock).saveJiraConnectionData(any(JiraConnectionDataDTO.class));
 		verify(firstConfigurationServiceMock).saveFirstConfiguration(any(FirstConfigurationDTO.class));
-        assertThat(jiraConnectionSaved).isTrue();
+		assertThat(jiraConnectionSaved).isTrue();
 	}
 }
