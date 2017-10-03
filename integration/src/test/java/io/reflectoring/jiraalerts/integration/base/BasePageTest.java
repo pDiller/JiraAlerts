@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import de.agilecoders.wicket.core.markup.html.bootstrap.heading.Heading;
+
 import io.reflectoring.jiraalerts.integration.wickettests.IntegrationTestConfiguration;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -19,7 +21,7 @@ public class BasePageTest {
 
 	@Before
 	public void setUp() {
-		wicketTester.startPage(BasePage.class);
+		wicketTester.startPage(new BasePage() {});
 	}
 
 	@Test
@@ -30,5 +32,10 @@ public class BasePageTest {
 	@Test
 	public void basepageContainsNavbar() {
 		wicketTester.assertComponent("navbarHeaderPanel", NavbarHeaderPanel.class);
+	}
+
+	@Test
+	public void basepageContainsPageHeading() throws Exception {
+		wicketTester.assertComponent("pageHeading", Heading.class);
 	}
 }
