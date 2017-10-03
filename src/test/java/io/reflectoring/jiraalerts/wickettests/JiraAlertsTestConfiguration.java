@@ -7,17 +7,11 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 import io.reflectoring.jiraalerts.base.wickettests.TestConfiguration;
-import io.reflectoring.jiraalerts.jiracomponent.configuration.JiraConnectionConfigurationService;
-import io.reflectoring.jiraalerts.jiracomponent.connection.persistence.JiraConnectionDataRepository;
+import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.JiraConnectionDataRepository;
 
 @Configuration
 @Import(TestConfiguration.class)
 public class JiraAlertsTestConfiguration {
-
-	@Bean
-	public JiraConnectionConfigurationService jiraConnectionConfigurationService() {
-		return mock(JiraConnectionConfigurationService.class);
-	}
 
 	@Bean
 	public JiraConnectionDataRepository jiraConnectionDataRepository() {

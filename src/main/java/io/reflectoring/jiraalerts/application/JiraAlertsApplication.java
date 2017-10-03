@@ -10,8 +10,9 @@ import org.springframework.stereotype.Component;
 import de.agilecoders.wicket.core.Bootstrap;
 import de.agilecoders.wicket.core.settings.BootstrapSettings;
 
-import io.reflectoring.jiraalerts.integration.homepage.HomePage;
-import io.reflectoring.jiraalerts.integration.jiraconfiguration.JiraConfigurationPage;
+import io.reflectoring.jiraalerts.integration.Login.LoginPage;
+import io.reflectoring.jiraalerts.jiracomponent.admin.applicationactivation.ActivateApplicationService;
+import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.FirstConfigurationService;
 
 @Component
 public class JiraAlertsApplication extends WebApplication {
@@ -19,22 +20,33 @@ public class JiraAlertsApplication extends WebApplication {
 	@Autowired
 	private ApplicationContext applicationContext;
 
+	@Autowired
+	private FirstConfigurationService firstConfigurationService;
+
+	@Autowired
+	private ActivateApplicationService activateApplicationService;
+
 	@Override
 	public Class<? extends Page> getHomePage() {
-		return HomePage.class;
+		return LoginPage.class;
 	}
 
 	@Override
 	protected void init() {
 		super.init();
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
-		mountPages();
 
 		BootstrapSettings bootstrapSettings = new BootstrapSettings();
 		Bootstrap.install(this, bootstrapSettings);
+
+		getRequestCycleListeners().add(new FirstConfigurationListener());
 	}
 
-	private void mountPages() {
-		mountPage("/jira-configuration", JiraConfigurationPage.class);
+	boolean isFirstConfiguration() {
+		return firstConfigurationService.isFirstConfiguration();
+	}
+
+	public boolean isApplicationActivated() {
+		return activateApplicationService.isApplicationActivated();
 	}
 }
