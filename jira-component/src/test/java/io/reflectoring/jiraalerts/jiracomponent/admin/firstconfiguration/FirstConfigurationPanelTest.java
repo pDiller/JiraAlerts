@@ -1,5 +1,6 @@
 package io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.verify;
 
@@ -9,6 +10,7 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
+import org.assertj.core.api.Assertions;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,7 +56,7 @@ public class FirstConfigurationPanelTest {
 	}
 
 	@Test
-	public void homepageRendersSuccessfully() {
+	public void panelRendersSuccessfully() {
 		wicketTester.assertComponent("panel", FirstConfigurationPanel.class);
 		wicketTester.assertComponent("panel:jiraConnectionDataForm", BootstrapForm.class);
 		wicketTester.assertComponent("panel:jiraConnectionDataForm:connectionUrlPanel", LabeledTextfieldInputPanel.class);
@@ -72,5 +74,6 @@ public class FirstConfigurationPanelTest {
 
 		verify(jiraConnectionDataServiceMock).saveJiraConnectionData(any(JiraConnectionDataDTO.class));
 		verify(firstConfigurationServiceMock).saveFirstConfiguration(any(FirstConfigurationDTO.class));
+        assertThat(jiraConnectionSaved).isTrue();
 	}
 }
