@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.integration.Login;
+package io.reflectoring.jiraalerts.integration.login;
 
 import io.reflectoring.jiraalerts.integration.base.BasePage;
 

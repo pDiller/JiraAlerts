@@ -1,7 +1,4 @@
-package io.reflectoring.jiraalerts.integration.Login;
-
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+package io.reflectoring.jiraalerts.integration.login;
 
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;

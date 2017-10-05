@@ -25,6 +25,7 @@ public class IssueRecognizerService {
 		List<Object> issues = Lists.newArrayList();
 
 		issueSearchStopWatch.stop();
-		LOGGER.info("found {} issue(s) in {}.", issues.size(), formatDuration(issueSearchStopWatch.getTime(), "HH:mm:ss,SSS"));
+		String formatedDuration = formatDuration(issueSearchStopWatch.getTime(), "HH:mm:ss,SSS");
+		LOGGER.info("found {} issue(s) in {}.", issues.size(), formatedDuration);
 	}
 }
