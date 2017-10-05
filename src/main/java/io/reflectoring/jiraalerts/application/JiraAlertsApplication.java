@@ -39,7 +39,7 @@ public class JiraAlertsApplication extends WebApplication {
 		BootstrapSettings bootstrapSettings = new BootstrapSettings();
 		Bootstrap.install(this, bootstrapSettings);
 
-		getRequestCycleListeners().add(new FirstConfigurationListener());
+		getRequestCycleListeners().add(new InitialActivationListener());
 	}
 
 	boolean isFirstConfiguration() {

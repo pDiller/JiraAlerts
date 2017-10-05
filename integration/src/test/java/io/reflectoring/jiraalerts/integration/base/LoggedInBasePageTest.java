@@ -9,7 +9,6 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import io.reflectoring.jiraalerts.integration.wickettests.IntegrationTestConfiguration;
-import io.reflectoring.jiraalerts.jiracomponent.admin.applicationactivation.ActivateApplicationService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(classes = IntegrationTestConfiguration.class)
@@ -17,9 +16,6 @@ public class LoggedInBasePageTest {
 
 	@Autowired
 	private WicketTester wicketTester;
-
-	@Autowired
-	private ActivateApplicationService activateApplicationServiceMock;
 
 	@Before
 	public void setUp() {

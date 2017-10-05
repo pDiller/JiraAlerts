@@ -2,7 +2,6 @@ package io.reflectoring.jiraalerts.jiracomponent.wickettests;
 
 import static org.mockito.Mockito.mock;
 
-import org.mockito.Mockito;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -32,8 +31,6 @@ public class JiraComponentTestConfiguration {
 
 	@Bean
 	public ActivateApplicationService activateApplicationService() {
-		ActivateApplicationService activateApplicationServiceMock = mock(ActivateApplicationService.class);
-		Mockito.when(activateApplicationServiceMock.isApplicationActivated()).thenReturn(true);
-		return activateApplicationServiceMock;
+		return mock(ActivateApplicationService.class);
 	}
 }
