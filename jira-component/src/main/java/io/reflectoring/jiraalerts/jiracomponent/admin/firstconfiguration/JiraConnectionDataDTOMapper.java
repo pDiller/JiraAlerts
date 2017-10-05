@@ -3,9 +3,11 @@ package io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration;
 import org.springframework.stereotype.Component;
 
 import io.reflectoring.jiraalerts.jiracomponent.mapper.DTOToEntityMapper;
+import io.reflectoring.jiraalerts.jiracomponent.mapper.EntityToDTOMapper;
 
 @Component
-public class JiraConnectionDataDTOMapper implements DTOToEntityMapper<JiraConnectionData, JiraConnectionDataDTO> {
+public class JiraConnectionDataDTOMapper
+        implements DTOToEntityMapper<JiraConnectionData, JiraConnectionDataDTO>, EntityToDTOMapper<JiraConnectionDataDTO, JiraConnectionData> {
 
 	@Override
 	public JiraConnectionData dtoToEntity(JiraConnectionDataDTO dto) {
@@ -17,4 +19,13 @@ public class JiraConnectionDataDTOMapper implements DTOToEntityMapper<JiraConnec
 		return jiraConnectionData;
 	}
 
+	@Override
+	public JiraConnectionDataDTO entityToDTO(JiraConnectionData entity) {
+		JiraConnectionDataDTO jiraConnectionDataDTO = new JiraConnectionDataDTO();
+		jiraConnectionDataDTO.setId(entity.getId());
+		jiraConnectionDataDTO.setModifiedAt(entity.getModifiedAt());
+		jiraConnectionDataDTO.setUrl(entity.getUrl());
+		jiraConnectionDataDTO.setUsername(entity.getUsername());
+		return jiraConnectionDataDTO;
+	}
 }

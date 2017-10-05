@@ -63,7 +63,7 @@ public class ActivateApplicationPanelTest {
 
 		wicketTester.clickLink("panel:activateApplicationForm:activateApplicationLink");
 
-		verify(activateApplicationService).activateApplication();
+		verify(activateApplicationService).activateApplication(ACTIVATION_PASSWORD);
 		assertThat(applicationActivated).isTrue();
 	}
 }

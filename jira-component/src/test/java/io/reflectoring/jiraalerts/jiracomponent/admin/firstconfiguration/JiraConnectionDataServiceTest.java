@@ -17,6 +17,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class JiraConnectionDataServiceTest {
 
 	private static final Date MODIFIED_AT_DATE = new Date();
+	private static final Long ID = 1337L;
 
 	@Mock
 	private JiraConnectionDataDTOMapper jiraConnectionDataMapperMock;
@@ -28,14 +29,19 @@ public class JiraConnectionDataServiceTest {
 	private JiraConnectionDataService sut = new JiraConnectionDataService();
 
 	private JiraConnectionDataDTO jiraConnectionDataDTO;
+	private JiraConnectionDataDTO modifiedJiraConnectionDataDTO;
 	private JiraConnectionData jiraConnectionData;
 
 	@Before
 	public void setup() {
 		jiraConnectionDataDTO = new JiraConnectionDataDTO();
 		jiraConnectionData = new JiraConnectionData();
+		modifiedJiraConnectionDataDTO = new JiraConnectionDataDTO();
+		modifiedJiraConnectionDataDTO.setModifiedAt(MODIFIED_AT_DATE);
 		when(jiraConnectionDataMapperMock.dtoToEntity(jiraConnectionDataDTO)).thenReturn(jiraConnectionData);
+		when(jiraConnectionDataMapperMock.entityToDTO(jiraConnectionData)).thenReturn(modifiedJiraConnectionDataDTO);
 		when(jiraConnectionDataRepositoryMock.save(jiraConnectionData)).thenReturn(jiraConnectionData);
+		when(jiraConnectionDataRepositoryMock.findOne(ID)).thenReturn(jiraConnectionData);
 	}
 
 	@Test
@@ -54,9 +60,9 @@ public class JiraConnectionDataServiceTest {
 
 	@Test
 	public void modifiedAtIsSetToEntity() {
-		JiraConnectionData jiraConnectionData = sut.saveJiraConnectionData(jiraConnectionDataDTO);
+		JiraConnectionDataDTO loadedJiraConnectionDataDTO = sut.saveJiraConnectionData(jiraConnectionDataDTO);
 
-		assertThat(jiraConnectionData.getModifiedAt()).isAfter(MODIFIED_AT_DATE).isNotNull();
+		assertThat(loadedJiraConnectionDataDTO.getModifiedAt()).isEqualTo(MODIFIED_AT_DATE).isNotNull();
 	}
 
 	@Test
@@ -80,5 +86,12 @@ public class JiraConnectionDataServiceTest {
 		sut.isFirstConfiguration();
 
 		verify(jiraConnectionDataRepositoryMock).findAll();
+	}
+
+	@Test
+	public void getJiraConnectionDataReturnsMappedJiraConnectionData() throws Exception {
+		JiraConnectionDataDTO loadedJiraConnectionDataDTO = sut.getJiraConnectionDataDTO(ID);
+
+		assertThat(loadedJiraConnectionDataDTO).isEqualTo(modifiedJiraConnectionDataDTO);
 	}
 }

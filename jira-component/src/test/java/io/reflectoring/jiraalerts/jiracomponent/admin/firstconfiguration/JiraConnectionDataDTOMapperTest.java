@@ -17,6 +17,7 @@ public class JiraConnectionDataDTOMapperTest {
 
 	private JiraConnectionDataDTOMapper sut = new JiraConnectionDataDTOMapper();
 	private JiraConnectionDataDTO jiraConnectionDataDTO;
+	private JiraConnectionData jiraConnectionData;
 
 	@Before
 	public void setup() {
@@ -25,6 +26,12 @@ public class JiraConnectionDataDTOMapperTest {
 		jiraConnectionDataDTO.setModifiedAt(MODIFIED_AT);
 		jiraConnectionDataDTO.setUrl(URL);
 		jiraConnectionDataDTO.setUsername(USERNAME);
+
+		jiraConnectionData = new JiraConnectionData();
+		jiraConnectionData.setId(ID);
+		jiraConnectionData.setModifiedAt(MODIFIED_AT);
+		jiraConnectionData.setUrl(URL);
+		jiraConnectionData.setUsername(USERNAME);
 	}
 
 	@Test
@@ -53,5 +60,33 @@ public class JiraConnectionDataDTOMapperTest {
 		JiraConnectionData jiraConnectionData = sut.dtoToEntity(jiraConnectionDataDTO);
 
 		assertThat(jiraConnectionData.getUsername()).isEqualTo(USERNAME);
+	}
+
+	@Test
+	public void mapToDTOWithID() {
+		JiraConnectionDataDTO jiraConnectionDataDTO = sut.entityToDTO(jiraConnectionData);
+
+		assertThat(jiraConnectionDataDTO.getId()).isEqualTo(ID);
+	}
+
+	@Test
+	public void mapToDTOWithModifiedAt() {
+		JiraConnectionDataDTO jiraConnectionDataDTO = sut.entityToDTO(jiraConnectionData);
+
+		assertThat(jiraConnectionDataDTO.getModifiedAt()).isEqualTo(MODIFIED_AT);
+	}
+
+	@Test
+	public void mapToDTOWithURL() {
+		JiraConnectionDataDTO jiraConnectionDataDTO = sut.entityToDTO(jiraConnectionData);
+
+		assertThat(jiraConnectionDataDTO.getUrl()).isEqualTo(URL);
+	}
+
+	@Test
+	public void mapToDTOWithUsername() {
+		JiraConnectionDataDTO jiraConnectionDataDTO = sut.entityToDTO(jiraConnectionData);
+
+		assertThat(jiraConnectionDataDTO.getUsername()).isEqualTo(USERNAME);
 	}
 }

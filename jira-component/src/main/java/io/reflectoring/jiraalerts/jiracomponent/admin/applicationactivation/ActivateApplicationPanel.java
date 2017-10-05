@@ -33,7 +33,7 @@ public abstract class ActivateApplicationPanel extends GenericPanel<String> {
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target) {
-				activateApplicationService.activateApplication();
+				activateApplicationService.activateApplication(ActivateApplicationPanel.this.getModelObject());
 				activateApplication(target);
 			}
 		});
