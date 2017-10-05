@@ -3,6 +3,7 @@ package io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
+import java.util.Collections;
 import java.util.Date;
 
 import org.junit.Before;
@@ -56,5 +57,28 @@ public class JiraConnectionDataServiceTest {
 		JiraConnectionData jiraConnectionData = sut.saveJiraConnectionData(jiraConnectionDataDTO);
 
 		assertThat(jiraConnectionData.getModifiedAt()).isAfter(MODIFIED_AT_DATE).isNotNull();
+	}
+
+	@Test
+	public void isFirstConfigurationReturnsFalseWhenRepositoryFindsAnyEntries() {
+		when(jiraConnectionDataRepositoryMock.findAll()).thenReturn(Collections.singletonList(new JiraConnectionData()));
+
+		boolean firstConfiguration = sut.isFirstConfiguration();
+
+		assertThat(firstConfiguration).isFalse();
+	}
+
+	@Test
+	public void isFirstConfigurationReturnsTrueWhenRepositoryFindsNoEntries() {
+		boolean firstConfiguration = sut.isFirstConfiguration();
+
+		assertThat(firstConfiguration).isTrue();
+	}
+
+	@Test
+	public void isFirstConfigurationAsksRepositoryForEntries() {
+		sut.isFirstConfiguration();
+
+		verify(jiraConnectionDataRepositoryMock).findAll();
 	}
 }

@@ -21,4 +21,8 @@ public class JiraConnectionDataService {
 		jiraConnectionData.setModifiedAt(new Date());
 		return jiraConnectionDataRepository.save(jiraConnectionData);
 	}
+
+	public boolean isFirstConfiguration() {
+		return jiraConnectionDataRepository.findAll().isEmpty();
+	}
 }

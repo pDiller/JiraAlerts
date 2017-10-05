@@ -31,21 +31,6 @@ public class JiraComponentTestConfiguration {
 	}
 
 	@Bean
-	public FirstConfigurationService firstConfigurationService() {
-		return mock(FirstConfigurationService.class);
-	}
-
-	@Bean
-	public FirstConfigurationRepository firstConfigurationRepository() {
-		return mock(FirstConfigurationRepository.class);
-	}
-
-	@Bean
-	public FirstConfigurationMapper firstConfigurationMapper() {
-		return mock(FirstConfigurationMapper.class);
-	}
-
-	@Bean
 	public ActivateApplicationService activateApplicationService() {
 		ActivateApplicationService activateApplicationServiceMock = mock(ActivateApplicationService.class);
 		Mockito.when(activateApplicationServiceMock.isApplicationActivated()).thenReturn(true);

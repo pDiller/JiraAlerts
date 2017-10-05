@@ -35,9 +35,6 @@ public class FirstConfigurationPanelTest {
 	@Autowired
 	private JiraConnectionDataService jiraConnectionDataServiceMock;
 
-	@Autowired
-	private FirstConfigurationService firstConfigurationServiceMock;
-
 	private boolean jiraConnectionSaved = false;
 
 	@Before
@@ -72,7 +69,6 @@ public class FirstConfigurationPanelTest {
 		wicketTester.clickLink("panel:jiraConnectionDataForm:submitNewConnectionUrlLink");
 
 		verify(jiraConnectionDataServiceMock).saveJiraConnectionData(any(JiraConnectionDataDTO.class));
-		verify(firstConfigurationServiceMock).saveFirstConfiguration(any(FirstConfigurationDTO.class));
 		assertThat(jiraConnectionSaved).isTrue();
 	}
 }

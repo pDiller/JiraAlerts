@@ -12,7 +12,7 @@ import de.agilecoders.wicket.core.settings.BootstrapSettings;
 
 import io.reflectoring.jiraalerts.integration.Login.LoginPage;
 import io.reflectoring.jiraalerts.jiracomponent.admin.applicationactivation.ActivateApplicationService;
-import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.FirstConfigurationService;
+import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.JiraConnectionDataService;
 
 @Component
 public class JiraAlertsApplication extends WebApplication {
@@ -21,7 +21,7 @@ public class JiraAlertsApplication extends WebApplication {
 	private ApplicationContext applicationContext;
 
 	@Autowired
-	private FirstConfigurationService firstConfigurationService;
+	private JiraConnectionDataService jiraConnectionDataService;
 
 	@Autowired
 	private ActivateApplicationService activateApplicationService;
@@ -43,7 +43,7 @@ public class JiraAlertsApplication extends WebApplication {
 	}
 
 	boolean isFirstConfiguration() {
-		return firstConfigurationService.isFirstConfiguration();
+		return jiraConnectionDataService.isFirstConfiguration();
 	}
 
 	public boolean isApplicationActivated() {
