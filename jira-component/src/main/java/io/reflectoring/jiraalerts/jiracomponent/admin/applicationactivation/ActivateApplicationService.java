@@ -11,8 +11,6 @@ import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.JiraCon
 @ApplicationScope
 public class ActivateApplicationService {
 
-	private static final long JIRA_CONNECTION_DATA_ID = 0L;
-
 	@Autowired
 	private JiraConnectionDataService jiraConnectionDataService;
 
@@ -26,7 +24,7 @@ public class ActivateApplicationService {
 	public void activateApplication(String activationPassword) {
 		this.activationPassword = activationPassword;
 
-		JiraConnectionDataDTO jiraConnectionDataDTO = jiraConnectionDataService.getJiraConnectionDataDTO(JIRA_CONNECTION_DATA_ID);
+		JiraConnectionDataDTO jiraConnectionDataDTO = jiraConnectionDataService.getJiraConnectionDataDTO();
 
 		activated = true;
 	}

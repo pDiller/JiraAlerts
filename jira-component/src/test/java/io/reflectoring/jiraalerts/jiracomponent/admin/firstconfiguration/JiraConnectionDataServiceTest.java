@@ -1,9 +1,9 @@
 package io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration;
 
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
-import java.util.Collections;
 import java.util.Date;
 
 import org.junit.Before;
@@ -17,7 +17,6 @@ import org.mockito.runners.MockitoJUnitRunner;
 public class JiraConnectionDataServiceTest {
 
 	private static final Date MODIFIED_AT_DATE = new Date();
-	private static final Long ID = 1337L;
 
 	@Mock
 	private JiraConnectionDataDTOMapper jiraConnectionDataMapperMock;
@@ -41,7 +40,6 @@ public class JiraConnectionDataServiceTest {
 		when(jiraConnectionDataMapperMock.dtoToEntity(jiraConnectionDataDTO)).thenReturn(jiraConnectionData);
 		when(jiraConnectionDataMapperMock.entityToDTO(jiraConnectionData)).thenReturn(modifiedJiraConnectionDataDTO);
 		when(jiraConnectionDataRepositoryMock.save(jiraConnectionData)).thenReturn(jiraConnectionData);
-		when(jiraConnectionDataRepositoryMock.findOne(ID)).thenReturn(jiraConnectionData);
 	}
 
 	@Test
@@ -67,7 +65,7 @@ public class JiraConnectionDataServiceTest {
 
 	@Test
 	public void isFirstConfigurationReturnsFalseWhenRepositoryFindsAnyEntries() {
-		when(jiraConnectionDataRepositoryMock.findAll()).thenReturn(Collections.singletonList(new JiraConnectionData()));
+		when(jiraConnectionDataRepositoryMock.findAll()).thenReturn(singletonList(new JiraConnectionData()));
 
 		boolean firstConfiguration = sut.isFirstConfiguration();
 
@@ -90,7 +88,8 @@ public class JiraConnectionDataServiceTest {
 
 	@Test
 	public void getJiraConnectionDataReturnsMappedJiraConnectionData() throws Exception {
-		JiraConnectionDataDTO loadedJiraConnectionDataDTO = sut.getJiraConnectionDataDTO(ID);
+		when(jiraConnectionDataRepositoryMock.findAll()).thenReturn(singletonList(jiraConnectionData));
+		JiraConnectionDataDTO loadedJiraConnectionDataDTO = sut.getJiraConnectionDataDTO();
 
 		assertThat(loadedJiraConnectionDataDTO).isEqualTo(modifiedJiraConnectionDataDTO);
 	}

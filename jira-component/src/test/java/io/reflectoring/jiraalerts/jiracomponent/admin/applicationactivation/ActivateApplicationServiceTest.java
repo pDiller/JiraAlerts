@@ -15,7 +15,6 @@ import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.JiraCon
 public class ActivateApplicationServiceTest {
 
 	private static final String ACTIVATION_PASSWORD = "activation";
-	private static final long JIRA_CONNECTION_DATA_ID = 0L;
 
 	@Mock
 	private JiraConnectionDataService jiraConnectionDataServiceMock;
@@ -40,7 +39,7 @@ public class ActivateApplicationServiceTest {
 	public void activateApplicationLoadsJiraConnectionData() throws Exception {
 		sut.activateApplication(ACTIVATION_PASSWORD);
 
-		verify(jiraConnectionDataServiceMock).getJiraConnectionDataDTO(JIRA_CONNECTION_DATA_ID);
+		verify(jiraConnectionDataServiceMock).getJiraConnectionDataDTO();
 	}
 
 	@Test

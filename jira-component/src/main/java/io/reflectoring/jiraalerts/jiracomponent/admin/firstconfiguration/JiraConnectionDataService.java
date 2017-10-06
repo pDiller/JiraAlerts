@@ -10,8 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 public class JiraConnectionDataService {
 
-	private static final long JIRA_CONNECTION_DATA_ID = 0L;
-
 	@Autowired
 	private JiraConnectionDataDTOMapper jiraConnectionDataMapper;
 
@@ -21,7 +19,6 @@ public class JiraConnectionDataService {
 	public JiraConnectionDataDTO saveJiraConnectionData(JiraConnectionDataDTO jiraConnectionDataDTO) {
 		JiraConnectionData jiraConnectionData = jiraConnectionDataMapper.dtoToEntity(jiraConnectionDataDTO);
 		jiraConnectionData.setModifiedAt(new Date());
-		jiraConnectionData.setId(JIRA_CONNECTION_DATA_ID);
 		jiraConnectionData = jiraConnectionDataRepository.save(jiraConnectionData);
 
 		return jiraConnectionDataMapper.entityToDTO(jiraConnectionData);
@@ -31,7 +28,7 @@ public class JiraConnectionDataService {
 		return jiraConnectionDataRepository.findAll().isEmpty();
 	}
 
-	public JiraConnectionDataDTO getJiraConnectionDataDTO(Long jiraConnectionDataID) {
-		return jiraConnectionDataMapper.entityToDTO(jiraConnectionDataRepository.findOne(jiraConnectionDataID));
+	public JiraConnectionDataDTO getJiraConnectionDataDTO() {
+		return jiraConnectionDataMapper.entityToDTO(jiraConnectionDataRepository.findAll().get(0));
 	}
 }
