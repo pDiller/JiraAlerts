@@ -18,7 +18,7 @@ public class JiraConnectionDataService {
 	@Autowired
 	private JiraConnectionDataRepository jiraConnectionDataRepository;
 
-	JiraConnectionDataDTO saveJiraConnectionData(JiraConnectionDataDTO jiraConnectionDataDTO) {
+	public JiraConnectionDataDTO saveJiraConnectionData(JiraConnectionDataDTO jiraConnectionDataDTO) {
 		JiraConnectionData jiraConnectionData = jiraConnectionDataMapper.dtoToEntity(jiraConnectionDataDTO);
 		jiraConnectionData.setModifiedAt(new Date());
 		jiraConnectionData.setId(JIRA_CONNECTION_DATA_ID);

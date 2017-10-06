@@ -23,7 +23,7 @@ public class ActivateApplicationService {
 		return activated;
 	}
 
-	void activateApplication(String activationPassword) {
+	public void activateApplication(String activationPassword) {
 		this.activationPassword = activationPassword;
 
 		JiraConnectionDataDTO jiraConnectionDataDTO = jiraConnectionDataService.getJiraConnectionDataDTO(JIRA_CONNECTION_DATA_ID);
@@ -31,7 +31,7 @@ public class ActivateApplicationService {
 		activated = true;
 	}
 
-	String getActivationPassword() {
+	public String getActivationPassword() {
 		return activationPassword;
 	}
 }
