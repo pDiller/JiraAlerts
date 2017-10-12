@@ -2,6 +2,7 @@ package io.reflectoring.jiraalerts.jiracomponent.admin.applicationactivation;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
+import org.apache.wicket.markup.html.panel.ComponentFeedbackPanel;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.StringResourceModel;
@@ -19,6 +20,8 @@ public abstract class ActivateApplicationPanel extends GenericPanel<String> {
 	public ActivateApplicationPanel(String id, IModel<String> activationPasswordModel) {
 		super(id, activationPasswordModel);
 
+		setOutputMarkupId(true);
+
 		BootstrapForm activateApplicationForm = new BootstrapForm("activateApplicationForm");
 		activateApplicationForm
 		        .add(new LabeledPasswordInputPanel("activationPasswordPanel", new StringResourceModel("activationPassword.label", this), getModel()));
@@ -33,10 +36,17 @@ public abstract class ActivateApplicationPanel extends GenericPanel<String> {
 
 			@Override
 			protected void onSubmit(AjaxRequestTarget target) {
-				activateApplicationService.activateApplication(ActivateApplicationPanel.this.getModelObject());
-				activateApplication(target);
+				boolean applicationActivationSuccessfull = activateApplicationService
+				        .activateApplication(ActivateApplicationPanel.this.getModelObject());
+				if (applicationActivationSuccessfull) {
+					activateApplication(target);
+				} else {
+					activateApplicationForm.error(ActivateApplicationPanel.this.getString("activation.failed.text"));
+					target.add(ActivateApplicationPanel.this);
+				}
 			}
 		});
+		activateApplicationForm.add(new ComponentFeedbackPanel("feedback", activateApplicationForm));
 		add(activateApplicationForm);
 	}
 

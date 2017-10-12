@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Import;
 import io.reflectoring.jiraalerts.base.wickettests.TestConfiguration;
 import io.reflectoring.jiraalerts.jiracomponent.admin.applicationactivation.ActivateApplicationService;
 import io.reflectoring.jiraalerts.jiracomponent.admin.firstconfiguration.*;
+import io.reflectoring.jiraalerts.jiracomponent.jiraclient.JiraRestClientService;
 
 @Configuration
 @Import(TestConfiguration.class)
@@ -32,5 +33,10 @@ public class JiraComponentTestConfiguration {
 	@Bean
 	public ActivateApplicationService activateApplicationService() {
 		return mock(ActivateApplicationService.class);
+	}
+
+	@Bean
+	public JiraRestClientService jiraRestClientService() {
+		return mock(JiraRestClientService.class);
 	}
 }

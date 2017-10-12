@@ -1,6 +1,7 @@
 dependencies{
 	compile(project(':wicket-base'))
-	compile('com.atlassian.jira:jira-rest-java-client:2.0.0-m2')
+	compile('com.atlassian.jira:jira-rest-java-client-core:4.0.0')
+	compile('com.atlassian.fugue:fugue:2.2.1')
 }
 
 spotless {

@@ -5,6 +5,7 @@ import static org.mockito.Mockito.*;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxSubmitLink;
+import org.apache.wicket.markup.html.panel.ComponentFeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.util.tester.FormTester;
@@ -31,7 +32,7 @@ public class ActivateApplicationPanelTest {
 	private WicketTester wicketTester;
 
 	@Autowired
-	private ActivateApplicationService activateApplicationService;
+	private ActivateApplicationService activateApplicationServiceMock;
 
 	private boolean applicationActivated = false;
 
@@ -54,6 +55,7 @@ public class ActivateApplicationPanelTest {
 		wicketTester.assertComponent("panel:activateApplicationForm", BootstrapForm.class);
 		wicketTester.assertComponent("panel:activateApplicationForm:activationPasswordPanel", LabeledPasswordInputPanel.class);
 		wicketTester.assertComponent("panel:activateApplicationForm:activateApplicationLink", AjaxSubmitLink.class);
+		wicketTester.assertComponent("panel:activateApplicationForm:feedback", ComponentFeedbackPanel.class);
 	}
 
 	@Test
@@ -63,7 +65,27 @@ public class ActivateApplicationPanelTest {
 
 		wicketTester.clickLink("panel:activateApplicationForm:activateApplicationLink");
 
-		verify(activateApplicationService).activateApplication(ACTIVATION_PASSWORD);
+		verify(activateApplicationServiceMock, atLeastOnce()).activateApplication(ACTIVATION_PASSWORD);
+	}
+
+	@Test
+	public void formSubmitActivatesApplicationWithCorrectPassword() {
+		when(activateApplicationServiceMock.activateApplication(ACTIVATION_PASSWORD)).thenReturn(true);
+		FormTester formTester = wicketTester.newFormTester("panel:activateApplicationForm");
+		formTester.setValue("activationPasswordPanel:textInputForm:password", ACTIVATION_PASSWORD);
+
+		wicketTester.clickLink("panel:activateApplicationForm:activateApplicationLink");
+
 		assertThat(applicationActivated).isTrue();
+	}
+
+	@Test
+	public void formSubmitDoesNotActivateApplicationWithCorrectPassword() {
+		FormTester formTester = wicketTester.newFormTester("panel:activateApplicationForm");
+		formTester.setValue("activationPasswordPanel:textInputForm:password", ACTIVATION_PASSWORD);
+
+		wicketTester.clickLink("panel:activateApplicationForm:activateApplicationLink");
+
+		assertThat(applicationActivated).isFalse();
 	}
 }
