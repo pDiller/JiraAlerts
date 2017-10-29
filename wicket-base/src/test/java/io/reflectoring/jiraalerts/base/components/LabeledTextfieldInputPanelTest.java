@@ -27,7 +27,8 @@ public class LabeledTextfieldInputPanelTest {
 
 	@Autowired
 	private WicketTester wicketTester;
-	private StringValidator stringValidator = new StringValidator(15, 20);;
+
+	private StringValidator stringValidator = new StringValidator(15, 20);
 
 	@Test
 	public void componentIsSuccessfullyRendered() {
@@ -60,5 +61,15 @@ public class LabeledTextfieldInputPanelTest {
 		formTester.submit();
 
 		wicketTester.assertNoErrorMessage();
+	}
+
+	@Test
+	public void formSubmitValidatesInputFieldWithRequiredParameter() {
+		wicketTester.startComponentInPage(new LabeledTextfieldInputPanel("inputPanel", Model.of("labelValue"), Model.of(), true, stringValidator));
+		FormTester formTester = wicketTester.newFormTester("inputPanel:textInputForm");
+
+		formTester.submit();
+
+		wicketTester.assertErrorMessages("input.Required");
 	}
 }

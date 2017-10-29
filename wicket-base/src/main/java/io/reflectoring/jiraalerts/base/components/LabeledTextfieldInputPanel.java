@@ -17,6 +17,11 @@ public class LabeledTextfieldInputPanel extends GenericPanel<String> {
 
 	public LabeledTextfieldInputPanel(String id, IModel<String> textInputLabelModel, IModel<String> textInputModel,
 	        IValidator<String>... validators) {
+		this(id, textInputLabelModel, textInputModel, false, validators);
+	}
+
+	public LabeledTextfieldInputPanel(String id, IModel<String> textInputLabelModel, IModel<String> textInputModel, boolean inputRequired,
+	        IValidator<String>... validators) {
 		super(id, textInputModel);
 		setOutputMarkupId(true);
 
@@ -25,6 +30,7 @@ public class LabeledTextfieldInputPanel extends GenericPanel<String> {
 		Label textInputLabel = new Label("inputLabel", textInputLabelModel);
 
 		TextField<String> textInputField = new TextField<>("input", getModel());
+		textInputField.setRequired(inputRequired);
 		textInputField.add(validators);
 
 		FeedbackPanel textInputFeedbackPanel = new FencedFeedbackPanel("feedback", textInputForm) {
@@ -37,6 +43,5 @@ public class LabeledTextfieldInputPanel extends GenericPanel<String> {
 
 		textInputForm.add(textInputLabel, textInputField, textInputFeedbackPanel);
 		add(textInputForm);
-
 	}
 }
