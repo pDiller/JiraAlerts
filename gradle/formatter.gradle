@@ -1,0 +1,47 @@
+apply plugin: 'com.diffplug.gradle.spotless'
+
+spotless {
+    java {
+        lineEndings 'UNIX'
+
+        removeUnusedImports()
+        importOrderFile 'config/formatter/spotless.importorder'
+        eclipse().configFile 'config/formatter/spotless.eclipse-format.xml'
+    }
+
+    format 'properties', {
+        target '**/*.properties'
+
+        lineEndings 'UNIX'
+        // encoding seems to be broken in the current version:
+        // https://github.com/diffplug/spotless/issues/169
+        encoding 'ISO-8859-1'
+    }
+
+    format 'unix', {
+        target 'gradlew', 'gradle/**/*.sh'
+
+        lineEndings 'UNIX'
+        endWithNewline()
+    }
+
+    groovyGradle {
+        target '**/*.gradle'
+
+        lineEndings 'UNIX'
+        endWithNewline()
+    }
+
+    groovy {
+        target '**/*.groovy'
+
+        lineEndings 'UNIX'
+        endWithNewline()
+    }
+
+    // encoding seems to be broken in the current version:
+    // https://github.com/diffplug/spotless/issues/169
+    encoding project.encoding
+}
+
+check.dependsOn 'spotlessApply'

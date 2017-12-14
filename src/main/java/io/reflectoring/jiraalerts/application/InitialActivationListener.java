@@ -4,8 +4,8 @@ import org.apache.wicket.Application;
 import org.apache.wicket.request.cycle.IRequestCycleListener;
 import org.apache.wicket.request.cycle.RequestCycle;
 
-import io.reflectoring.jiraalerts.integration.admin.applicationactivation.ActivateApplicationPage;
-import io.reflectoring.jiraalerts.integration.admin.firstconfiguration.FirstConfigurationPage;
+import io.reflectoring.jiraalerts.admin.applicationactivation.ActivateApplicationPage;
+import io.reflectoring.jiraalerts.admin.firstconfiguration.FirstConfigurationPage;
 
 public class InitialActivationListener implements IRequestCycleListener {
 
