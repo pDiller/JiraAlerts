@@ -1,0 +1,70 @@
+apply plugin: 'idea'
+
+idea {
+    project {
+        jdkName = '1.8'
+        languageLevel = '8'
+        vcs = 'Git'
+    }
+}
+
+idea {
+    module {
+        inheritOutputDirs = true
+        downloadJavadoc = true
+        downloadSources = true
+        outputDir = file('build/classes/main')
+        testOutputDir = file('build/classes/test')
+    }
+}
+
+if (plugins.hasPlugin("java")) {
+
+    idea.module.iml {
+        withXml {
+            // mark resource directories as such
+            // cf. https://discuss.gradle.org/t/the-idea-plugin-breaks-the-new-intellij-13-iml-configuration/2456/10
+            def sourceFolder = it.asNode().component.content.sourceFolder
+
+            def mainResourceFolder = sourceFolder.find { it.@url == 'file://$MODULE_DIR$/src/main/resources' }
+            // in case there is no src/main/resources in this module
+            if (mainResourceFolder != null) {
+                def atts = mainResourceFolder.attributes()
+                atts.remove('isTestSource')
+                atts.put('type', 'java-resource')
+            }
+
+            def testResourceFolder = sourceFolder.find { it.@url == 'file://$MODULE_DIR$/src/test/resources' }
+            // in case there is no src/test/resources in this module
+            if (testResourceFolder != null) {
+                def atts = testResourceFolder.attributes()
+                atts.remove('isTestSource')
+                atts.put('type', 'java-test-resource')
+            }
+
+            // spring facet
+            def springFacet = '''<component name="FacetManager">
+				<facet type="Spring" name="Spring">
+				<configuration />
+				</facet>
+			</component>'''
+
+            it.asNode().append((new XmlParser()).parseText(springFacet))
+
+            def disableSpelling = '''<component name="InspectionProjectProfileManager">
+				<profile version="1.0">
+				<option name="myName" value="Project Default" />
+				<inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
+					<option name="processCode" value="true" />
+					<option name="processLiterals" value="true" />
+					<option name="processComments" value="true" />
+				</inspection_tool>
+				</profile>
+				<option name="PROJECT_PROFILE" value="Project Default" />
+				<option name="USE_PROJECT_PROFILE" value="true" />
+				<version value="1.0" />
+			</component>'''
+            it.asNode().append((new XmlParser()).parseText(disableSpelling))
+        }
+    }
+}
