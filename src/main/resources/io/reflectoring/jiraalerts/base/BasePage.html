@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!doctype html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>JiraAlerts</title>
+</head>
 <body>
-<div wicket:id="navbarHeaderPanel"/>
-<h3 wicket:id="pageHeading"/>
+<div class="navbar sticky-top navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1"><wicket:message key="navbar.text"/></span>
+</div>
+
 <wicket:child/>
+
+<div class="navbar fixed-bottom navbar-light bg-light">
+    <p class="navbar-text pull-left">build with ♡ by reflectoring</p>
+    <p class="navbar-text pull-right">Version 0.1.0.1225</p>
+</div>
 </body>
 </html>

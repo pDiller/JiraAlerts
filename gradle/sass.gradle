@@ -1,0 +1,38 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven {
+            url("https://plugins.gradle.org/m2/")
+        }
+    }
+    dependencies {
+        classpath "io.freefair.gradle:jsass-gradle-plugin:0.6.0"
+    }
+}
+
+apply plugin: io.freefair.gradle.plugins.JSassBasePlugin
+
+def sassFolder = file('src/main/webapp/scss/')
+task compileSass(type: io.freefair.gradle.plugins.jsass.SassCompile) {
+    def buildFolder = file('build/css')
+
+    // inputs- und outputs-definition für den up-to-date check
+    inputs.dir sassFolder
+    outputs.dir buildFolder
+
+
+    //  Mögliche Style:
+    // 'NESTED', 'EXPANDED', 'COMPACT',  'COMPRESSED';
+    outputStyle 'NESTED'
+    sourceDir sassFolder
+    destinationDir buildFolder
+    sourceMapEnabled false
+}
+
+processResources {
+    // compiliertes SASS mit einbinden
+    into('public/css'){
+        from compileSass.destinationDir
+    }
+    dependsOn compileSass
+}

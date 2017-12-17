@@ -1,26 +1,25 @@
 package io.reflectoring.jiraalerts.base;
 
+import org.apache.wicket.markup.head.CssHeaderItem;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
-import org.apache.wicket.model.StringResourceModel;
-import org.apache.wicket.spring.injection.annot.SpringBean;
 
-import de.agilecoders.wicket.core.markup.html.bootstrap.heading.Heading;
+public class BasePage extends WebPage {
 
-import io.reflectoring.jiraalerts.admin.applicationactivation.ActivateApplicationService;
-
-/**
- * The Page with Basic funktionaltiy, like ne Navigation.
- */
-public abstract class BasePage extends WebPage {
-
-	@SpringBean
-	private ActivateApplicationService activateApplicationService;
-
-	/** Constructor for LoggedInBasePage. */
 	public BasePage() {
-		add(new NavbarHeaderPanel("navbarHeaderPanel"));
 
-		Heading pageHeading = new Heading("pageHeading", new StringResourceModel("pageHeading", this));
-		add(pageHeading);
+	}
+
+	@Override
+	public void renderHead(IHeaderResponse response) {
+		super.renderHead(response);
+
+		response.render(CssHeaderItem.forUrl("font-awesome/css/font-awesome.css"));
+		response.render(CssHeaderItem.forUrl("css/styles.css"));
+		response.render(JavaScriptHeaderItem.forUrl("js/jquery-slim.min.js"));
+		response.render(JavaScriptHeaderItem.forUrl("js/popper.min.js"));
+		response.render(JavaScriptHeaderItem.forUrl("bootstrap/js/bootstrap.min.js"));
+		response.render(JavaScriptHeaderItem.forUrl("js/main.js"));
 	}
 }

@@ -38,9 +38,12 @@ dependencies {
 
     compile("org.apache.wicket:wicket:${wicketVersion}")
     compile("org.apache.wicket:wicket-spring:${wicketVersion}")
+    compile("org.apache.wicket:wicket-auth-roles:${wicketVersion}")
     compile("org.apache.wicket:wicket-extensions:${wicketVersion}")
     compile("org.apache.commons:commons-crypto:${apacheCommonsCryptoVersion}")
     compile("org.wicketstuff:wicketstuff-lazymodel:${wicketVersion}")
+
+    compile("org.apache.commons:commons-lang3:${apacheCommonsLang3Version}")
 
     compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework:spring-context-support:${springContextSupportVersion}")
@@ -53,12 +56,16 @@ dependencies {
     compile("com.atlassian.jira:jira-rest-java-client-core:${jiraRestClientVersion}")
     compile("com.atlassian.fugue:fugue:${atlassianFugueVersion}")
 
-    compile("de.agilecoders.wicket:wicket-bootstrap-core:2.0.0-M5")
-
     runtime("mysql:mysql-connector-java")
 
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }
 
+bootRun {
+    // use raw ressources instead of the output of processResources task
+    addResources = true
+}
+
 apply from: 'gradle/idea.gradle'
 apply from: 'gradle/formatter.gradle'
+apply from: 'gradle/sass.gradle'

@@ -3,8 +3,6 @@ package io.reflectoring.jiraalerts.application;
 import org.apache.wicket.mock.MockApplication;
 import org.springframework.stereotype.Component;
 
-import de.agilecoders.wicket.core.Bootstrap;
-
 @Component
 public class TestApplication extends MockApplication {
 
@@ -23,7 +21,5 @@ public class TestApplication extends MockApplication {
 		DefaultInjector mockInjector = new DefaultInjector(new MockFieldValueFactory(mockRepositoryObject));
 		getComponentInstantiationListeners().add(mockInjector);
 		mockInjector.bind(this);
-
-		Bootstrap.install(this);
 	}
 }
