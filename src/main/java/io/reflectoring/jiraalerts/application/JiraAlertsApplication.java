@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import io.reflectoring.jiraalerts.home.HomePage;
 import io.reflectoring.jiraalerts.login.LoginPage;
 
 @Component
@@ -29,11 +30,12 @@ public class JiraAlertsApplication extends AuthenticatedWebApplication {
 		getComponentInstantiationListeners().add(new SpringComponentInjector(this, applicationContext));
 
 		mountPage("login.html", LoginPage.class);
+		mountPage("home.html", HomePage.class);
 	}
 
 	@Override
 	protected Class<? extends AbstractAuthenticatedWebSession> getWebSessionClass() {
-		return JiraApplicationSession.class;
+		return JiraAlertsSession.class;
 	}
 
 	@Override
