@@ -5,8 +5,14 @@ import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptHeaderItem;
 import org.apache.wicket.markup.html.WebPage;
 
+/**
+ * Base for all pages in this application.
+ */
 public class BasePage extends WebPage {
 
+	/**
+	 * Constructor.
+	 */
 	public BasePage() {
 
 	}

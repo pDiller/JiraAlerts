@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 import io.reflectoring.jiraalerts.home.HomePage;
 import io.reflectoring.jiraalerts.login.LoginPage;
 
+/**
+ * Wickets application. Initializes and configures the configuration.
+ */
 @Component
 public class JiraAlertsApplication extends AuthenticatedWebApplication {
 

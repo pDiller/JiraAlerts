@@ -24,8 +24,14 @@ import io.reflectoring.jiraalerts.common.FormComponentErrorClassModifier;
 import io.reflectoring.jiraalerts.common.PlaceholderAttributeModifier;
 import io.reflectoring.jiraalerts.home.HomePage;
 
+/**
+ * Provides the login of this application.
+ */
 public class LoginPage extends BasePage {
 
+	/**
+	 * Constructor.
+	 */
 	public LoginPage() {
 
 		FencedFeedbackPanel loginFeedbackPanel = new FencedFeedbackPanel("loginFeedbackPanel", this);

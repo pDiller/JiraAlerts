@@ -11,11 +11,17 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 
+/**
+ * Recognizes new issues.
+ */
 @Service
 public class IssueRecognizerService {
 
 	private static final Logger LOGGER = getLogger(IssueRecognizerService.class);
 
+	/**
+	 * Asks the interface for new issues.
+	 */
 	public void recognize() {
 		LOGGER.info("Searching for issues");
 		StopWatch issueSearchStopWatch = new StopWatch();

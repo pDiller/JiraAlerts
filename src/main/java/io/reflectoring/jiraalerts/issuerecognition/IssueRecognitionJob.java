@@ -6,6 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 import org.springframework.stereotype.Component;
 
+/**
+ * Job that encapsulates the recognition of new issues and the trigger on the reaction.
+ */
 @Component
 public class IssueRecognitionJob extends QuartzJobBean {
 

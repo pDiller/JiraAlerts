@@ -1,5 +1,8 @@
 package io.reflectoring.jiraalerts.login;
 
+/**
+ * Transferobject for the user.
+ */
 public class UserDTO {
 
 	private String username;

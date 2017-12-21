@@ -6,6 +6,10 @@ import org.apache.wicket.ClassAttributeModifier;
 import org.apache.wicket.Component;
 import org.apache.wicket.markup.html.form.FormComponent;
 
+/**
+ * {@link ClassAttributeModifier} for JiraAlerts {@link FormComponent}s. Sets the CSS classes for the {@link FormComponent}, depending on whether the
+ * component is valid or not. Throws an {@link IllegalArgumentException} if this class is added to another component than a {@link FormComponent}.
+ */
 public class FormComponentErrorClassModifier extends ClassAttributeModifier {
 
 	private static final String INVALID_CLASS = "is-invalid";

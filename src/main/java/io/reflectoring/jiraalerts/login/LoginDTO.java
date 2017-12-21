@@ -2,6 +2,9 @@ package io.reflectoring.jiraalerts.login;
 
 import java.io.Serializable;
 
+/**
+ * Transferobject for logindata.
+ */
 class LoginDTO implements Serializable {
 
 	private String username;

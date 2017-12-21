@@ -14,6 +14,9 @@ import io.reflectoring.jiraalerts.login.UserDTO;
 import io.reflectoring.jiraalerts.login.UserNotLoggedInException;
 import io.reflectoring.jiraalerts.login.UserService;
 
+/**
+ * The Session for JiraAlerts.
+ */
 public class JiraAlertsSession extends AuthenticatedWebSession {
 
 	@Inject

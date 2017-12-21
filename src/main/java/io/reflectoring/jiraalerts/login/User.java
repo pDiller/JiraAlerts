@@ -4,6 +4,9 @@ import static javax.persistence.GenerationType.IDENTITY;
 
 import javax.persistence.*;
 
+/**
+ * Entityobject for the user.
+ */
 @Entity
 @Table(name = "USERS")
 public class User {

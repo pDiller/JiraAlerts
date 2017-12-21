@@ -14,6 +14,9 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import io.reflectoring.jiraalerts.issuerecognition.IssueRecognitionJob;
 
+/**
+ * Spring-configuration for Quartz.
+ */
 @Configuration
 public class QuartzTimerConfiguration {
 
