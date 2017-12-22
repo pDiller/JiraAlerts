@@ -14,7 +14,7 @@ public class BasePage extends WebPage {
 	 * Constructor.
 	 */
 	public BasePage() {
-
+        //Basic Page with no components for layouting
 	}
 
 	@Override
