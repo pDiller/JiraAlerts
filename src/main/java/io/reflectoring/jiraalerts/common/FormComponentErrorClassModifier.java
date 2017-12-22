@@ -1,5 +1,7 @@
 package io.reflectoring.jiraalerts.common;
 
+import static java.lang.String.format;
+
 import java.util.Set;
 
 import org.apache.wicket.ClassAttributeModifier;
@@ -21,7 +23,8 @@ public class FormComponentErrorClassModifier extends ClassAttributeModifier {
 		super.onConfigure(component);
 
 		if (!(component instanceof FormComponent)) {
-			throw new IllegalArgumentException("Dieses Behavior darf ausschliesslich auf FeedbackPanels angewendet werden.");
+			throw new IllegalArgumentException(
+			        format("This behavior should only be added to FormComponents. Can´t add behavior to class '%s'", component.getClass()));
 		}
 
 		valid = ((FormComponent) component).isValid();

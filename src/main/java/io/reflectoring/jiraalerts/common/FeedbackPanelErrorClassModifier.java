@@ -1,5 +1,6 @@
 package io.reflectoring.jiraalerts.common;
 
+import static java.lang.String.format;
 import static java.util.Collections.emptySet;
 
 import java.util.Set;
@@ -23,7 +24,8 @@ public class FeedbackPanelErrorClassModifier extends ClassAttributeModifier {
 		super.onConfigure(component);
 
 		if (!(component instanceof FeedbackPanel)) {
-			throw new IllegalArgumentException("Dieses Behavior darf ausschliesslich auf FeedbackPanels angewendet werden.");
+			throw new IllegalArgumentException(
+			        format("This behavior should only be added to FeedbackPanels.Can´t add behavior to class '%s'", component.getClass()));
 		}
 
 		hasErrorMessages = ((FeedbackPanel) component).anyErrorMessage();

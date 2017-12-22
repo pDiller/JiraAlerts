@@ -35,7 +35,7 @@ public class HashService {
 			}
 			return sb.toString();
 		} catch (NoSuchAlgorithmException | UnsupportedEncodingException exception) {
-			throw new IllegalStateException("Beim hashen des Passwortes ist ein Fehler aufgetreten: ", exception);
+			throw new IllegalStateException("Hashing of password failed: ", exception);
 		}
 	}
 }
