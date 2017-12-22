@@ -22,7 +22,7 @@ import io.reflectoring.jiraalerts.base.BasePage;
 import io.reflectoring.jiraalerts.common.FeedbackPanelErrorClassModifier;
 import io.reflectoring.jiraalerts.common.FormComponentErrorClassModifier;
 import io.reflectoring.jiraalerts.common.PlaceholderAttributeModifier;
-import io.reflectoring.jiraalerts.home.HomePage;
+import io.reflectoring.jiraalerts.dashboard.DashboardPage;
 
 /**
  * Provides the login of this application.
@@ -70,7 +70,7 @@ public class LoginPage extends BasePage {
 	private void login(String username, String password, Optional<AjaxRequestTarget> targetOptional) {
 		try {
 			AuthenticatedWebSession.get().signIn(username, password);
-			setResponsePage(HomePage.class);
+			setResponsePage(DashboardPage.class);
 		} catch (UserNotLoggedInException userNotLoggedInException) {
 			error(getString("login.failed.text"));
 			targetOptional.ifPresent(target -> target.add(LoginPage.this));

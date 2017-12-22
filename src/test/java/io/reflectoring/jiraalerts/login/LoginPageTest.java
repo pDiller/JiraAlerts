@@ -14,7 +14,7 @@ import org.junit.Test;
 
 import io.reflectoring.jiraalerts.application.TestApplication;
 import io.reflectoring.jiraalerts.application.TestSession;
-import io.reflectoring.jiraalerts.home.HomePage;
+import io.reflectoring.jiraalerts.dashboard.DashboardPage;
 
 public class LoginPageTest {
 
@@ -76,7 +76,7 @@ public class LoginPageTest {
 
 		formTester.submit("loginButton");
 
-		wicketTester.assertRenderedPage(HomePage.class);
+		wicketTester.assertRenderedPage(DashboardPage.class);
 	}
 
 	@Test
