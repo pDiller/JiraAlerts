@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.applicationstatus;
+package io.reflectoring.jiraalerts.applicationstate;
 
 import java.io.Serializable;
 
@@ -18,7 +18,7 @@ public class JiraLoginDTO implements Serializable {
 	}
 
 	public void setUrl(String url) {
-        this.url = url;
+		this.url = url;
 	}
 
 	public String getUsername() {

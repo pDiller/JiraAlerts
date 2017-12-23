@@ -1,6 +1,6 @@
-package io.reflectoring.jiraalerts.applicationstatus;
+package io.reflectoring.jiraalerts.applicationstate;
 
-import static io.reflectoring.jiraalerts.application.ApplicationStatus.ACTIVE;
+import static io.reflectoring.jiraalerts.application.ApplicationState.ACTIVE;
 
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.api.RestClientException;
 
-import io.reflectoring.jiraalerts.application.ApplicationStatusService;
+import io.reflectoring.jiraalerts.application.ApplicationStateService;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
 
 /**
@@ -27,7 +27,7 @@ public class SetupApplicationService {
 	private JiraRestClientService jiraRestClientService;
 
 	@Inject
-	private ApplicationStatusService applicationStatusService;
+	private ApplicationStateService applicationStateService;
 
 	@Inject
 	private JiraConnectionRepository jiraConnectionRepository;
@@ -43,7 +43,7 @@ public class SetupApplicationService {
 			JiraRestClient jiraRestClient = jiraRestClientService.getJiraRestClient(jiraLoginDTO.getUrl(), jiraLoginDTO.getUsername(),
 			        jiraLoginDTO.getPassword());
 			loginToJira(jiraRestClient);
-			applicationStatusService.setApplicationStatus(ACTIVE);
+			applicationStateService.setApplicationState(ACTIVE);
 			storeJiraConnection(jiraLoginDTO);
 		} catch (URISyntaxException e) {
 			throw new SetupApplicationFailedException("The given url is not valid", e);

@@ -1,5 +1,8 @@
 package io.reflectoring.jiraalerts.login;
 
+import static io.reflectoring.jiraalerts.application.ApplicationState.ACTIVE;
+import static org.mockito.Mockito.when;
+
 import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.feedback.FencedFeedbackPanel;
@@ -8,22 +11,31 @@ import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.runners.MockitoJUnitRunner;
 
+import io.reflectoring.jiraalerts.application.ApplicationStateService;
 import io.reflectoring.jiraalerts.application.TestApplication;
 import io.reflectoring.jiraalerts.application.TestSession;
 import io.reflectoring.jiraalerts.common.FormControlPasswordFieldPanel;
 import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
 import io.reflectoring.jiraalerts.dashboard.DashboardPage;
 
+@RunWith(MockitoJUnitRunner.class)
 public class LoginPageTest {
 
 	private static final String TEST_PASSWORD = "Password";
 	private static final String TEST_USERNAME = "Username";
 
+	@Mock
+	private ApplicationStateService applicationStateServiceMock;
+
 	private WicketTester wicketTester;
 
 	@Before
 	public void setUp() {
+		when(applicationStateServiceMock.getApplicationState()).thenReturn(ACTIVE);
 		wicketTester = new WicketTester(new TestApplication(this));
 		wicketTester.startPage(LoginPage.class);
 	}

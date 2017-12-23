@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.applicationstatus;
+package io.reflectoring.jiraalerts.applicationstate;
 
 /**
  * Exception which should be thrown, when setup of application fails.

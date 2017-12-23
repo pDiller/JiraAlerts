@@ -1,6 +1,6 @@
-package io.reflectoring.jiraalerts.applicationstatus;
+package io.reflectoring.jiraalerts.applicationstate;
 
-import static io.reflectoring.jiraalerts.application.ApplicationStatus.ACTIVE;
+import static io.reflectoring.jiraalerts.application.ApplicationState.ACTIVE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import static org.mockito.Mockito.*;
@@ -22,7 +22,7 @@ import com.atlassian.jira.rest.client.api.SessionRestClient;
 import com.atlassian.jira.rest.client.api.domain.Session;
 import com.atlassian.util.concurrent.Promise;
 
-import io.reflectoring.jiraalerts.application.ApplicationStatusService;
+import io.reflectoring.jiraalerts.application.ApplicationStateService;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -36,7 +36,7 @@ public class SetupApplicationServiceTest {
 	private JiraRestClientService jiraRestClientServiceMock;
 
 	@Mock
-	private ApplicationStatusService applicationStatusServiceMock;
+	private ApplicationStateService applicationStateServiceMock;
 
 	@Mock
 	private JiraConnectionRepository jiraConnectionRepositoryMock;
@@ -138,10 +138,10 @@ public class SetupApplicationServiceTest {
 	}
 
 	@Test
-	public void applicationStatusIsSetToActive() throws Exception {
+	public void applicationStateIsSetToActive() throws Exception {
 		testSubject.setupApplicaton(jiraLoginDTO);
 
-		verify(applicationStatusServiceMock).setApplicationStatus(ACTIVE);
+		verify(applicationStateServiceMock).setApplicationState(ACTIVE);
 	}
 
 	@Test

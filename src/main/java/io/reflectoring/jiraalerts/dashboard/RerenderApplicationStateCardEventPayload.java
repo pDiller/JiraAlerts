@@ -5,9 +5,9 @@ import org.apache.wicket.ajax.AjaxRequestTarget;
 import io.reflectoring.jiraalerts.common.AjaxEventPayload;
 
 /**
- * Eventpayload for Rerender {@link io.reflectoring.jiraalerts.dashboard.ApplicationStatusDashboardCardPanel}.
+ * Eventpayload for Rerender {@link ApplicationStateDashboardCardPanel}.
  */
-public class RerenderApplicationStatusCardEventPayload extends AjaxEventPayload {
+public class RerenderApplicationStateCardEventPayload extends AjaxEventPayload {
 
 	/**
 	 * Constructor.
@@ -15,7 +15,7 @@ public class RerenderApplicationStatusCardEventPayload extends AjaxEventPayload 
 	 * @param target
 	 *            the {@link AjaxRequestTarget}.
 	 */
-	public RerenderApplicationStatusCardEventPayload(AjaxRequestTarget target) {
+	public RerenderApplicationStateCardEventPayload(AjaxRequestTarget target) {
 		super(target);
 	}
 }

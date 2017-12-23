@@ -5,13 +5,14 @@
     <title>JiraAlerts</title>
 </head>
 <body>
-<wicket:extend>
+<wicket:panel>
 
-    <p>Status:
-        <span class="badge badge-danger">Nicht eingrichtet</span>
+    <p>
+        <wicket:message key="jira.instance.text" />
     </p>
-    <div wicket:id="setupApplicationPanel"></div>
+    <div wicket:id="urlLabelPanel"></div>
+    <div wicket:id="usernameLabelPanel"></div>
 
-</wicket:extend>
+</wicket:panel>
 </body>
 </html>

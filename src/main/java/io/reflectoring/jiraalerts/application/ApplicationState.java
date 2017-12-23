@@ -3,30 +3,21 @@ package io.reflectoring.jiraalerts.application;
 /**
  * The different states for the application.
  */
-public enum ApplicationStatus {
+public enum ApplicationState {
 
 	/**
 	 * Not initialized and not active.
 	 */
-	NOT_INITIALIZED(0),
+	NOT_INITIALIZED,
 
 	/**
 	 * Initialized but not active.
 	 */
-	NOT_ACTIVE(1),
+	NOT_ACTIVE,
 
 	/**
 	 * Initialized and active.
 	 */
-	ACTIVE(2);
+	ACTIVE;
 
-	private int id;
-
-	ApplicationStatus(int id) {
-		this.id = id;
-	}
-
-	public int getId() {
-		return id;
-	}
 }

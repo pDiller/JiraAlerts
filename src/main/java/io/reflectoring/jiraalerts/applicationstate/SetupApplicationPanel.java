@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.applicationstatus;
+package io.reflectoring.jiraalerts.applicationstate;
 
 import static org.apache.wicket.event.Broadcast.BUBBLE;
 import static org.wicketstuff.lazymodel.LazyModel.from;
@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
 import io.reflectoring.jiraalerts.common.FeedbackPanelErrorClassModifier;
 import io.reflectoring.jiraalerts.common.FormControlPasswordFieldPanel;
 import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
-import io.reflectoring.jiraalerts.dashboard.RerenderApplicationStatusCardEventPayload;
+import io.reflectoring.jiraalerts.dashboard.RerenderApplicationStateCardEventPayload;
 
 /**
  * Panel for initial setup with JIRA.
@@ -44,7 +44,7 @@ public class SetupApplicationPanel extends GenericPanel<JiraLoginDTO> {
 	 */
 	public SetupApplicationPanel(String id, IModel<JiraLoginDTO> model) {
 		super(id, model);
-        setOutputMarkupId(true);
+		setOutputMarkupId(true);
 
 		Form<JiraLoginDTO> setupForm = new Form<>("setupForm", getModel());
 
@@ -95,7 +95,7 @@ public class SetupApplicationPanel extends GenericPanel<JiraLoginDTO> {
 	private void setupJiraConnection(JiraLoginDTO jiraLoginDTO, Optional<AjaxRequestTarget> targetOptional) {
 		try {
 			setupApplicationService.setupApplicaton(jiraLoginDTO);
-			targetOptional.ifPresent(target -> send(this, BUBBLE, new RerenderApplicationStatusCardEventPayload(target)));
+			targetOptional.ifPresent(target -> send(this, BUBBLE, new RerenderApplicationStateCardEventPayload(target)));
 		} catch (SetupApplicationFailedException exception) {
 			LOGGER.warn("Setup of application failed: ", exception);
 			error(getString("setup.application.failed"));
