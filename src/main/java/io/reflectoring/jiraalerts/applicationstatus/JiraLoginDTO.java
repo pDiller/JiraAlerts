@@ -7,18 +7,18 @@ import java.io.Serializable;
  */
 public class JiraLoginDTO implements Serializable {
 
-	private String Url;
+	private String url;
 
 	private String username;
 
 	private String password;
 
 	public String getUrl() {
-		return Url;
+		return url;
 	}
 
 	public void setUrl(String url) {
-		Url = url;
+        this.url = url;
 	}
 
 	public String getUsername() {
