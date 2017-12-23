@@ -7,13 +7,15 @@ import org.apache.wicket.model.IModel;
  */
 public class UserManagementDashboardCardPanel extends AbstractDashboardCardPanel<String> {
 
-    /**
-     * Constructor.
-     *
-     * @param id    Wicket-ID.
-     * @param model Wicket-Model.
-     */
-    public UserManagementDashboardCardPanel(String id, IModel<String> model) {
-        super(id, model);
-    }
+	/**
+	 * Constructor.
+	 *
+	 * @param id
+	 *            Wicket-ID.
+	 * @param model
+	 *            Wicket-Model.
+	 */
+	public UserManagementDashboardCardPanel(String id, IModel<String> model) {
+		super(id, model);
+	}
 }
