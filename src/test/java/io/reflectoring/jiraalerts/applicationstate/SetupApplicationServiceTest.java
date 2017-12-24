@@ -1,6 +1,10 @@
 package io.reflectoring.jiraalerts.applicationstate;
 
 import static io.reflectoring.jiraalerts.application.ApplicationState.ACTIVE;
+import static io.reflectoring.jiraalerts.application.ApplicationState.NOT_ACTIVE;
+import static io.reflectoring.jiraalerts.application.ApplicationState.NOT_INITIALIZED;
+import static java.util.Collections.emptyList;
+import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import static org.mockito.Mockito.*;
@@ -154,5 +158,23 @@ public class SetupApplicationServiceTest {
 		assertThat(argumentCaptor.getValue()).isNotNull();
 		assertThat(argumentCaptor.getValue().getUsername()).isEqualTo(TEST_USERNAME);
 		assertThat(argumentCaptor.getValue().getUrl()).isEqualTo(TEST_URL);
+	}
+
+	@Test
+	public void whenRepositoryNotFindAnyConfigurationServiceSetsApplicationStateNotInitialized() throws Exception {
+		when(jiraConnectionRepositoryMock.findAll()).thenReturn(emptyList());
+
+		testSubject.initializeApplicationState();
+
+		verify(applicationStateServiceMock).setApplicationState(NOT_INITIALIZED);
+	}
+
+	@Test
+	public void whenRepositoryFindsAnyConfigurationServiceSetsApplicationStateNotActive() throws Exception {
+		when(jiraConnectionRepositoryMock.findAll()).thenReturn(singletonList(new JiraConnection()));
+
+		testSubject.initializeApplicationState();
+
+		verify(applicationStateServiceMock).setApplicationState(NOT_ACTIVE);
 	}
 }

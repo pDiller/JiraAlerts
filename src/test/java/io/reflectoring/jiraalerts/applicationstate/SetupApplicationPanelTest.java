@@ -16,6 +16,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import io.reflectoring.jiraalerts.application.ApplicationState;
+import io.reflectoring.jiraalerts.application.ApplicationStateService;
 import io.reflectoring.jiraalerts.application.TestApplication;
 import io.reflectoring.jiraalerts.common.FormControlPasswordFieldPanel;
 import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
@@ -30,11 +32,15 @@ public class SetupApplicationPanelTest {
 	@Mock
 	private SetupApplicationService setupApplicationServiceMock;
 
+	@Mock
+	private ApplicationStateService applicationStateServiceMock;
+
 	private WicketTester wicketTester;
 	private JiraLoginDTO jiraLoginDTO;
 
 	@Before
 	public void setUp() throws Exception {
+		when(applicationStateServiceMock.getApplicationState()).thenReturn(ApplicationState.NOT_INITIALIZED);
 		wicketTester = new WicketTester(new TestApplication(this));
 		jiraLoginDTO = new JiraLoginDTO();
 		wicketTester.startComponentInPage(new SetupApplicationPanel("panel", Model.of(jiraLoginDTO)));
@@ -117,5 +123,16 @@ public class SetupApplicationPanelTest {
 		formTester.submit("submitButton");
 
 		wicketTester.assertErrorMessages("setup.application.failed");
+	}
+
+	@Test
+	public void inputsAreDisabledWhenStateIsNotActive() throws Exception {
+		when(applicationStateServiceMock.getApplicationState()).thenReturn(ApplicationState.NOT_ACTIVE);
+		wicketTester = new WicketTester(new TestApplication(this));
+		jiraLoginDTO = new JiraLoginDTO();
+		wicketTester.startComponentInPage(new SetupApplicationPanel("panel", Model.of(jiraLoginDTO)));
+
+		wicketTester.assertDisabled("panel:setupForm:urlInputPanel:input");
+		wicketTester.assertDisabled("panel:setupForm:usernameInputPanel:input");
 	}
 }

@@ -1,7 +1,6 @@
 package io.reflectoring.jiraalerts.dashboard;
 
-import static io.reflectoring.jiraalerts.application.ApplicationState.ACTIVE;
-import static io.reflectoring.jiraalerts.application.ApplicationState.NOT_INITIALIZED;
+import static io.reflectoring.jiraalerts.application.ApplicationState.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -59,8 +58,15 @@ public class ApplicationStateDashboardCardPanelTest {
 	}
 
 	@Test
+	public void notActiveComponentRenders() throws Exception {
+		when(applicationStateServiceMock.getApplicationState()).thenReturn(NOT_ACTIVE);
+		wicketTester.startComponentInPage(new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO)));
+		wicketTester.assertComponent("panel:setupApplicationPanel", SetupApplicationPanel.class);
+	}
+
+	@Test
 	public void fromNotInitializedToActive() throws Exception {
-		when(applicationStateServiceMock.getApplicationState()).thenReturn(NOT_INITIALIZED, ACTIVE);
+		when(applicationStateServiceMock.getApplicationState()).thenReturn(NOT_INITIALIZED, NOT_INITIALIZED, ACTIVE);
 		ApplicationStateDashboardCardPanel panel = new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO));
 		wicketTester.startComponentInPage(panel);
 		wicketTester.assertComponent("panel:setupApplicationPanel", SetupApplicationPanel.class);
@@ -72,12 +78,14 @@ public class ApplicationStateDashboardCardPanelTest {
 
 	@Test
 	public void otherEventsMakesNoDifference() throws Exception {
-		when(applicationStateServiceMock.getApplicationState()).thenReturn(NOT_INITIALIZED, ACTIVE);
+		when(applicationStateServiceMock.getApplicationState()).thenReturn(NOT_INITIALIZED);
 		ApplicationStateDashboardCardPanel panel = new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO));
 		wicketTester.startComponentInPage(panel);
 		wicketTester.assertComponent("panel:setupApplicationPanel", SetupApplicationPanel.class);
 
 		panel.send(panel, Broadcast.BREADTH, new AjaxEventPayload(mock(AjaxRequestTarget.class)) {});
+
+		when(applicationStateServiceMock.getApplicationState()).thenReturn(ACTIVE);
 
 		wicketTester.assertComponent("panel:setupApplicationPanel", SetupApplicationPanel.class);
 	}

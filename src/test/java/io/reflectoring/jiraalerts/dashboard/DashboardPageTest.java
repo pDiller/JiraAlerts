@@ -15,12 +15,16 @@ import org.mockito.runners.MockitoJUnitRunner;
 import io.reflectoring.jiraalerts.application.ApplicationStateService;
 import io.reflectoring.jiraalerts.application.TestApplication;
 import io.reflectoring.jiraalerts.application.TestSession;
+import io.reflectoring.jiraalerts.applicationstate.JiraConnectionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DashboardPageTest {
 
 	@Mock
 	private ApplicationStateService applicationStateServiceMock;
+
+	@Mock
+	private JiraConnectionRepository jiraConnectionRepositoryMock;
 
 	private WicketTester wicketTester;
 

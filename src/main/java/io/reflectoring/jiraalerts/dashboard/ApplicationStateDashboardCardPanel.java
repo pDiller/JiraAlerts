@@ -4,7 +4,6 @@ import static java.lang.String.format;
 
 import javax.inject.Inject;
 
-import org.apache.commons.lang3.NotImplementedException;
 import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.event.IEvent;
@@ -75,7 +74,8 @@ public class ApplicationStateDashboardCardPanel extends AbstractDashboardCardPan
 			replaceComponent(new LoggedInApplicationPanel(STATE_COMPONENT_ID, getModel()), target);
 			break;
 		case NOT_ACTIVE:
-			throw new NotImplementedException("This part is not implemented yet");
+			replaceComponent(new SetupApplicationPanel(STATE_COMPONENT_ID, getModel()), target);
+			break;
 		default:
 			throw new IllegalStateException(format("This enum value is not supported: '%s'", applicationState));
 		}

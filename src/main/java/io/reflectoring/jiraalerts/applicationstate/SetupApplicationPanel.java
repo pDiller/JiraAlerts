@@ -1,5 +1,6 @@
 package io.reflectoring.jiraalerts.applicationstate;
 
+import static java.lang.String.format;
 import static org.apache.wicket.event.Broadcast.BUBBLE;
 import static org.wicketstuff.lazymodel.LazyModel.from;
 import static org.wicketstuff.lazymodel.LazyModel.model;
@@ -19,6 +20,8 @@ import org.apache.wicket.model.ResourceModel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import io.reflectoring.jiraalerts.application.ApplicationState;
+import io.reflectoring.jiraalerts.application.ApplicationStateService;
 import io.reflectoring.jiraalerts.common.FeedbackPanelErrorClassModifier;
 import io.reflectoring.jiraalerts.common.FormControlPasswordFieldPanel;
 import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
@@ -33,6 +36,12 @@ public class SetupApplicationPanel extends GenericPanel<JiraLoginDTO> {
 
 	@Inject
 	private SetupApplicationService setupApplicationService;
+
+	@Inject
+	private ApplicationStateService applicationStateService;
+
+	private FormControlTextFieldPanel<String> urlInputPanel;
+	private FormControlTextFieldPanel<String> usernameInputPanel;
 
 	/**
 	 * Constructor.
@@ -75,14 +84,16 @@ public class SetupApplicationPanel extends GenericPanel<JiraLoginDTO> {
 		IModel<String> jiraUrlLabelModel = new ResourceModel("setup.url.label.text");
 		IModel<String> jiraUrlModel = model(from(JiraLoginDTO.class).getUrl()).bind(getModel());
 
-		setupForm.add(new FormControlTextFieldPanel<>("urlInputPanel", jiraUrlModel, jiraUrlLabelModel, true));
+		urlInputPanel = new FormControlTextFieldPanel<>("urlInputPanel", jiraUrlModel, jiraUrlLabelModel, true);
+		setupForm.add(urlInputPanel);
 	}
 
 	private void addJiraUsernameComponents(Form<JiraLoginDTO> setupForm) {
 		IModel<String> jiraUsernameLabelModel = new ResourceModel("setup.username.label.text");
 		IModel<String> jiraUsernameModel = model(from(JiraLoginDTO.class).getUsername()).bind(getModel());
 
-		setupForm.add(new FormControlTextFieldPanel<>("usernameInputPanel", jiraUsernameModel, jiraUsernameLabelModel, true));
+		usernameInputPanel = new FormControlTextFieldPanel<>("usernameInputPanel", jiraUsernameModel, jiraUsernameLabelModel, true);
+		setupForm.add(usernameInputPanel);
 	}
 
 	private void addJiraPasswordComponents(Form<JiraLoginDTO> setupForm) {
@@ -100,6 +111,25 @@ public class SetupApplicationPanel extends GenericPanel<JiraLoginDTO> {
 			LOGGER.warn("Setup of application failed: ", exception);
 			error(getString("setup.application.failed"));
 			targetOptional.ifPresent(target -> target.add(SetupApplicationPanel.this));
+		}
+	}
+
+	@Override
+	protected void onConfigure() {
+		super.onConfigure();
+
+		ApplicationState applicationState = applicationStateService.getApplicationState();
+
+		switch (applicationState) {
+		case NOT_INITIALIZED:
+			// do nothing input is rendered correctly
+			break;
+		case NOT_ACTIVE:
+			urlInputPanel.getInput().setEnabled(false);
+			usernameInputPanel.getInput().setEnabled(false);
+			break;
+		default:
+			throw new IllegalStateException(format("This enum value is not supported: '%s'", applicationState));
 		}
 	}
 }

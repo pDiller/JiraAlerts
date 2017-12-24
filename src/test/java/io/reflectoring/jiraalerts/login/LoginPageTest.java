@@ -18,6 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import io.reflectoring.jiraalerts.application.ApplicationStateService;
 import io.reflectoring.jiraalerts.application.TestApplication;
 import io.reflectoring.jiraalerts.application.TestSession;
+import io.reflectoring.jiraalerts.applicationstate.JiraConnectionRepository;
 import io.reflectoring.jiraalerts.common.FormControlPasswordFieldPanel;
 import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
 import io.reflectoring.jiraalerts.dashboard.DashboardPage;
@@ -30,6 +31,9 @@ public class LoginPageTest {
 
 	@Mock
 	private ApplicationStateService applicationStateServiceMock;
+
+	@Mock
+	private JiraConnectionRepository jiraConnectionRepositoryMock;
 
 	private WicketTester wicketTester;
 

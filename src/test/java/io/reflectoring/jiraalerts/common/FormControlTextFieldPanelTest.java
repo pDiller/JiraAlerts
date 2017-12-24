@@ -22,11 +22,13 @@ public class FormControlTextFieldPanelTest {
 	public static final String FORM_TEST_MARKUP = "<html><body><form wicket:id=\"form\"><div wicket:id=\"panel\"></div></form></body></html>";
 
 	private WicketTester wicketTester = new WicketTester(new TestApplication(this));
+	private FormControlTextFieldPanel<String> testSubject;
 
 	@Test
 	public void rendersSuccessful() throws Exception {
 		String testString = "";
-		wicketTester.startComponentInPage(new FormControlTextFieldPanel<>("panel", Model.of(testString), Model.of(TEST_LABEL)));
+		testSubject = new FormControlTextFieldPanel<>("panel", Model.of(testString), Model.of(TEST_LABEL));
+		wicketTester.startComponentInPage(testSubject);
 
 		wicketTester.assertComponent("panel:input", TextField.class);
 		wicketTester.assertComponent("panel:label", SimpleFormComponentLabel.class);
@@ -87,5 +89,14 @@ public class FormControlTextFieldPanelTest {
 		Form<String> testForm = new Form<>("form");
 		testForm.add(new FormControlTextFieldPanel<>("panel", Model.of(testString), Model.of(TEST_LABEL), textFieldRequired));
 		wicketTester.startComponentInPage(testForm, Markup.of(FORM_TEST_MARKUP));
+	}
+
+	@Test
+	public void getInputReturnsInputTextField() throws Exception {
+		String testString = "";
+		testSubject = new FormControlTextFieldPanel<>("panel", Model.of(testString), Model.of(TEST_LABEL));
+		wicketTester.startComponentInPage(testSubject);
+
+		assertThat(testSubject.getInput().getPath()).isEqualTo("0:panel:input");
 	}
 }

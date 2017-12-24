@@ -21,6 +21,8 @@ import org.apache.wicket.model.IModel;
  */
 public class FormControlTextFieldPanel<T> extends GenericPanel<T> {
 
+	private TextField<T> input;
+
 	/**
 	 * Constructor. {@link TextField} of this class is not Required!
 	 *
@@ -50,7 +52,7 @@ public class FormControlTextFieldPanel<T> extends GenericPanel<T> {
 	public FormControlTextFieldPanel(String id, IModel<T> textfieldModel, IModel<String> textfieldLabelModel, boolean textfieldRequired) {
 		super(id, textfieldModel);
 
-		TextField<T> input = new TextField<>("input", getModel());
+		input = new TextField<>("input", getModel());
 		input.setLabel(textfieldLabelModel);
 		input.setRequired(textfieldRequired);
 		input.add(new PlaceholderAttributeModifier(textfieldLabelModel));
@@ -62,5 +64,15 @@ public class FormControlTextFieldPanel<T> extends GenericPanel<T> {
 		feedback.add(new FeedbackPanelErrorClassModifier());
 
 		add(input, label, feedback);
+	}
+
+	public TextField<T> getInput() {
+		return input;
+	}
+
+	@Override
+	protected void onDetach() {
+		super.onDetach();
+		input.detach();
 	}
 }
