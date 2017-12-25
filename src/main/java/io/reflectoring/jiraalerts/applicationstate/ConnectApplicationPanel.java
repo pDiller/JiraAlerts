@@ -97,14 +97,13 @@ public class ConnectApplicationPanel extends GenericPanel<JiraLoginDTO> {
 		setupForm.add(new FormControlPasswordFieldPanel("passwordInputPanel", jiraPasswordModel, jiraPasswordLabelModel));
 	}
 
-	// TODO Muss angepasst werden, da hier eine Verbindung gespeichert wird.
 	private void setupJiraConnection(JiraLoginDTO jiraLoginDTO, Optional<AjaxRequestTarget> targetOptional) {
 		try {
-			setupApplicationService.setupApplicaton(jiraLoginDTO);
+			setupApplicationService.activateApplicaton(jiraLoginDTO);
 			targetOptional.ifPresent(target -> send(this, BUBBLE, new RerenderApplicationStateCardEventPayload(target)));
 		} catch (SetupApplicationFailedException exception) {
-			LOGGER.warn("Setup of application failed: ", exception);
-			error(getString("setup.application.failed"));
+			LOGGER.warn("Reinitialization failed: ", exception);
+			error(getString("initialization.application.failed"));
 			targetOptional.ifPresent(target -> target.add(ConnectApplicationPanel.this));
 		}
 	}

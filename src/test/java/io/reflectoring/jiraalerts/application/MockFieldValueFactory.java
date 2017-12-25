@@ -8,21 +8,10 @@ import org.apache.wicket.injection.IFieldValueFactory;
 import org.mockito.Mock;
 import org.springframework.util.ReflectionUtils;
 
-/**
- * Sorgt dafür, dass mit @Inject annotierte Felder in Wicket-Komponenten mit Mocks befüllt werden. Die Mock-Objekte können per @Mock-Annotation
- * definiert werden.
- */
 public class MockFieldValueFactory implements IFieldValueFactory {
 
 	private Map<Class<?>, Object> repository = new HashMap<>();
 
-	/**
-	 * Konstruktor.
-	 * 
-	 * @param objectWithMockAnnotations
-	 *            von diesem Objekt werden alle @Mock-Annotationen ausgelesen. Alle @Inject-Annotation in Wicket-Komponenten werden durch die Werte
-	 *            dieser Felder ersetzt (passend zu ihrer Klasse).
-	 */
 	public MockFieldValueFactory(Object objectWithMockAnnotations) {
 		try {
 			Class<?> clazz = objectWithMockAnnotations.getClass();

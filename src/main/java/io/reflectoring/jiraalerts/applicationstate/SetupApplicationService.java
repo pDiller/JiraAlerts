@@ -41,12 +41,26 @@ public class SetupApplicationService {
 	 *            values which are needed to connect against JIRA.
 	 */
 	public void setupApplicaton(JiraLoginDTO jiraLoginDTO) {
+		loginAgainstJIRA(jiraLoginDTO);
+		storeJiraConnection(jiraLoginDTO);
+	}
+
+	/**
+	 * Reconnects to JIRA instance.
+	 *
+	 * @param jiraLoginDTO
+	 *            values which are needed to connect against JIRA.
+	 */
+	public void activateApplicaton(JiraLoginDTO jiraLoginDTO) {
+		loginAgainstJIRA(jiraLoginDTO);
+	}
+
+	private void loginAgainstJIRA(JiraLoginDTO jiraLoginDTO) {
 		try {
 			JiraRestClient jiraRestClient = jiraRestClientService.getJiraRestClient(jiraLoginDTO.getUrl(), jiraLoginDTO.getUsername(),
 			        jiraLoginDTO.getPassword());
 			loginToJira(jiraRestClient);
 			applicationStateService.setApplicationState(ACTIVE);
-			storeJiraConnection(jiraLoginDTO);
 		} catch (URISyntaxException e) {
 			throw new SetupApplicationFailedException("The given url is not valid", e);
 		}

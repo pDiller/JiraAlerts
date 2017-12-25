@@ -5,7 +5,7 @@ import org.apache.wicket.injection.IFieldValueFactory;
 import org.apache.wicket.injection.Injector;
 
 /**
- * Standard-Injector, der Felder mit @Inject-Annotation in Wicket-Komponenten befüllt.
+ * Fills fields with @Inject in wicket components.
  */
 public class DefaultInjector extends Injector implements IComponentInstantiationListener {
 

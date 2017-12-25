@@ -83,10 +83,28 @@ public class SetupApplicationServiceTest {
 	}
 
 	@Test
-	public void whenUrlIsNotValidExceptionIsThrown() throws Exception {
+	public void activateApplicationCallsJiraRestClientToPerformLogin() throws Exception {
+		testSubject.activateApplicaton(jiraLoginDTO);
+
+		verify(jiraRestClientServiceMock).getJiraRestClient(TEST_URL, TEST_USERNAME, TEST_PASSWORD);
+	}
+
+	@Test
+	public void whenUrlIsNotValidForSetupExceptionIsThrown() throws Exception {
 		doThrow(new URISyntaxException("", "")).when(jiraRestClientServiceMock).getJiraRestClient(TEST_URL, TEST_USERNAME, TEST_PASSWORD);
 		try {
 			testSubject.setupApplicaton(jiraLoginDTO);
+			failBecauseExceptionWasNotThrown(SetupApplicationFailedException.class);
+		} catch (SetupApplicationFailedException exception) {
+			assertThat(exception.getMessage()).isEqualTo("The given url is not valid");
+		}
+	}
+
+	@Test
+	public void whenUrlIsNotValidForActivationExceptionIsThrown() throws Exception {
+		doThrow(new URISyntaxException("", "")).when(jiraRestClientServiceMock).getJiraRestClient(TEST_URL, TEST_USERNAME, TEST_PASSWORD);
+		try {
+			testSubject.activateApplicaton(jiraLoginDTO);
 			failBecauseExceptionWasNotThrown(SetupApplicationFailedException.class);
 		} catch (SetupApplicationFailedException exception) {
 			assertThat(exception.getMessage()).isEqualTo("The given url is not valid");
@@ -98,6 +116,17 @@ public class SetupApplicationServiceTest {
 		doThrow(new RestClientException(mock(Throwable.class))).when(promise).claim();
 		try {
 			testSubject.setupApplicaton(jiraLoginDTO);
+			failBecauseExceptionWasNotThrown(SetupApplicationFailedException.class);
+		} catch (SetupApplicationFailedException exception) {
+			assertThat(exception.getMessage()).isEqualTo("The credentials of the user are not correct");
+		}
+	}
+
+	@Test
+	public void whenCredentialsAreNotCorrectActivationFailedExceptionIsRethrown() throws Exception {
+		doThrow(new RestClientException(mock(Throwable.class))).when(promise).claim();
+		try {
+			testSubject.activateApplicaton(jiraLoginDTO);
 			failBecauseExceptionWasNotThrown(SetupApplicationFailedException.class);
 		} catch (SetupApplicationFailedException exception) {
 			assertThat(exception.getMessage()).isEqualTo("The credentials of the user are not correct");
@@ -118,10 +147,34 @@ public class SetupApplicationServiceTest {
 	}
 
 	@Test
+	public void whenUnknownHostExceptionIsThrownActivationFailedExceptionIsRethrown() throws Exception {
+		RuntimeException runtimeException = mock(RuntimeException.class);
+		when(runtimeException.getCause()).thenReturn(mock(UnknownHostException.class));
+		doThrow(runtimeException).when(promise).claim();
+		try {
+			testSubject.activateApplicaton(jiraLoginDTO);
+			failBecauseExceptionWasNotThrown(SetupApplicationFailedException.class);
+		} catch (SetupApplicationFailedException exception) {
+			assertThat(exception.getMessage()).isEqualTo("There is no JIRA instance for given url");
+		}
+	}
+
+	@Test
 	public void whenRandomExceptionIsThrownSetupFailedExceptionIsRethrown() throws Exception {
 		doThrow(new RuntimeException()).when(promise).claim();
 		try {
 			testSubject.setupApplicaton(jiraLoginDTO);
+			failBecauseExceptionWasNotThrown(SetupApplicationFailedException.class);
+		} catch (SetupApplicationFailedException exception) {
+			assertThat(exception.getMessage()).isEqualTo("Setup of application failed");
+		}
+	}
+
+	@Test
+	public void whenRandomExceptionIsThrownActivationFailedExceptionIsRethrown() throws Exception {
+		doThrow(new RuntimeException()).when(promise).claim();
+		try {
+			testSubject.activateApplicaton(jiraLoginDTO);
 			failBecauseExceptionWasNotThrown(SetupApplicationFailedException.class);
 		} catch (SetupApplicationFailedException exception) {
 			assertThat(exception.getMessage()).isEqualTo("Setup of application failed");
@@ -142,14 +195,34 @@ public class SetupApplicationServiceTest {
 	}
 
 	@Test
-	public void applicationStateIsSetToActive() throws Exception {
+	public void whenRandomExceptionWithRandomCauseIsThrownActivationFailedExceptionIsRethrown() throws Exception {
+		RuntimeException runtimeExceptionMock = mock(RuntimeException.class);
+		when(runtimeExceptionMock.getCause()).thenReturn(mock(RuntimeException.class));
+		doThrow(runtimeExceptionMock).when(promise).claim();
+		try {
+			testSubject.activateApplicaton(jiraLoginDTO);
+			failBecauseExceptionWasNotThrown(SetupApplicationFailedException.class);
+		} catch (SetupApplicationFailedException exception) {
+			assertThat(exception.getMessage()).isEqualTo("Setup of application failed");
+		}
+	}
+
+	@Test
+	public void applicationStateIsSetToActiveOnSetup() throws Exception {
 		testSubject.setupApplicaton(jiraLoginDTO);
 
 		verify(applicationStateServiceMock).setApplicationState(ACTIVE);
 	}
 
 	@Test
-	public void jiraConnectionIsStored() throws Exception {
+	public void applicationStateIsSetToActiveOnActivation() throws Exception {
+		testSubject.activateApplicaton(jiraLoginDTO);
+
+		verify(applicationStateServiceMock).setApplicationState(ACTIVE);
+	}
+
+	@Test
+	public void jiraConnectionIsStoredOnSetup() throws Exception {
 		testSubject.setupApplicaton(jiraLoginDTO);
 
 		ArgumentCaptor<JiraConnection> argumentCaptor = ArgumentCaptor.forClass(JiraConnection.class);
@@ -158,6 +231,13 @@ public class SetupApplicationServiceTest {
 		assertThat(argumentCaptor.getValue()).isNotNull();
 		assertThat(argumentCaptor.getValue().getUsername()).isEqualTo(TEST_USERNAME);
 		assertThat(argumentCaptor.getValue().getUrl()).isEqualTo(TEST_URL);
+	}
+
+	@Test
+	public void jiraConnectionIsNotStoredOnActivation() throws Exception {
+		testSubject.activateApplicaton(jiraLoginDTO);
+
+		verify(jiraConnectionRepositoryMock, never()).save(any(JiraConnection.class));
 	}
 
 	@Test

@@ -88,18 +88,18 @@ public class ConnectApplicationPanelTest {
 
 		formTester.submit("submitButton");
 
-		verify(setupApplicationServiceMock).setupApplicaton(jiraLoginDTO);
+		verify(setupApplicationServiceMock).activateApplicaton(jiraLoginDTO);
 	}
 
 	@Test
 	public void whenServiceCallThrowsMethodErrorIsShown() throws Exception {
-		doThrow(new SetupApplicationFailedException("setup failed")).when(setupApplicationServiceMock).setupApplicaton(jiraLoginDTO);
+		doThrow(new SetupApplicationFailedException("setup failed")).when(setupApplicationServiceMock).activateApplicaton(jiraLoginDTO);
 
 		FormTester formTester = wicketTester.newFormTester("panel:setupForm");
 		formTester.setValue("passwordInputPanel:input", TEST_PASSWORD);
 
 		formTester.submit("submitButton");
 
-		wicketTester.assertErrorMessages("setup.application.failed");
+		wicketTester.assertErrorMessages("initialization.application.failed");
 	}
 }
