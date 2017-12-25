@@ -1,6 +1,7 @@
 package io.reflectoring.jiraalerts.application;
 
 import static io.reflectoring.jiraalerts.application.ApplicationState.NOT_INITIALIZED;
+import static java.lang.String.format;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,7 +20,8 @@ public class ApplicationStateService {
 	private ApplicationState applicationState = NOT_INITIALIZED;
 
 	public void setApplicationState(ApplicationState applicationState) {
-		LOGGER.info(String.format("Statechange from '%s' to '%s'", this.applicationState, applicationState));
+        String stateChangeInformation = format("Statechange from '%s' to '%s'", this.applicationState, applicationState);
+        LOGGER.info(stateChangeInformation);
 		this.applicationState = applicationState;
 	}
 
