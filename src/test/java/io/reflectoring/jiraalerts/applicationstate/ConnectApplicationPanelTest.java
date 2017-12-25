@@ -1,6 +1,6 @@
 package io.reflectoring.jiraalerts.applicationstate;
 
-import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
@@ -17,11 +17,11 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import io.reflectoring.jiraalerts.application.TestApplication;
+import io.reflectoring.jiraalerts.common.FormControlLabelPanel;
 import io.reflectoring.jiraalerts.common.FormControlPasswordFieldPanel;
-import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SetupApplicationPanelTest {
+public class ConnectApplicationPanelTest {
 
 	private static final String TEST_URL = "https://jira.test.test";
 	private static final String TEST_USERNAME = "tester@test.test";
@@ -37,7 +37,9 @@ public class SetupApplicationPanelTest {
 	public void setUp() throws Exception {
 		wicketTester = new WicketTester(new TestApplication(this));
 		jiraLoginDTO = new JiraLoginDTO();
-		wicketTester.startComponentInPage(new SetupApplicationPanel("panel", Model.of(jiraLoginDTO)));
+		jiraLoginDTO.setUrl(TEST_URL);
+		jiraLoginDTO.setUsername(TEST_USERNAME);
+		wicketTester.startComponentInPage(new ConnectApplicationPanel("panel", Model.of(jiraLoginDTO)));
 	}
 
 	@Test
@@ -45,33 +47,21 @@ public class SetupApplicationPanelTest {
 		wicketTester.assertComponent("panel:globalFeedback", FencedFeedbackPanel.class);
 
 		wicketTester.assertComponent("panel:setupForm", Form.class);
-		wicketTester.assertComponent("panel:setupForm:urlInputPanel", FormControlTextFieldPanel.class);
-		wicketTester.assertComponent("panel:setupForm:usernameInputPanel", FormControlTextFieldPanel.class);
+		wicketTester.assertComponent("panel:setupForm:urlLabelPanel", FormControlLabelPanel.class);
+		wicketTester.assertComponent("panel:setupForm:usernameLabelPanel", FormControlLabelPanel.class);
 		wicketTester.assertComponent("panel:setupForm:passwordInputPanel", FormControlPasswordFieldPanel.class);
 
 		wicketTester.assertComponent("panel:setupForm:submitButton", AjaxFallbackButton.class);
 	}
 
 	@Test
-	public void jiraUrlInputIsRequired() throws Exception {
-		FormTester formTester = wicketTester.newFormTester("panel:setupForm");
-		formTester.setValue("usernameInputPanel:input", TEST_USERNAME);
-		formTester.setValue("passwordInputPanel:input", TEST_PASSWORD);
-
-		formTester.submit();
-
-		wicketTester.assertErrorMessages("input.Required");
+	public void jiraUrlInputIsWired() throws Exception {
+		wicketTester.assertModelValue("panel:setupForm:urlLabelPanel:input", TEST_URL);
 	}
 
 	@Test
-	public void jiraUsernameInputIsRequired() throws Exception {
-		FormTester formTester = wicketTester.newFormTester("panel:setupForm");
-		formTester.setValue("urlInputPanel:input", TEST_URL);
-		formTester.setValue("passwordInputPanel:input", TEST_PASSWORD);
-
-		formTester.submit();
-
-		wicketTester.assertErrorMessages("input.Required");
+	public void jiraUsernameInputIsWired() throws Exception {
+		wicketTester.assertModelValue("panel:setupForm:usernameLabelPanel:input", TEST_USERNAME);
 	}
 
 	@Test
@@ -82,8 +72,6 @@ public class SetupApplicationPanelTest {
 		passwordTextField.setResetPassword(false);
 
 		FormTester formTester = wicketTester.newFormTester("panel:setupForm");
-		formTester.setValue("urlInputPanel:input", TEST_URL);
-		formTester.setValue("usernameInputPanel:input", TEST_USERNAME);
 		formTester.setValue("passwordInputPanel:input", TEST_PASSWORD);
 
 		formTester.submit();
@@ -96,8 +84,6 @@ public class SetupApplicationPanelTest {
 	@Test
 	public void submitFormWithSubmitButtonCallsService() throws Exception {
 		FormTester formTester = wicketTester.newFormTester("panel:setupForm");
-		formTester.setValue("urlInputPanel:input", TEST_URL);
-		formTester.setValue("usernameInputPanel:input", TEST_USERNAME);
 		formTester.setValue("passwordInputPanel:input", TEST_PASSWORD);
 
 		formTester.submit("submitButton");
@@ -110,8 +96,6 @@ public class SetupApplicationPanelTest {
 		doThrow(new SetupApplicationFailedException("setup failed")).when(setupApplicationServiceMock).setupApplicaton(jiraLoginDTO);
 
 		FormTester formTester = wicketTester.newFormTester("panel:setupForm");
-		formTester.setValue("urlInputPanel:input", TEST_URL);
-		formTester.setValue("usernameInputPanel:input", TEST_USERNAME);
 		formTester.setValue("passwordInputPanel:input", TEST_PASSWORD);
 
 		formTester.submit("submitButton");

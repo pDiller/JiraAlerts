@@ -4,6 +4,8 @@ import org.apache.wicket.authroles.authorization.strategies.role.annotations.Aut
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 
+import io.reflectoring.jiraalerts.application.ApplicationState;
+import io.reflectoring.jiraalerts.application.ApplicationStateModel;
 import io.reflectoring.jiraalerts.applicationstate.InitializeJiraLoginDTOModel;
 import io.reflectoring.jiraalerts.applicationstate.JiraLoginDTO;
 import io.reflectoring.jiraalerts.base.BasePage;
@@ -26,6 +28,7 @@ public class DashboardPage extends BasePage {
 		add(new UserManagementDashboardCardPanel("userManagementPanel", new Model<>()));
 
 		IModel<JiraLoginDTO> initialJiraLoginDTOModel = new InitializeJiraLoginDTOModel();
-		add(new ApplicationStateDashboardCardPanel("applicationStatePanel", initialJiraLoginDTOModel));
+		IModel<ApplicationState> applicationStateModel = new ApplicationStateModel();
+		add(new ApplicationStateDashboardCardPanel("applicationStatePanel", initialJiraLoginDTOModel, applicationStateModel));
 	}
 }

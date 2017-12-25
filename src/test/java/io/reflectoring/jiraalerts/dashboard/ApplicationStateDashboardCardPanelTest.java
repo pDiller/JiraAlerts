@@ -2,7 +2,6 @@ package io.reflectoring.jiraalerts.dashboard;
 
 import static io.reflectoring.jiraalerts.application.ApplicationState.*;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.event.Broadcast;
@@ -11,11 +10,11 @@ import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.reflectoring.jiraalerts.application.ApplicationStateService;
+import io.reflectoring.jiraalerts.application.ApplicationState;
 import io.reflectoring.jiraalerts.application.TestApplication;
+import io.reflectoring.jiraalerts.applicationstate.ConnectApplicationPanel;
 import io.reflectoring.jiraalerts.applicationstate.JiraLoginDTO;
 import io.reflectoring.jiraalerts.applicationstate.LoggedInApplicationPanel;
 import io.reflectoring.jiraalerts.applicationstate.SetupApplicationPanel;
@@ -27,9 +26,6 @@ public class ApplicationStateDashboardCardPanelTest {
 	private static final String TEST_URL = "url";
 	private static final String TEST_USERNAME = "username";
 	private static final String TEST_PASSWORD = "password";
-
-	@Mock
-	private ApplicationStateService applicationStateServiceMock;
 
 	private WicketTester wicketTester;
 	private JiraLoginDTO jiraLoginDTO;
@@ -45,48 +41,46 @@ public class ApplicationStateDashboardCardPanelTest {
 
 	@Test
 	public void activeComponentRenders() throws Exception {
-		when(applicationStateServiceMock.getApplicationState()).thenReturn(ACTIVE);
-		wicketTester.startComponentInPage(new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO)));
-		wicketTester.assertComponent("panel:setupApplicationPanel", LoggedInApplicationPanel.class);
+		wicketTester.startComponentInPage(new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO), Model.of(ACTIVE)));
+		wicketTester.assertComponent("panel:stateComponent", LoggedInApplicationPanel.class);
 	}
 
 	@Test
 	public void notInitializedComponentRenders() throws Exception {
-		when(applicationStateServiceMock.getApplicationState()).thenReturn(NOT_INITIALIZED);
-		wicketTester.startComponentInPage(new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO)));
-		wicketTester.assertComponent("panel:setupApplicationPanel", SetupApplicationPanel.class);
+		wicketTester.startComponentInPage(new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO), Model.of(NOT_INITIALIZED)));
+		wicketTester.assertComponent("panel:stateComponent", SetupApplicationPanel.class);
 	}
 
 	@Test
 	public void notActiveComponentRenders() throws Exception {
-		when(applicationStateServiceMock.getApplicationState()).thenReturn(NOT_ACTIVE);
-		wicketTester.startComponentInPage(new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO)));
-		wicketTester.assertComponent("panel:setupApplicationPanel", SetupApplicationPanel.class);
+		wicketTester.startComponentInPage(new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO), Model.of(NOT_ACTIVE)));
+		wicketTester.assertComponent("panel:stateComponent", ConnectApplicationPanel.class);
 	}
 
 	@Test
 	public void fromNotInitializedToActive() throws Exception {
-		when(applicationStateServiceMock.getApplicationState()).thenReturn(NOT_INITIALIZED, NOT_INITIALIZED, ACTIVE);
-		ApplicationStateDashboardCardPanel panel = new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO));
+		Model<ApplicationState> applicationStateModel = Model.of(NOT_INITIALIZED);
+		ApplicationStateDashboardCardPanel panel = new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO), applicationStateModel);
 		wicketTester.startComponentInPage(panel);
-		wicketTester.assertComponent("panel:setupApplicationPanel", SetupApplicationPanel.class);
+
+		wicketTester.assertComponent("panel:stateComponent", SetupApplicationPanel.class);
+
+		applicationStateModel.setObject(ACTIVE);
 
 		panel.send(panel, Broadcast.BREADTH, new RerenderApplicationStateCardEventPayload(mock(AjaxRequestTarget.class)));
 
-		wicketTester.assertComponent("panel:setupApplicationPanel", LoggedInApplicationPanel.class);
+		wicketTester.assertComponent("panel:stateComponent", LoggedInApplicationPanel.class);
 	}
 
 	@Test
 	public void otherEventsMakesNoDifference() throws Exception {
-		when(applicationStateServiceMock.getApplicationState()).thenReturn(NOT_INITIALIZED);
-		ApplicationStateDashboardCardPanel panel = new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO));
+		ApplicationStateDashboardCardPanel panel = new ApplicationStateDashboardCardPanel("panel", new Model<>(jiraLoginDTO),
+		        Model.of(NOT_INITIALIZED));
 		wicketTester.startComponentInPage(panel);
-		wicketTester.assertComponent("panel:setupApplicationPanel", SetupApplicationPanel.class);
+		wicketTester.assertComponent("panel:stateComponent", SetupApplicationPanel.class);
 
 		panel.send(panel, Broadcast.BREADTH, new AjaxEventPayload(mock(AjaxRequestTarget.class)) {});
 
-		when(applicationStateServiceMock.getApplicationState()).thenReturn(ACTIVE);
-
-		wicketTester.assertComponent("panel:setupApplicationPanel", SetupApplicationPanel.class);
+		wicketTester.assertComponent("panel:stateComponent", SetupApplicationPanel.class);
 	}
 }
