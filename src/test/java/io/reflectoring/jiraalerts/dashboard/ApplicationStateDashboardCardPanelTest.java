@@ -14,10 +14,10 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import io.reflectoring.jiraalerts.application.state.ApplicationState;
 import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
-import io.reflectoring.jiraalerts.applicationstate.ConnectApplicationPanel;
-import io.reflectoring.jiraalerts.applicationstate.JiraLoginDTO;
-import io.reflectoring.jiraalerts.applicationstate.LoggedInApplicationPanel;
-import io.reflectoring.jiraalerts.applicationstate.SetupApplicationPanel;
+import io.reflectoring.jiraalerts.dashboard.applicationstate.ConnectApplicationPanel;
+import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraLoginDTO;
+import io.reflectoring.jiraalerts.dashboard.applicationstate.LoggedInApplicationPanel;
+import io.reflectoring.jiraalerts.dashboard.applicationstate.SetupApplicationPanel;
 import io.reflectoring.jiraalerts.common.AjaxEventPayload;
 
 @RunWith(MockitoJUnitRunner.class)

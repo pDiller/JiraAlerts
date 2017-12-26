@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.applicationstate;
+package io.reflectoring.jiraalerts.dashboard.applicationstate;
 
 import static org.wicketstuff.lazymodel.LazyModel.from;
 import static org.wicketstuff.lazymodel.LazyModel.model;

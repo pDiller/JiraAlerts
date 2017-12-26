@@ -6,8 +6,8 @@ import org.apache.wicket.model.Model;
 
 import io.reflectoring.jiraalerts.application.state.ApplicationState;
 import io.reflectoring.jiraalerts.application.state.ApplicationStateModel;
-import io.reflectoring.jiraalerts.applicationstate.InitializeJiraLoginDTOModel;
-import io.reflectoring.jiraalerts.applicationstate.JiraLoginDTO;
+import io.reflectoring.jiraalerts.dashboard.applicationstate.InitializeJiraLoginDTOModel;
+import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraLoginDTO;
 import io.reflectoring.jiraalerts.base.BasePage;
 
 /**

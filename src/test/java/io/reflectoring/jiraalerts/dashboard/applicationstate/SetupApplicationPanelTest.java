@@ -1,8 +1,12 @@
-package io.reflectoring.jiraalerts.applicationstate;
+package io.reflectoring.jiraalerts.dashboard.applicationstate;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
 
+import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraLoginDTO;
+import io.reflectoring.jiraalerts.dashboard.applicationstate.SetupApplicationFailedException;
+import io.reflectoring.jiraalerts.dashboard.applicationstate.SetupApplicationPanel;
+import io.reflectoring.jiraalerts.dashboard.applicationstate.SetupApplicationService;
 import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
 import org.apache.wicket.feedback.FencedFeedbackPanel;
 import org.apache.wicket.markup.html.form.Form;

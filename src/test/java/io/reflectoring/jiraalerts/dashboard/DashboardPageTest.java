@@ -15,7 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
 import io.reflectoring.jiraalerts.application.testsetup.TestSession;
-import io.reflectoring.jiraalerts.applicationstate.JiraConnectionRepository;
+import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraConnectionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DashboardPageTest {

@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.applicationstate;
+package io.reflectoring.jiraalerts.dashboard.applicationstate;
 
 import static io.reflectoring.jiraalerts.application.state.ApplicationState.ACTIVE;
 

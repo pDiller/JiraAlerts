@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.applicationstate;
+package io.reflectoring.jiraalerts.dashboard.applicationstate;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

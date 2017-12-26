@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.applicationstate;
+package io.reflectoring.jiraalerts.dashboard.applicationstate;
 
 import static org.apache.wicket.event.Broadcast.BUBBLE;
 import static org.wicketstuff.lazymodel.LazyModel.from;
@@ -20,16 +20,16 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.reflectoring.jiraalerts.common.FeedbackPanelErrorClassModifier;
-import io.reflectoring.jiraalerts.common.FormControlLabelPanel;
 import io.reflectoring.jiraalerts.common.FormControlPasswordFieldPanel;
+import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
 import io.reflectoring.jiraalerts.dashboard.RerenderApplicationStateCardEventPayload;
 
 /**
- * Panel for login against existent JIRA-Instance.
+ * Panel for initial setup with JIRA. s
  */
-public class ConnectApplicationPanel extends GenericPanel<JiraLoginDTO> {
+public class SetupApplicationPanel extends GenericPanel<JiraLoginDTO> {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ConnectApplicationPanel.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(SetupApplicationPanel.class);
 
 	@Inject
 	private SetupApplicationService setupApplicationService;
@@ -40,18 +40,17 @@ public class ConnectApplicationPanel extends GenericPanel<JiraLoginDTO> {
 	 * @param id
 	 *            Wicket-ID.
 	 * @param model
-	 *            Model with jiraconnection data.
+	 *            The initial login-values of JIRA.
 	 */
-	public ConnectApplicationPanel(String id, IModel<JiraLoginDTO> model) {
+	public SetupApplicationPanel(String id, IModel<JiraLoginDTO> model) {
 		super(id, model);
-
 		setOutputMarkupId(true);
 
 		Form<JiraLoginDTO> setupForm = new Form<>("setupForm", getModel());
 
 		addGlobalFeedbackPanel();
-		addUrlLabel(setupForm);
-		addUsernameLabel(setupForm);
+		addJiraUrlComponents(setupForm);
+		addJiraUsernameComponents(setupForm);
 		addJiraPasswordComponents(setupForm);
 
 		setupForm.add(new AjaxFallbackButton("submitButton", setupForm) {
@@ -59,35 +58,35 @@ public class ConnectApplicationPanel extends GenericPanel<JiraLoginDTO> {
 			@Override
 			protected void onError(Optional<AjaxRequestTarget> targetOptional) {
 				super.onError(targetOptional);
-				targetOptional.ifPresent(target -> target.add(ConnectApplicationPanel.this));
+				targetOptional.ifPresent(target -> target.add(SetupApplicationPanel.this));
 			}
 
 			@Override
 			protected void onSubmit(Optional<AjaxRequestTarget> targetOptional) {
 				super.onSubmit(targetOptional);
-				setupJiraConnection(ConnectApplicationPanel.this.getModelObject(), targetOptional);
+				setupJiraConnection(SetupApplicationPanel.this.getModelObject(), targetOptional);
 			}
 		});
 
 		add(setupForm);
 	}
 
-	private void addUrlLabel(Form<JiraLoginDTO> setupForm) {
-		IModel<String> urlLabelModel = new ResourceModel("jira.url.label.text");
-		IModel<String> urlValueModel = model(from(JiraLoginDTO.class).getUrl()).bind(getModel());
-		setupForm.add(new FormControlLabelPanel("urlLabelPanel", urlValueModel, urlLabelModel));
-	}
-
-	private void addUsernameLabel(Form<JiraLoginDTO> setupForm) {
-		IModel<String> usernameLabelModel = new ResourceModel("jira.username.label.text");
-		IModel<String> usernameValueModel = model(from(JiraLoginDTO.class).getUsername()).bind(getModel());
-		setupForm.add(new FormControlLabelPanel("usernameLabelPanel", usernameValueModel, usernameLabelModel));
-	}
-
 	private void addGlobalFeedbackPanel() {
 		FeedbackPanel globalFeedbackPanel = new FencedFeedbackPanel("globalFeedback", this);
 		globalFeedbackPanel.add(new FeedbackPanelErrorClassModifier());
 		add(globalFeedbackPanel);
+	}
+
+	private void addJiraUrlComponents(Form<JiraLoginDTO> setupForm) {
+		IModel<String> jiraUrlLabelModel = new ResourceModel("setup.url.label.text");
+		IModel<String> jiraUrlModel = model(from(JiraLoginDTO.class).getUrl()).bind(getModel());
+		setupForm.add(new FormControlTextFieldPanel<>("urlInputPanel", jiraUrlModel, jiraUrlLabelModel, true));
+	}
+
+	private void addJiraUsernameComponents(Form<JiraLoginDTO> setupForm) {
+		IModel<String> jiraUsernameLabelModel = new ResourceModel("setup.username.label.text");
+		IModel<String> jiraUsernameModel = model(from(JiraLoginDTO.class).getUsername()).bind(getModel());
+		setupForm.add(new FormControlTextFieldPanel<>("usernameInputPanel", jiraUsernameModel, jiraUsernameLabelModel, true));
 	}
 
 	private void addJiraPasswordComponents(Form<JiraLoginDTO> setupForm) {
@@ -99,12 +98,12 @@ public class ConnectApplicationPanel extends GenericPanel<JiraLoginDTO> {
 
 	private void setupJiraConnection(JiraLoginDTO jiraLoginDTO, Optional<AjaxRequestTarget> targetOptional) {
 		try {
-			setupApplicationService.activateApplicaton(jiraLoginDTO);
+			setupApplicationService.setupApplicaton(jiraLoginDTO);
 			targetOptional.ifPresent(target -> send(this, BUBBLE, new RerenderApplicationStateCardEventPayload(target)));
 		} catch (SetupApplicationFailedException exception) {
-			LOGGER.warn("Reinitialization failed: ", exception);
-			error(getString("initialization.application.failed"));
-			targetOptional.ifPresent(target -> target.add(ConnectApplicationPanel.this));
+			LOGGER.warn("Setup of application failed: ", exception);
+			error(getString("setup.application.failed"));
+			targetOptional.ifPresent(target -> target.add(SetupApplicationPanel.this));
 		}
 	}
 }

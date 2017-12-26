@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.applicationstate;
+package io.reflectoring.jiraalerts.dashboard.applicationstate;
 
 import static io.reflectoring.jiraalerts.application.state.ApplicationState.ACTIVE;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -8,6 +8,7 @@ import static org.mockito.Mockito.*;
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
 
+import io.reflectoring.jiraalerts.dashboard.applicationstate.*;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
