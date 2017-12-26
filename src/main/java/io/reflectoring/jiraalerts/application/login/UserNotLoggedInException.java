@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.login;
+package io.reflectoring.jiraalerts.application.login;
 
 /**
  * Is thrown when the user can´t get logged in.

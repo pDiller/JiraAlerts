@@ -1,6 +1,5 @@
-package io.reflectoring.jiraalerts.login;
+package io.reflectoring.jiraalerts.application.login;
 
-import static org.wicketstuff.lazymodel.LazyModel.from;
 import static org.wicketstuff.lazymodel.LazyModel.model;
 
 import java.util.Optional;
@@ -13,6 +12,7 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.model.ResourceModel;
+import org.wicketstuff.lazymodel.LazyModel;
 
 import io.reflectoring.jiraalerts.base.BasePage;
 import io.reflectoring.jiraalerts.common.*;
@@ -21,12 +21,12 @@ import io.reflectoring.jiraalerts.dashboard.DashboardPage;
 /**
  * Provides the login of this application.
  */
-public class LoginPage extends BasePage {
+class LoginPage extends BasePage {
 
 	/**
 	 * Constructor.
 	 */
-	public LoginPage() {
+	LoginPage() {
 
 		FencedFeedbackPanel loginFeedbackPanel = new FencedFeedbackPanel("loginFeedbackPanel", this);
 		loginFeedbackPanel.add(new FeedbackPanelErrorClassModifier());
@@ -73,14 +73,14 @@ public class LoginPage extends BasePage {
 
 	private void addUsernameComponents(Form<LoginDTO> loginForm) {
 		IModel<String> usernameLabelModel = new ResourceModel("login.username.label");
-		IModel<String> usernameModel = model(from(LoginDTO.class).getUsername()).bind(loginForm.getModel());
+		IModel<String> usernameModel = model(LazyModel.from(LoginDTO.class).getUsername()).bind(loginForm.getModel());
 
 		loginForm.add(new FormControlTextFieldPanel<>("loginUsernamePanel", usernameModel, usernameLabelModel, true));
 	}
 
 	private void addPasswordComponents(Form<LoginDTO> loginForm) {
 		IModel<String> passwordLabelModel = new ResourceModel("login.password.label");
-		IModel<String> passwordModel = model(from(LoginDTO.class).getPassword()).bind(loginForm.getModel());
+		IModel<String> passwordModel = model(LazyModel.from(LoginDTO.class).getPassword()).bind(loginForm.getModel());
 
 		loginForm.add(new FormControlPasswordFieldPanel("loginPasswordPanel", passwordModel, passwordLabelModel));
 	}

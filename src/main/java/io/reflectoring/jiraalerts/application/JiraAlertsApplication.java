@@ -10,9 +10,9 @@ import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import io.reflectoring.jiraalerts.application.login.LoginPage;
 import io.reflectoring.jiraalerts.applicationstate.SetupApplicationService;
 import io.reflectoring.jiraalerts.dashboard.DashboardPage;
-import io.reflectoring.jiraalerts.login.LoginPage;
 
 /**
  * Wickets application. Initializes and configures the configuration.

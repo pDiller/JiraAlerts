@@ -1,15 +1,15 @@
-package io.reflectoring.jiraalerts.login;
+package io.reflectoring.jiraalerts.application.login;
+
+import java.io.Serializable;
 
 /**
- * Transferobject for the user.
+ * Transferobject for logindata.
  */
-public class UserDTO {
+class LoginDTO implements Serializable {
 
 	private String username;
 
 	private String password;
-
-	private String salt;
 
 	public String getUsername() {
 		return username;
@@ -25,13 +25,5 @@ public class UserDTO {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
 	}
 }

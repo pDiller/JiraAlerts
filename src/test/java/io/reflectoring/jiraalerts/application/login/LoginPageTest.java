@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.login;
+package io.reflectoring.jiraalerts.application.login;
 
 import static io.reflectoring.jiraalerts.application.ApplicationState.ACTIVE;
 import static org.mockito.Mockito.when;

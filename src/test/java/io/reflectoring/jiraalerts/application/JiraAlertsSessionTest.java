@@ -11,10 +11,10 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.reflectoring.jiraalerts.login.HashService;
-import io.reflectoring.jiraalerts.login.UserDTO;
-import io.reflectoring.jiraalerts.login.UserNotLoggedInException;
-import io.reflectoring.jiraalerts.login.UserService;
+import io.reflectoring.jiraalerts.application.login.HashService;
+import io.reflectoring.jiraalerts.application.login.UserDTO;
+import io.reflectoring.jiraalerts.application.login.UserNotLoggedInException;
+import io.reflectoring.jiraalerts.application.login.UserService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class JiraAlertsSessionTest {

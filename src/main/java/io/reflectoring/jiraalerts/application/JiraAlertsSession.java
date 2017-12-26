@@ -9,10 +9,10 @@ import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.request.Request;
 
-import io.reflectoring.jiraalerts.login.HashService;
-import io.reflectoring.jiraalerts.login.UserDTO;
-import io.reflectoring.jiraalerts.login.UserNotLoggedInException;
-import io.reflectoring.jiraalerts.login.UserService;
+import io.reflectoring.jiraalerts.application.login.HashService;
+import io.reflectoring.jiraalerts.application.login.UserDTO;
+import io.reflectoring.jiraalerts.application.login.UserNotLoggedInException;
+import io.reflectoring.jiraalerts.application.login.UserService;
 
 /**
  * The Session for JiraAlerts.
