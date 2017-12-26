@@ -9,10 +9,7 @@ import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.model.IModel;
 
 import io.reflectoring.jiraalerts.application.state.ApplicationState;
-import io.reflectoring.jiraalerts.dashboard.applicationstate.ConnectApplicationPanel;
-import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraLoginDTO;
-import io.reflectoring.jiraalerts.dashboard.applicationstate.LoggedInApplicationPanel;
-import io.reflectoring.jiraalerts.dashboard.applicationstate.SetupApplicationPanel;
+import io.reflectoring.jiraalerts.dashboard.applicationstate.*;
 
 /**
  * Dashboard-Card for application state.

@@ -4,10 +4,6 @@ import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.mockito.Mockito.*;
 
-import io.reflectoring.jiraalerts.dashboard.applicationstate.InitializeJiraLoginDTOModel;
-import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraConnection;
-import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraConnectionRepository;
-import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraLoginDTO;
 import org.apache.wicket.util.tester.WicketTester;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Before;

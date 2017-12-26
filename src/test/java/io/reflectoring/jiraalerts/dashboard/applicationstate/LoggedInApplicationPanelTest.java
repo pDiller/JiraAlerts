@@ -1,7 +1,5 @@
 package io.reflectoring.jiraalerts.dashboard.applicationstate;
 
-import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraLoginDTO;
-import io.reflectoring.jiraalerts.dashboard.applicationstate.LoggedInApplicationPanel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;

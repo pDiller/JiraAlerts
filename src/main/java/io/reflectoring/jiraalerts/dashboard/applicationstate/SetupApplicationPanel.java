@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 import io.reflectoring.jiraalerts.common.FeedbackPanelErrorClassModifier;
 import io.reflectoring.jiraalerts.common.FormControlPasswordFieldPanel;
 import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
-import io.reflectoring.jiraalerts.dashboard.RerenderApplicationStateCardEventPayload;
 
 /**
  * Panel for initial setup with JIRA. s

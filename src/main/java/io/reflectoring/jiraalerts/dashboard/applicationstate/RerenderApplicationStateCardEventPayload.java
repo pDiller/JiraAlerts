@@ -1,8 +1,9 @@
-package io.reflectoring.jiraalerts.dashboard;
+package io.reflectoring.jiraalerts.dashboard.applicationstate;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
 
 import io.reflectoring.jiraalerts.common.AjaxEventPayload;
+import io.reflectoring.jiraalerts.dashboard.ApplicationStateDashboardCardPanel;
 
 /**
  * Eventpayload for Rerender {@link ApplicationStateDashboardCardPanel}.
