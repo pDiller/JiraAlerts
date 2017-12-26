@@ -21,12 +21,12 @@ import io.reflectoring.jiraalerts.dashboard.DashboardPage;
 /**
  * Provides the login of this application.
  */
-class LoginPage extends BasePage {
+public class LoginPage extends BasePage {
 
 	/**
 	 * Constructor.
 	 */
-	LoginPage() {
+	public LoginPage() {
 
 		FencedFeedbackPanel loginFeedbackPanel = new FencedFeedbackPanel("loginFeedbackPanel", this);
 		loginFeedbackPanel.add(new FeedbackPanelErrorClassModifier());

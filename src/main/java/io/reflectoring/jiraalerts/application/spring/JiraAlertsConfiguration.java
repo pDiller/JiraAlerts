@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.application;
+package io.reflectoring.jiraalerts.application.spring;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;

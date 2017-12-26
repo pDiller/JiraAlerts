@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.application;
+package io.reflectoring.jiraalerts.application.spring;
 
 import static com.google.common.collect.Maps.newHashMap;
 
@@ -12,6 +12,7 @@ import org.springframework.scheduling.quartz.CronTriggerFactoryBean;
 import org.springframework.scheduling.quartz.JobDetailFactoryBean;
 import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
+import io.reflectoring.jiraalerts.application.AutowiringBeanFactory;
 import io.reflectoring.jiraalerts.issuerecognition.IssueRecognitionJob;
 
 /**
