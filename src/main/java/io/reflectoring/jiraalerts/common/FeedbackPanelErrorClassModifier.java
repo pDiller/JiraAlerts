@@ -25,7 +25,7 @@ public class FeedbackPanelErrorClassModifier extends ClassAttributeModifier {
 
 		if (!(component instanceof FeedbackPanel)) {
 			throw new IllegalArgumentException(
-			        format("This behavior should only be added to FeedbackPanels.Can´t add behavior to class '%s'", component.getClass()));
+			        format("This behavior should only be added to FeedbackPanels. Can´t add behavior to class '%s'", component.getClass()));
 		}
 
 		hasErrorMessages = ((FeedbackPanel) component).anyErrorMessage();
