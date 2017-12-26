@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.application;
+package io.reflectoring.jiraalerts.application.testsetup;
 
 import org.apache.wicket.Page;
 import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSession;

@@ -2,7 +2,6 @@ package io.reflectoring.jiraalerts.applicationstate;
 
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
-import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 import org.apache.wicket.util.tester.WicketTester;
@@ -13,7 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.reflectoring.jiraalerts.application.TestApplication;
+import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
 
 @RunWith(MockitoJUnitRunner.class)
 public class InitializeJiraLoginDTOModelTest {

@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.application;
+package io.reflectoring.jiraalerts.application.testsetup;
 
 import org.apache.wicket.application.IComponentInstantiationListener;
 import org.apache.wicket.injection.IFieldValueFactory;

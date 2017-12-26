@@ -14,7 +14,7 @@ import org.apache.wicket.util.tester.FormTester;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Test;
 
-import io.reflectoring.jiraalerts.application.TestApplication;
+import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
 
 public class FormControlPasswordFieldPanelTest {
 

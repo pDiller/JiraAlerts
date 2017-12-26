@@ -16,7 +16,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.reflectoring.jiraalerts.application.TestApplication;
+import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
 import io.reflectoring.jiraalerts.common.FormControlLabelPanel;
 import io.reflectoring.jiraalerts.common.FormControlPasswordFieldPanel;
 

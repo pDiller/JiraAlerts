@@ -3,6 +3,7 @@ package io.reflectoring.jiraalerts.application;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
