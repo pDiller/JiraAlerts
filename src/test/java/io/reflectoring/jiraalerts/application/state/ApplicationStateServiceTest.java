@@ -1,7 +1,7 @@
-package io.reflectoring.jiraalerts.application;
+package io.reflectoring.jiraalerts.application.state;
 
-import static io.reflectoring.jiraalerts.application.ApplicationState.ACTIVE;
-import static io.reflectoring.jiraalerts.application.ApplicationState.NOT_INITIALIZED;
+import static io.reflectoring.jiraalerts.application.state.ApplicationState.ACTIVE;
+import static io.reflectoring.jiraalerts.application.state.ApplicationState.NOT_INITIALIZED;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.Test;

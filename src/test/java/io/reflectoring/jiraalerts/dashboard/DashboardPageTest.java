@@ -1,6 +1,6 @@
 package io.reflectoring.jiraalerts.dashboard;
 
-import static io.reflectoring.jiraalerts.application.ApplicationState.ACTIVE;
+import static io.reflectoring.jiraalerts.application.state.ApplicationState.ACTIVE;
 import static org.mockito.Mockito.when;
 
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
@@ -12,9 +12,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.reflectoring.jiraalerts.application.ApplicationStateService;
 import io.reflectoring.jiraalerts.application.TestApplication;
 import io.reflectoring.jiraalerts.application.TestSession;
+import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.applicationstate.JiraConnectionRepository;
 
 @RunWith(MockitoJUnitRunner.class)

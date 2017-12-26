@@ -1,6 +1,6 @@
 package io.reflectoring.jiraalerts.application.login;
 
-import static io.reflectoring.jiraalerts.application.ApplicationState.ACTIVE;
+import static io.reflectoring.jiraalerts.application.state.ApplicationState.ACTIVE;
 import static org.mockito.Mockito.when;
 
 import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
@@ -15,9 +15,9 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.reflectoring.jiraalerts.application.ApplicationStateService;
 import io.reflectoring.jiraalerts.application.TestApplication;
 import io.reflectoring.jiraalerts.application.TestSession;
+import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.applicationstate.JiraConnectionRepository;
 import io.reflectoring.jiraalerts.common.FormControlPasswordFieldPanel;
 import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;

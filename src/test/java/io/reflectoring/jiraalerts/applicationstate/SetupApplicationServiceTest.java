@@ -1,8 +1,8 @@
 package io.reflectoring.jiraalerts.applicationstate;
 
-import static io.reflectoring.jiraalerts.application.ApplicationState.ACTIVE;
-import static io.reflectoring.jiraalerts.application.ApplicationState.NOT_ACTIVE;
-import static io.reflectoring.jiraalerts.application.ApplicationState.NOT_INITIALIZED;
+import static io.reflectoring.jiraalerts.application.state.ApplicationState.ACTIVE;
+import static io.reflectoring.jiraalerts.application.state.ApplicationState.NOT_ACTIVE;
+import static io.reflectoring.jiraalerts.application.state.ApplicationState.NOT_INITIALIZED;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,7 +26,7 @@ import com.atlassian.jira.rest.client.api.SessionRestClient;
 import com.atlassian.jira.rest.client.api.domain.Session;
 import com.atlassian.util.concurrent.Promise;
 
-import io.reflectoring.jiraalerts.application.ApplicationStateService;
+import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
 
 @RunWith(MockitoJUnitRunner.class)

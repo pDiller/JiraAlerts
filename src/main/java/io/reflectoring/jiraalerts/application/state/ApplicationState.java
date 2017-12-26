@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.application;
+package io.reflectoring.jiraalerts.application.state;
 
 /**
  * The different states for the application.

@@ -1,6 +1,6 @@
 package io.reflectoring.jiraalerts.applicationstate;
 
-import static io.reflectoring.jiraalerts.application.ApplicationState.ACTIVE;
+import static io.reflectoring.jiraalerts.application.state.ApplicationState.ACTIVE;
 
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
@@ -14,8 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.api.RestClientException;
 
-import io.reflectoring.jiraalerts.application.ApplicationState;
-import io.reflectoring.jiraalerts.application.ApplicationStateService;
+import io.reflectoring.jiraalerts.application.state.ApplicationState;
+import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
 
 /**

@@ -8,7 +8,7 @@ import org.apache.wicket.event.IEvent;
 import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.model.IModel;
 
-import io.reflectoring.jiraalerts.application.ApplicationState;
+import io.reflectoring.jiraalerts.application.state.ApplicationState;
 import io.reflectoring.jiraalerts.applicationstate.ConnectApplicationPanel;
 import io.reflectoring.jiraalerts.applicationstate.JiraLoginDTO;
 import io.reflectoring.jiraalerts.applicationstate.LoggedInApplicationPanel;

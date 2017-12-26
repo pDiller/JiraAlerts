@@ -1,6 +1,6 @@
 package io.reflectoring.jiraalerts.dashboard;
 
-import static io.reflectoring.jiraalerts.application.ApplicationState.*;
+import static io.reflectoring.jiraalerts.application.state.ApplicationState.*;
 import static org.mockito.Mockito.mock;
 
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -12,8 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.reflectoring.jiraalerts.application.ApplicationState;
 import io.reflectoring.jiraalerts.application.TestApplication;
+import io.reflectoring.jiraalerts.application.state.ApplicationState;
 import io.reflectoring.jiraalerts.applicationstate.ConnectApplicationPanel;
 import io.reflectoring.jiraalerts.applicationstate.JiraLoginDTO;
 import io.reflectoring.jiraalerts.applicationstate.LoggedInApplicationPanel;

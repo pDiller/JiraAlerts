@@ -1,6 +1,6 @@
-package io.reflectoring.jiraalerts.application;
+package io.reflectoring.jiraalerts.application.state;
 
-import static io.reflectoring.jiraalerts.application.ApplicationState.NOT_INITIALIZED;
+import static io.reflectoring.jiraalerts.application.state.ApplicationState.NOT_INITIALIZED;
 import static java.lang.String.format;
 
 import org.slf4j.Logger;
