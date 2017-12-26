@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import io.reflectoring.jiraalerts.application.login.LoginPage;
-import io.reflectoring.jiraalerts.applicationstate.SetupApplicationService;
+import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.dashboard.DashboardPage;
 
 /**
@@ -24,7 +24,7 @@ public class JiraAlertsApplication extends AuthenticatedWebApplication {
 	private ApplicationContext applicationContext;
 
 	@Inject
-	private SetupApplicationService setupApplicationService;
+	private ApplicationStateService applicationStateService;
 
 	@Override
 	public Class<? extends Page> getHomePage() {
@@ -54,6 +54,6 @@ public class JiraAlertsApplication extends AuthenticatedWebApplication {
 	}
 
 	private void initializeApplicationState() {
-		setupApplicationService.initializeApplicationState();
+		applicationStateService.initializeApplicationState();
 	}
 }

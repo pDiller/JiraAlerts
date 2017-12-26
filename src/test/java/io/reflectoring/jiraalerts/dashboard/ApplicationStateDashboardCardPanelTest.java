@@ -12,8 +12,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
 import io.reflectoring.jiraalerts.application.state.ApplicationState;
+import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
 import io.reflectoring.jiraalerts.applicationstate.ConnectApplicationPanel;
 import io.reflectoring.jiraalerts.applicationstate.JiraLoginDTO;
 import io.reflectoring.jiraalerts.applicationstate.LoggedInApplicationPanel;

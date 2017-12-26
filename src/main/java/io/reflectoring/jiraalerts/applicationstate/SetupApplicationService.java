@@ -4,7 +4,6 @@ import static io.reflectoring.jiraalerts.application.state.ApplicationState.ACTI
 
 import java.net.URISyntaxException;
 import java.net.UnknownHostException;
-import java.util.List;
 
 import javax.inject.Inject;
 
@@ -14,7 +13,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.api.RestClientException;
 
-import io.reflectoring.jiraalerts.application.state.ApplicationState;
 import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
 
@@ -85,15 +83,6 @@ public class SetupApplicationService {
 				throw new SetupApplicationFailedException("There is no JIRA instance for given url", exception);
 			}
 			throw new SetupApplicationFailedException("Setup of application failed", exception);
-		}
-	}
-
-	public void initializeApplicationState() {
-		List<JiraConnection> jiraConnections = jiraConnectionRepository.findAll();
-		if (!jiraConnections.isEmpty()) {
-			applicationStateService.setApplicationState(ApplicationState.NOT_ACTIVE);
-		} else {
-			applicationStateService.setApplicationState(ApplicationState.NOT_INITIALIZED);
 		}
 	}
 }
