@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>JiraAlerts</title>
+</head>
+<body>
+<wicket:panel>
+
+    <p><wicket:message key="card.body.status.text" />
+        <span class="badge badge-warning"><wicket:message key="card.body.status.badge" /></span>
+    </p>
+
+    <p>
+        <wicket:message key="jira.instance.text" />
+    </p>
+
+    <div wicket:id="globalFeedback"></div>
+
+    <form wicket:id="setupForm">
+
+        <div wicket:id="urlLabelPanel"></div>
+        <div wicket:id="usernameLabelPanel"></div>
+        <div wicket:id="passwordInputPanel"></div>
+
+        <button class="btn btn-primary" wicket:id="submitButton">
+            <wicket:message key="setup.submitbutton.text"/>
+        </button>
+    </form>
+</wicket:panel>
+</body>
+</html>

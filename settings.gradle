@@ -1,6 +1,0 @@
-rootProject.name = 'JiraAlerts'
-
-include 'wicket-base'
-include 'integration'
-include 'jira-component'
-include 'iot-controller'

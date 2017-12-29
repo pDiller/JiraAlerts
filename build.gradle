@@ -1,165 +1,70 @@
+ext {
+    encoding = 'UTF-8'
+}
+
 buildscript {
-	ext {
-		springBootVersion = '1.5.4.RELEASE'
-	}
-	repositories {
-		maven {
-			url("https://plugins.gradle.org/m2/")
-		}
-	}
-	dependencies {
-		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-		classpath("gradle.plugin.com.boxfuse.client:flyway-release:4.2.0")
-		classpath "com.diffplug.spotless:spotless-plugin-gradle:3.4.0"
-	}
-}
-plugins{
-	id 'war'
-	id "org.flywaydb.flyway" version "4.2.0"
+    repositories {
+        maven {
+            jcenter()
+            url("https://plugins.gradle.org/m2/")
+        }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("gradle.plugin.com.boxfuse.client:flyway-release:${flyWayVersion}")
+        classpath("org.sonarsource.scanner.gradle:sonarqube-gradle-plugin:${sonarqubeVersion}")
+        classpath("com.diffplug.spotless:spotless-plugin-gradle:${spotlessVersion}")
+    }
 }
 
-allprojects{
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'org.springframework.boot'
 
-	buildscript {
-		repositories {
-			maven {
-				url("https://plugins.gradle.org/m2/")
-			}
-		}
-	}
+group='io.reflectoring.jiraalerts'
+version='0.1.0-SNAPSHOT'
+sourceCompatibility=1.8
 
-	version = '0.0.1-SNAPSHOT'
-	sourceCompatibility = 1.8
-
-	apply plugin: 'java'
-	apply plugin: 'idea'
-	apply plugin: 'org.springframework.boot'
-	apply plugin: 'com.diffplug.gradle.spotless'
-
-	repositories {
-		jcenter()
-	}
-
-	dependencies{
-		testCompile('org.springframework.boot:spring-boot-starter-test')
-		testCompile('org.assertj:assertj-core:3.8.0')
-		testCompile('javax.servlet:javax.servlet-api:3.1.0')
-
-		compile('com.google.guava:guava:20.0')
-		compile('org.apache.wicket:wicket:8.0.0-M6')
-		compile('org.apache.wicket:wicket-spring:8.0.0-M6')
-		compile('org.apache.wicket:wicket-extensions:8.0.0-M6')
-		compile('org.wicketstuff:wicketstuff-lazymodel:8.0.0-M6')
-		compile('de.agilecoders.wicket:wicket-bootstrap-core:2.0.0-M5')
-		compile('org.springframework.boot:spring-boot-starter-data-jpa')
-		compile('org.quartz-scheduler:quartz:2.2.1')
-		compile('org.springframework:spring-context-support:4.3.9.RELEASE')
-		compile('org.springframework.boot:spring-boot-starter-web')
-	}
-
-	idea {
-		module {
-			inheritOutputDirs = true
-			downloadJavadoc = true
-			downloadSources = true
-			outputDir = file('build/classes/main')
-			testOutputDir = file('build/classes/test')
-		}
-	}
-
-	if (plugins.hasPlugin("java")) {
-
-		idea.module.iml {
-			withXml {
-				// mark resource directories as such
-				// cf. https://discuss.gradle.org/t/the-idea-plugin-breaks-the-new-intellij-13-iml-configuration/2456/10
-				def sourceFolder = it.asNode().component.content.sourceFolder
-
-				def mainResourceFolder = sourceFolder.find { it.@url == 'file://$MODULE_DIR$/src/main/resources' }
-				// in case there is no src/main/resources in this module
-				if (mainResourceFolder != null) {
-					def atts = mainResourceFolder.attributes()
-					atts.remove('isTestSource')
-					atts.put('type', 'java-resource')
-				}
-
-				def testResourceFolder = sourceFolder.find { it.@url == 'file://$MODULE_DIR$/src/test/resources' }
-				// in case there is no src/test/resources in this module
-				if (testResourceFolder != null) {
-					def atts = testResourceFolder.attributes()
-					atts.remove('isTestSource')
-					atts.put('type', 'java-test-resource')
-				}
-
-				// spring facet
-				def springFacet = '''<component name="FacetManager">
-				<facet type="Spring" name="Spring">
-				<configuration />
-				</facet>
-			</component>'''
-
-				it.asNode().append((new XmlParser()).parseText(springFacet))
-
-				def disableSpelling = '''<component name="InspectionProjectProfileManager">
-				<profile version="1.0">
-				<option name="myName" value="Project Default" />
-				<inspection_tool class="SpellCheckingInspection" enabled="false" level="TYPO" enabled_by_default="false">
-					<option name="processCode" value="true" />
-					<option name="processLiterals" value="true" />
-					<option name="processComments" value="true" />
-				</inspection_tool>
-				</profile>
-				<option name="PROJECT_PROFILE" value="Project Default" />
-				<option name="USE_PROJECT_PROFILE" value="true" />
-				<version value="1.0" />
-			</component>'''
-				it.asNode().append((new XmlParser()).parseText(disableSpelling))
-			}
-		}
-	}
-
-	spotless {
-		format 'misc', {
-			target '**/*.gradle', '**/*.md', '**/.gitignore'
-
-			trimTrailingWhitespace()
-			indentWithTabs() // or spaces. Takes an integer argument if you don't like 4
-			endWithNewline()
-		}
-	}
+repositories {
+    jcenter()
 }
 
 dependencies {
+    testCompile("org.springframework.boot:spring-boot-starter-test")
+    testCompile("org.assertj:assertj-core:${assertjVersion}")
+    testCompile("javax.servlet:javax.servlet-api:${servletApiVersion}")
 
-	compile('org.flywaydb:flyway-core')
-	compile('org.flywaydb:flyway-core:4.2.0')
-	testCompile(project(':wicket-base'))
-	compile(project(':integration'))
+    compile("org.apache.wicket:wicket:${wicketVersion}")
+    compile("org.apache.wicket:wicket-spring:${wicketVersion}")
+    compile("org.apache.wicket:wicket-auth-roles:${wicketVersion}")
+    compile("org.apache.wicket:wicket-extensions:${wicketVersion}")
+    compile("org.apache.commons:commons-crypto:${apacheCommonsCryptoVersion}")
+    compile("org.wicketstuff:wicketstuff-lazymodel:${wicketVersion}")
 
-	runtime('mysql:mysql-connector-java')
+    compile("org.apache.commons:commons-lang3:${apacheCommonsLang3Version}")
 
-	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
+    compile("org.springframework:spring-context-support:${springContextSupportVersion}")
+    compile("org.springframework.boot:spring-boot-starter-web")
+
+    compile("org.quartz-scheduler:quartz:${quartzVersion}")
+
+    compile("org.flywaydb:flyway-core:${flyWayVersion}")
+
+    compile("com.atlassian.jira:jira-rest-java-client-core:${jiraRestClientVersion}")
+    compile("com.atlassian.fugue:fugue:${atlassianFugueVersion}")
+
+    runtime("mysql:mysql-connector-java")
+
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 }
 
-flyway {
-	url = 'jdbc:mysql://localhost:3306/jiraalerts?serverTimezone=UTC'
-	user = 'root'
-	password = 'root'
-	schemas = ['jiraalerts']
+bootRun {
+    // use raw ressources instead of the output of processResources task
+    addResources = true
 }
 
-idea {
-	project {
-		jdkName = '1.8'
-		languageLevel = '8'
-		vcs = 'Git'
-	}
-}
-
-spotless {
-	java {
-		removeUnusedImports()
-		importOrderFile 'src/main/resources/formatter/spotless.importorder'
-		eclipse().configFile 'src/main/resources/formatter/spotless.eclipse-format.xml'
-	}
-}
+apply from: 'gradle/idea.gradle'
+apply from: 'gradle/formatter.gradle'
+apply from: 'gradle/sass.gradle'
+apply from: 'gradle/sonarqube.gradle'

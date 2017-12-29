@@ -1,0 +1,25 @@
+apply plugin: 'org.sonarqube'
+apply plugin: 'jacoco'
+
+sonarqube {
+    properties {
+        property "sonar.projectName", "JiraAlerts"
+        property "sonar.projectKey", "io.reflectoring.jiraalerts:JiraAlerts-Sonar"
+        property "sonar.host.url", "https://sonarcloud.io"
+        property "sonar.organization", "pdiller-github"
+        property "sonar.login", "6dedb17d06baa59bd81b5e936e192f11526a47b8"
+
+        // exclusions for analyzing
+        property "sonar.exclusions", "**/com/atlassian/jira/**/*"
+
+        // only analyze java code
+        property "sonar.language", "java"
+
+        // Java version used
+        property "sonar.java.source", "1.8"
+        property "sonar.java.target", "1.8"
+
+        // source encoding used
+        property "sonar.sourceEncoding", project.encoding
+    }
+}
