@@ -7,8 +7,8 @@ import io.reflectoring.jiraalerts.common.EnumWithIdType;
  */
 public class RoutineQueryStateType extends EnumWithIdType<RoutineQueryState> {
 
-    @Override
-    public Class<RoutineQueryState> returnedClass() {
-        return RoutineQueryState.class;
-    }
+	@Override
+	public Class<RoutineQueryState> returnedClass() {
+		return RoutineQueryState.class;
+	}
 }

@@ -5,8 +5,8 @@ package io.reflectoring.jiraalerts.common;
  */
 public interface EnumWithId {
 
-    /**
-     * @return should return the ID of enum-constant
-     */
-    int getId();
+	/**
+	 * @return should return the ID of enum-constant
+	 */
+	int getId();
 }
