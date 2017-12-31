@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import io.reflectoring.jiraalerts.application.login.LoginPage;
 import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.dashboard.DashboardPage;
+import io.reflectoring.jiraalerts.dashboard.routine.CreateRoutineQueryPage;
 
 /**
  * Wickets application. Initializes and configures the configuration.
@@ -41,6 +42,7 @@ public class JiraAlertsApplication extends AuthenticatedWebApplication {
 
 		mountPage("login.html", LoginPage.class);
 		mountPage("dashboard.html", DashboardPage.class);
+		mountPage("routine/create.html", CreateRoutineQueryPage.class);
 	}
 
 	@Override

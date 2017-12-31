@@ -6,11 +6,11 @@
 </head>
 <body>
 <wicket:panel>
-    <table wicket:id="routineQueryTable" class="table table-hover table-sm"></table>
-
-    <a wicket:id="createNewRoutineQueryLink" class="btn btn-primary">
-        <wicket:message key="createLink.text"/>
-    </a>
+    <form wicket:id="routineForm">
+        <div wicket:id="routineNamePanel"></div>
+        <div wicket:id="routineJqlPanel"></div>
+        <div wicket:id="routineMinutesPanel"></div>
+    </form>
 </wicket:panel>
 </body>
 </html>

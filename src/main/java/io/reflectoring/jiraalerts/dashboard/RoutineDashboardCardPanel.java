@@ -22,6 +22,6 @@ public class RoutineDashboardCardPanel extends AbstractDashboardCardPanel<Routin
 	public RoutineDashboardCardPanel(String id, IModel<RoutineQueryDTO> model) {
 		super(id, model);
 
-		add(new RoutineQueryTablePanel("routineQueryTablePanel", JiraAlertsSession.get().getUserId()));
+		add(new RoutineQueryTablePanel("routineQueryTablePanel", getModel(), JiraAlertsSession.get().getUserId()));
 	}
 }
