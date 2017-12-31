@@ -22,6 +22,7 @@ import io.reflectoring.jiraalerts.common.FormControlPasswordFieldPanel;
 import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
 import io.reflectoring.jiraalerts.dashboard.DashboardPage;
 import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraConnectionRepository;
+import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class LoginPageTest {
@@ -34,6 +35,9 @@ public class LoginPageTest {
 
 	@Mock
 	private JiraConnectionRepository jiraConnectionRepositoryMock;
+
+	@Mock
+	private RoutineQueryService routineQueryServiceMock;
 
 	private WicketTester wicketTester;
 

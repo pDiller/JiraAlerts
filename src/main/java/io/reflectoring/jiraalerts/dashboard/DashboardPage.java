@@ -9,6 +9,7 @@ import io.reflectoring.jiraalerts.application.state.ApplicationStateModel;
 import io.reflectoring.jiraalerts.base.BasePage;
 import io.reflectoring.jiraalerts.dashboard.applicationstate.InitializeJiraLoginDTOModel;
 import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraLoginDTO;
+import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryDTO;
 
 /**
  * Dashboard for JiraAlerts functions.
@@ -21,7 +22,7 @@ public class DashboardPage extends BasePage {
 	 */
 	public DashboardPage() {
 
-		add(new RoutineDashboardCardPanel("routinePanel", new Model<>()));
+		add(new RoutineDashboardCardPanel("routinePanel", new Model<>(new RoutineQueryDTO())));
 
 		add(new ProfileDashboardCardPanel("profilePanel", new Model<>()));
 

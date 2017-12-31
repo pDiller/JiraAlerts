@@ -2,10 +2,11 @@ package io.reflectoring.jiraalerts.dashboard.routine;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
-
-import io.reflectoring.jiraalerts.application.login.User;
 
 /**
  * Repository for database transactions with {@link RoutineQuery}.
@@ -13,7 +14,9 @@ import io.reflectoring.jiraalerts.application.login.User;
 @Repository
 public interface RoutineQueryRepository extends JpaRepository<RoutineQuery, Long> {
 
-	List<RoutineQuery> findByOwner(User user);
+	@Query("SELECT rq FROM RoutineQuery rq WHERE rq.owner.id = :userId")
+	List<RoutineQuery> findByOwner(@Param("userId") long userId, Pageable pageable);
 
-	int countByOwner(User user);
+	@Query("SELECT count(rq) FROM RoutineQuery rq WHERE rq.owner.id = :userId")
+	int countByOwner(@Param("userId") long userId);
 }

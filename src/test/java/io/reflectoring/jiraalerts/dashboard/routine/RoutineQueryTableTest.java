@@ -1,6 +1,9 @@
-package io.reflectoring.jiraalerts.dashboard;
+package io.reflectoring.jiraalerts.dashboard.routine;
 
-import org.apache.wicket.model.Model;
+import static org.assertj.core.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+import org.apache.wicket.markup.Markup;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,11 +12,11 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
-import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryService;
-import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryTablePanel;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RoutineDashboardCardPanelTest {
+public class RoutineQueryTableTest {
+
+	private static final long USER_ID = 4711;
 
 	@Mock
 	private RoutineQueryService routineQueryServiceMock;
@@ -23,13 +26,11 @@ public class RoutineDashboardCardPanelTest {
 	@Before
 	public void setUp() throws Exception {
 		wicketTester = new WicketTester(new TestApplication(this));
+		wicketTester.startComponentInPage(new RoutineQueryTable("table", USER_ID), Markup.of("<table wicket:id=table></table>"));
 	}
 
 	@Test
-	public void rendersSuccessful() throws Exception {
-		wicketTester.startComponentInPage(new RoutineDashboardCardPanel("panel", new Model<>()));
-
-		wicketTester.assertComponent("panel:routineQueryTablePanel", RoutineQueryTablePanel.class);
+	public void rendersSuccessfull() throws Exception {
+		wicketTester.assertNoErrorMessage();
 	}
-
 }

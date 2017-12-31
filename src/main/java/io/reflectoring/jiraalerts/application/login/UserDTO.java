@@ -5,11 +5,21 @@ package io.reflectoring.jiraalerts.application.login;
  */
 public class UserDTO {
 
+	private long id;
+
 	private String username;
 
 	private String password;
 
 	private String salt;
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 
 	public String getUsername() {
 		return username;

@@ -2,10 +2,14 @@ package io.reflectoring.jiraalerts.dashboard;
 
 import org.apache.wicket.model.IModel;
 
+import io.reflectoring.jiraalerts.application.JiraAlertsSession;
+import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryDTO;
+import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryTablePanel;
+
 /**
  * Dashboard-Card for routines.
  */
-public class RoutineDashboardCardPanel extends AbstractDashboardCardPanel<String> {
+public class RoutineDashboardCardPanel extends AbstractDashboardCardPanel<RoutineQueryDTO> {
 
 	/**
 	 * Constructor.
@@ -15,7 +19,9 @@ public class RoutineDashboardCardPanel extends AbstractDashboardCardPanel<String
 	 * @param model
 	 *            Wicket-Model.
 	 */
-	public RoutineDashboardCardPanel(String id, IModel<String> model) {
+	public RoutineDashboardCardPanel(String id, IModel<RoutineQueryDTO> model) {
 		super(id, model);
+
+		add(new RoutineQueryTablePanel("routineQueryTablePanel", JiraAlertsSession.get().getUserId()));
 	}
 }

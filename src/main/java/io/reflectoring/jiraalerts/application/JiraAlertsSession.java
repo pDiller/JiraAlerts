@@ -4,6 +4,7 @@ import static java.lang.String.format;
 
 import javax.inject.Inject;
 
+import org.apache.wicket.Session;
 import org.apache.wicket.authroles.authentication.AuthenticatedWebSession;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.injection.Injector;
@@ -25,6 +26,8 @@ public class JiraAlertsSession extends AuthenticatedWebSession {
 	@Inject
 	private UserService userService;
 
+	private long userId;
+
 	public JiraAlertsSession(Request request) {
 		super(request);
 		Injector.get().inject(this);
@@ -43,6 +46,7 @@ public class JiraAlertsSession extends AuthenticatedWebSession {
 	private boolean checkPassword(String password, UserDTO loadedUser) {
 		String hashedPassword = hashService.hashPassword(password, loadedUser.getSalt());
 		if (loadedUser.getPassword().equals(hashedPassword)) {
+			this.userId = loadedUser.getId();
 			return true;
 		} else {
 			throw new UserNotLoggedInException(format("Password invalid for username '%s'", loadedUser.getUsername()));
@@ -52,5 +56,22 @@ public class JiraAlertsSession extends AuthenticatedWebSession {
 	@Override
 	public Roles getRoles() {
 		return new Roles("administrator");
+	}
+
+	/**
+	 * Should be used when special methods of {@link JiraAlertsSession} are used. Otherwise use {@link AuthenticatedWebSession#get()} or
+	 * {@link Session#get()}.
+	 *
+	 * @return the casted {@link JiraAlertsSession}.
+	 */
+	public static JiraAlertsSession get() {
+		return ((JiraAlertsSession) Session.get());
+	}
+
+	/**
+	 * @return The Id of the user which is signed in.
+	 */
+	public long getUserId() {
+		return userId;
 	}
 }

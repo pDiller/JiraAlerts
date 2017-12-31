@@ -23,6 +23,7 @@ public class JiraAlertsSessionTest {
 	private static final String TESTNAME = "TestName";
 	private static final String TEST_PASSWORD = "TestPassword";
 	private static final String TEST_SALT = "TestSalt";
+	private static final long TEST_USER_ID = 1337;
 
 	@Mock
 	private UserService userServiceMock;
@@ -85,5 +86,19 @@ public class JiraAlertsSessionTest {
 		testSubject.authenticate(TESTNAME, TEST_PASSWORD);
 
 		assertThat(testSubject.getRoles()).contains("administrator");
+	}
+
+	@Test
+	public void whenAuthenticationIsSuccessfullUserIdIsSet() throws Exception {
+		UserDTO userDTO = new UserDTO();
+		userDTO.setPassword(TEST_PASSWORD);
+		userDTO.setSalt(TEST_SALT);
+		userDTO.setId(TEST_USER_ID);
+		when(userServiceMock.findUserByUsername(TESTNAME)).thenReturn(userDTO);
+		when(hashServiceMock.hashPassword(TEST_PASSWORD, TEST_SALT)).thenReturn(TEST_PASSWORD);
+
+		testSubject.authenticate(TESTNAME, TEST_PASSWORD);
+
+		assertThat(testSubject.getUserId()).isEqualTo(TEST_USER_ID);
 	}
 }

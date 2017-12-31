@@ -5,11 +5,9 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import io.reflectoring.jiraalerts.application.login.User;
-import io.reflectoring.jiraalerts.application.login.UserRepository;
 
 /**
  * Servicemethods for storing and loading the {@link RoutineQuery}.
@@ -19,19 +17,14 @@ import io.reflectoring.jiraalerts.application.login.UserRepository;
 public class RoutineQueryService {
 
 	@Inject
-	private UserRepository userRepository;
-
-	@Inject
 	private RoutineQueryRepository routineQueryRepository;
 
 	public int countRoutineQueriesByUserId(long userId) {
-		User loggedInUser = userRepository.findOne(userId);
-		return routineQueryRepository.countByOwner(loggedInUser);
+		return routineQueryRepository.countByOwner(userId);
 	}
 
-	public List<RoutineQueryDTO> getRoutineQueriesByUserId(long userId) {
-		User loggedInUser = userRepository.findOne(userId);
-		List<RoutineQuery> routineQueries = routineQueryRepository.findByOwner(loggedInUser);
+	public List<RoutineQueryDTO> getRoutineQueriesByUserId(long userId, PageRequest pageRequest) {
+		List<RoutineQuery> routineQueries = routineQueryRepository.findByOwner(userId, pageRequest);
 		return mapAllFromEntityToDTO(routineQueries);
 	}
 
