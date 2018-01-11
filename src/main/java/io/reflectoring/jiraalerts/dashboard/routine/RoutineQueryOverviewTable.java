@@ -30,6 +30,7 @@ public class RoutineQueryOverviewTable extends AjaxFallbackDefaultDataTable<Rout
 	private static List<? extends IColumn<RoutineQueryDTO, String>> createColumns() {
 		List<IColumn<RoutineQueryDTO, String>> columns = new ArrayList<>();
 		columns.add(new PropertyColumn<>(new ResourceModel("routine.table.name.column"), "name", "name"));
+		columns.add(new PropertyColumn<>(new ResourceModel("routine.table.minutes.column"), "minutesForRecognition", "minutesForRecognition"));
 		columns.add(new RoutineStateColumn());
 		return columns;
 	}
