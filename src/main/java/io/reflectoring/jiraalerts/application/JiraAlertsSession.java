@@ -55,7 +55,10 @@ public class JiraAlertsSession extends AuthenticatedWebSession {
 
 	@Override
 	public Roles getRoles() {
-		return new Roles("administrator");
+	    if(isSignedIn()){
+    		return new Roles("administrator");
+        }
+        return null;
 	}
 
 	/**
