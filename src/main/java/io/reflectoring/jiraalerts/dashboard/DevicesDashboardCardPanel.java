@@ -3,9 +3,9 @@ package io.reflectoring.jiraalerts.dashboard;
 import org.apache.wicket.model.IModel;
 
 /**
- * Dashboard-Card for profile.
+ * Dashboard-Card for devices.
  */
-public class ProfileDashboardCardPanel extends AbstractDashboardCardPanel<String> {
+public class DevicesDashboardCardPanel extends AbstractDashboardCardPanel<String> {
 
 	/**
 	 * Constructor.
@@ -15,7 +15,7 @@ public class ProfileDashboardCardPanel extends AbstractDashboardCardPanel<String
 	 * @param model
 	 *            Wicket-Model.
 	 */
-	public ProfileDashboardCardPanel(String id, IModel<String> model) {
+	public DevicesDashboardCardPanel(String id, IModel<String> model) {
 		super(id, model);
 	}
 }

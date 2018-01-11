@@ -42,7 +42,7 @@ public class DashboardPageTest {
 
 		wicketTester.assertRenderedPage(DashboardPage.class);
 		wicketTester.assertComponent("routinePanel", RoutineDashboardCardPanel.class);
-		wicketTester.assertComponent("profilePanel", ProfileDashboardCardPanel.class);
+		wicketTester.assertComponent("devicesPanel", DevicesDashboardCardPanel.class);
 		wicketTester.assertComponent("userManagementPanel", UserManagementDashboardCardPanel.class);
 		wicketTester.assertComponent("applicationStatePanel", ApplicationStateDashboardCardPanel.class);
 	}
