@@ -1,6 +1,6 @@
 package io.reflectoring.jiraalerts.dashboard;
 
-import org.apache.wicket.model.Model;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,7 +9,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
-import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryOverviewTablePanel;
+import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryOverviewTable;
 import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -27,9 +27,10 @@ public class RoutineDashboardCardPanelTest {
 
 	@Test
 	public void rendersSuccessful() throws Exception {
-		wicketTester.startComponentInPage(new RoutineDashboardCardPanel("panel", new Model<>()));
+		wicketTester.startComponentInPage(new RoutineDashboardCardPanel("panel"));
 
-		wicketTester.assertComponent("panel:routineQueryTablePanel", RoutineQueryOverviewTablePanel.class);
+		wicketTester.assertComponent("panel:routineQueryTable", RoutineQueryOverviewTable.class);
+		wicketTester.assertComponent("panel:showAllRoutinesLink", BookmarkablePageLink.class);
 	}
 
 }

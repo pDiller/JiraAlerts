@@ -83,7 +83,7 @@ public class JiraAlertsSessionTest {
 		when(userServiceMock.findUserByUsername(TESTNAME)).thenReturn(userDTO);
 		when(hashServiceMock.hashPassword(TEST_PASSWORD, TEST_SALT)).thenReturn(TEST_PASSWORD);
 
-		testSubject.authenticate(TESTNAME, TEST_PASSWORD);
+		testSubject.signIn(TESTNAME, TEST_PASSWORD);
 
 		assertThat(testSubject.getRoles()).contains("administrator");
 	}
