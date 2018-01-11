@@ -5,7 +5,7 @@ import org.apache.wicket.model.IModel;
 /**
  * Dashboard-Card for devices.
  */
-public class DevicesDashboardCardPanel extends AbstractDashboardCardPanel<String> {
+public class DeviceDashboardCardPanel extends AbstractDashboardCardPanel<String> {
 
 	/**
 	 * Constructor.
@@ -15,7 +15,7 @@ public class DevicesDashboardCardPanel extends AbstractDashboardCardPanel<String
 	 * @param model
 	 *            Wicket-Model.
 	 */
-	public DevicesDashboardCardPanel(String id, IModel<String> model) {
+	public DeviceDashboardCardPanel(String id, IModel<String> model) {
 		super(id, model);
 	}
 }
