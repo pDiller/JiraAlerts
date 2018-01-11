@@ -35,7 +35,7 @@ public class RoutineQueryDataProvider extends SortableDataProvider<RoutineQueryD
 		this.userId = userId;
 		this.rowsPerPage = rowsPerPage;
 		Injector.get().inject(this);
-		setSort("name", SortOrder.DESCENDING);
+		setSort("routineQueryState", SortOrder.DESCENDING);
 	}
 
 	@Override

@@ -11,7 +11,7 @@ import org.apache.wicket.model.ResourceModel;
 /**
  * Table to show the existing routines.
  */
-public class RoutineQueryTable extends AjaxFallbackDefaultDataTable<RoutineQueryDTO, String> {
+public class RoutineQueryOverviewTable extends AjaxFallbackDefaultDataTable<RoutineQueryDTO, String> {
 
 	private static final int ROWS_PER_PAGE = 5;
 
@@ -23,7 +23,7 @@ public class RoutineQueryTable extends AjaxFallbackDefaultDataTable<RoutineQuery
 	 * @param userId
 	 *            the Id of the user which is loggedin.
 	 */
-	public RoutineQueryTable(String id, long userId) {
+	public RoutineQueryOverviewTable(String id, long userId) {
 		super(id, createColumns(), new RoutineQueryDataProvider(userId, ROWS_PER_PAGE), ROWS_PER_PAGE);
 	}
 

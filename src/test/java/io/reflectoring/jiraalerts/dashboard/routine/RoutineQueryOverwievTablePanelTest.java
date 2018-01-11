@@ -14,7 +14,7 @@ import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
 import io.reflectoring.jiraalerts.application.testsetup.TestSession;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RoutineQueryTablePanelTest {
+public class RoutineQueryOverwievTablePanelTest {
 
 	private static final long USER_ID = 1337;
 
@@ -27,19 +27,19 @@ public class RoutineQueryTablePanelTest {
 	public void setUp() throws Exception {
 		wicketTester = new WicketTester(new TestApplication(this));
 		TestSession.get().setRoles(new Roles("administrator"));
-		wicketTester.startComponentInPage(new RoutineQueryTablePanel("panel", Model.of(new RoutineQueryDTO()), USER_ID));
+		wicketTester.startComponentInPage(new RoutineQueryOverwievTablePanel("panel", Model.of(new RoutineQueryDTO()), USER_ID));
 	}
 
 	@Test
 	public void rendersSuccessfull() throws Exception {
-		wicketTester.assertComponent("panel:routineQueryTable", RoutineQueryTable.class);
-		wicketTester.assertComponent("panel:createNewRoutineQueryLink", BookmarkablePageLink.class);
+		wicketTester.assertComponent("panel:routineQueryTable", RoutineQueryOverviewTable.class);
+		wicketTester.assertComponent("panel:showAllRoutinesLink", BookmarkablePageLink.class);
 	}
 
 	@Test
 	public void clickLinkForNewRoutineCreationOpensPage() throws Exception {
-		wicketTester.clickLink("panel:createNewRoutineQueryLink");
+		wicketTester.clickLink("panel:showAllRoutinesLink");
 
-		wicketTester.assertRenderedPage(CreateRoutineQueryPage.class);
+		wicketTester.assertRenderedPage(RoutineQueriesDetailPage.class);
 	}
 }

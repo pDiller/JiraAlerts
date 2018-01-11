@@ -1,8 +1,5 @@
 package io.reflectoring.jiraalerts.dashboard.routine;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
-
 import org.apache.wicket.markup.Markup;
 import org.apache.wicket.util.tester.WicketTester;
 import org.junit.Before;
@@ -14,7 +11,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RoutineQueryTableTest {
+public class RoutineQueryOverviewTableTest {
 
 	private static final long USER_ID = 4711;
 
@@ -26,7 +23,7 @@ public class RoutineQueryTableTest {
 	@Before
 	public void setUp() throws Exception {
 		wicketTester = new WicketTester(new TestApplication(this));
-		wicketTester.startComponentInPage(new RoutineQueryTable("table", USER_ID), Markup.of("<table wicket:id=table></table>"));
+		wicketTester.startComponentInPage(new RoutineQueryOverviewTable("table", USER_ID), Markup.of("<table wicket:id=table></table>"));
 	}
 
 	@Test

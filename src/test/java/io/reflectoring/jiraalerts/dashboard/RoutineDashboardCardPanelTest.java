@@ -9,8 +9,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
+import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryOverwievTablePanel;
 import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryService;
-import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryTablePanel;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RoutineDashboardCardPanelTest {
@@ -29,7 +29,7 @@ public class RoutineDashboardCardPanelTest {
 	public void rendersSuccessful() throws Exception {
 		wicketTester.startComponentInPage(new RoutineDashboardCardPanel("panel", new Model<>()));
 
-		wicketTester.assertComponent("panel:routineQueryTablePanel", RoutineQueryTablePanel.class);
+		wicketTester.assertComponent("panel:routineQueryTablePanel", RoutineQueryOverwievTablePanel.class);
 	}
 
 }

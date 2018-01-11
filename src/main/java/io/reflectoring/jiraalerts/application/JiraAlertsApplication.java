@@ -14,6 +14,7 @@ import io.reflectoring.jiraalerts.application.login.LoginPage;
 import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.dashboard.DashboardPage;
 import io.reflectoring.jiraalerts.dashboard.routine.CreateRoutineQueryPage;
+import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueriesDetailPage;
 
 /**
  * Wickets application. Initializes and configures the configuration.
@@ -42,6 +43,7 @@ public class JiraAlertsApplication extends AuthenticatedWebApplication {
 
 		mountPage("login.html", LoginPage.class);
 		mountPage("dashboard.html", DashboardPage.class);
+		mountPage("routines.html", RoutineQueriesDetailPage.class);
 		mountPage("routine/create.html", CreateRoutineQueryPage.class);
 	}
 
