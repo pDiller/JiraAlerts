@@ -4,7 +4,7 @@ import org.apache.wicket.model.IModel;
 
 import io.reflectoring.jiraalerts.application.JiraAlertsSession;
 import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryDTO;
-import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryOverwievTablePanel;
+import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryOverviewTablePanel;
 
 /**
  * Dashboard-Card for routines.
@@ -22,6 +22,6 @@ public class RoutineDashboardCardPanel extends AbstractDashboardCardPanel<Routin
 	public RoutineDashboardCardPanel(String id, IModel<RoutineQueryDTO> model) {
 		super(id, model);
 
-		add(new RoutineQueryOverwievTablePanel("routineQueryTablePanel", getModel(), JiraAlertsSession.get().getUserId()));
+		add(new RoutineQueryOverviewTablePanel("routineQueryTablePanel", getModel(), JiraAlertsSession.get().getUserId()));
 	}
 }

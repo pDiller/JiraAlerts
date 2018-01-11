@@ -14,7 +14,7 @@ import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
 import io.reflectoring.jiraalerts.application.testsetup.TestSession;
 
 @RunWith(MockitoJUnitRunner.class)
-public class RoutineQueryOverwievTablePanelTest {
+public class RoutineQueryOverviewTablePanelTest {
 
 	private static final long USER_ID = 1337;
 
@@ -27,7 +27,7 @@ public class RoutineQueryOverwievTablePanelTest {
 	public void setUp() throws Exception {
 		wicketTester = new WicketTester(new TestApplication(this));
 		TestSession.get().setRoles(new Roles("administrator"));
-		wicketTester.startComponentInPage(new RoutineQueryOverwievTablePanel("panel", Model.of(new RoutineQueryDTO()), USER_ID));
+		wicketTester.startComponentInPage(new RoutineQueryOverviewTablePanel("panel", Model.of(new RoutineQueryDTO()), USER_ID));
 	}
 
 	@Test

@@ -7,7 +7,7 @@ import org.apache.wicket.model.IModel;
 /**
  * Shows the table for routines and the button to create new routine.
  */
-public class RoutineQueryOverwievTablePanel extends GenericPanel<RoutineQueryDTO> {
+public class RoutineQueryOverviewTablePanel extends GenericPanel<RoutineQueryDTO> {
 
 	/**
 	 * Constructor.
@@ -19,7 +19,7 @@ public class RoutineQueryOverwievTablePanel extends GenericPanel<RoutineQueryDTO
 	 * @param userId
 	 *            the Id of the user which is loggedin.
 	 */
-	public RoutineQueryOverwievTablePanel(String id, IModel<RoutineQueryDTO> routineQueryDTOModel, long userId) {
+	public RoutineQueryOverviewTablePanel(String id, IModel<RoutineQueryDTO> routineQueryDTOModel, long userId) {
 		super(id, routineQueryDTOModel);
 
 		add(new RoutineQueryOverviewTable("routineQueryTable", userId));
