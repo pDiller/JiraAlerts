@@ -26,4 +26,14 @@ public abstract class AbstractDashboardCardPanel<T> extends GenericPanel<T> {
 	public AbstractDashboardCardPanel(String id, IModel<T> model) {
 		super(id, model);
 	}
+
+	/**
+	 * Constructor.
+	 *
+	 * @param id
+	 *            Wicket-ID.
+	 */
+	public AbstractDashboardCardPanel(String id) {
+		super(id);
+	}
 }

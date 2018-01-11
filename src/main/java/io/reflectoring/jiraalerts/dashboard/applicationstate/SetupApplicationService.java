@@ -59,6 +59,7 @@ public class SetupApplicationService {
 			        jiraLoginDTO.getPassword());
 			loginToJira(jiraRestClient);
 			applicationStateService.setApplicationState(ACTIVE);
+			applicationStateService.setJiraPassword(jiraLoginDTO.getPassword());
 		} catch (URISyntaxException e) {
 			throw new SetupApplicationFailedException("The given url is not valid", e);
 		}

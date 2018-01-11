@@ -6,7 +6,11 @@
 </head>
 <body>
 <wicket:extend>
-    <a class="btn btn-primary" href="#" role="button">Some Button</a>
+    <table wicket:id="routineQueryTable" class="table table-hover table-sm"></table>
+
+    <a wicket:id="showAllRoutinesLink" class="btn btn-primary">
+        <wicket:message key="showAllRoutinesLink.text"/>
+    </a>
 </wicket:extend>
 </body>
 </html>
