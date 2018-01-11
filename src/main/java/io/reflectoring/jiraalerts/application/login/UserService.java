@@ -24,6 +24,7 @@ public class UserService {
 		User user = userRepository.findByUsername(username);
 		if (user != null) {
 			UserDTO userDTO = new UserDTO();
+			userDTO.setId(user.getId());
 			userDTO.setUsername(user.getUsername());
 			userDTO.setPassword(user.getPassword());
 			userDTO.setSalt(user.getSalt());

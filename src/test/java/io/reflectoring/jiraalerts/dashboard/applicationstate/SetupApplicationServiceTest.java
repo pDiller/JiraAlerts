@@ -211,6 +211,13 @@ public class SetupApplicationServiceTest {
 	}
 
 	@Test
+	public void jiraPasswordIsStoredWhenLoginIsSuccessFull() {
+		testSubject.setupApplicaton(jiraLoginDTO);
+
+		verify(applicationStateServiceMock).setJiraPassword(TEST_PASSWORD);
+	}
+
+	@Test
 	public void applicationStateIsSetToActiveOnActivation() throws Exception {
 		testSubject.activateApplicaton(jiraLoginDTO);
 

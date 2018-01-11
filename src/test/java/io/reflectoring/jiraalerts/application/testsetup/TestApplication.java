@@ -5,9 +5,7 @@ import org.apache.wicket.authroles.authentication.AbstractAuthenticatedWebSessio
 import org.apache.wicket.authroles.authentication.AuthenticatedWebApplication;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.mock.MockHomePage;
-import org.springframework.stereotype.Component;
 
-@Component
 public class TestApplication extends AuthenticatedWebApplication {
 
 	private final Object mockRepositoryObject;
