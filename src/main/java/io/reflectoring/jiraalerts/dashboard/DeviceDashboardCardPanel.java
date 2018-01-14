@@ -2,7 +2,9 @@ package io.reflectoring.jiraalerts.dashboard;
 
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 
+import io.reflectoring.jiraalerts.application.JiraAlertsSession;
 import io.reflectoring.jiraalerts.dashboard.device.DeviceDetailPage;
+import io.reflectoring.jiraalerts.dashboard.device.DeviceOverviewTable;
 
 /**
  * Dashboard-Card for devices.
@@ -18,9 +20,8 @@ public class DeviceDashboardCardPanel extends AbstractDashboardCardPanel<Void> {
 	public DeviceDashboardCardPanel(String id) {
 		super(id);
 
-		// TODO table
+		add(new DeviceOverviewTable("deviceTable", JiraAlertsSession.get().getUserId()));
 
-		// TODO correct page
 		add(new BookmarkablePageLink<>("showAllDevicesLink", DeviceDetailPage.class));
 	}
 }
