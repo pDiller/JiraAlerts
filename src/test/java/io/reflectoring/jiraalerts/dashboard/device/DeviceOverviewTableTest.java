@@ -16,7 +16,7 @@ public class DeviceOverviewTableTest {
 	private static final long USER_ID = 4711;
 
 	@Mock
-	private DeviceDataProvider deviceDataProviderMock;
+	private DeviceService deviceServiceMock;
 
 	private WicketTester wicketTester;
 
