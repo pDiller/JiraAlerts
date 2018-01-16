@@ -14,7 +14,7 @@ import io.reflectoring.jiraalerts.dashboard.routine.RoutineQuery;
 @Entity
 @Table(name = "IOT_ACTION", uniqueConstraints = { @UniqueConstraint(columnNames = { "DEVICE_ID", "PRIORITY" }) })
 @IdClass(IoTAction.IoTActionId.class)
-public class IoTAction {
+public class IoTAction implements Serializable {
 
 	@Id
 	@JoinColumn(name = "ROUTINE_QUERY_ID", updatable = false, nullable = false)

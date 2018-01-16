@@ -2,6 +2,8 @@ package io.reflectoring.jiraalerts.dashboard.device;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
@@ -16,7 +18,7 @@ import io.reflectoring.jiraalerts.application.login.User;
 @Entity
 @Table(name = "DEVICE")
 @TypeDefs(@TypeDef(typeClass = DeviceTypeDef.class, name = "deviceTypeDef"))
-public class Device {
+public class Device implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

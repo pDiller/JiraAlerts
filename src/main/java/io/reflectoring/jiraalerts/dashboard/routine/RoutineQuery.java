@@ -2,6 +2,8 @@ package io.reflectoring.jiraalerts.dashboard.routine;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 import org.hibernate.annotations.Type;
@@ -16,7 +18,7 @@ import io.reflectoring.jiraalerts.application.login.User;
 @Entity
 @Table(name = "ROUTINE_QUERY")
 @TypeDefs(@TypeDef(typeClass = RoutineQueryStateType.class, name = "routineQueryStateType"))
-public class RoutineQuery {
+public class RoutineQuery implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)
