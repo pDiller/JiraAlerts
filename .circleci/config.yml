@@ -2,7 +2,10 @@ version: 2
 jobs:
   test:
     docker:
-      - image: circleci/classic:latest
+      - image: circleci/openjdk:8-jdk-browsers
+      working_directory: ~/JiraAlerts
+          environment:
+            JVM_OPTS: -Xmx3200m
     steps:
       - checkout
       - run: ./gradlew check
