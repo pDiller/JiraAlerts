@@ -6,11 +6,11 @@ jobs:
     steps:
       - checkout
       - run:
-        name: test
-        command: ./gradlew check
+          name: test
+          command: ./gradlew check
       - run:
-        name: analyze
-        command: if ["$CIRCLE_PR_NUMBER" = "" ]; then ./gradlew sonarqube -Dsonar.organization=$SONAR_ORG -Dsonar.projectName=$SONAR_PROJECT_NAME -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.projectKey=SONAR_PROJECT_KEY -Dsonar.login=$SONAR_LOGIN
+          name: analyze
+          command: if ["$CIRCLE_PR_NUMBER" = "" ]; then ./gradlew sonarqube -Dsonar.organization=$SONAR_ORG -Dsonar.projectName=$SONAR_PROJECT_NAME -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.projectKey=SONAR_PROJECT_KEY -Dsonar.login=$SONAR_LOGIN
 
 workflows:
   version: 2
