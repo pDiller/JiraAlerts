@@ -11,4 +11,5 @@
     <DEVICE ID="6" NAME="Device6" URL="url6" TYPE="1" OWNER="2"/>
 
     <ROUTINE_QUERY />
+    <IOT_ACTION />
 </dataset>

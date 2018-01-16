@@ -11,4 +11,5 @@
     <ROUTINE_QUERY ID="6" NAME="Routine6" JQL="jql6" MINUTES_FOR_RECOGNITION="10" ROUTINE_QUERY_STATE="2" OWNER="2"/>
 
     <DEVICE />
+    <IOT_ACTION />
 </dataset>

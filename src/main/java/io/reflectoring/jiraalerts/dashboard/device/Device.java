@@ -11,7 +11,7 @@ import org.hibernate.annotations.TypeDefs;
 import io.reflectoring.jiraalerts.application.login.User;
 
 /**
- * Entity for the query-part of the Routines.
+ * Entity for Devices.
  */
 @Entity
 @Table(name = "DEVICE")
