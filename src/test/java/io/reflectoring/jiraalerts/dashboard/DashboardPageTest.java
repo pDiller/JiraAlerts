@@ -16,6 +16,7 @@ import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
 import io.reflectoring.jiraalerts.application.testsetup.TestSession;
 import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraConnectionRepository;
+import io.reflectoring.jiraalerts.dashboard.device.DeviceService;
 import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryService;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -29,6 +30,9 @@ public class DashboardPageTest {
 
 	@Mock
 	private RoutineQueryService routineQueryServiceMock;
+
+	@Mock
+	private DeviceService deviceServiceMock;
 
 	private WicketTester wicketTester;
 
@@ -46,7 +50,7 @@ public class DashboardPageTest {
 
 		wicketTester.assertRenderedPage(DashboardPage.class);
 		wicketTester.assertComponent("routinePanel", RoutineDashboardCardPanel.class);
-		wicketTester.assertComponent("profilePanel", ProfileDashboardCardPanel.class);
+		wicketTester.assertComponent("devicePanel", DeviceDashboardCardPanel.class);
 		wicketTester.assertComponent("userManagementPanel", UserManagementDashboardCardPanel.class);
 		wicketTester.assertComponent("applicationStatePanel", ApplicationStateDashboardCardPanel.class);
 	}
