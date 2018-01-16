@@ -11,7 +11,7 @@ jobs:
       - run:
           name: analyze
           command: |
-                  ./gradlew sonarqube -Dsonar.organization=$SONAR_ORG -Dsonar.projectName=$SONAR_PROJECT_NAME -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.projectKey=SONAR_PROJECT_KEY -Dsonar.login=$SONAR_LOGIN
+                   ./gradlew sonarqube -Dsonar.organization=$SONAR_ORG -Dsonar.projectName=$SONAR_PROJECT_NAME -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.projectKey=SONAR_PROJECT_KEY -Dsonar.login=$SONAR_LOGIN
 
 workflows:
   version: 2
