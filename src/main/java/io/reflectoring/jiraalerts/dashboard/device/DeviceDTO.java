@@ -11,7 +11,9 @@ public class DeviceDTO implements Serializable {
 
 	private String name;
 
-	private String type;
+	private String url;
+
+	private DeviceType type;
 
 	public long getId() {
 		return id;
@@ -29,11 +31,19 @@ public class DeviceDTO implements Serializable {
 		this.name = name;
 	}
 
-	public String getType() {
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public DeviceType getType() {
 		return type;
 	}
 
-	public void setType(String type) {
+	public void setType(DeviceType type) {
 		this.type = type;
 	}
 }
