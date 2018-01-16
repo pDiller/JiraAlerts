@@ -8,9 +8,9 @@ import org.apache.wicket.extensions.markup.html.repeater.data.table.IColumn;
 import org.apache.wicket.extensions.markup.html.repeater.data.table.PropertyColumn;
 import org.apache.wicket.model.ResourceModel;
 
-public class RoutineQueryDetailsTable extends AjaxFallbackDefaultDataTable<RoutineQueryDTO, String> {
+class RoutineQueryDetailsTable extends AjaxFallbackDefaultDataTable<RoutineQueryDTO, String> {
 
-	private static final int ROWS_PER_PAGE = 12;
+	private static final int ROWS_PER_PAGE = 10;
 
 	/**
 	 * Constructor.
@@ -20,7 +20,7 @@ public class RoutineQueryDetailsTable extends AjaxFallbackDefaultDataTable<Routi
 	 * @param userId
 	 *            the Id of the user which is loggedin.
 	 */
-	public RoutineQueryDetailsTable(String id, long userId) {
+	RoutineQueryDetailsTable(String id, long userId) {
 		super(id, createColumns(), new RoutineQueryDataProvider(userId, ROWS_PER_PAGE), ROWS_PER_PAGE);
 	}
 

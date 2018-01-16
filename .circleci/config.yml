@@ -1,0 +1,20 @@
+version: 2
+jobs:
+  test_analyze:
+    docker:
+      - image: circleci/openjdk:8-jdk-browsers
+    steps:
+      - checkout
+      - run:
+          name: test
+          command: ./gradlew check
+      - run:
+          name: analyze
+          command: |
+                    ./gradlew sonarqube -Dsonar.organization=$SONAR_ORG -Dsonar.projectName=$SONAR_PROJECT_NAME -Dsonar.host.url=$SONAR_HOST_URL -Dsonar.projectKey=SONAR_PROJECT_KEY -Dsonar.login=$SONAR_LOGIN
+
+workflows:
+  version: 2
+  test_analyze:
+    jobs:
+      - test_analyze
