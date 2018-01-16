@@ -1,5 +1,7 @@
 package io.reflectoring.jiraalerts.dashboard.device;
 
+import java.util.ResourceBundle;
+
 import io.reflectoring.jiraalerts.common.EnumWithId;
 
 /**
@@ -7,7 +9,8 @@ import io.reflectoring.jiraalerts.common.EnumWithId;
  */
 public enum DeviceType implements EnumWithId {
 
-	RAITO4RPI(0), PHILIPS_HUE(1);
+	RAITO4RPI(0), //
+	PHILIPS_HUE(1);
 
 	private final int id;
 
@@ -18,5 +21,10 @@ public enum DeviceType implements EnumWithId {
 	@Override
 	public int getId() {
 		return id;
+	}
+
+	@Override
+	public String toString() {
+		return ResourceBundle.getBundle(getClass().getName()).getString(name());
 	}
 }

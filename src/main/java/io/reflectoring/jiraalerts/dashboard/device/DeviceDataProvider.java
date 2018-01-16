@@ -35,7 +35,7 @@ public class DeviceDataProvider extends SortableDataProvider<DeviceDTO, String> 
 		this.userId = userId;
 		this.rowsPerPage = rowsPerPage;
 		Injector.get().inject(this);
-		setSort("name", SortOrder.DESCENDING);
+		setSort("name", SortOrder.ASCENDING);
 	}
 
 	@Override
