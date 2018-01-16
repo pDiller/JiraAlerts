@@ -5,14 +5,11 @@ sonarqube {
     properties {
         // exclusions for analyzing
         property "sonar.exclusions", "**/com/atlassian/jira/**/*"
-
         // only analyze java code
         property "sonar.language", "java"
-
         // Java version used
         property "sonar.java.source", "1.8"
         property "sonar.java.target", "1.8"
-
         // source encoding used
         property "sonar.sourceEncoding", project.encoding
     }
