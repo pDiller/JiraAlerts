@@ -5,7 +5,7 @@ import io.reflectoring.jiraalerts.common.EnumWithIdType;
 /**
  * Type definition for mapping {@link DeviceType} to expected {@link org.hibernate.usertype.UserType}.
  */
-public class DeviceTypeDef extends EnumWithIdType<DeviceType> {
+public class DeviceTypeUserType extends EnumWithIdType<DeviceType> {
 
 	@Override
 	public Class<DeviceType> returnedClass() {

@@ -17,7 +17,7 @@ import io.reflectoring.jiraalerts.application.login.User;
  */
 @Entity
 @Table(name = "DEVICE")
-@TypeDefs(@TypeDef(typeClass = DeviceTypeDef.class, name = "deviceTypeDef"))
+@TypeDefs(@TypeDef(typeClass = DeviceTypeUserType.class, name = "deviceTypeUserType"))
 public class Device implements Serializable {
 
 	@Id
@@ -32,7 +32,7 @@ public class Device implements Serializable {
 	private String url;
 
 	@Column(name = "TYPE", nullable = false)
-	@Type(type = "deviceTypeDef")
+	@Type(type = "deviceTypeUserType")
 	private DeviceType type;
 
 	@ManyToOne(fetch = FetchType.LAZY)
