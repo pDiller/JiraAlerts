@@ -31,7 +31,7 @@ public class IoTAction implements Serializable {
 	private Blob action;
 
 	@Column(name = "PRIORITY", nullable = false)
-	private long priority;
+	private int priority;
 
 	public RoutineQuery getRoutineQuery() {
 		return routineQuery;
@@ -57,11 +57,11 @@ public class IoTAction implements Serializable {
 		this.action = action;
 	}
 
-	public long getPriority() {
+	public int getPriority() {
 		return priority;
 	}
 
-	public void setPriority(long priority) {
+	public void setPriority(int priority) {
 		this.priority = priority;
 	}
 
