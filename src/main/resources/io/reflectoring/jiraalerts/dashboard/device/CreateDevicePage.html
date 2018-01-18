@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>JiraAlerts</title>
+</head>
+<body>
+<wicket:extend>
+
+    <div class="container mt-5">
+        <div class="row d-flex justify-content-center">
+            <div class="col-lg-10 offset-lg-3">
+                <div class="card">
+
+                    <div class="card-body">
+
+                        <h4 class="card-title">
+                            <wicket:message key="create.device.title.text"/>
+                        </h4>
+
+                        <p class="card-text">
+                            <wicket:message key="create.device.instruction.text"/>
+                        </p>
+                        <form wicket:id="createDeviceForm">
+                            <div wicket:id="devicePanel"></div>
+
+                            <button class="btn btn-primary" wicket:id="submitButton">
+                                <wicket:message key="device.create.submitbutton.text"/>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</wicket:extend>
+</body>
+</html>
