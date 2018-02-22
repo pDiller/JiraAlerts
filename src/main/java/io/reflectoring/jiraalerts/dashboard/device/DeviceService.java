@@ -9,6 +9,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import io.reflectoring.jiraalerts.application.login.User;
+
 /**
  * Service methods for storing and loading a {@link Device}.
  */
@@ -42,6 +44,22 @@ public class DeviceService {
 		return deviceRepository.countByOwner(userId);
 	}
 
+	/**
+	 * Saves the device in the database.
+	 *
+	 * @param device
+	 *            the device to save.
+	 * @param userId
+	 *            the Id of the user to whom the device belongs to.
+	 */
+	public void createDevice(DeviceDTO device, long userId) {
+		Device entity = mapFromDTOToEntity(device);
+		User owner = new User();
+		owner.setId(userId);
+		entity.setOwner(owner);
+		deviceRepository.save(entity);
+	}
+
 	private List<DeviceDTO> mapAllFromEntityToDTO(List<Device> devices) {
 		List<DeviceDTO> deviceDTOs = new ArrayList<>();
 		devices.forEach(device -> deviceDTOs.add(mapFromEntityToDTO(device)));
@@ -55,6 +73,15 @@ public class DeviceService {
 		deviceDTO.setUrl(device.getUrl());
 		deviceDTO.setType(device.getType());
 		return deviceDTO;
+	}
+
+	private Device mapFromDTOToEntity(DeviceDTO device) {
+		Device entity = new Device();
+		entity.setId(device.getId());
+		entity.setName(device.getName());
+		entity.setUrl(device.getUrl());
+		entity.setType(device.getType());
+		return entity;
 	}
 
 }

@@ -23,7 +23,7 @@ public class CreateDevicePageTest {
 	}
 
 	@Test
-	public void rendersSuccessfull() throws Exception {
+	public void rendersSuccessfully() throws Exception {
 		wicketTester.assertComponent("createDeviceForm", Form.class);
 		wicketTester.assertComponent("createDeviceForm:devicePanel", DevicePanel.class);
 		wicketTester.assertComponent("createDeviceForm:submitButton", AjaxFallbackButton.class);

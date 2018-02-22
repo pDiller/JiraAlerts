@@ -11,6 +11,7 @@ import java.util.List;
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
@@ -77,6 +78,27 @@ public class DeviceServiceTest {
 		softAssertions.assertThat(deviceDTOs.get(0).getName()).isEqualTo(DEVICE_NAME);
 		softAssertions.assertThat(deviceDTOs.get(0).getUrl()).isEqualTo(DEVICE_URL);
 		softAssertions.assertThat(deviceDTOs.get(0).getType()).isEqualTo(DEVICE_TYPE);
+		softAssertions.assertAll();
+	}
+
+	@Test
+	public void createDeviceCallsSaveOnRepository() {
+		DeviceDTO deviceDTO = new DeviceDTO();
+		deviceDTO.setId(DEVICE_ID);
+		deviceDTO.setName(DEVICE_NAME);
+		deviceDTO.setType(RAITO4RPI);
+		deviceDTO.setUrl(DEVICE_URL);
+
+		testSubject.createDevice(deviceDTO, USER_ID);
+
+		ArgumentCaptor<Device> deviceArgumentCaptor = ArgumentCaptor.forClass(Device.class);
+		verify(deviceRepositoryMock).save(deviceArgumentCaptor.capture());
+		SoftAssertions softAssertions = new SoftAssertions();
+		softAssertions.assertThat(deviceArgumentCaptor.getValue().getId()).isEqualTo(DEVICE_ID);
+		softAssertions.assertThat(deviceArgumentCaptor.getValue().getName()).isEqualTo(DEVICE_NAME);
+		softAssertions.assertThat(deviceArgumentCaptor.getValue().getType()).isEqualTo(DEVICE_TYPE);
+		softAssertions.assertThat(deviceArgumentCaptor.getValue().getUrl()).isEqualTo(DEVICE_URL);
+		softAssertions.assertThat(deviceArgumentCaptor.getValue().getOwner().getId()).isEqualTo(USER_ID);
 		softAssertions.assertAll();
 	}
 }
