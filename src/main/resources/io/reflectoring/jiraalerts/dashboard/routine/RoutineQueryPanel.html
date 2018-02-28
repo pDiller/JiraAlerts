@@ -7,9 +7,32 @@
 <body>
 <wicket:panel>
     <form wicket:id="routineForm">
-        <div wicket:id="routineNamePanel"></div>
-        <div wicket:id="routineJqlPanel"></div>
-        <div wicket:id="routineMinutesPanel"></div>
+        <div class="row">
+            <div class="col-10">
+                <div wicket:id="routineNamePanel"></div>
+            </div>
+        </div>
+        <form wicket:id="jqlForm">
+            <div class="row">
+                <div class="col-10">
+                    <div wicket:id="routineJqlPanel"></div>
+                </div>
+                <div class="col-1">
+                    <button wicket:id="checkJqlLink" class="btn btn-outline-primary">
+                        <wicket:message key="routine.jql.test.text"/>
+                    </button>
+                </div>
+                <div class="col-1">
+                    <div wicket:id="successIcon" class="fa fa-check-circle-o fa-2x text-success pt-1"></div>
+                    <div wicket:id="failIcon" class="fa fa-times fa-2x text-danger pt-1"></div>
+                </div>
+            </div>
+        </form>
+        <div class="row">
+            <div class="col-10">
+                <div wicket:id="routineMinutesPanel"></div>
+            </div>
+        </div>
     </form>
 </wicket:panel>
 </body>

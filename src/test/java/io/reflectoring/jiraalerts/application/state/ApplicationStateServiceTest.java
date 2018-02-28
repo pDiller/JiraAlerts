@@ -24,7 +24,7 @@ public class ApplicationStateServiceTest {
 	private JiraConnectionRepository jiraConnectionRepositoryMock;
 
 	@InjectMocks
-	private ApplicationStateService testSubject = new ApplicationStateService();
+	private ApplicationStateService testSubject;
 
 	@Test
 	public void onDefaultApplicationStateIsNotInitialized() throws Exception {

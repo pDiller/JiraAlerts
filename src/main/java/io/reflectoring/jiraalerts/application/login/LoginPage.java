@@ -42,14 +42,11 @@ public class LoginPage extends BasePage {
 
 			@Override
 			protected void onError(Optional<AjaxRequestTarget> targetOptional) {
-				super.onError(targetOptional);
 				targetOptional.ifPresent(target -> target.add(LoginPage.this));
 			}
 
 			@Override
 			protected void onSubmit(Optional<AjaxRequestTarget> target) {
-				super.onSubmit(target);
-
 				LoginDTO loginDTO = loginForm.getModelObject();
 				String username = loginDTO.getUsername().toLowerCase();
 				String password = loginDTO.getPassword().toLowerCase();
