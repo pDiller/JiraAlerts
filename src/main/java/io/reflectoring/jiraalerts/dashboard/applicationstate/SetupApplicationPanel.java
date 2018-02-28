@@ -56,13 +56,11 @@ public class SetupApplicationPanel extends GenericPanel<JiraLoginDTO> {
 
 			@Override
 			protected void onError(Optional<AjaxRequestTarget> targetOptional) {
-				super.onError(targetOptional);
 				targetOptional.ifPresent(target -> target.add(SetupApplicationPanel.this));
 			}
 
 			@Override
 			protected void onSubmit(Optional<AjaxRequestTarget> targetOptional) {
-				super.onSubmit(targetOptional);
 				setupJiraConnection(SetupApplicationPanel.this.getModelObject(), targetOptional);
 			}
 		});

@@ -20,5 +20,6 @@ public class RoutineQueriesDetailPage extends BasePage {
 		add(new RoutineQueryDetailsTable("routineQueriesTable", JiraAlertsSession.get().getUserId()));
 
 		add(new BookmarkablePageLink<>("backToDashboardLink", DashboardPage.class));
+		add(new BookmarkablePageLink<>("createRoutineQueryLink", CreateRoutineQueryPage.class));
 	}
 }

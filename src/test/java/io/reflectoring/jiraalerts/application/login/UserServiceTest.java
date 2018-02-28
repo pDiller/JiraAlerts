@@ -18,7 +18,7 @@ public class UserServiceTest {
 	private UserRepository userRepositoryMock;
 
 	@InjectMocks
-	private UserService testSubject = new UserService();
+	private UserService testSubject;
 
 	@Test
 	public void returnsUserDTOWhenRepositoryFindsUser() throws Exception {

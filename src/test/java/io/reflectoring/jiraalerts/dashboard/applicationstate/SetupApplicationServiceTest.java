@@ -54,7 +54,7 @@ public class SetupApplicationServiceTest {
 	private Session session;
 
 	@InjectMocks
-	private SetupApplicationService testSubject = new SetupApplicationService();
+	private SetupApplicationService testSubject;
 
 	private JiraLoginDTO jiraLoginDTO;
 
