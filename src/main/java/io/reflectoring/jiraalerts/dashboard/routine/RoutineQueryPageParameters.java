@@ -6,4 +6,6 @@ package io.reflectoring.jiraalerts.dashboard.routine;
 class RoutineQueryPageParameters {
 
 	public static final String ROUTINE_ID = "id";
+
+	private RoutineQueryPageParameters() {}
 }

@@ -88,7 +88,7 @@ public class RoutineQueryService {
 		User user = checkifUserExists(userId);
 
 		RoutineQuery routineQuery = new RoutineQuery();
-		routineQuery = mapFromDTOToEntity(routineQueryDTO, routineQuery, user);
+		mapFromDTOToEntity(routineQueryDTO, routineQuery, user);
 
 		routineQueryRepository.saveAndFlush(routineQuery);
 	}
@@ -101,11 +101,11 @@ public class RoutineQueryService {
 		return user;
 	}
 
-	private RoutineQuery mapFromDTOToEntity(RoutineQueryDTO routineQueryDTO, RoutineQuery routineQuery) {
-		return mapFromDTOToEntity(routineQueryDTO, routineQuery, null);
+	private void mapFromDTOToEntity(RoutineQueryDTO routineQueryDTO, RoutineQuery routineQuery) {
+		mapFromDTOToEntity(routineQueryDTO, routineQuery, null);
 	}
 
-	private RoutineQuery mapFromDTOToEntity(RoutineQueryDTO routineQueryDTO, RoutineQuery routineQuery, User user) {
+	private void mapFromDTOToEntity(RoutineQueryDTO routineQueryDTO, RoutineQuery routineQuery, User user) {
 		if (routineQueryDTO.getId() != null) {
 			routineQuery.setId(routineQueryDTO.getId());
 		}
@@ -121,8 +121,6 @@ public class RoutineQueryService {
 		routineQuery.setName(routineQueryDTO.getName());
 		routineQuery.setJql(routineQueryDTO.getJqlString());
 		routineQuery.setMinutesForRecognition(routineQueryDTO.getMinutesForRecognition());
-
-		return routineQuery;
 	}
 
 	/**
@@ -169,7 +167,7 @@ public class RoutineQueryService {
 
 		RoutineQuery routineQueryForUpdate = routineQueryRepository.findOne(routineQueryDTO.getId());
 
-		routineQueryForUpdate = mapFromDTOToEntity(routineQueryDTO, routineQueryForUpdate);
+		mapFromDTOToEntity(routineQueryDTO, routineQueryForUpdate);
 
 		routineQueryRepository.saveAndFlush(routineQueryForUpdate);
 	}
