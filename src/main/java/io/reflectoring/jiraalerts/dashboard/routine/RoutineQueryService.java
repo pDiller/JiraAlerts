@@ -2,6 +2,7 @@ package io.reflectoring.jiraalerts.dashboard.routine;
 
 import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.NOT_ACTIVE;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -89,13 +90,23 @@ public class RoutineQueryService {
 		}
 
 		RoutineQuery routineQuery = new RoutineQuery();
+		routineQuery = mapFromDTOToEntity(routineQueryDTO, routineQuery, user);
+
+		routineQueryRepository.saveAndFlush(routineQuery);
+	}
+
+	private RoutineQuery mapFromDTOToEntity(RoutineQueryDTO routineQueryDTO, RoutineQuery routineQuery, User user) {
+		if (routineQueryDTO.getId() != null) {
+			routineQuery.setId(routineQueryDTO.getId());
+		}
+
 		routineQuery.setName(routineQueryDTO.getName());
 		routineQuery.setJql(routineQueryDTO.getJqlString());
 		routineQuery.setMinutesForRecognition(routineQueryDTO.getMinutesForRecognition());
 		routineQuery.setRoutineQueryState(NOT_ACTIVE);
 		routineQuery.setOwner(user);
 
-		routineQueryRepository.save(routineQuery);
+		return routineQuery;
 	}
 
 	/**
@@ -114,5 +125,34 @@ public class RoutineQueryService {
 		} catch (Exception exception) {
 			throw new CheckJqlException("Jql check failed. Nested exception:", exception);
 		}
+	}
+
+	/**
+	 * Loads a RoutineQueryDTO by the given routineQueryId.
+	 * 
+	 * @param routineQueryId
+	 *            the Id which is used to load the RoutineQuery.
+	 * @throws IllegalArgumentException
+	 *             when no entity is found.
+	 */
+	public RoutineQueryDTO loadRoutineQueryDTOById(long routineQueryId) {
+		RoutineQuery routineQuery = routineQueryRepository.findOne(routineQueryId);
+		if (routineQuery != null) {
+			return mapFromEntityToDTO(routineQuery);
+		}
+		throw new IllegalArgumentException(MessageFormat.format("Error on loading RoutineQuery with id {0}", routineQueryId));
+	}
+
+	public void updateRoutineQuery(RoutineQueryDTO routineQueryDTO, long userId) {
+		User user = userRepository.findOne(userId);
+		if (user == null) {
+			throw new UnauthorizedActionException(String.format("There is no user with Id %s", userId));
+		}
+
+		RoutineQuery routineQueryForUpdate = routineQueryRepository.findOne(routineQueryDTO.getId());
+
+		routineQueryForUpdate = mapFromDTOToEntity(routineQueryDTO, routineQueryForUpdate, user);
+
+		routineQueryRepository.saveAndFlush(routineQueryForUpdate);
 	}
 }
