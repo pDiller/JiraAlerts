@@ -17,12 +17,11 @@ import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.request.mapper.parameter.PageParameters;
 
-import io.reflectoring.jiraalerts.application.JiraAlertsSession;
 import io.reflectoring.jiraalerts.base.BasePage;
 import io.reflectoring.jiraalerts.common.FeedbackPanelErrorClassModifier;
 
 /**
- * //TODO JavaDoc, Test
+ * Page for Editing one {@link RoutineQuery}.
  */
 @AuthorizeInstantiation("administrator")
 public class EditRoutineQueryPage extends BasePage {
@@ -30,6 +29,12 @@ public class EditRoutineQueryPage extends BasePage {
 	@Inject
 	private RoutineQueryService routineQueryService;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param pageParameters
+	 *            {@link PageParameters} with the Id of the {@link RoutineQuery} which should be changed.
+	 */
 	public EditRoutineQueryPage(PageParameters pageParameters) {
 
 		long routineQueryId = getRoutineQueryId(pageParameters);
@@ -55,9 +60,7 @@ public class EditRoutineQueryPage extends BasePage {
 				if (routineQueryService.checkJql(routineQueryDTO.getJqlString())) {
 
 					routineQueryDTO.setRoutineQueryState(ACTIVE);
-					long userId = JiraAlertsSession.get().getUserId();
-
-					routineQueryService.updateRoutineQuery(routineQueryDTO, userId);
+					routineQueryService.updateRoutineQuery(routineQueryDTO);
 					setResponsePage(RoutineQueriesDetailPage.class);
 				} else {
 					createRoutineForm.error(EditRoutineQueryPage.this.getString("save.error.text"));

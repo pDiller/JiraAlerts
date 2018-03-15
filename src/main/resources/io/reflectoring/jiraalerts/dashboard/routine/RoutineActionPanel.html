@@ -6,10 +6,22 @@
 </head>
 <body>
 <wicket:panel>
+    <div class="pull-right">
+        <a href="#" wicket:id="editRoutineQueryLink">
+            <div class="fa fa-pencil-square"></div>
+            <wicket:message key="edit.routine.text"/>
+        </a>
 
-    <a href="#" wicket:id="editRoutineQueryLink">
-        <div class="fa fa-pencil-square"></div><wicket:message key="edit.routine.text"/>
-    </a>
+        <a href="#" wicket:id="activateRoutineQueryLink">
+            <div class="fa fa-power-off"></div>
+            <wicket:message key="activate.routine.text"/>
+        </a>
+
+        <a href="#" wicket:id="deactivateRoutineQueryLink">
+            <div class="fa fa-power-off"></div>
+            <wicket:message key="deactivate.routine.text"/>
+        </a>
+    </div>
 </wicket:panel>
 </body>
 </html>
