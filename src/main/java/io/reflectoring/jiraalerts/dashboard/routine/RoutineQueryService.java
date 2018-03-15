@@ -1,5 +1,6 @@
 package io.reflectoring.jiraalerts.dashboard.routine;
 
+import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.ACTIVE;
 import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.NOT_ACTIVE;
 
 import java.text.MessageFormat;
@@ -76,7 +77,7 @@ public class RoutineQueryService {
 	}
 
 	/**
-	 * Saves the {@link RoutineQuery} when the {@link RoutineQueryService#checkJql(String)} doesn´t throw any exception.
+	 * Saves the {@link RoutineQuery} when the given user exists.
 	 *
 	 * @param routineQueryDTO
 	 *            given routine data.
@@ -84,10 +85,7 @@ public class RoutineQueryService {
 	 *            loggedin user.
 	 */
 	public void saveRoutineQuery(RoutineQueryDTO routineQueryDTO, long userId) {
-		User user = userRepository.findOne(userId);
-		if (user == null) {
-			throw new UnauthorizedActionException(String.format("There is no user with Id %s", userId));
-		}
+		User user = checkifUserExists(userId);
 
 		RoutineQuery routineQuery = new RoutineQuery();
 		routineQuery = mapFromDTOToEntity(routineQueryDTO, routineQuery, user);
@@ -95,16 +93,34 @@ public class RoutineQueryService {
 		routineQueryRepository.saveAndFlush(routineQuery);
 	}
 
+	private User checkifUserExists(long userId) {
+		User user = userRepository.findOne(userId);
+		if (user == null) {
+			throw new UnauthorizedActionException(String.format("There is no user with Id %s", userId));
+		}
+		return user;
+	}
+
+	private RoutineQuery mapFromDTOToEntity(RoutineQueryDTO routineQueryDTO, RoutineQuery routineQuery) {
+		return mapFromDTOToEntity(routineQueryDTO, routineQuery, null);
+	}
+
 	private RoutineQuery mapFromDTOToEntity(RoutineQueryDTO routineQueryDTO, RoutineQuery routineQuery, User user) {
 		if (routineQueryDTO.getId() != null) {
 			routineQuery.setId(routineQueryDTO.getId());
+		}
+		if (user != null) {
+			routineQuery.setOwner(user);
+		}
+		if (routineQueryDTO.getRoutineQueryState() == null) {
+			routineQuery.setRoutineQueryState(ACTIVE);
+		} else {
+			routineQuery.setRoutineQueryState(routineQueryDTO.getRoutineQueryState());
 		}
 
 		routineQuery.setName(routineQueryDTO.getName());
 		routineQuery.setJql(routineQueryDTO.getJqlString());
 		routineQuery.setMinutesForRecognition(routineQueryDTO.getMinutesForRecognition());
-		routineQuery.setRoutineQueryState(NOT_ACTIVE);
-		routineQuery.setOwner(user);
 
 		return routineQuery;
 	}
@@ -129,7 +145,7 @@ public class RoutineQueryService {
 
 	/**
 	 * Loads a RoutineQueryDTO by the given routineQueryId.
-	 * 
+	 *
 	 * @param routineQueryId
 	 *            the Id which is used to load the RoutineQuery.
 	 * @throws IllegalArgumentException
@@ -143,16 +159,34 @@ public class RoutineQueryService {
 		throw new IllegalArgumentException(MessageFormat.format("Error on loading RoutineQuery with id {0}", routineQueryId));
 	}
 
-	public void updateRoutineQuery(RoutineQueryDTO routineQueryDTO, long userId) {
-		User user = userRepository.findOne(userId);
-		if (user == null) {
-			throw new UnauthorizedActionException(String.format("There is no user with Id %s", userId));
-		}
+	/**
+	 * Updates the {@link RoutineQuery} when the given User exists.
+	 *
+	 * @param routineQueryDTO
+	 *            the {@link RoutineQuery} which should be persisted.
+	 */
+	public void updateRoutineQuery(RoutineQueryDTO routineQueryDTO) {
 
 		RoutineQuery routineQueryForUpdate = routineQueryRepository.findOne(routineQueryDTO.getId());
 
-		routineQueryForUpdate = mapFromDTOToEntity(routineQueryDTO, routineQueryForUpdate, user);
+		routineQueryForUpdate = mapFromDTOToEntity(routineQueryDTO, routineQueryForUpdate);
 
 		routineQueryRepository.saveAndFlush(routineQueryForUpdate);
+	}
+
+	/**
+	 * Acitvates the given {@link RoutineQuery}.
+	 */
+	public void activateRoutineQuery(RoutineQueryDTO routineQueryDTO) {
+		routineQueryDTO.setRoutineQueryState(ACTIVE);
+		updateRoutineQuery(routineQueryDTO);
+	}
+
+	/**
+	 * Deactivates the given {@link RoutineQuery}
+	 */
+	public void deactivateRoutineQuery(RoutineQueryDTO routineQueryDTO) {
+		routineQueryDTO.setRoutineQueryState(NOT_ACTIVE);
+		updateRoutineQuery(routineQueryDTO);
 	}
 }

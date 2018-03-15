@@ -39,7 +39,7 @@ public class RoutineQueryServiceTest {
 	private static final String ROUTINE_NAME = "TestRoutine";
 	private static final String ROUTINE_JQL = "JQL";
 	private static final int ROUTINE_MINUTES = 12;
-	private static final RoutineQueryState ROUTINE_STATE = NOT_ACTIVE;
+	private static final RoutineQueryState ROUTINE_STATE = ACTIVE;
 	private static final User ROUTINE_OWNER = new User();
 
 	@Mock
@@ -64,21 +64,21 @@ public class RoutineQueryServiceTest {
 	private RoutineQueryService testSubject;
 
 	@Before
-	public void setUp() throws Exception {
+	public void setUp() {
 		when(jiraRestClientServiceMock.getInitializedJiraRestClient()).thenReturn(jiraRestClientMock);
 		when(jiraRestClientMock.getSearchClient()).thenReturn(searchRestClientMock);
 		when(searchRestClientMock.searchJql(ROUTINE_JQL)).thenReturn(promiseMock);
 	}
 
 	@Test
-	public void countRoutineQueriesByUserIdCallsRoutineRepositoryMock() throws Exception {
+	public void countRoutineQueriesByUserIdCallsRoutineRepositoryMock() {
 		testSubject.countRoutineQueriesByUserId(USER_ID);
 
 		verify(routineQueryRepositoryMock).countByOwner(USER_ID);
 	}
 
 	@Test
-	public void countRoutineQueriesByUserIdReturnsValueFromRepository() throws Exception {
+	public void countRoutineQueriesByUserIdReturnsValueFromRepository() {
 		when(routineQueryRepositoryMock.countByOwner(USER_ID)).thenReturn(EXPECTED_COUNT);
 
 		int loadedCount = testSubject.countRoutineQueriesByUserId(USER_ID);
@@ -87,7 +87,7 @@ public class RoutineQueryServiceTest {
 	}
 
 	@Test
-	public void getRoutineQueriesByUserIdCallsRoutineQueryRepository() throws Exception {
+	public void getRoutineQueriesByUserIdCallsRoutineQueryRepository() {
 		PageRequest pageRequest = mock(PageRequest.class);
 		testSubject.getRoutineQueriesByUserId(USER_ID, pageRequest);
 
@@ -95,7 +95,7 @@ public class RoutineQueryServiceTest {
 	}
 
 	@Test
-	public void getRoutineQueriesByUserIdReturnesUsersRoutineQueries() throws Exception {
+	public void getRoutineQueriesByUserIdReturnesUsersRoutineQueries() {
 		PageRequest pageRequest = mock(PageRequest.class);
 		when(routineQueryRepositoryMock.findByOwner(USER_ID, pageRequest)).thenReturn(Arrays.asList(new RoutineQuery(), new RoutineQuery()));
 
@@ -105,7 +105,7 @@ public class RoutineQueryServiceTest {
 	}
 
 	@Test
-	public void getRoutineQueriesByUserIdMapsEntityValuesToDTO() throws Exception {
+	public void getRoutineQueriesByUserIdMapsEntityValuesToDTO() {
 		RoutineQuery routineQuery = new RoutineQuery();
 		routineQuery.setId(ROUTINE_ID);
 		routineQuery.setName(ROUTINE_NAME);
@@ -127,7 +127,7 @@ public class RoutineQueryServiceTest {
 	}
 
 	@Test
-	public void saveRoutineQueryCallsRepositoryToSave() throws Exception {
+	public void saveRoutineQueryCallsRepositoryToSave() {
 		when(userRepositoryMock.findOne(USER_ID)).thenReturn(ROUTINE_OWNER);
 		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
 		routineQueryDTO.setName(ROUTINE_NAME);
@@ -143,13 +143,13 @@ public class RoutineQueryServiceTest {
 		softAssertions.assertThat(captorValue.getName()).isEqualTo(ROUTINE_NAME);
 		softAssertions.assertThat(captorValue.getJql()).isEqualTo(ROUTINE_JQL);
 		softAssertions.assertThat(captorValue.getMinutesForRecognition()).isEqualTo(ROUTINE_MINUTES);
-		softAssertions.assertThat(captorValue.getRoutineQueryState()).isEqualTo(NOT_ACTIVE);
+		softAssertions.assertThat(captorValue.getRoutineQueryState()).isEqualTo(ACTIVE);
 		softAssertions.assertThat(captorValue.getOwner()).isEqualTo(ROUTINE_OWNER);
 		softAssertions.assertAll();
 	}
 
 	@Test
-	public void saveRoutineQueryCallsRepositoryToLoadLoggedInUser() throws Exception {
+	public void saveRoutineQueryCallsRepositoryToLoadLoggedInUser() {
 		when(userRepositoryMock.findOne(USER_ID)).thenReturn(ROUTINE_OWNER);
 		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
 		routineQueryDTO.setJqlString(ROUTINE_JQL);
@@ -159,7 +159,7 @@ public class RoutineQueryServiceTest {
 	}
 
 	@Test
-	public void saveRoutineQueryThrowsExceptionWhenUserNotFound() throws Exception {
+	public void saveRoutineQueryThrowsExceptionWhenUserNotFound() {
 		try {
 			RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
 			routineQueryDTO.setJqlString(ROUTINE_JQL);
@@ -171,14 +171,14 @@ public class RoutineQueryServiceTest {
 	}
 
 	@Test
-	public void checkJqlCallsRestClientService() throws Exception {
+	public void checkJqlCallsRestClientService() {
 		testSubject.checkJql(ROUTINE_JQL);
 
 		verify(jiraRestClientServiceMock).getInitializedJiraRestClient();
 	}
 
 	@Test
-	public void checkJqlExceptionThrowsCheckJqlExceptionWhenJiraRestClientThrowsExceptionAtCreation() throws Exception {
+	public void checkJqlExceptionThrowsCheckJqlExceptionWhenJiraRestClientThrowsExceptionAtCreation() {
 		RuntimeException toBeThrown = new RuntimeException();
 		doThrow(toBeThrown).when(jiraRestClientServiceMock).getInitializedJiraRestClient();
 		try {
@@ -190,7 +190,7 @@ public class RoutineQueryServiceTest {
 	}
 
 	@Test
-	public void searchWithInvalidJqlThrowsException() throws Exception {
+	public void searchWithInvalidJqlThrowsException() {
 		RuntimeException toBeThrown = new RuntimeException();
 		doThrow(toBeThrown).when(promiseMock).claim();
 
@@ -203,7 +203,7 @@ public class RoutineQueryServiceTest {
 	}
 
 	@Test
-	public void findRoutineQueryByIdCallsRepositoryToLoadEntity() throws Exception {
+	public void findRoutineQueryByIdCallsRepositoryToLoadEntity() {
 		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(new RoutineQuery());
 
 		testSubject.loadRoutineQueryDTOById(ROUTINE_ID);
@@ -212,7 +212,7 @@ public class RoutineQueryServiceTest {
 	}
 
 	@Test
-	public void findRoutineQueryByIdThrowsExceptionWhenNoEntityFound() throws Exception {
+	public void findRoutineQueryByIdThrowsExceptionWhenNoEntityFound() {
 		try {
 			testSubject.loadRoutineQueryDTOById(ROUTINE_ID);
 			failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
@@ -222,7 +222,7 @@ public class RoutineQueryServiceTest {
 	}
 
 	@Test
-	public void findRoutineQueryByIdReturnsMappedValues() throws Exception {
+	public void findRoutineQueryByIdReturnsMappedValues() {
 		RoutineQuery routineQuery = new RoutineQuery();
 		routineQuery.setId(ROUTINE_ID);
 		routineQuery.setRoutineQueryState(ACTIVE);
@@ -243,34 +243,20 @@ public class RoutineQueryServiceTest {
 	}
 
 	@Test
-	public void updateRoutineQueryThrowsExceptionWhenGivenUserIsNotExistent() throws Exception {
-		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
-		try {
-			testSubject.updateRoutineQuery(routineQueryDTO, 123L);
-			failBecauseExceptionWasNotThrown(UnauthorizedActionException.class);
-		} catch (UnauthorizedActionException unauthorizedActionException) {
-			assertThat(unauthorizedActionException.getMessage()).isEqualTo("There is no user with Id 123");
-		}
-	}
-
-	@Test
-	public void updateRoutineQueryCallsRepositoryToLoadEntity() throws Exception {
-		when(userRepositoryMock.findOne(USER_ID)).thenReturn(new User());
+	public void updateRoutineQueryCallsRepositoryToLoadEntity() {
 		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
 		routineQueryDTO.setId(ROUTINE_ID);
 
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
 		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
 
-		testSubject.updateRoutineQuery(routineQueryDTO, USER_ID);
+		testSubject.updateRoutineQuery(routineQueryDTO);
 
 		verify(routineQueryRepositoryMock).findOne(ROUTINE_ID);
 	}
 
 	@Test
-	public void updateRoutineQueryCallsRepositoryToSave() throws Exception {
-		User user = new User();
-		when(userRepositoryMock.findOne(USER_ID)).thenReturn(user);
+	public void updateRoutineQueryCallsRepositoryToSave() {
 		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
 		routineQueryDTO.setId(ROUTINE_ID);
 		routineQueryDTO.setRoutineQueryState(ROUTINE_STATE);
@@ -281,15 +267,13 @@ public class RoutineQueryServiceTest {
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
 		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
 
-		testSubject.updateRoutineQuery(routineQueryDTO, USER_ID);
+		testSubject.updateRoutineQuery(routineQueryDTO);
 
 		verify(routineQueryRepositoryMock).saveAndFlush(routineQueryForUpdate);
 	}
 
 	@Test
-	public void updateRoutineQueryMappsValueInEntity() throws Exception {
-		User user = new User();
-		when(userRepositoryMock.findOne(USER_ID)).thenReturn(user);
+	public void updateRoutineQueryMappsValueInEntity() {
 		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
 		routineQueryDTO.setId(ROUTINE_ID);
 		routineQueryDTO.setRoutineQueryState(ROUTINE_STATE);
@@ -300,7 +284,7 @@ public class RoutineQueryServiceTest {
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
 		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
 
-		testSubject.updateRoutineQuery(routineQueryDTO, USER_ID);
+		testSubject.updateRoutineQuery(routineQueryDTO);
 
 		ArgumentCaptor<RoutineQuery> routineQueryArgumentCaptor = ArgumentCaptor.forClass(RoutineQuery.class);
 
@@ -309,12 +293,45 @@ public class RoutineQueryServiceTest {
 		RoutineQuery capturedRoutineQuery = routineQueryArgumentCaptor.getValue();
 
 		SoftAssertions routineQueryUpdateAssertions = new SoftAssertions();
-		routineQueryUpdateAssertions.assertThat(capturedRoutineQuery.getOwner()).isEqualTo(user);
 		routineQueryUpdateAssertions.assertThat(capturedRoutineQuery.getRoutineQueryState()).isEqualTo(ROUTINE_STATE);
 		routineQueryUpdateAssertions.assertThat(capturedRoutineQuery.getMinutesForRecognition()).isEqualTo(ROUTINE_MINUTES);
 		routineQueryUpdateAssertions.assertThat(capturedRoutineQuery.getName()).isEqualTo(ROUTINE_NAME);
 		routineQueryUpdateAssertions.assertThat(capturedRoutineQuery.getJql()).isEqualTo(ROUTINE_JQL);
 		routineQueryUpdateAssertions.assertThat(capturedRoutineQuery.getId()).isEqualTo(ROUTINE_ID);
 		routineQueryUpdateAssertions.assertAll();
+	}
+
+	@Test
+	public void deactivateRoutineQuerySetsStatusToNotActive() {
+		RoutineQueryDTO activatedRoutineQueryDTO = new RoutineQueryDTO();
+		activatedRoutineQueryDTO.setId(ROUTINE_ID);
+		activatedRoutineQueryDTO.setRoutineQueryState(ACTIVE);
+
+		RoutineQuery routineQueryForUpdate = new RoutineQuery();
+		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
+
+		testSubject.deactivateRoutineQuery(activatedRoutineQueryDTO);
+
+		ArgumentCaptor<RoutineQuery> routineQueryArgumentCaptor = ArgumentCaptor.forClass(RoutineQuery.class);
+		verify(routineQueryRepositoryMock).saveAndFlush(routineQueryArgumentCaptor.capture());
+
+		assertThat(routineQueryArgumentCaptor.getValue().getRoutineQueryState()).isEqualTo(NOT_ACTIVE);
+	}
+
+	@Test
+	public void activateRoutineQuerySetsStatusToNotActive() {
+		RoutineQueryDTO deactivatedRoutineQueryDTO = new RoutineQueryDTO();
+		deactivatedRoutineQueryDTO.setId(ROUTINE_ID);
+		deactivatedRoutineQueryDTO.setRoutineQueryState(NOT_ACTIVE);
+
+		RoutineQuery routineQueryForUpdate = new RoutineQuery();
+		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
+
+		testSubject.activateRoutineQuery(deactivatedRoutineQueryDTO);
+
+		ArgumentCaptor<RoutineQuery> routineQueryArgumentCaptor = ArgumentCaptor.forClass(RoutineQuery.class);
+		verify(routineQueryRepositoryMock).saveAndFlush(routineQueryArgumentCaptor.capture());
+
+		assertThat(routineQueryArgumentCaptor.getValue().getRoutineQueryState()).isEqualTo(ACTIVE);
 	}
 }

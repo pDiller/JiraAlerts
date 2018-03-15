@@ -6,7 +6,7 @@ import org.apache.wicket.injection.Injector;
 import org.apache.wicket.model.LoadableDetachableModel;
 
 /**
- * //TODO JavaDoc, Test
+ * Loads the {@link RoutineQueryDTO} with the given id.
  */
 class RoutineQueryModel extends LoadableDetachableModel<RoutineQueryDTO> {
 
@@ -15,6 +15,12 @@ class RoutineQueryModel extends LoadableDetachableModel<RoutineQueryDTO> {
 
 	private long routineQueryId;
 
+	/**
+	 * Constructor.
+	 *
+	 * @param routineQueryId
+	 *            id.
+	 */
 	RoutineQueryModel(long routineQueryId) {
 		this.routineQueryId = routineQueryId;
 		Injector.get().inject(this);
