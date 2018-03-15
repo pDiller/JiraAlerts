@@ -40,15 +40,15 @@ public class EditRoutineQueryPage extends BasePage {
 		long routineQueryId = getRoutineQueryId(pageParameters);
 		IModel<RoutineQueryDTO> routineQueryDTOModel = new RoutineQueryModel(routineQueryId);
 
-		Form<RoutineQueryDTO> createRoutineForm = new Form<>("createRoutineForm", routineQueryDTOModel);
+		Form<RoutineQueryDTO> editRoutineForm = new Form<>("createRoutineForm", routineQueryDTOModel);
 
-		createRoutineForm.add(new RoutineQueryPanel("routineQueryPanel", routineQueryDTOModel));
+		editRoutineForm.add(new RoutineQueryPanel("routineQueryPanel", routineQueryDTOModel));
 
-		FeedbackPanel feedbackPanel = new FencedFeedbackPanel("formFeedback", createRoutineForm);
+		FeedbackPanel feedbackPanel = new FencedFeedbackPanel("formFeedback", editRoutineForm);
 		feedbackPanel.add(new FeedbackPanelErrorClassModifier());
-		createRoutineForm.add(feedbackPanel);
+		editRoutineForm.add(feedbackPanel);
 
-		createRoutineForm.add(new AjaxFallbackButton("submitButton", createRoutineForm) {
+		editRoutineForm.add(new AjaxFallbackButton("submitButton", editRoutineForm) {
 
 			@Override
 			protected void onSubmit(Optional<AjaxRequestTarget> targetOptional) {
@@ -58,12 +58,11 @@ public class EditRoutineQueryPage extends BasePage {
 			private void saveRoutineQuery(Optional<AjaxRequestTarget> targetOptional) {
 				RoutineQueryDTO routineQueryDTO = routineQueryDTOModel.getObject();
 				if (routineQueryService.checkJql(routineQueryDTO.getJqlString())) {
-
 					routineQueryDTO.setRoutineQueryState(ACTIVE);
 					routineQueryService.updateRoutineQuery(routineQueryDTO);
 					setResponsePage(RoutineQueriesDetailPage.class);
 				} else {
-					createRoutineForm.error(EditRoutineQueryPage.this.getString("save.error.text"));
+					editRoutineForm.error(EditRoutineQueryPage.this.getString("save.error.text"));
 					targetOptional.ifPresent(target -> target.add(EditRoutineQueryPage.this));
 				}
 			}
@@ -74,9 +73,9 @@ public class EditRoutineQueryPage extends BasePage {
 			}
 		});
 
-		createRoutineForm.add(new BookmarkablePageLink<Void>("cancelButton", RoutineQueriesDetailPage.class));
+		editRoutineForm.add(new BookmarkablePageLink<Void>("cancelButton", RoutineQueriesDetailPage.class));
 
-		add(createRoutineForm);
+		add(editRoutineForm);
 	}
 
 	private long getRoutineQueryId(PageParameters pageParameters) {
