@@ -1,5 +1,8 @@
 package io.reflectoring.jiraalerts.dashboard.routine;
 
+import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryPageParameters.ROUTINE_ID;
+import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.ACTIVE;
+
 import java.util.Optional;
 
 import javax.inject.Inject;
@@ -12,21 +15,26 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.IModel;
-import org.apache.wicket.model.Model;
+import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import io.reflectoring.jiraalerts.application.JiraAlertsSession;
 import io.reflectoring.jiraalerts.base.BasePage;
 import io.reflectoring.jiraalerts.common.FeedbackPanelErrorClassModifier;
 
+/**
+ * //TODO JavaDoc, Test
+ */
 @AuthorizeInstantiation("administrator")
-public class CreateRoutineQueryPage extends BasePage {
+public class EditRoutineQueryPage extends BasePage {
 
 	@Inject
 	private RoutineQueryService routineQueryService;
 
-	public CreateRoutineQueryPage() {
+	public EditRoutineQueryPage(PageParameters pageParameters) {
 
-		IModel<RoutineQueryDTO> routineQueryDTOModel = new Model<>(new RoutineQueryDTO());
+		long routineQueryId = getRoutineQueryId(pageParameters);
+		IModel<RoutineQueryDTO> routineQueryDTOModel = new RoutineQueryModel(routineQueryId);
+
 		Form<RoutineQueryDTO> createRoutineForm = new Form<>("createRoutineForm", routineQueryDTOModel);
 
 		createRoutineForm.add(new RoutineQueryPanel("routineQueryPanel", routineQueryDTOModel));
@@ -45,24 +53,37 @@ public class CreateRoutineQueryPage extends BasePage {
 			private void saveRoutineQuery(Optional<AjaxRequestTarget> targetOptional) {
 				RoutineQueryDTO routineQueryDTO = routineQueryDTOModel.getObject();
 				if (routineQueryService.checkJql(routineQueryDTO.getJqlString())) {
-					routineQueryDTO.setRoutineQueryState(RoutineQueryState.ACTIVE);
+
+					routineQueryDTO.setRoutineQueryState(ACTIVE);
 					long userId = JiraAlertsSession.get().getUserId();
-					routineQueryService.saveRoutineQuery(routineQueryDTO, userId);
+
+					routineQueryService.updateRoutineQuery(routineQueryDTO, userId);
 					setResponsePage(RoutineQueriesDetailPage.class);
 				} else {
-					createRoutineForm.error(CreateRoutineQueryPage.this.getString("save.error.text"));
-					targetOptional.ifPresent(target -> target.add(CreateRoutineQueryPage.this));
+					createRoutineForm.error(EditRoutineQueryPage.this.getString("save.error.text"));
+					targetOptional.ifPresent(target -> target.add(EditRoutineQueryPage.this));
 				}
 			}
 
 			@Override
 			protected void onError(Optional<AjaxRequestTarget> targetOptional) {
-				targetOptional.ifPresent(target -> target.add(CreateRoutineQueryPage.this));
+				targetOptional.ifPresent(target -> target.add(EditRoutineQueryPage.this));
 			}
 		});
 
 		createRoutineForm.add(new BookmarkablePageLink<Void>("cancelButton", RoutineQueriesDetailPage.class));
 
 		add(createRoutineForm);
+	}
+
+	private long getRoutineQueryId(PageParameters pageParameters) {
+		String routineIdAsString = pageParameters.get(ROUTINE_ID).toString();
+		return Long.valueOf(routineIdAsString);
+	}
+
+	static PageParameters createPageParameters(long routineQueryId) {
+		PageParameters pageParameters = new PageParameters();
+		pageParameters.add(ROUTINE_ID, routineQueryId);
+		return pageParameters;
 	}
 }

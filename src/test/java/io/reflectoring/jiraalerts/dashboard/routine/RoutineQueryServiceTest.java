@@ -1,5 +1,6 @@
 package io.reflectoring.jiraalerts.dashboard.routine;
 
+import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.ACTIVE;
 import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.NOT_ACTIVE;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -34,7 +35,7 @@ public class RoutineQueryServiceTest {
 
 	private static final long USER_ID = 1337;
 	private static final int EXPECTED_COUNT = 5;
-	private static final int ROUTINE_ID = 4811;
+	private static final long ROUTINE_ID = 4811;
 	private static final String ROUTINE_NAME = "TestRoutine";
 	private static final String ROUTINE_JQL = "JQL";
 	private static final int ROUTINE_MINUTES = 12;
@@ -135,7 +136,7 @@ public class RoutineQueryServiceTest {
 		testSubject.saveRoutineQuery(routineQueryDTO, USER_ID);
 
 		ArgumentCaptor<RoutineQuery> argumentCaptor = ArgumentCaptor.forClass(RoutineQuery.class);
-		verify(routineQueryRepositoryMock).save(argumentCaptor.capture());
+		verify(routineQueryRepositoryMock).saveAndFlush(argumentCaptor.capture());
 
 		RoutineQuery captorValue = argumentCaptor.getValue();
 		SoftAssertions softAssertions = new SoftAssertions();
@@ -199,5 +200,121 @@ public class RoutineQueryServiceTest {
 		} catch (CheckJqlException exception) {
 			assertThat(exception.getCause()).isSameAs(toBeThrown);
 		}
+	}
+
+	@Test
+	public void findRoutineQueryByIdCallsRepositoryToLoadEntity() throws Exception {
+		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(new RoutineQuery());
+
+		testSubject.loadRoutineQueryDTOById(ROUTINE_ID);
+
+		verify(routineQueryRepositoryMock).findOne(ROUTINE_ID);
+	}
+
+	@Test
+	public void findRoutineQueryByIdThrowsExceptionWhenNoEntityFound() throws Exception {
+		try {
+			testSubject.loadRoutineQueryDTOById(ROUTINE_ID);
+			failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
+		} catch (IllegalArgumentException illegalArgumentException) {
+			assertThat(illegalArgumentException.getMessage()).isEqualTo("Error on loading RoutineQuery with id 4.811");
+		}
+	}
+
+	@Test
+	public void findRoutineQueryByIdReturnsMappedValues() throws Exception {
+		RoutineQuery routineQuery = new RoutineQuery();
+		routineQuery.setId(ROUTINE_ID);
+		routineQuery.setRoutineQueryState(ACTIVE);
+		routineQuery.setMinutesForRecognition(ROUTINE_MINUTES);
+		routineQuery.setJql(ROUTINE_JQL);
+		routineQuery.setName(ROUTINE_NAME);
+		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQuery);
+
+		RoutineQueryDTO routineQueryDTO = testSubject.loadRoutineQueryDTOById(ROUTINE_ID);
+
+		SoftAssertions softAssertions = new SoftAssertions();
+		softAssertions.assertThat(routineQueryDTO.getId()).isEqualTo(ROUTINE_ID);
+		softAssertions.assertThat(routineQueryDTO.getRoutineQueryState()).isEqualTo(ACTIVE);
+		softAssertions.assertThat(routineQueryDTO.getName()).isEqualTo(ROUTINE_NAME);
+		softAssertions.assertThat(routineQueryDTO.getJqlString()).isEqualTo(ROUTINE_JQL);
+		softAssertions.assertThat(routineQueryDTO.getMinutesForRecognition()).isEqualTo(ROUTINE_MINUTES);
+		softAssertions.assertAll();
+	}
+
+	@Test
+	public void updateRoutineQueryThrowsExceptionWhenGivenUserIsNotExistent() throws Exception {
+		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
+		try {
+			testSubject.updateRoutineQuery(routineQueryDTO, 123L);
+			failBecauseExceptionWasNotThrown(UnauthorizedActionException.class);
+		} catch (UnauthorizedActionException unauthorizedActionException) {
+			assertThat(unauthorizedActionException.getMessage()).isEqualTo("There is no user with Id 123");
+		}
+	}
+
+	@Test
+	public void updateRoutineQueryCallsRepositoryToLoadEntity() throws Exception {
+		when(userRepositoryMock.findOne(USER_ID)).thenReturn(new User());
+		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
+		routineQueryDTO.setId(ROUTINE_ID);
+
+		RoutineQuery routineQueryForUpdate = new RoutineQuery();
+		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
+
+		testSubject.updateRoutineQuery(routineQueryDTO, USER_ID);
+
+		verify(routineQueryRepositoryMock).findOne(ROUTINE_ID);
+	}
+
+	@Test
+	public void updateRoutineQueryCallsRepositoryToSave() throws Exception {
+		User user = new User();
+		when(userRepositoryMock.findOne(USER_ID)).thenReturn(user);
+		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
+		routineQueryDTO.setId(ROUTINE_ID);
+		routineQueryDTO.setRoutineQueryState(ROUTINE_STATE);
+		routineQueryDTO.setJqlString(ROUTINE_JQL);
+		routineQueryDTO.setMinutesForRecognition(ROUTINE_MINUTES);
+		routineQueryDTO.setName(ROUTINE_NAME);
+
+		RoutineQuery routineQueryForUpdate = new RoutineQuery();
+		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
+
+		testSubject.updateRoutineQuery(routineQueryDTO, USER_ID);
+
+		verify(routineQueryRepositoryMock).saveAndFlush(routineQueryForUpdate);
+	}
+
+	@Test
+	public void updateRoutineQueryMappsValueInEntity() throws Exception {
+		User user = new User();
+		when(userRepositoryMock.findOne(USER_ID)).thenReturn(user);
+		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
+		routineQueryDTO.setId(ROUTINE_ID);
+		routineQueryDTO.setRoutineQueryState(ROUTINE_STATE);
+		routineQueryDTO.setJqlString(ROUTINE_JQL);
+		routineQueryDTO.setMinutesForRecognition(ROUTINE_MINUTES);
+		routineQueryDTO.setName(ROUTINE_NAME);
+
+		RoutineQuery routineQueryForUpdate = new RoutineQuery();
+		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
+
+		testSubject.updateRoutineQuery(routineQueryDTO, USER_ID);
+
+		ArgumentCaptor<RoutineQuery> routineQueryArgumentCaptor = ArgumentCaptor.forClass(RoutineQuery.class);
+
+		verify(routineQueryRepositoryMock).saveAndFlush(routineQueryArgumentCaptor.capture());
+
+		RoutineQuery capturedRoutineQuery = routineQueryArgumentCaptor.getValue();
+
+		SoftAssertions routineQueryUpdateAssertions = new SoftAssertions();
+		routineQueryUpdateAssertions.assertThat(capturedRoutineQuery.getOwner()).isEqualTo(user);
+		routineQueryUpdateAssertions.assertThat(capturedRoutineQuery.getRoutineQueryState()).isEqualTo(ROUTINE_STATE);
+		routineQueryUpdateAssertions.assertThat(capturedRoutineQuery.getMinutesForRecognition()).isEqualTo(ROUTINE_MINUTES);
+		routineQueryUpdateAssertions.assertThat(capturedRoutineQuery.getName()).isEqualTo(ROUTINE_NAME);
+		routineQueryUpdateAssertions.assertThat(capturedRoutineQuery.getJql()).isEqualTo(ROUTINE_JQL);
+		routineQueryUpdateAssertions.assertThat(capturedRoutineQuery.getId()).isEqualTo(ROUTINE_ID);
+		routineQueryUpdateAssertions.assertAll();
 	}
 }

@@ -7,7 +7,7 @@ import java.io.Serializable;
  */
 public class RoutineQueryDTO implements Serializable {
 
-	private long id;
+	private Long id;
 
 	private String name;
 
@@ -17,11 +17,11 @@ public class RoutineQueryDTO implements Serializable {
 
 	private RoutineQueryState routineQueryState;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

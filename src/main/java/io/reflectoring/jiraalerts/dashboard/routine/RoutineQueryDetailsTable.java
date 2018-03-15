@@ -30,6 +30,7 @@ class RoutineQueryDetailsTable extends AjaxFallbackDefaultDataTable<RoutineQuery
 		columns.add(new PropertyColumn<>(new ResourceModel("routine.table.jql.column"), "jqlString", "jqlString"));
 		columns.add(new PropertyColumn<>(new ResourceModel("routine.table.minutes.column"), "minutesForRecognition", "minutesForRecognition"));
 		columns.add(new RoutineStateColumn());
+		columns.add(new RoutineActionColumn());
 		return columns;
 	}
 }
