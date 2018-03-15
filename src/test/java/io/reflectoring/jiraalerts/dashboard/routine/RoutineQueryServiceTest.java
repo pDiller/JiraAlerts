@@ -217,7 +217,7 @@ public class RoutineQueryServiceTest {
 			testSubject.loadRoutineQueryDTOById(ROUTINE_ID);
 			failBecauseExceptionWasNotThrown(IllegalArgumentException.class);
 		} catch (IllegalArgumentException illegalArgumentException) {
-			assertThat(illegalArgumentException.getMessage()).isEqualTo("Error on loading RoutineQuery with id 4.811");
+			assertThat(illegalArgumentException.getMessage()).isEqualTo("Error on loading RoutineQuery with id 4811");
 		}
 	}
 

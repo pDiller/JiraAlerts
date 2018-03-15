@@ -156,7 +156,7 @@ public class RoutineQueryService {
 		if (routineQuery != null) {
 			return mapFromEntityToDTO(routineQuery);
 		}
-		throw new IllegalArgumentException(MessageFormat.format("Error on loading RoutineQuery with id {0}", routineQueryId));
+		throw new IllegalArgumentException(MessageFormat.format("Error on loading RoutineQuery with id {0,number,##########}", routineQueryId));
 	}
 
 	/**
