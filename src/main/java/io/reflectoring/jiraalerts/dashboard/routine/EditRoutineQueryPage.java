@@ -40,7 +40,7 @@ public class EditRoutineQueryPage extends BasePage {
 		long routineQueryId = getRoutineQueryId(pageParameters);
 		IModel<RoutineQueryDTO> routineQueryDTOModel = new RoutineQueryModel(routineQueryId);
 
-		Form<RoutineQueryDTO> editRoutineForm = new Form<>("createRoutineForm", routineQueryDTOModel);
+		Form<RoutineQueryDTO> editRoutineForm = new Form<>("editRoutineForm", routineQueryDTOModel);
 
 		editRoutineForm.add(new RoutineQueryPanel("routineQueryPanel", routineQueryDTOModel));
 
