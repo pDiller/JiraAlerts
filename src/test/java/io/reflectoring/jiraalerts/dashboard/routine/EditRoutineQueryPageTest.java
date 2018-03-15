@@ -47,9 +47,9 @@ public class EditRoutineQueryPageTest {
 
 	@Test
 	public void rendersSuccessfull() throws Exception {
-		wicketTester.assertComponent("createRoutineForm", Form.class);
-		wicketTester.assertComponent("createRoutineForm:routineQueryPanel", RoutineQueryPanel.class);
-		wicketTester.assertComponent("createRoutineForm:submitButton", AjaxFallbackButton.class);
+		wicketTester.assertComponent("editRoutineForm", Form.class);
+		wicketTester.assertComponent("editRoutineForm:routineQueryPanel", RoutineQueryPanel.class);
+		wicketTester.assertComponent("editRoutineForm:submitButton", AjaxFallbackButton.class);
 	}
 
 	@Test(expected = RestartResponseAtInterceptPageException.class)
@@ -63,7 +63,7 @@ public class EditRoutineQueryPageTest {
 
 		when(routineQueryServiceMock.checkJql(TEST_JQL_VALUE)).thenReturn(true);
 
-		FormTester formTester = wicketTester.newFormTester("createRoutineForm");
+		FormTester formTester = wicketTester.newFormTester("editRoutineForm");
 		formTester.setValue("routineQueryPanel:routineForm:routineNamePanel:input", TEST_NAME_VALUE);
 		formTester.setValue("routineQueryPanel:routineForm:jqlForm:routineJqlPanel:input", TEST_JQL_VALUE);
 		formTester.setValue("routineQueryPanel:routineForm:routineMinutesPanel:input", TEST_MINUTES_VALUE);
@@ -81,7 +81,7 @@ public class EditRoutineQueryPageTest {
 
 	@Test
 	public void formSubmitCallsRoutineQueryServiceForValidateJql() throws Exception {
-		FormTester formTester = wicketTester.newFormTester("createRoutineForm");
+		FormTester formTester = wicketTester.newFormTester("editRoutineForm");
 		formTester.setValue("routineQueryPanel:routineForm:routineNamePanel:input", TEST_NAME_VALUE);
 		formTester.setValue("routineQueryPanel:routineForm:jqlForm:routineJqlPanel:input", TEST_JQL_VALUE);
 		formTester.setValue("routineQueryPanel:routineForm:routineMinutesPanel:input", TEST_MINUTES_VALUE);
@@ -93,7 +93,7 @@ public class EditRoutineQueryPageTest {
 
 	@Test
 	public void invalidFormDataShowsErrorMessage() throws Exception {
-		FormTester formTester = wicketTester.newFormTester("createRoutineForm");
+		FormTester formTester = wicketTester.newFormTester("editRoutineForm");
 		formTester.setValue("routineQueryPanel:routineForm:routineNamePanel:input", TEST_NAME_VALUE);
 		formTester.setValue("routineQueryPanel:routineForm:jqlForm:routineJqlPanel:input", TEST_JQL_VALUE);
 		formTester.setValue("routineQueryPanel:routineForm:routineMinutesPanel:input", TEST_MINUTES_VALUE);
