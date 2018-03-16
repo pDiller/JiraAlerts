@@ -14,6 +14,9 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RoutineQueryRepository extends JpaRepository<RoutineQuery, Long> {
 
+    @Query("SELECT rq FROM RoutineQuery rq WHERE rq.routineQueryState = 0")
+    List<RoutineQuery> findAllActive();
+
 	@Query("SELECT rq FROM RoutineQuery rq WHERE rq.owner.id = :userId")
 	List<RoutineQuery> findByOwner(@Param("userId") long userId, Pageable pageable);
 
