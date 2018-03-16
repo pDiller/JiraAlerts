@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.inject.Inject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -27,6 +29,8 @@ import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
 @Service
 @Transactional
 public class RoutineQueryService {
+
+    private static final Logger LOGGER = LoggerFactory.getLogger(RoutineQueryService.class);
 
 	@Inject
 	private RoutineQueryRepository routineQueryRepository;
@@ -90,7 +94,9 @@ public class RoutineQueryService {
 		RoutineQuery routineQuery = new RoutineQuery();
 		mapFromDTOToEntity(routineQueryDTO, routineQuery, user);
 
-		routineQueryRepository.saveAndFlush(routineQuery);
+        RoutineQuery savedRoutineQuery = routineQueryRepository.saveAndFlush(routineQuery);
+
+        LOGGER.info("Saved new RoutineQuery with Id {}", savedRoutineQuery.getId());
 	}
 
 	private User checkifUserExists(long userId) {
@@ -169,7 +175,10 @@ public class RoutineQueryService {
 
 		mapFromDTOToEntity(routineQueryDTO, routineQueryForUpdate);
 
-		routineQueryRepository.saveAndFlush(routineQueryForUpdate);
+        RoutineQuery updatedRoutineQuery = routineQueryRepository.saveAndFlush(routineQueryForUpdate);
+
+        LOGGER.info("Updated RoutineQuery with Id {}", updatedRoutineQuery.getId());
+
 	}
 
 	/**
