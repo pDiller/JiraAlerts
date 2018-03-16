@@ -45,4 +45,9 @@ public class RoutineQueryRepositoryTest extends AbstractDbUnitTest {
 	public void countByOwnerReturnsTwoForUserTwo() throws Exception {
 		assertThat(testSubject.countByOwner(USER_ID_2)).isEqualTo(2);
 	}
+
+    @Test
+    public void findAllActiveReturnsThree() throws Exception {
+        assertThat(testSubject.findAllActive()).hasSize(3);
+    }
 }
