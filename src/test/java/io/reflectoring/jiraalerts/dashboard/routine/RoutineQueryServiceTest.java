@@ -133,6 +133,9 @@ public class RoutineQueryServiceTest {
 		routineQueryDTO.setName(ROUTINE_NAME);
 		routineQueryDTO.setJqlString(ROUTINE_JQL);
 		routineQueryDTO.setMinutesForRecognition(ROUTINE_MINUTES);
+
+		when(routineQueryRepositoryMock.saveAndFlush(any(RoutineQuery.class))).thenReturn(new RoutineQuery());
+
 		testSubject.saveRoutineQuery(routineQueryDTO, USER_ID);
 
 		ArgumentCaptor<RoutineQuery> argumentCaptor = ArgumentCaptor.forClass(RoutineQuery.class);
@@ -153,6 +156,9 @@ public class RoutineQueryServiceTest {
 		when(userRepositoryMock.findOne(USER_ID)).thenReturn(ROUTINE_OWNER);
 		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
 		routineQueryDTO.setJqlString(ROUTINE_JQL);
+
+		when(routineQueryRepositoryMock.saveAndFlush(any(RoutineQuery.class))).thenReturn(new RoutineQuery());
+
 		testSubject.saveRoutineQuery(routineQueryDTO, USER_ID);
 
 		verify(userRepositoryMock).findOne(USER_ID);
@@ -250,6 +256,8 @@ public class RoutineQueryServiceTest {
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
 		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
 
+		when(routineQueryRepositoryMock.saveAndFlush(routineQueryForUpdate)).thenReturn(routineQueryForUpdate);
+
 		testSubject.updateRoutineQuery(routineQueryDTO);
 
 		verify(routineQueryRepositoryMock).findOne(ROUTINE_ID);
@@ -267,6 +275,8 @@ public class RoutineQueryServiceTest {
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
 		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
 
+		when(routineQueryRepositoryMock.saveAndFlush(routineQueryForUpdate)).thenReturn(routineQueryForUpdate);
+
 		testSubject.updateRoutineQuery(routineQueryDTO);
 
 		verify(routineQueryRepositoryMock).saveAndFlush(routineQueryForUpdate);
@@ -283,6 +293,8 @@ public class RoutineQueryServiceTest {
 
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
 		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
+
+		when(routineQueryRepositoryMock.saveAndFlush(routineQueryForUpdate)).thenReturn(routineQueryForUpdate);
 
 		testSubject.updateRoutineQuery(routineQueryDTO);
 
@@ -310,6 +322,8 @@ public class RoutineQueryServiceTest {
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
 		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
 
+		when(routineQueryRepositoryMock.saveAndFlush(routineQueryForUpdate)).thenReturn(routineQueryForUpdate);
+
 		testSubject.deactivateRoutineQuery(activatedRoutineQueryDTO);
 
 		ArgumentCaptor<RoutineQuery> routineQueryArgumentCaptor = ArgumentCaptor.forClass(RoutineQuery.class);
@@ -326,6 +340,7 @@ public class RoutineQueryServiceTest {
 
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
 		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
+		when(routineQueryRepositoryMock.saveAndFlush(routineQueryForUpdate)).thenReturn(routineQueryForUpdate);
 
 		testSubject.activateRoutineQuery(deactivatedRoutineQueryDTO);
 

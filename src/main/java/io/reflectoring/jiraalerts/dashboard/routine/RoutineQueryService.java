@@ -30,7 +30,7 @@ import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
 @Transactional
 public class RoutineQueryService {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(RoutineQueryService.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(RoutineQueryService.class);
 
 	@Inject
 	private RoutineQueryRepository routineQueryRepository;
@@ -94,9 +94,9 @@ public class RoutineQueryService {
 		RoutineQuery routineQuery = new RoutineQuery();
 		mapFromDTOToEntity(routineQueryDTO, routineQuery, user);
 
-        RoutineQuery savedRoutineQuery = routineQueryRepository.saveAndFlush(routineQuery);
+		RoutineQuery savedRoutineQuery = routineQueryRepository.saveAndFlush(routineQuery);
 
-        LOGGER.info("Saved new RoutineQuery with Id {}", savedRoutineQuery.getId());
+		LOGGER.info("Saved new RoutineQuery with Id {}", savedRoutineQuery.getId());
 	}
 
 	private User checkifUserExists(long userId) {
@@ -175,9 +175,9 @@ public class RoutineQueryService {
 
 		mapFromDTOToEntity(routineQueryDTO, routineQueryForUpdate);
 
-        RoutineQuery updatedRoutineQuery = routineQueryRepository.saveAndFlush(routineQueryForUpdate);
+		RoutineQuery updatedRoutineQuery = routineQueryRepository.saveAndFlush(routineQueryForUpdate);
 
-        LOGGER.info("Updated RoutineQuery with Id {}", updatedRoutineQuery.getId());
+		LOGGER.info("Updated RoutineQuery with Id {}", updatedRoutineQuery.getId());
 
 	}
 
