@@ -1,0 +1,30 @@
+ext {
+    libraries = [
+            test: [
+                    ["org.assertj:assertj-core:${assertjVersion}"],
+                    ["org.springframework.boot:spring-boot-starter-test"]
+            ],
+
+            dbUnit: [
+                    ["com.github.springtestdbunit:spring-test-dbunit:${spring_test_dbunit_version}"],
+                    ["org.dbunit:dbunit:${dbunit_version}"],
+                    ["com.h2database:h2:${h2_version}"]
+            ],
+
+            jiraRestClient: [
+                    ["com.atlassian.jira:jira-rest-java-client-core:${jiraRestClientVersion}"],
+                    ["com.atlassian.fugue:fugue:${atlassianFugueVersion}"],
+
+                    ["javax.validation:validation-api:${validationApiVersion}"]
+
+            ],
+
+            wicket: [
+                    ["org.apache.wicket:wicket:${wicketVersion}"],
+                    ["org.apache.wicket:wicket-spring:${wicketVersion}"],
+                    ["org.apache.wicket:wicket-auth-roles:${wicketVersion}"],
+                    ["org.apache.wicket:wicket-extensions:${wicketVersion}"],
+                    ["org.wicketstuff:wicketstuff-lazymodel:${wicketVersion}"]
+            ]
+    ]
+}

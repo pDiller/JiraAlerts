@@ -3,12 +3,14 @@ ext {
 }
 
 buildscript {
+
     repositories {
         maven {
             jcenter()
             url("https://plugins.gradle.org/m2/")
         }
     }
+
     dependencies {
         classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
         classpath("gradle.plugin.com.boxfuse.client:flyway-release:${flyWayVersion}")
@@ -21,45 +23,42 @@ apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'org.springframework.boot'
 
-group='io.reflectoring.jiraalerts'
-version='0.1.0-SNAPSHOT'
-sourceCompatibility=1.8
+group = 'io.reflectoring.jiraalerts'
+version = '0.1.0-SNAPSHOT'
+sourceCompatibility = 1.8
 
-repositories {
-    jcenter()
+allprojects {
+    repositories {
+        jcenter()
+    }
 }
 
-dependencies {
-    testCompile("org.springframework.boot:spring-boot-starter-test")
-    testCompile("org.assertj:assertj-core:${assertjVersion}")
-    testCompile("javax.servlet:javax.servlet-api:${servletApiVersion}")
-    testCompile("com.github.springtestdbunit:spring-test-dbunit:${spring_test_dbunit_version}")
-    testCompile("org.dbunit:dbunit:${dbunit_version}")
-    testCompile("com.h2database:h2:${h2_version}")
+apply from: 'gradle/libs.gradle'
 
-    compile("org.apache.wicket:wicket:${wicketVersion}")
-    compile("org.apache.wicket:wicket-spring:${wicketVersion}")
-    compile("org.apache.wicket:wicket-auth-roles:${wicketVersion}")
-    compile("org.apache.wicket:wicket-extensions:${wicketVersion}")
-    compile("org.apache.commons:commons-crypto:${apacheCommonsCryptoVersion}")
-    compile("org.wicketstuff:wicketstuff-lazymodel:${wicketVersion}")
+dependencies {
+    testCompile("javax.servlet:javax.servlet-api:${servletApiVersion}")
+    testCompile libraries.dbUnit
+    testCompile libraries.test
+
+    compile libraries.wicket
 
     compile("org.apache.commons:commons-lang3:${apacheCommonsLang3Version}")
 
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework:spring-context-support:${springContextSupportVersion}")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa")
     compile("org.springframework.boot:spring-boot-starter-web")
 
     compile("org.quartz-scheduler:quartz:${quartzVersion}")
 
     compile("org.flywaydb:flyway-core:${flyWayVersion}")
 
-    compile("com.atlassian.jira:jira-rest-java-client-core:${jiraRestClientVersion}")
-    compile("com.atlassian.fugue:fugue:${atlassianFugueVersion}")
+    compile libraries.jiraRestClient
+
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 
     runtime("mysql:mysql-connector-java")
 
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    project("jira-rest-client")
 }
 
 bootRun {
