@@ -6,6 +6,7 @@ import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.NOT
 import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.inject.Inject;
 
@@ -100,11 +101,11 @@ public class RoutineQueryService {
 	}
 
 	private User checkifUserExists(long userId) {
-		User user = userRepository.findOne(userId);
-		if (user == null) {
-			throw new UnauthorizedActionException(String.format("There is no user with Id %s", userId));
+		Optional<User> userOptional = userRepository.findById(userId);
+		if (userOptional.isPresent()) {
+			return userOptional.get();
 		}
-		return user;
+		throw new UnauthorizedActionException(String.format("There is no user with Id %s", userId));
 	}
 
 	private void mapFromDTOToEntity(RoutineQueryDTO routineQueryDTO, RoutineQuery routineQuery) {
@@ -156,9 +157,9 @@ public class RoutineQueryService {
 	 *             when no entity is found.
 	 */
 	public RoutineQueryDTO loadRoutineQueryDTOById(long routineQueryId) {
-		RoutineQuery routineQuery = routineQueryRepository.findOne(routineQueryId);
-		if (routineQuery != null) {
-			return mapFromEntityToDTO(routineQuery);
+		Optional<RoutineQuery> routineQueryOptional = routineQueryRepository.findById(routineQueryId);
+		if (routineQueryOptional.isPresent()) {
+			return mapFromEntityToDTO(routineQueryOptional.get());
 		}
 		throw new IllegalArgumentException(MessageFormat.format("Error on loading RoutineQuery with id {0,number,##########}", routineQueryId));
 	}
@@ -171,14 +172,17 @@ public class RoutineQueryService {
 	 */
 	public void updateRoutineQuery(RoutineQueryDTO routineQueryDTO) {
 
-		RoutineQuery routineQueryForUpdate = routineQueryRepository.findOne(routineQueryDTO.getId());
+		Optional<RoutineQuery> routineQueryForUpdateOptional = routineQueryRepository.findById(routineQueryDTO.getId());
 
-		mapFromDTOToEntity(routineQueryDTO, routineQueryForUpdate);
+		if (routineQueryForUpdateOptional.isPresent()) {
+			RoutineQuery routineQuery = routineQueryForUpdateOptional.get();
 
-		RoutineQuery updatedRoutineQuery = routineQueryRepository.saveAndFlush(routineQueryForUpdate);
+			mapFromDTOToEntity(routineQueryDTO, routineQuery);
 
-		LOGGER.info("Updated RoutineQuery with Id {}", updatedRoutineQuery.getId());
+			RoutineQuery updatedRoutineQuery = routineQueryRepository.saveAndFlush(routineQuery);
 
+			LOGGER.info("Updated RoutineQuery with Id {}", updatedRoutineQuery.getId());
+		}
 	}
 
 	/**

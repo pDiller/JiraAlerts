@@ -19,7 +19,6 @@ buildscript {
     }
 }
 
-apply plugin: 'java'
 apply plugin: 'war'
 apply plugin: 'org.springframework.boot'
 
@@ -28,6 +27,9 @@ version = '0.1.0-SNAPSHOT'
 sourceCompatibility = 1.8
 
 allprojects {
+
+    apply plugin: 'java'
+
     repositories {
         jcenter()
     }
@@ -36,17 +38,16 @@ allprojects {
 apply from: 'gradle/libs.gradle'
 
 dependencies {
-    testCompile("javax.servlet:javax.servlet-api:${servletApiVersion}")
-    testCompile libraries.dbUnit
     testCompile libraries.test
+    testCompile libraries.dbUnit
 
     compile libraries.wicket
 
     compile("org.apache.commons:commons-lang3:${apacheCommonsLang3Version}")
 
     compile("org.springframework:spring-context-support:${springContextSupportVersion}")
-    compile("org.springframework.boot:spring-boot-starter-data-jpa")
-    compile("org.springframework.boot:spring-boot-starter-web")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
 
     compile("org.quartz-scheduler:quartz:${quartzVersion}")
 
@@ -54,16 +55,11 @@ dependencies {
 
     compile libraries.jiraRestClient
 
-    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
+    providedRuntime("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")
 
-    runtime("mysql:mysql-connector-java")
+    runtime("mysql:mysql-connector-java:${mySqlConnectorVersion}")
 
     project("jira-rest-client")
-}
-
-bootRun {
-    // use raw ressources instead of the output of processResources task
-    addResources = true
 }
 
 apply from: 'gradle/idea.gradle'

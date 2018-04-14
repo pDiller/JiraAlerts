@@ -26,25 +26,25 @@ public class IoTActionRepositoryTest extends AbstractDbUnitTest {
 
 	@Test
 	public void findByRoutineQueryFindsTwoIoTActionsForRoutine1() {
-		List<IoTAction> iotActions = testSubject.findByRoutineQuery(ROUTINE_QUERY_ID_1, new PageRequest(0, 10, Sort.DEFAULT_DIRECTION, "device.id"));
+		List<IoTAction> iotActions = testSubject.findByRoutineQuery(ROUTINE_QUERY_ID_1, PageRequest.of(0, 10, Sort.DEFAULT_DIRECTION, "device.id"));
 		assertThat(iotActions).hasSize(2);
 	}
 
 	@Test
 	public void findByRoutineQueryFindsOneIoTActionsForRoutine2() {
-		List<IoTAction> iotActions = testSubject.findByRoutineQuery(ROUTINE_QUERY_ID_2, new PageRequest(0, 10, Sort.DEFAULT_DIRECTION, "device.id"));
+		List<IoTAction> iotActions = testSubject.findByRoutineQuery(ROUTINE_QUERY_ID_2, PageRequest.of(0, 10, Sort.DEFAULT_DIRECTION, "device.id"));
 		assertThat(iotActions).hasSize(1);
 	}
 
 	@Test
 	public void findByDeviceFindsThreeIoTActionsForDevice1() {
-		List<IoTAction> iotActions = testSubject.findByDevice(DEVICE_ID_1, new PageRequest(0, 10, Sort.DEFAULT_DIRECTION, "routineQuery.id"));
+		List<IoTAction> iotActions = testSubject.findByDevice(DEVICE_ID_1, PageRequest.of(0, 10, Sort.DEFAULT_DIRECTION, "routineQuery.id"));
 		assertThat(iotActions).hasSize(3);
 	}
 
 	@Test
 	public void findByRoutineQueryFindsTwoIoTActionsForDevice2() {
-		List<IoTAction> iotActions = testSubject.findByDevice(DEVICE_ID_2, new PageRequest(0, 10, Sort.DEFAULT_DIRECTION, "routineQuery.id"));
+		List<IoTAction> iotActions = testSubject.findByDevice(DEVICE_ID_2, PageRequest.of(0, 10, Sort.DEFAULT_DIRECTION, "routineQuery.id"));
 		assertThat(iotActions).hasSize(2);
 	}
 

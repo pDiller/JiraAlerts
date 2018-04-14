@@ -24,14 +24,14 @@ public class RoutineQueryRepositoryTest extends AbstractDbUnitTest {
 
 	@Test
 	public void findByOwnerFindsFourRoutinesForUserOne() throws Exception {
-		List<RoutineQuery> routineQueries = testSubject.findByOwner(USER_ID_1, new PageRequest(0, 10, Sort.DEFAULT_DIRECTION, "id"));
+		List<RoutineQuery> routineQueries = testSubject.findByOwner(USER_ID_1, PageRequest.of(0, 10, Sort.DEFAULT_DIRECTION, "id"));
 
 		assertThat(routineQueries).hasSize(4);
 	}
 
 	@Test
 	public void findByOwnerFindsTwoRoutinesForUserTwo() throws Exception {
-		List<RoutineQuery> routineQueries = testSubject.findByOwner(USER_ID_2, new PageRequest(0, 10, Sort.DEFAULT_DIRECTION, "id"));
+		List<RoutineQuery> routineQueries = testSubject.findByOwner(USER_ID_2, PageRequest.of(0, 10, Sort.DEFAULT_DIRECTION, "id"));
 
 		assertThat(routineQueries).hasSize(2);
 	}

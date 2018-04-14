@@ -9,6 +9,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.assertj.core.api.SoftAssertions;
 import org.junit.Before;
@@ -128,7 +129,7 @@ public class RoutineQueryServiceTest {
 
 	@Test
 	public void saveRoutineQueryCallsRepositoryToSave() {
-		when(userRepositoryMock.findOne(USER_ID)).thenReturn(ROUTINE_OWNER);
+		when(userRepositoryMock.findById(USER_ID)).thenReturn(Optional.of(ROUTINE_OWNER));
 		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
 		routineQueryDTO.setName(ROUTINE_NAME);
 		routineQueryDTO.setJqlString(ROUTINE_JQL);
@@ -153,7 +154,7 @@ public class RoutineQueryServiceTest {
 
 	@Test
 	public void saveRoutineQueryCallsRepositoryToLoadLoggedInUser() {
-		when(userRepositoryMock.findOne(USER_ID)).thenReturn(ROUTINE_OWNER);
+		when(userRepositoryMock.findById(USER_ID)).thenReturn(Optional.of(ROUTINE_OWNER));
 		RoutineQueryDTO routineQueryDTO = new RoutineQueryDTO();
 		routineQueryDTO.setJqlString(ROUTINE_JQL);
 
@@ -161,7 +162,7 @@ public class RoutineQueryServiceTest {
 
 		testSubject.saveRoutineQuery(routineQueryDTO, USER_ID);
 
-		verify(userRepositoryMock).findOne(USER_ID);
+		verify(userRepositoryMock).findById(USER_ID);
 	}
 
 	@Test
@@ -210,11 +211,11 @@ public class RoutineQueryServiceTest {
 
 	@Test
 	public void findRoutineQueryByIdCallsRepositoryToLoadEntity() {
-		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(new RoutineQuery());
+		when(routineQueryRepositoryMock.findById(ROUTINE_ID)).thenReturn(Optional.of(new RoutineQuery()));
 
 		testSubject.loadRoutineQueryDTOById(ROUTINE_ID);
 
-		verify(routineQueryRepositoryMock).findOne(ROUTINE_ID);
+		verify(routineQueryRepositoryMock).findById(ROUTINE_ID);
 	}
 
 	@Test
@@ -235,7 +236,7 @@ public class RoutineQueryServiceTest {
 		routineQuery.setMinutesForRecognition(ROUTINE_MINUTES);
 		routineQuery.setJql(ROUTINE_JQL);
 		routineQuery.setName(ROUTINE_NAME);
-		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQuery);
+		when(routineQueryRepositoryMock.findById(ROUTINE_ID)).thenReturn(Optional.of(routineQuery));
 
 		RoutineQueryDTO routineQueryDTO = testSubject.loadRoutineQueryDTOById(ROUTINE_ID);
 
@@ -254,13 +255,13 @@ public class RoutineQueryServiceTest {
 		routineQueryDTO.setId(ROUTINE_ID);
 
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
-		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
+		when(routineQueryRepositoryMock.findById(ROUTINE_ID)).thenReturn(Optional.of(routineQueryForUpdate));
 
 		when(routineQueryRepositoryMock.saveAndFlush(routineQueryForUpdate)).thenReturn(routineQueryForUpdate);
 
 		testSubject.updateRoutineQuery(routineQueryDTO);
 
-		verify(routineQueryRepositoryMock).findOne(ROUTINE_ID);
+		verify(routineQueryRepositoryMock).findById(ROUTINE_ID);
 	}
 
 	@Test
@@ -273,7 +274,7 @@ public class RoutineQueryServiceTest {
 		routineQueryDTO.setName(ROUTINE_NAME);
 
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
-		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
+		when(routineQueryRepositoryMock.findById(ROUTINE_ID)).thenReturn(Optional.of(routineQueryForUpdate));
 
 		when(routineQueryRepositoryMock.saveAndFlush(routineQueryForUpdate)).thenReturn(routineQueryForUpdate);
 
@@ -292,7 +293,7 @@ public class RoutineQueryServiceTest {
 		routineQueryDTO.setName(ROUTINE_NAME);
 
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
-		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
+		when(routineQueryRepositoryMock.findById(ROUTINE_ID)).thenReturn(Optional.of(routineQueryForUpdate));
 
 		when(routineQueryRepositoryMock.saveAndFlush(routineQueryForUpdate)).thenReturn(routineQueryForUpdate);
 
@@ -320,7 +321,7 @@ public class RoutineQueryServiceTest {
 		activatedRoutineQueryDTO.setRoutineQueryState(ACTIVE);
 
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
-		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
+		when(routineQueryRepositoryMock.findById(ROUTINE_ID)).thenReturn(Optional.of(routineQueryForUpdate));
 
 		when(routineQueryRepositoryMock.saveAndFlush(routineQueryForUpdate)).thenReturn(routineQueryForUpdate);
 
@@ -339,7 +340,7 @@ public class RoutineQueryServiceTest {
 		deactivatedRoutineQueryDTO.setRoutineQueryState(NOT_ACTIVE);
 
 		RoutineQuery routineQueryForUpdate = new RoutineQuery();
-		when(routineQueryRepositoryMock.findOne(ROUTINE_ID)).thenReturn(routineQueryForUpdate);
+		when(routineQueryRepositoryMock.findById(ROUTINE_ID)).thenReturn(Optional.of(routineQueryForUpdate));
 		when(routineQueryRepositoryMock.saveAndFlush(routineQueryForUpdate)).thenReturn(routineQueryForUpdate);
 
 		testSubject.activateRoutineQuery(deactivatedRoutineQueryDTO);

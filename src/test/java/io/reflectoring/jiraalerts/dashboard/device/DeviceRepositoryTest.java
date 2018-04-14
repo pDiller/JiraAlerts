@@ -24,13 +24,13 @@ public class DeviceRepositoryTest extends AbstractDbUnitTest {
 
 	@Test
 	public void findByOwnerFindsFourDevicesForUserOne() throws Exception {
-		List<Device> devices = testSubject.findByOwner(USER_ID_1, new PageRequest(0, 10, Sort.DEFAULT_DIRECTION, "id"));
+		List<Device> devices = testSubject.findByOwner(USER_ID_1, PageRequest.of(0, 10, Sort.DEFAULT_DIRECTION, "id"));
 		assertThat(devices).hasSize(4);
 	}
 
 	@Test
 	public void findByOwnerFindsTwoDevicesForUserTwo() throws Exception {
-		List<Device> devices = testSubject.findByOwner(USER_ID_2, new PageRequest(0, 10, Sort.DEFAULT_DIRECTION, "id"));
+		List<Device> devices = testSubject.findByOwner(USER_ID_2, PageRequest.of(0, 10, Sort.DEFAULT_DIRECTION, "id"));
 		assertThat(devices).hasSize(2);
 	}
 
