@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.application.testsetup;
+package io.reflectoring.jiraalerts.testsetup;
 
 import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;

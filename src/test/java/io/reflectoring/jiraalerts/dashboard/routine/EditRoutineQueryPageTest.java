@@ -1,7 +1,7 @@
 package io.reflectoring.jiraalerts.dashboard.routine;
 
 import static io.reflectoring.jiraalerts.dashboard.routine.EditRoutineQueryPage.createPageParameters;
-import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.ACTIVE;
+import static io.reflectoring.jiraalerts.routine.RoutineQueryState.ACTIVE;
 import static org.assertj.core.api.Assertions.*;
 import static org.mockito.Mockito.*;
 

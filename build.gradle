@@ -39,27 +39,26 @@ apply from: 'gradle/libs.gradle'
 
 dependencies {
     testCompile libraries.test
-    testCompile libraries.dbUnit
 
     compile libraries.wicket
 
     compile("org.apache.commons:commons-lang3:${apacheCommonsLang3Version}")
 
     compile("org.springframework:spring-context-support:${springContextSupportVersion}")
-    compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
 
     compile("org.quartz-scheduler:quartz:${quartzVersion}")
 
     compile("org.flywaydb:flyway-core:${flyWayVersion}")
 
+    compile project(":jira-rest-client")
+    compile project(":persistence")
+
     compile libraries.jiraRestClient
 
     providedRuntime("org.springframework.boot:spring-boot-starter-tomcat:${springBootVersion}")
 
     runtime("mysql:mysql-connector-java:${mySqlConnectorVersion}")
-
-    project("jira-rest-client")
 }
 
 apply from: 'gradle/idea.gradle'

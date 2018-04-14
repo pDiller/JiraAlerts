@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.dashboard.device;
+package io.reflectoring.jiraalerts.device;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -10,7 +10,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
-import io.reflectoring.jiraalerts.application.login.User;
+import io.reflectoring.jiraalerts.user.User;
 
 /**
  * Entity for Devices.

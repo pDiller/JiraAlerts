@@ -1,7 +1,7 @@
 package io.reflectoring.jiraalerts.dashboard.routine;
 
-import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.ACTIVE;
-import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.NOT_ACTIVE;
+import static io.reflectoring.jiraalerts.routine.RoutineQueryState.ACTIVE;
+import static io.reflectoring.jiraalerts.routine.RoutineQueryState.NOT_ACTIVE;
 
 import java.util.Optional;
 

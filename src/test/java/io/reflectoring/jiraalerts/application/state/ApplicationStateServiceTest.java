@@ -14,8 +14,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraConnection;
-import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraConnectionRepository;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnection;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnectionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ApplicationStateServiceTest {

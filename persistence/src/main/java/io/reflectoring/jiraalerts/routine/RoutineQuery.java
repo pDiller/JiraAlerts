@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.dashboard.routine;
+package io.reflectoring.jiraalerts.routine;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
@@ -10,7 +10,7 @@ import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 import org.hibernate.annotations.TypeDefs;
 
-import io.reflectoring.jiraalerts.application.login.User;
+import io.reflectoring.jiraalerts.user.User;
 
 /**
  * Entity for the query-part of the Routines.

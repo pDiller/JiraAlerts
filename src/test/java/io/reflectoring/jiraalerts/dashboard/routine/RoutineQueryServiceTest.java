@@ -1,7 +1,7 @@
 package io.reflectoring.jiraalerts.dashboard.routine;
 
-import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.ACTIVE;
-import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.NOT_ACTIVE;
+import static io.reflectoring.jiraalerts.routine.RoutineQueryState.ACTIVE;
+import static io.reflectoring.jiraalerts.routine.RoutineQueryState.NOT_ACTIVE;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
@@ -26,10 +26,13 @@ import com.atlassian.jira.rest.client.api.SearchRestClient;
 import com.atlassian.jira.rest.client.api.domain.SearchResult;
 import com.atlassian.util.concurrent.Promise;
 
-import io.reflectoring.jiraalerts.application.login.User;
-import io.reflectoring.jiraalerts.application.login.UserRepository;
 import io.reflectoring.jiraalerts.common.UnauthorizedActionException;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
+import io.reflectoring.jiraalerts.routine.RoutineQuery;
+import io.reflectoring.jiraalerts.routine.RoutineQueryRepository;
+import io.reflectoring.jiraalerts.routine.RoutineQueryState;
+import io.reflectoring.jiraalerts.user.User;
+import io.reflectoring.jiraalerts.user.UserRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class RoutineQueryServiceTest {

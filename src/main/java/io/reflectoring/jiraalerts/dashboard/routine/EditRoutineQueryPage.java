@@ -1,7 +1,7 @@
 package io.reflectoring.jiraalerts.dashboard.routine;
 
 import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryPageParameters.ROUTINE_ID;
-import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.ACTIVE;
+import static io.reflectoring.jiraalerts.routine.RoutineQueryState.ACTIVE;
 
 import java.util.Optional;
 
@@ -19,6 +19,7 @@ import org.apache.wicket.request.mapper.parameter.PageParameters;
 
 import io.reflectoring.jiraalerts.base.BasePage;
 import io.reflectoring.jiraalerts.common.FeedbackPanelErrorClassModifier;
+import io.reflectoring.jiraalerts.routine.RoutineQuery;
 
 /**
  * Page for Editing one {@link RoutineQuery}.

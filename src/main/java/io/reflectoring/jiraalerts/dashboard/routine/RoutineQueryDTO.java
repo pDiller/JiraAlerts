@@ -2,6 +2,9 @@ package io.reflectoring.jiraalerts.dashboard.routine;
 
 import java.io.Serializable;
 
+import io.reflectoring.jiraalerts.routine.RoutineQuery;
+import io.reflectoring.jiraalerts.routine.RoutineQueryState;
+
 /**
  * Transferobject for {@link RoutineQuery}.
  */

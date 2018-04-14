@@ -1,6 +1,6 @@
 package io.reflectoring.jiraalerts.dashboard.device;
 
-import static io.reflectoring.jiraalerts.dashboard.device.DeviceType.RAITO4RPI;
+import static io.reflectoring.jiraalerts.device.DeviceType.RAITO4RPI;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -15,6 +15,10 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import org.springframework.data.domain.PageRequest;
+
+import io.reflectoring.jiraalerts.device.Device;
+import io.reflectoring.jiraalerts.device.DeviceRepository;
+import io.reflectoring.jiraalerts.device.DeviceType;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DeviceServiceTest {

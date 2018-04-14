@@ -1,13 +1,17 @@
 package io.reflectoring.jiraalerts.application.login;
 
-import static org.assertj.core.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import io.reflectoring.jiraalerts.user.User;
+import io.reflectoring.jiraalerts.user.UserRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UserServiceTest {
@@ -28,14 +32,14 @@ public class UserServiceTest {
 
 		UserDTO loadedUserDTO = testSubject.findUserByUsername(TEST_NAME);
 
-		assertThat(loadedUserDTO.getUsername()).isEqualTo(TEST_NAME);
+		Assertions.assertThat(loadedUserDTO.getUsername()).isEqualTo(TEST_NAME);
 	}
 
 	@Test
 	public void returnsNullWhenRepositoryDontFindUser() throws Exception {
 		UserDTO loadedUserDTO = testSubject.findUserByUsername(TEST_NAME);
 
-		assertThat(loadedUserDTO).isNull();
+		Assertions.assertThat(loadedUserDTO).isNull();
 	}
 
 	@Test

@@ -17,6 +17,7 @@ import org.apache.wicket.model.Model;
 import io.reflectoring.jiraalerts.application.JiraAlertsSession;
 import io.reflectoring.jiraalerts.base.BasePage;
 import io.reflectoring.jiraalerts.common.FeedbackPanelErrorClassModifier;
+import io.reflectoring.jiraalerts.routine.RoutineQueryState;
 
 @AuthorizeInstantiation("administrator")
 public class CreateRoutineQueryPage extends BasePage {

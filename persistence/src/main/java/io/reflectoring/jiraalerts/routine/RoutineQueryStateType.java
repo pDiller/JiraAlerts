@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.dashboard.device;
+package io.reflectoring.jiraalerts.routine;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,13 +11,13 @@ import io.reflectoring.jiraalerts.common.EnumWithId;
 import io.reflectoring.jiraalerts.common.EnumWithIdType;
 
 /**
- * Type definition for mapping {@link DeviceType} to expected {@link org.hibernate.usertype.UserType}.
+ * Type for mapping {@link RoutineQueryState} to expected {@link org.hibernate.usertype.UserType}.
  */
-public class DeviceTypeDef extends EnumWithIdType {
+public class RoutineQueryStateType extends EnumWithIdType {
 
 	@Override
-	public Class<DeviceType> returnedClass() {
-		return DeviceType.class;
+	public Class<RoutineQueryState> returnedClass() {
+		return RoutineQueryState.class;
 	}
 
 	@Override

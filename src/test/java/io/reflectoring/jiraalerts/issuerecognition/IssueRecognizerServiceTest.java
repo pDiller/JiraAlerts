@@ -15,9 +15,9 @@ import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.api.SearchRestClient;
 
 import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
-import io.reflectoring.jiraalerts.dashboard.routine.RoutineQuery;
-import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryRepository;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
+import io.reflectoring.jiraalerts.routine.RoutineQuery;
+import io.reflectoring.jiraalerts.routine.RoutineQueryRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class IssueRecognizerServiceTest {

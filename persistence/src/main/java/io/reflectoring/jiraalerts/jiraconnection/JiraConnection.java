@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.dashboard.applicationstate;
+package io.reflectoring.jiraalerts.jiraconnection;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
