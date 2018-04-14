@@ -55,6 +55,6 @@ public class RoutineQueryDataProvider extends SortableDataProvider<RoutineQueryD
 
 	private PageRequest createPageRequest(long first) {
 		Sort.Direction sortDirection = getSort().isAscending() ? Sort.Direction.ASC : Sort.Direction.DESC;
-		return new PageRequest((int) (first / rowsPerPage), rowsPerPage, sortDirection, getSort().getProperty());
+		return PageRequest.of((int) (first / rowsPerPage), rowsPerPage, sortDirection, getSort().getProperty());
 	}
 }

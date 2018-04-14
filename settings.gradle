@@ -1,1 +1,2 @@
 include 'jira-rest-client'
+include 'persistence'
