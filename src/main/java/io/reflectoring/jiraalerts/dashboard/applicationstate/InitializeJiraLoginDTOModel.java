@@ -7,6 +7,9 @@ import javax.inject.Inject;
 import org.apache.wicket.injection.Injector;
 import org.apache.wicket.model.LoadableDetachableModel;
 
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnection;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnectionRepository;
+
 /**
  * Loads the {@link JiraConnection} if existent and maps it to {@link JiraLoginDTO}. If its not existent, this model initializes new
  * {@link JiraLoginDTO}.

@@ -18,6 +18,7 @@ import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.validation.validator.RangeValidator;
 
 import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
+import io.reflectoring.jiraalerts.routine.RoutineQuery;
 
 /**
  * Panel, which shows the inputs for create and edit an {@link RoutineQuery}.

@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.application.login;
+package io.reflectoring.jiraalerts.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;

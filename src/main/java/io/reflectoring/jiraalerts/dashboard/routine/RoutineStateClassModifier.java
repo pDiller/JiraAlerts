@@ -4,6 +4,8 @@ import java.util.Set;
 
 import org.apache.wicket.ClassAttributeModifier;
 
+import io.reflectoring.jiraalerts.routine.RoutineQueryState;
+
 /*
  * Adds the CSS-class of the routine-state.
  */

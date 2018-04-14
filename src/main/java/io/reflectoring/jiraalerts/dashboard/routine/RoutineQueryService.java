@@ -1,7 +1,7 @@
 package io.reflectoring.jiraalerts.dashboard.routine;
 
-import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.ACTIVE;
-import static io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryState.NOT_ACTIVE;
+import static io.reflectoring.jiraalerts.routine.RoutineQueryState.ACTIVE;
+import static io.reflectoring.jiraalerts.routine.RoutineQueryState.NOT_ACTIVE;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -19,10 +19,12 @@ import org.springframework.transaction.annotation.Transactional;
 import com.atlassian.jira.rest.client.api.JiraRestClient;
 import com.atlassian.jira.rest.client.api.RestClientException;
 
-import io.reflectoring.jiraalerts.application.login.User;
-import io.reflectoring.jiraalerts.application.login.UserRepository;
 import io.reflectoring.jiraalerts.common.UnauthorizedActionException;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
+import io.reflectoring.jiraalerts.routine.RoutineQuery;
+import io.reflectoring.jiraalerts.routine.RoutineQueryRepository;
+import io.reflectoring.jiraalerts.user.User;
+import io.reflectoring.jiraalerts.user.UserRepository;
 
 /**
  * Servicemethods for storing and loading the {@link RoutineQuery}.

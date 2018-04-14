@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.dashboard.routine;
+package io.reflectoring.jiraalerts.routine;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

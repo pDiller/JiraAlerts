@@ -24,6 +24,8 @@ import com.atlassian.util.concurrent.Promise;
 
 import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnection;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnectionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SetupApplicationServiceTest {

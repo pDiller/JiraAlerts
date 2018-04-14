@@ -16,9 +16,9 @@ import com.google.common.collect.Iterables;
 
 import io.reflectoring.jiraalerts.application.state.ApplicationState;
 import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
-import io.reflectoring.jiraalerts.dashboard.routine.RoutineQuery;
-import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueryRepository;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
+import io.reflectoring.jiraalerts.routine.RoutineQuery;
+import io.reflectoring.jiraalerts.routine.RoutineQueryRepository;
 
 /**
  * Recognizes new issues.

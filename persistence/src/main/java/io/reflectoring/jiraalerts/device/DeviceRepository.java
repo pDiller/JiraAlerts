@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.dashboard.device;
+package io.reflectoring.jiraalerts.device;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repository for database transactions with {@link io.reflectoring.jiraalerts.dashboard.device.Device}.
+ * Repository for database transactions with {@link Device}.
  */
 @Repository
 public interface DeviceRepository extends JpaRepository<Device, Long> {

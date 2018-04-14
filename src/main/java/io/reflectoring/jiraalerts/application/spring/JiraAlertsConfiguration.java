@@ -10,6 +10,8 @@ import org.springframework.boot.web.servlet.ServletContextInitializer;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import io.reflectoring.jiraalerts.spring.PersistenceContextConfiguration;
+
 /**
  * Springconfiguration for JiraAlerts.
  */

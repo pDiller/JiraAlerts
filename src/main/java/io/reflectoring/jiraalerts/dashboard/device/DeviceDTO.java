@@ -2,6 +2,9 @@ package io.reflectoring.jiraalerts.dashboard.device;
 
 import java.io.Serializable;
 
+import io.reflectoring.jiraalerts.device.Device;
+import io.reflectoring.jiraalerts.device.DeviceType;
+
 /**
  * Transferobject for {@link Device}
  */

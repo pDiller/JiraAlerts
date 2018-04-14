@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.dashboard.device;
+package io.reflectoring.jiraalerts.device;
 
 import java.util.Locale;
 import java.util.ResourceBundle;

@@ -15,6 +15,8 @@ import com.atlassian.jira.rest.client.api.RestClientException;
 
 import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnection;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnectionRepository;
 
 /**
  * Provides functionality to setup the application against an JIRA-instance.

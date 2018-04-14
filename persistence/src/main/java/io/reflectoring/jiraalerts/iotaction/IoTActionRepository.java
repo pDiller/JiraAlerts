@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.dashboard.iotaction;
+package io.reflectoring.jiraalerts.iotaction;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 /**
- * Repository for database transactions with {@link io.reflectoring.jiraalerts.dashboard.iotaction.IoTAction}.
+ * Repository for database transactions with {@link IoTAction}.
  */
 @Repository
 public interface IoTActionRepository extends JpaRepository<IoTAction, IoTAction.IoTActionId> {
