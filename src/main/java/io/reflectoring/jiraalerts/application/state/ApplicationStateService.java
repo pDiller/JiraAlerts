@@ -29,8 +29,6 @@ public class ApplicationStateService {
 
 	private ApplicationState applicationState = NOT_INITIALIZED;
 
-	private String jiraPassword;
-
 	public void setApplicationState(ApplicationState applicationState) {
 		String stateChangeInformation = format("Statechange from '%s' to '%s'", this.applicationState, applicationState);
 		LOGGER.info(stateChangeInformation);
@@ -48,13 +46,5 @@ public class ApplicationStateService {
 		} else {
 			setApplicationState(ApplicationState.NOT_INITIALIZED);
 		}
-	}
-
-	public String getJiraPassword() {
-		return jiraPassword;
-	}
-
-	public void setJiraPassword(String jiraPassword) {
-		this.jiraPassword = jiraPassword;
 	}
 }
