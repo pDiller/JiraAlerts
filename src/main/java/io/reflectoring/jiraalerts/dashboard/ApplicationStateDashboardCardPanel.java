@@ -17,7 +17,7 @@ import io.reflectoring.jiraalerts.dashboard.applicationstate.*;
 public class ApplicationStateDashboardCardPanel extends AbstractDashboardCardPanel<JiraLoginDTO> {
 
 	/**
-	 * This constant must be used to replace the actual application-state panel.
+	 * This constant must be used to replace the current application-state panel.
 	 */
 	private static final String STATE_COMPONENT_ID = "stateComponent";
 
