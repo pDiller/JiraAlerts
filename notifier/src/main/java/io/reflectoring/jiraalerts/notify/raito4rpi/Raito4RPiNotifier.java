@@ -20,8 +20,8 @@ public class Raito4RPiNotifier implements Notifier {
 
     private Gson gson;
 
-    public Raito4RPiNotifier(Gson gson) {
-        this.gson = gson;
+    public Raito4RPiNotifier() {
+        this.gson = new GsonBuilder().create();
     }
 
     @Override
