@@ -6,7 +6,7 @@ import org.apache.wicket.injection.Injector;
 import org.apache.wicket.model.IModel;
 
 /**
- * Model to provide the applicationstate
+ * Model to provide the state of the application
  */
 public class ApplicationStateModel implements IModel<ApplicationState> {
 
