@@ -2,6 +2,8 @@ package io.reflectoring.jiraalerts.application.login;
 
 import static javax.persistence.GenerationType.IDENTITY;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 /**
@@ -9,7 +11,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "USERS")
-public class User {
+public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = IDENTITY)

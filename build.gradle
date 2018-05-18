@@ -33,6 +33,9 @@ dependencies {
     testCompile("org.springframework.boot:spring-boot-starter-test")
     testCompile("org.assertj:assertj-core:${assertjVersion}")
     testCompile("javax.servlet:javax.servlet-api:${servletApiVersion}")
+    testCompile("com.github.springtestdbunit:spring-test-dbunit:${spring_test_dbunit_version}")
+    testCompile("org.dbunit:dbunit:${dbunit_version}")
+    testCompile("com.h2database:h2:${h2_version}")
 
     compile("org.apache.wicket:wicket:${wicketVersion}")
     compile("org.apache.wicket:wicket-spring:${wicketVersion}")

@@ -21,9 +21,9 @@ public class DashboardPage extends BasePage {
 	 */
 	public DashboardPage() {
 
-		add(new RoutineDashboardCardPanel("routinePanel", new Model<>()));
+		add(new RoutineDashboardCardPanel("routinePanel"));
 
-		add(new ProfileDashboardCardPanel("profilePanel", new Model<>()));
+		add(new DeviceDashboardCardPanel("devicePanel"));
 
 		add(new UserManagementDashboardCardPanel("userManagementPanel", new Model<>()));
 

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="windows-1252"?>
+<dataset>
+    <USERS ID="1" USERNAME="User123" PASSWORD="Test12345_" SALT="Test12345_"/>
+    <USERS ID="2" USERNAME="User456" PASSWORD="Abc123_" SALT="Abc123_"/>
+
+    <DEVICE ID="1" NAME="Device1" URL="url1" TYPE="0" OWNER="1"/>
+    <DEVICE ID="2" NAME="Device2" URL="url2" TYPE="1" OWNER="1"/>
+    <DEVICE ID="3" NAME="Device3" URL="url3" TYPE="0" OWNER="1"/>
+    <DEVICE ID="4" NAME="Device4" URL="url4" TYPE="1" OWNER="1"/>
+    <DEVICE ID="5" NAME="Device5" URL="url5" TYPE="0" OWNER="2"/>
+    <DEVICE ID="6" NAME="Device6" URL="url6" TYPE="1" OWNER="2"/>
+
+    <ROUTINE_QUERY />
+    <IOT_ACTION />
+</dataset>
