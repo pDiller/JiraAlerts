@@ -1,8 +1,5 @@
 package io.reflectoring.jiraalerts.dashboard.device;
 
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.when;
-
 import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
 import org.apache.wicket.authroles.authorization.strategies.role.Roles;
 import org.apache.wicket.markup.html.form.Form;

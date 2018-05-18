@@ -25,9 +25,8 @@ public class IoTAction implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     private Device device;
 
-    @Lob
     @Column(name = "ACTION", nullable = false)
-    private Blob action;
+    private String action;
 
     @Column(name = "PRIORITY", nullable = false)
     private int priority;
@@ -48,11 +47,11 @@ public class IoTAction implements Serializable {
         this.device = device;
     }
 
-    public Blob getAction() {
+    public String getAction() {
         return action;
     }
 
-    public void setAction(Blob action) {
+    public void setAction(String action) {
         this.action = action;
     }
 
