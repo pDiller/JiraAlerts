@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.dashboard.device;
+package io.reflectoring.jiraalerts.device;
 
 import io.reflectoring.jiraalerts.common.EnumWithId;
 import io.reflectoring.jiraalerts.common.EnumWithIdType;

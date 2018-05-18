@@ -4,12 +4,11 @@ import java.util.Locale;
 import java.util.ResourceBundle;
 
 import io.reflectoring.jiraalerts.common.EnumWithId;
-import io.reflectoring.jiraalerts.common.LocalizedEnum;
 
 /**
  * The type of a device.
  */
-public enum DeviceType implements EnumWithId, LocalizedEnum {
+public enum DeviceType implements EnumWithId, io.reflectoring.jiraalerts.common.LocalizedEnum {
 
 	RAITO4RPI(0), //
 	PHILIPS_HUE(1);
