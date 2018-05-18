@@ -4,4 +4,5 @@ dependencies {
     compile("org.springframework:spring-context-support:${springContextSupportVersion}")
     compile project(":persistence")
     compile("org.quartz-scheduler:quartz:${quartzVersion}")
+    compile("com.google.code.gson:gson:${gsonVersion}")
 }
