@@ -3,6 +3,14 @@ package io.reflectoring.jiraalerts.dashboard.routine;
 import static org.wicketstuff.lazymodel.LazyModel.from;
 import static org.wicketstuff.lazymodel.LazyModel.model;
 
+import java.util.Optional;
+
+import javax.inject.Inject;
+
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.form.OnChangeAjaxBehavior;
+import org.apache.wicket.ajax.markup.html.form.AjaxFallbackButton;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.GenericPanel;
 import org.apache.wicket.model.IModel;
@@ -10,14 +18,21 @@ import org.apache.wicket.model.ResourceModel;
 import org.apache.wicket.validation.validator.RangeValidator;
 
 import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
+import io.reflectoring.jiraalerts.routine.RoutineQuery;
 
 /**
  * Panel, which shows the inputs for create and edit an {@link RoutineQuery}.
  */
-public class RoutineQueryPanel extends GenericPanel<RoutineQueryDTO> {
+class RoutineQueryPanel extends GenericPanel<RoutineQueryDTO> {
 
 	private static final int MIN_VALUE = 1;
-	private static final int MAX_VALUE = 1440;
+	private static final int MAX_VALUE = 60;
+
+	@Inject
+	private RoutineQueryService routineQueryService;
+
+	private WebMarkupContainer successIcon;
+	private WebMarkupContainer failIcon;
 
 	/**
 	 * Constructor.
@@ -27,19 +42,20 @@ public class RoutineQueryPanel extends GenericPanel<RoutineQueryDTO> {
 	 * @param model
 	 *            the {@link RoutineQueryDTO}.
 	 */
-	public RoutineQueryPanel(String id, IModel<RoutineQueryDTO> model) {
+	RoutineQueryPanel(String id, IModel<RoutineQueryDTO> model) {
 		super(id, model);
 
 		Form<RoutineQueryDTO> routineForm = new Form<>("routineForm", getModel());
-
 		addRoutineNameComponent(routineForm);
 
-		addRoutineJqlComponent(routineForm);
+		Form<Void> jqlForm = new Form<>("jqlForm");
+		addRoutineJqlComponent(jqlForm);
+		addJQLTestLink(jqlForm);
+		addJQLIcons(jqlForm);
+		routineForm.add(jqlForm);
 
 		addRoutineMinutesComponent(routineForm);
-
 		add(routineForm);
-
 	}
 
 	private void addRoutineMinutesComponent(Form<RoutineQueryDTO> routineForm) {
@@ -51,10 +67,51 @@ public class RoutineQueryPanel extends GenericPanel<RoutineQueryDTO> {
 		routineForm.add(routineMinutesPanel);
 	}
 
-	private void addRoutineJqlComponent(Form<RoutineQueryDTO> routineForm) {
+	private void addRoutineJqlComponent(Form<Void> jqlForm) {
 		IModel<String> routineJqlLabelModel = new ResourceModel("routine.jql.text");
 		IModel<String> routineJqlModel = model(from(RoutineQueryDTO.class).getJqlString()).bind(getModel());
-		routineForm.add(new FormControlTextFieldPanel<>("routineJqlPanel", routineJqlModel, routineJqlLabelModel, true));
+		FormControlTextFieldPanel<String> routineJqlPanel = new FormControlTextFieldPanel<>("routineJqlPanel", routineJqlModel, routineJqlLabelModel,
+		        true);
+		routineJqlPanel.getInput().add(new OnChangeAjaxBehavior() {
+
+			@Override
+			protected void onUpdate(AjaxRequestTarget target) {
+				resetJQLIcons(target);
+			}
+		});
+		jqlForm.add(routineJqlPanel);
+	}
+
+	private void addJQLTestLink(Form<Void> jqlForm) {
+		jqlForm.add(new AjaxFallbackButton("checkJqlLink", jqlForm) {
+
+			@Override
+			protected void onSubmit(Optional<AjaxRequestTarget> targetOptional) {
+				RoutineQueryDTO routineQueryDTO = RoutineQueryPanel.this.getModelObject();
+				boolean checkSuccessFull = routineQueryService.checkJql(routineQueryDTO.getJqlString());
+				successIcon.setVisible(checkSuccessFull);
+				failIcon.setVisible(!checkSuccessFull);
+				targetOptional.ifPresent(target -> target.add(successIcon, failIcon));
+			}
+		});
+	}
+
+	private void addJQLIcons(Form<Void> jqlForm) {
+		successIcon = new WebMarkupContainer("successIcon");
+		successIcon.setVisible(false);
+		successIcon.setOutputMarkupPlaceholderTag(true);
+		failIcon = new WebMarkupContainer("failIcon");
+		failIcon.setVisible(false);
+		failIcon.setOutputMarkupPlaceholderTag(true);
+		jqlForm.add(successIcon, failIcon);
+	}
+
+	private void resetJQLIcons(AjaxRequestTarget target) {
+		successIcon.setVisible(false);
+		failIcon.setVisible(false);
+		if (target != null) {
+			target.add(successIcon, failIcon);
+		}
 	}
 
 	private void addRoutineNameComponent(Form<RoutineQueryDTO> routineForm) {

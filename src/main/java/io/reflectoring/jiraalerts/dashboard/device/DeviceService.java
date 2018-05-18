@@ -9,10 +9,12 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import io.reflectoring.jiraalerts.application.login.User;
+import io.reflectoring.jiraalerts.device.Device;
+import io.reflectoring.jiraalerts.device.DeviceRepository;
+import io.reflectoring.jiraalerts.user.User;
 
 /**
- * Service methods for storing and loading a {@link Device}.
+ * Service methods for storing and loading a {@link io.reflectoring.jiraalerts.device.Device}.
  */
 @Service
 @Transactional

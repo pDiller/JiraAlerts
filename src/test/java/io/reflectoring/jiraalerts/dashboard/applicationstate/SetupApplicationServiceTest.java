@@ -24,6 +24,8 @@ import com.atlassian.util.concurrent.Promise;
 
 import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnection;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnectionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class SetupApplicationServiceTest {
@@ -54,7 +56,7 @@ public class SetupApplicationServiceTest {
 	private Session session;
 
 	@InjectMocks
-	private SetupApplicationService testSubject = new SetupApplicationService();
+	private SetupApplicationService testSubject;
 
 	private JiraLoginDTO jiraLoginDTO;
 
@@ -208,13 +210,6 @@ public class SetupApplicationServiceTest {
 		testSubject.setupApplicaton(jiraLoginDTO);
 
 		verify(applicationStateServiceMock).setApplicationState(ACTIVE);
-	}
-
-	@Test
-	public void jiraPasswordIsStoredWhenLoginIsSuccessFull() {
-		testSubject.setupApplicaton(jiraLoginDTO);
-
-		verify(applicationStateServiceMock).setJiraPassword(TEST_PASSWORD);
 	}
 
 	@Test

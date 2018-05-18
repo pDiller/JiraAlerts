@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnection;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnectionRepository;
 
 @RunWith(MockitoJUnitRunner.class)
 public class InitializeJiraLoginDTOModelTest {

@@ -9,7 +9,7 @@
 
     <div class="container mt-5">
         <div class="row d-flex justify-content-center">
-            <div class="col-lg-10 offset-lg-3">
+            <div class="col-lg-12 offset-lg-3">
                 <div class="card">
 
                     <div class="card-body">
@@ -21,11 +21,17 @@
                         <p class="card-text">
                             <wicket:message key="create.routine.instruction.text"/>
                         </p>
+
                         <form wicket:id="createRoutineForm">
                             <div wicket:id="routineQueryPanel"></div>
 
+                            <div role="alert" wicket:id="formFeedback"></div>
+
                             <button class="btn btn-primary" wicket:id="submitButton">
                                 <wicket:message key="routine.create.submitbutton.text"/>
+                            </button>
+                            <button class="btn btn-outline-secondary" wicket:id="cancelButton">
+                                <wicket:message key="routine.create.cancelbutton.text"/>
                             </button>
                         </form>
                     </div>

@@ -1,6 +1,6 @@
 package io.reflectoring.jiraalerts.dashboard.device;
 
-import static io.reflectoring.jiraalerts.dashboard.device.DeviceType.RAITO4RPI;
+import static io.reflectoring.jiraalerts.device.DeviceType.RAITO4RPI;
 
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.Model;
@@ -15,6 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
 import io.reflectoring.jiraalerts.common.FormControlDropDownPanel;
 import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
+import io.reflectoring.jiraalerts.device.DeviceType;
 
 @RunWith(MockitoJUnitRunner.class)
 public class DevicePanelTest {

@@ -12,6 +12,7 @@ import org.apache.wicket.model.util.ListModel;
 
 import io.reflectoring.jiraalerts.common.FormControlDropDownPanel;
 import io.reflectoring.jiraalerts.common.FormControlTextFieldPanel;
+import io.reflectoring.jiraalerts.device.DeviceType;
 
 /**
  * Panel, which shows the inputs for create and edit an {@link Device}.

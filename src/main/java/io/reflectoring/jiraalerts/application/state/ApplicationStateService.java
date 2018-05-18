@@ -12,8 +12,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.ApplicationScope;
 
-import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraConnection;
-import io.reflectoring.jiraalerts.dashboard.applicationstate.JiraConnectionRepository;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnection;
+import io.reflectoring.jiraalerts.jiraconnection.JiraConnectionRepository;
 
 /**
  * Holds the application state. This service is application-scoped, so you can access the application-state from the whole application.
@@ -28,8 +28,6 @@ public class ApplicationStateService {
 	private JiraConnectionRepository jiraConnectionRepository;
 
 	private ApplicationState applicationState = NOT_INITIALIZED;
-
-	private String jiraPassword;
 
 	public void setApplicationState(ApplicationState applicationState) {
 		String stateChangeInformation = format("Statechange from '%s' to '%s'", this.applicationState, applicationState);
@@ -48,13 +46,5 @@ public class ApplicationStateService {
 		} else {
 			setApplicationState(ApplicationState.NOT_INITIALIZED);
 		}
-	}
-
-	public String getJiraPassword() {
-		return jiraPassword;
-	}
-
-	public void setJiraPassword(String jiraPassword) {
-		this.jiraPassword = jiraPassword;
 	}
 }

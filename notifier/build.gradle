@@ -1,0 +1,7 @@
+dependencies {
+    testCompile libraries.test
+
+    compile("org.springframework:spring-context-support:${springContextSupportVersion}")
+    compile project(":persistence")
+    compile("org.quartz-scheduler:quartz:${quartzVersion}")
+}

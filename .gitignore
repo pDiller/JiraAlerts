@@ -30,3 +30,6 @@ build
 
 #output directory
 out
+
+#Jrebel
+rebel.xml

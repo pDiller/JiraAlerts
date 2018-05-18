@@ -14,6 +14,7 @@ import io.reflectoring.jiraalerts.application.login.LoginPage;
 import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
 import io.reflectoring.jiraalerts.dashboard.DashboardPage;
 import io.reflectoring.jiraalerts.dashboard.routine.CreateRoutineQueryPage;
+import io.reflectoring.jiraalerts.dashboard.routine.EditRoutineQueryPage;
 import io.reflectoring.jiraalerts.dashboard.routine.RoutineQueriesDetailPage;
 
 /**
@@ -45,6 +46,7 @@ public class JiraAlertsApplication extends AuthenticatedWebApplication {
 		mountPage("dashboard.html", DashboardPage.class);
 		mountPage("routines.html", RoutineQueriesDetailPage.class);
 		mountPage("routine/create.html", CreateRoutineQueryPage.class);
+		mountPage("routine/edit.html", EditRoutineQueryPage.class);
 	}
 
 	@Override

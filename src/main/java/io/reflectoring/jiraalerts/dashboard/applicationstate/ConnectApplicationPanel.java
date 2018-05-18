@@ -57,13 +57,11 @@ public class ConnectApplicationPanel extends GenericPanel<JiraLoginDTO> {
 
 			@Override
 			protected void onError(Optional<AjaxRequestTarget> targetOptional) {
-				super.onError(targetOptional);
 				targetOptional.ifPresent(target -> target.add(ConnectApplicationPanel.this));
 			}
 
 			@Override
 			protected void onSubmit(Optional<AjaxRequestTarget> targetOptional) {
-				super.onSubmit(targetOptional);
 				setupJiraConnection(ConnectApplicationPanel.this.getModelObject(), targetOptional);
 			}
 		});

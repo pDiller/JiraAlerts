@@ -4,6 +4,9 @@ import javax.inject.Inject;
 
 import org.springframework.stereotype.Service;
 
+import io.reflectoring.jiraalerts.user.User;
+import io.reflectoring.jiraalerts.user.UserRepository;
+
 /**
  * Service for user methods.
  */

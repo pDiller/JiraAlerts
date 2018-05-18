@@ -2,6 +2,8 @@ package io.reflectoring.jiraalerts.dashboard.device;
 
 import org.apache.wicket.markup.html.form.EnumChoiceRenderer;
 
+import io.reflectoring.jiraalerts.device.DeviceType;
+
 /**
  * ChoiceRenderer to display the values of {@link DeviceType} according to the enum's property files.
  */
