@@ -47,12 +47,11 @@ dependencies {
     compile("org.springframework:spring-context-support:${springContextSupportVersion}")
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
 
-    compile("org.quartz-scheduler:quartz:${quartzVersion}")
-
     compile("org.flywaydb:flyway-core:${flyWayVersion}")
 
     compile project(":jira-rest-client")
     compile project(":persistence")
+    compile project(":notifier")
 
     compile libraries.jiraRestClient
 

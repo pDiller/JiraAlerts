@@ -1,4 +1,4 @@
-package io.reflectoring.jiraalerts.application;
+package io.reflectoring.jiraalerts.quartz;
 
 import org.quartz.spi.TriggerFiredBundle;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
