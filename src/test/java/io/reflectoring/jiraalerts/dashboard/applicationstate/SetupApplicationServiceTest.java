@@ -1,6 +1,6 @@
 package io.reflectoring.jiraalerts.dashboard.applicationstate;
 
-import static io.reflectoring.jiraalerts.application.state.ApplicationState.ACTIVE;
+import static io.reflectoring.jiraalerts.appstate.ApplicationState.ACTIVE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import static org.mockito.Mockito.*;
@@ -22,7 +22,7 @@ import com.atlassian.jira.rest.client.api.SessionRestClient;
 import com.atlassian.jira.rest.client.api.domain.Session;
 import com.atlassian.util.concurrent.Promise;
 
-import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
+import io.reflectoring.jiraalerts.appstate.ApplicationStateService;
 import io.reflectoring.jiraalerts.jiraclient.JiraRestClientService;
 import io.reflectoring.jiraalerts.jiraconnection.JiraConnection;
 import io.reflectoring.jiraalerts.jiraconnection.JiraConnectionRepository;

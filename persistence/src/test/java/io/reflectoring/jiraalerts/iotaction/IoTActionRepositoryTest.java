@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.List;
 
+import io.reflectoring.jiraalerts.device.Device;
 import io.reflectoring.jiraalerts.iotaction.IoTAction;
 import io.reflectoring.jiraalerts.iotaction.IoTActionRepository;
 import org.junit.Test;
@@ -50,4 +51,10 @@ public class IoTActionRepositoryTest extends AbstractDbUnitTest {
 		assertThat(iotActions).hasSize(2);
 	}
 
+    @Test
+    public void findByDeviceOrderByPriorityForDevice1() throws Exception {
+	    List<IoTAction> ioTActions = testSubject.findByDeviceOrderByPriorityFetchRoutineQuery(DEVICE_ID_1);
+
+	    assertThat(ioTActions).hasSize(3);
+    }
 }

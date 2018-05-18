@@ -1,6 +1,6 @@
 package io.reflectoring.jiraalerts.application.state;
 
-import static io.reflectoring.jiraalerts.application.state.ApplicationState.ACTIVE;
+import static io.reflectoring.jiraalerts.appstate.ApplicationState.ACTIVE;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -13,6 +13,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import io.reflectoring.jiraalerts.application.testsetup.TestApplication;
+import io.reflectoring.jiraalerts.appstate.ApplicationState;
+import io.reflectoring.jiraalerts.appstate.ApplicationStateService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class ApplicationStateModelTest {

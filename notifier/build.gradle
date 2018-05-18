@@ -3,6 +3,9 @@ dependencies {
 
     compile("org.springframework:spring-context-support:${springContextSupportVersion}")
     compile project(":persistence")
+    compile project(":jira-rest-client")
+    compile project(":appstate")
+
     compile("org.quartz-scheduler:quartz:${quartzVersion}")
     compile("com.google.code.gson:gson:${gsonVersion}")
 }

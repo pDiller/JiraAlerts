@@ -1,3 +1,4 @@
 include 'jira-rest-client'
 include 'persistence'
 include 'notifier'
+include 'appstate'

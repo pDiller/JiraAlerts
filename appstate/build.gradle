@@ -1,8 +1,8 @@
 dependencies {
     testCompile libraries.test
 
-    compile libraries.jiraRestClient
-
     compile("org.springframework:spring-context-support:${springContextSupportVersion}")
     compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+
+    compile project(":persistence")
 }

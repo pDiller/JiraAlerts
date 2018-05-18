@@ -52,6 +52,7 @@ dependencies {
     compile project(":jira-rest-client")
     compile project(":persistence")
     compile project(":notifier")
+    compile project(":appstate")
 
     compile libraries.jiraRestClient
 

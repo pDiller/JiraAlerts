@@ -11,7 +11,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
 import io.reflectoring.jiraalerts.application.login.LoginPage;
-import io.reflectoring.jiraalerts.application.state.ApplicationStateService;
+import io.reflectoring.jiraalerts.appstate.ApplicationStateService;
 import io.reflectoring.jiraalerts.dashboard.DashboardPage;
 import io.reflectoring.jiraalerts.dashboard.routine.CreateRoutineQueryPage;
 import io.reflectoring.jiraalerts.dashboard.routine.EditRoutineQueryPage;

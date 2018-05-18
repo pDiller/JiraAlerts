@@ -1,13 +1,14 @@
-package io.reflectoring.jiraalerts.application.state;
+package io.reflectoring.jiraalerts.appstate;
 
-import static io.reflectoring.jiraalerts.application.state.ApplicationState.ACTIVE;
-import static io.reflectoring.jiraalerts.application.state.ApplicationState.NOT_ACTIVE;
-import static io.reflectoring.jiraalerts.application.state.ApplicationState.NOT_INITIALIZED;
+import static io.reflectoring.jiraalerts.appstate.ApplicationState.ACTIVE;
+import static io.reflectoring.jiraalerts.appstate.ApplicationState.NOT_ACTIVE;
+import static io.reflectoring.jiraalerts.appstate.ApplicationState.NOT_INITIALIZED;
 import static java.util.Collections.emptyList;
 import static java.util.Collections.singletonList;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.when;
 
+import io.reflectoring.jiraalerts.appstate.ApplicationStateService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
