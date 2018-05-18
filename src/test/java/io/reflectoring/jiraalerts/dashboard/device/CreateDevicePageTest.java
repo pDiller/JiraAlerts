@@ -27,7 +27,6 @@ public class CreateDevicePageTest {
 
 	@Before
 	public void setUp() throws Exception {
-		when(deviceServiceMock.testUrl(anyString())).thenReturn(true);
 		wicketTester = new WicketTester(new TestApplication(this));
 		TestSession.get().setRoles(new Roles("administrator"));
 		wicketTester.startPage(CreateDevicePage.class);

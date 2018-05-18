@@ -1,21 +1,22 @@
 package io.reflectoring.jiraalerts.dashboard.device;
 
-import io.reflectoring.jiraalerts.device.DeviceType;
 import org.apache.wicket.markup.html.form.EnumChoiceRenderer;
+
+import io.reflectoring.jiraalerts.device.DeviceType;
 
 /**
  * ChoiceRenderer to display the values of {@link DeviceType} according to the enum's property files.
  */
 public class DeviceTypeChoiceRenderer extends EnumChoiceRenderer<DeviceType> {
 
-    @Override
-    public Object getDisplayValue(DeviceType deviceType) {
-        return deviceType.toLocalizedString();
-    }
+	@Override
+	public Object getDisplayValue(DeviceType deviceType) {
+		return deviceType.toLocalizedString();
+	}
 
-    @Override
-    public String getIdValue(DeviceType deviceType, int index) {
-        return deviceType.name();
-    }
+	@Override
+	public String getIdValue(DeviceType deviceType, int index) {
+		return deviceType.name();
+	}
 
 }

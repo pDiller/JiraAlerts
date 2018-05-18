@@ -3,11 +3,12 @@ package io.reflectoring.jiraalerts.device;
 import java.util.ResourceBundle;
 
 import io.reflectoring.jiraalerts.common.EnumWithId;
+import io.reflectoring.jiraalerts.common.LocalizedEnum;
 
 /**
  * The type of a device.
  */
-public enum DeviceType implements EnumWithId {
+public enum DeviceType implements EnumWithId, LocalizedEnum {
 
 	RAITO4RPI(0), //
 	PHILIPS_HUE(1);
@@ -23,8 +24,9 @@ public enum DeviceType implements EnumWithId {
 		return id;
 	}
 
-	@Override
-	public String toString() {
-		return ResourceBundle.getBundle(getClass().getName()).getString(name());
-	}
+    @Override
+    public String toLocalizedString() {
+        return ResourceBundle.getBundle(getClass().getName()).getString(name());
+    }
+
 }
