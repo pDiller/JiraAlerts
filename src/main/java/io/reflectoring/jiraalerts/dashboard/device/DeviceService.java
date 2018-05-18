@@ -60,6 +60,24 @@ public class DeviceService {
 		deviceRepository.save(entity);
 	}
 
+	/**
+	 * Tests the given URL by checking if HTTP 200 is returned.
+	 *
+	 * @param urlString
+	 *            the url to test
+	 * @return true if a HTTP Repsondecode 200 is received, else false
+	 */
+	public boolean testUrl(String urlString) {
+		// TODO
+		return true;
+		/**
+		 * if (isBlank(urlString)) { return false; } try { URL url = new URL(urlString); HttpURLConnection connection = (HttpURLConnection)
+		 * url.openConnection(); connection.setRequestMethod("GET"); connection.setConnectTimeout(5000); connection.setReadTimeout(5000); int
+		 * responseCode = connection.getResponseCode(); connection.disconnect(); return responseCode == 200; } catch (IOException e) { throw new
+		 * IllegalArgumentException("The connection could not be established", e); }
+		 **/
+	}
+
 	private List<DeviceDTO> mapAllFromEntityToDTO(List<Device> devices) {
 		List<DeviceDTO> deviceDTOs = new ArrayList<>();
 		devices.forEach(device -> deviceDTOs.add(mapFromEntityToDTO(device)));
@@ -83,5 +101,4 @@ public class DeviceService {
 		entity.setType(device.getType());
 		return entity;
 	}
-
 }

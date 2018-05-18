@@ -21,15 +21,17 @@ public class CreateDevicePage extends BasePage {
 	@Inject
 	private DeviceService deviceService;
 
+	private Form<DeviceDTO> createDeviceForm;
+	private AjaxFallbackButton submitButton;
+
 	public CreateDevicePage() {
 		Long userId = JiraAlertsSession.get().getUserId();
-
 		IModel<DeviceDTO> deviceDTOModel = new Model<>(new DeviceDTO());
-		Form<DeviceDTO> createDeviceForm = new Form<>("createDeviceForm", deviceDTOModel);
 
+		createDeviceForm = new Form<>("createDeviceForm", deviceDTOModel);
 		createDeviceForm.add(new DevicePanel("devicePanel", deviceDTOModel));
 
-		createDeviceForm.add(new AjaxFallbackButton("submitButton", createDeviceForm) {
+		submitButton = new AjaxFallbackButton("submitButton", createDeviceForm) {
 
 			@Override
 			protected void onSubmit(Optional<AjaxRequestTarget> targetOptional) {
@@ -43,9 +45,33 @@ public class CreateDevicePage extends BasePage {
 				super.onError(targetOptional);
 				targetOptional.ifPresent(target -> target.add(CreateDevicePage.this));
 			}
+		};
+
+		createDeviceForm.add(new AjaxFallbackButton("testUrlButton", createDeviceForm) {
+
+			@Override
+			protected void onSubmit(Optional<AjaxRequestTarget> targetOptional) {
+				super.onSubmit(targetOptional);
+				submitButton.setEnabled(deviceService.testUrl(createDeviceForm.getModelObject().getUrl()));
+				targetOptional.ifPresent(target -> target.add(CreateDevicePage.this));
+			}
+
+			@Override
+			protected void onError(Optional<AjaxRequestTarget> targetOptional) {
+				super.onError(targetOptional);
+				targetOptional.ifPresent(target -> target.add(CreateDevicePage.this));
+			}
 		});
+
+		createDeviceForm.add(submitButton);
 
 		add(createDeviceForm);
 	}
 
+	@Override
+	protected void onConfigure() {
+		super.onConfigure();
+		String deviceUrl = createDeviceForm.getModelObject().getUrl();
+		submitButton.setEnabled(deviceService.testUrl(deviceUrl));
+	}
 }
